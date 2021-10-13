@@ -55,8 +55,7 @@ class StudentRecordController extends Controller
        $sr =  $req->only(Qs::getStudentData());
 
         $ct = $this->my_class->findTypeByClass($req->my_class_id)->code;
-       /* $ct = ($ct == 'J') ? 'JSS' : $ct;
-        $ct = ($ct == 'S') ? 'SS' : $ct;*/
+
 
         $data['user_type'] = 'student';
         $data['name'] = ucwords($req->name);

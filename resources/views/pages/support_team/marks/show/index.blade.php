@@ -11,7 +11,7 @@
     @foreach($exams as $ex)
         @foreach($exam_records->where('exam_id', $ex->id) as $exr)
 
-            @if(Qs::userIsTeamSA())
+            @if(Qs::userIsTeamSAS())
                 <div class="card">
                     <div class="card-header header-elements-inline">
                         <h6 class="font-weight-bold">{{ $ex->name.' - '.$ex->year }}</h6>

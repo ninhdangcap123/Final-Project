@@ -67,6 +67,9 @@ class Qs
     {
         return ['admin', 'super_admin', 'teacher'];
     }
+    public static function getTeamSAS(){
+        return ['admin', 'super_admin', 'student'];
+    }
 
     public static function getTeamAcademic()
     {
@@ -129,6 +132,13 @@ class Qs
     {
         return in_array(Auth::user()->user_type, self::getTeamSAT());
     }
+    public static function userIsStaff()
+    {
+        return in_array(Auth::user()->user_type, self::getStaff());
+    }
+    public static function userIsTeamSAS(){
+        return in_array(Auth::user()->user_type, self::getTeamSAS());
+    }
 
     public static function userIsAcademic()
     {
@@ -170,10 +180,8 @@ class Qs
         return Auth::user()->user_type == 'parent';
     }
 
-    public static function userIsStaff()
-    {
-        return in_array(Auth::user()->user_type, self::getStaff());
-    }
+
+
 
     public static function getStaff($remove=[])
     {
