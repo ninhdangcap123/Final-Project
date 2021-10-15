@@ -127,11 +127,11 @@ class ExamRepo
         return Skill::where($where)->orderBy('name')->get();
     }
 
-    public function getSkillByClassType($class_type = NULL, $skill_type = NULL)
+    public function getSkillByClassType($major = NULL, $skill_type = NULL)
     {
         return ($skill_type)
-            ? $this->getSkill(['class_type' => $class_type, 'skill_type' => $skill_type])
-            : $this->getSkill(['class_type' => $class_type]);
+            ? $this->getSkill(['major' => $major, 'skill_type' => $skill_type])
+            : $this->getSkill(['major' => $major]);
     }
 
 }

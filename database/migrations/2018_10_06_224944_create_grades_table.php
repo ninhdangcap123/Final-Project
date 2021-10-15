@@ -16,15 +16,15 @@ class CreateGradesTable extends Migration
         Schema::create('grades', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 40);
-            $table->unsignedInteger('class_type_id')->nullable();
-            $table->tinyInteger('mark_from');
-            $table->tinyInteger('mark_to');
+            $table->unsignedInteger('major_id')->nullable();
+            $table->tinyInteger('mark_from')->nullable();
+            $table->tinyInteger('mark_to')->nullable();
             $table->string('remark', 40)->nullable();
             $table->timestamps();
         });
 
         Schema::table('grades', function (Blueprint $table) {
-            $table->unique(['name', 'class_type_id', 'remark']);
+            $table->unique(['name', 'major_id', 'remark']);
         });
     }
 

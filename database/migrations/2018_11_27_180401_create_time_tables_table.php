@@ -15,10 +15,10 @@ class CreateTimeTablesTable extends Migration
     {
         Schema::create('time_table_records', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 100)->unique();
-            $table->unsignedInteger('my_class_id');
+            $table->string('name', 100)->unique()->nullable();
+            $table->unsignedInteger('my_class_id')->nullable();
             $table->unsignedInteger('exam_id')->nullable();
-            $table->string('year', 100);
+            $table->string('year', 100)->nullable();
             $table->timestamps();
 
             $table->unique(['my_class_id', 'exam_id', 'year']);
@@ -26,18 +26,18 @@ class CreateTimeTablesTable extends Migration
 
         Schema::create('time_slots', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('ttr_id');
-            $table->tinyInteger('hour_from');
-            $table->string('min_from', 2);
-            $table->string('meridian_from', 2);
-            $table->tinyInteger('hour_to');
-            $table->string('min_to', 2);
-            $table->string('meridian_to', 2);
-            $table->string('time_from', 100);
-            $table->string('time_to', 100);
-            $table->string('timestamp_from', 50);
-            $table->string('timestamp_to', 50);
-            $table->string('full', 100);
+            $table->unsignedInteger('ttr_id')->nullable();
+            $table->tinyInteger('hour_from')->nullable();
+            $table->string('min_from', 2)->nullable();
+            $table->string('meridian_from', 2)->nullable();
+            $table->tinyInteger('hour_to')->nullable();
+            $table->string('min_to', 2)->nullable();
+            $table->string('meridian_to', 2)->nullable();
+            $table->string('time_from', 100)->nullable();
+            $table->string('time_to', 100)->nullable();
+            $table->string('timestamp_from', 50)->nullable();
+            $table->string('timestamp_to', 50)->nullable();
+            $table->string('full', 100)->nullable();
             $table->timestamps();
 
             $table->unique(['timestamp_from', 'timestamp_to', 'ttr_id']);
@@ -46,12 +46,12 @@ class CreateTimeTablesTable extends Migration
 
         Schema::create('time_tables', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('ttr_id');
-            $table->unsignedInteger('ts_id');
+            $table->unsignedInteger('ttr_id')->nullable();
+            $table->unsignedInteger('ts_id')->nullable();
             $table->unsignedInteger('subject_id')->nullable();
             $table->string('exam_date', 50)->nullable();
-            $table->string('timestamp_from', 100);
-            $table->string('timestamp_to', 100);
+            $table->string('timestamp_from', 100)->nullable();
+            $table->string('timestamp_to', 100)->nullable();
             $table->string('day', 50)->nullable();
             $table->tinyInteger('day_num')->nullable();
             $table->timestamps();

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Helpers\getSystemInfoHelper;
 use App\Helpers\Qs;
 use App\Models\Payment;
 use App\Models\PaymentRecord;
@@ -27,7 +28,7 @@ class PaymentRepo
 
     public function getActivePayments()
     {
-        return $this->getPayment(['year' => Qs::getCurrentSession()]);
+        return $this->getPayment(['year' => getSystemInfoHelper::getCurrentSession()]);
     }
 
     public function getPaymentYears()

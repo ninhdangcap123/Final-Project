@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 
+use App\Helpers\getUserTypeHelper;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -79,7 +80,7 @@ class UsersTableSeeder extends Seeder
     protected function createManyUsers(int $count)
     {
         $data = [];
-        $user_type = Qs::getAllUserTypes(['super_admin', 'librarian', 'student']);
+        $user_type = getUserTypeHelper::getAllUserTypes(['super_admin', 'librarian', 'student']);
 
         for($i = 1; $i <= $count; $i++){
 

@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title font-weight-semibold">Update System Settungs </h6>
-            {!! Qs::getPanelOptions() !!}
+            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -89,7 +89,7 @@
                     {{--Fees--}}
                <fieldset>
                    <legend><strong>Next Term Fees</strong></legend>
-                   @foreach($class_types as $ct)
+                   @foreach($majors as $ct)
                    <div class="form-group row">
                        <label class="col-lg-3 col-form-label font-weight-semibold">{{ $ct->name }}</label>
                        <div class="col-lg-9">

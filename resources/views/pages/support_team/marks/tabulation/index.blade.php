@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h5 class="card-title"><i class="icon-books mr-2"></i> Tabulation Sheet</h5>
-            {!! Qs::getPanelOptions() !!}
+            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -109,7 +109,7 @@
 
                             <td style="color: darkred">{{ $exr->where('student_id', $s->user_id)->first()->total ?: '-' }}</td>
                             <td style="color: darkblue">{{ $exr->where('student_id', $s->user_id)->first()->ave ?: '-' }}</td>
-                            <td style="color: darkgreen">{!! Mk::getSuffix($exr->where('student_id', $s->user_id)->first()->pos) ?: '-' !!}</td>
+                            <td style="color: darkgreen">{!! \App\Helpers\printMarkSheetHelper::getSuffix($exr->where('student_id', $s->user_id)->first()->pos) ?: '-' !!}</td>
                         </tr>
                     @endforeach
                     </tbody>

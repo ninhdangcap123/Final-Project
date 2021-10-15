@@ -6,19 +6,19 @@ use Eloquent;
 
 class MyClass extends Eloquent
 {
-    protected $fillable = ['name', 'class_type_id'];
+    protected $fillable = ['name', 'major_id'];
 
-    public function section()
+    public function section(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Section::class);
     }
 
-    public function class_type()
+    public function major(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(ClassType::class);
+        return $this->belongsTo(Major::class);
     }
 
-    public function student_record()
+    public function student_record(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(StudentRecord::class);
     }

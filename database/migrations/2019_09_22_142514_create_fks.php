@@ -21,7 +21,7 @@ class CreateFks extends Migration
         });
 
         Schema::table('my_classes', function (Blueprint $table) {
-            $table->foreign('class_type_id')->references('id')->on('class_types')->onDelete('set null');
+            $table->foreign('major_id')->references('id')->on('majors')->onDelete('set null');
         });
 
         Schema::table('sections', function (Blueprint $table) {
@@ -52,7 +52,7 @@ class CreateFks extends Migration
         });
 
         Schema::table('grades', function (Blueprint $table) {
-            $table->foreign('class_type_id')->references('id')->on('class_types')->onDelete('cascade');
+            $table->foreign('major_id')->references('id')->on('majors')->onDelete('cascade');
         });
 
         Schema::table('pins', function (Blueprint $table) {
@@ -65,15 +65,6 @@ class CreateFks extends Migration
             $table->foreign('my_class_id')->references('id')->on('my_classes')->onDelete('cascade');
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
-        });
-
-        Schema::table('books', function (Blueprint $table) {
-            $table->foreign('my_class_id')->references('id')->on('my_classes')->onDelete('cascade');
-        });
-
-        Schema::table('book_requests', function (Blueprint $table) {
-            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::table('staff_records', function (Blueprint $table) {

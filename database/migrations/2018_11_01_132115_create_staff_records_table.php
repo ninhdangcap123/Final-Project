@@ -15,7 +15,7 @@ class CreateStaffRecordsTable extends Migration
     {
         Schema::create('staff_records', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->string('code', 100)->nullable()->unique();
             $table->string('emp_date')->nullable();
             $table->timestamps();

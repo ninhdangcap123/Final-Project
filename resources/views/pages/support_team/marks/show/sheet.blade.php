@@ -50,7 +50,7 @@
 
                 {{--Grade, Subject Position & Remarks--}}
                 <td>{{ ($mk->grade) ? $mk->grade->name : '-' }}</td>
-                <td>{!! ($mk->grade) ? Mk::getSuffix($mk->sub_pos) : '-' !!}</td>
+                <td>{!! ($mk->grade) ? \App\Helpers\printMarkSheetHelper::getSuffix($mk->sub_pos) : '-' !!}</td>
                 <td>{{ ($mk->grade) ? $mk->grade->remark : '-' }}</td>
             @endforeach
         </tr>

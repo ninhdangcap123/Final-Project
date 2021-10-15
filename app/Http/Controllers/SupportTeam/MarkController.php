@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\SupportTeam;
 
+use App\Helpers\checkUsersHelper;
+use App\Helpers\displayMessageHelper;
+use App\Helpers\getSystemInfoHelper;
+use App\Helpers\getUserTypeHelper;
+use App\Helpers\jsonHelper;
 use App\Helpers\Qs;
 use App\Helpers\Mk;
+use App\Helpers\routeHelper;
 use App\Http\Requests\Mark\MarkSelector;
 use App\Models\Setting;
 use App\Repositories\ExamRepo;
@@ -25,9 +31,7 @@ class MarkController extends Controller
         $this->mark =  $mark;
         $this->student =  $student;
         $this->my_class =  $my_class;
-        $this->year =  Qs::getSetting('current_session');
-
-
+        $this->year =  getSystemInfoHelper::getSetting('current_session');
     }
 
     public function index()
@@ -46,28 +50,28 @@ class MarkController extends Controller
        return $this->verifyStudentExamYear($student_id);
     }
 
-    public function year_selected(Request $req, $student_id)
+    public function year_selected(Request $req, $student_id): \Illuminate\Http\RedirectResponse
     {
         if(!$this->verifyStudentExamYear($student_id, $req->year)){
             return $this->noStudentRecord();
         }
 
-        $student_id = Qs::hash($student_id);
+        $student_id = displayMessageHelper::hash($student_id);
         return redirect()->route('marks.show', [$student_id, $req->year]);
     }
 
     public function show($student_id, $year)
     {
         /* Prevent Other Students/Parents from viewing Result of others */
-        if(Auth::user()->id != $student_id && !Qs::userIsTeamSAT() && !Qs::userIsMyChild($student_id, Auth::user()->id)){
+        if(Auth::user()->id != $student_id && !checkUsersHelper::userIsTeamSAT() && !checkUsersHelper::userIsMyChild($student_id, Auth::user()->id)){
             return redirect(route('dashboard'))->with('pop_error', __('msg.denied'));
         }
 
-        if(Mk::examIsLocked() && !Qs::userIsTeamSA()){
-            Session::put('marks_url', route('marks.show', [Qs::hash($student_id), $year]));
+        if(Mk::examIsLocked() && !checkUsersHelper::userIsTeamSA()){
+            Session::put('marks_url', route('marks.show', [displayMessageHelper::hash($student_id), $year]));
 
             if(!$this->checkPinVerified($student_id)){
-                return redirect()->route('pins.enter', Qs::hash($student_id));
+                return redirect()->route('pins.enter', displayMessageHelper::hash($student_id));
             }
         }
 
@@ -81,13 +85,11 @@ class MarkController extends Controller
         $d['exams'] = $this->exam->getExam(['year' => $year]);
         $d['sr'] = $this->student->getRecord(['user_id' => $student_id])->first();
         $d['my_class'] = $mc = $this->my_class->getMC(['id' => $exr->first()->my_class_id])->first();
-        $d['class_type'] = $this->my_class->findTypeByClass($mc->id);
+        $d['major'] = $this->my_class->findTypeByClass($mc->id);
         $d['subjects'] = $this->my_class->findSubjectByClass($mc->id);
         $d['year'] = $year;
         $d['student_id'] = $student_id;
         $d['skills'] = $this->exam->getSkillByClassType() ?: NULL;
-        //$d['ct'] = $d['class_type']->code;
-        //$d['mark_type'] = Qs::getMarkType($d['ct']);
 
         return view('pages.support_team.marks.show.index', $d);
     }
@@ -95,15 +97,15 @@ class MarkController extends Controller
     public function print_view($student_id, $exam_id, $year)
     {
         /* Prevent Other Students/Parents from viewing Result of others */
-        if(Auth::user()->id != $student_id && !Qs::userIsTeamSA() && !Qs::userIsMyChild($student_id, Auth::user()->id)){
+        if(Auth::user()->id != $student_id && !checkUsersHelper::userIsTeamSA() && !checkUsersHelper::userIsMyChild($student_id, Auth::user()->id)){
             return redirect(route('dashboard'))->with('pop_error', __('msg.denied'));
         }
 
-        if(Mk::examIsLocked() && !Qs::userIsTeamSA()){
-            Session::put('marks_url', route('marks.show', [Qs::hash($student_id), $year]));
+        if(Mk::examIsLocked() && !checkUsersHelper::userIsTeamSA()){
+            Session::put('marks_url', route('marks.show', [displayMessageHelper::hash($student_id), $year]));
 
             if(!$this->checkPinVerified($student_id)){
-                return redirect()->route('pins.enter', Qs::hash($student_id));
+                return redirect()->route('pins.enter', displayMessageHelper::hash($student_id));
             }
         }
 
@@ -119,10 +121,10 @@ class MarkController extends Controller
         $d['ex'] = $exam = $this->exam->find($exam_id);
         $d['tex'] = 'tex'.$exam->term;
         $d['sr'] = $sr =$this->student->getRecord(['user_id' => $student_id])->first();
-        $d['class_type'] = $this->my_class->findTypeByClass($mc->id);
+        $d['major'] = $this->my_class->findTypeByClass($mc->id);
         $d['subjects'] = $this->my_class->findSubjectByClass($mc->id);
 
-        $d['ct'] = $ct = $d['class_type']->code;
+        $d['major'] = $major = $d['major'];
         $d['year'] = $year;
         $d['student_id'] = $student_id;
         $d['exam_id'] = $exam_id;
@@ -132,12 +134,12 @@ class MarkController extends Controller
             return [$s->type => $s->description];
         });
 
-        //$d['mark_type'] = Qs::getMarkType($ct);
+
 
         return view('pages.support_team.marks.print.index', $d);
     }
 
-    public function selector(MarkSelector $req)
+    public function selector(MarkSelector $req): \Illuminate\Http\RedirectResponse
     {
         $data = $req->only(['exam_id', 'my_class_id', 'section_id', 'subject_id']);
         $d2 = $req->only(['exam_id', 'my_class_id', 'section_id']);
@@ -172,11 +174,11 @@ class MarkController extends Controller
         $d['my_classes'] = $this->my_class->all();
         $d['sections'] = $this->my_class->getAllSections();
         $d['subjects'] = $this->my_class->getAllSubjects();
-        if(Qs::userIsTeacher()){
+        if(getUserTypeHelper::userIsTeacher()){
             $d['subjects'] = $this->my_class->findSubjectByTeacher(Auth::user()->id)->where('my_class_id', $class_id);
         }
         $d['selected'] = true;
-        $d['class_type'] = $this->my_class->findTypeByClass($class_id);
+        $d['major'] = $this->my_class->findTypeByClass($class_id);
 
         return view('pages.support_team.marks.manage', $d);
     }
@@ -189,7 +191,7 @@ class MarkController extends Controller
 
         $exam = $this->exam->find($exam_id);
         $marks = $this->exam->getMark($p);
-        $class_type = $this->my_class->findTypeByClass($class_id);
+        $major = $this->my_class->findTypeByClass($class_id);
 
         $mks = $req->all();
 
@@ -212,16 +214,8 @@ class MarkController extends Controller
                 $d['tex'.$exam->term] = $d['t1'] = $d['t2'] = $d['t3'] = $d['t4'] = $d['tca'] = $d['exm'] = NULL;
             }
 
-         /*   if($exam->term < 3){
-                $grade = $this->mark->getGrade($total, $class_type->id);
-            }
 
-            if($exam->term == 3){
-                $d['cum'] = $this->mark->getSubCumTotal($total, $st_id, $subject_id, $class_id, $this->year);
-                $d['cum_ave'] = $cav = $this->mark->getSubCumAvg($total, $st_id, $subject_id, $class_id, $this->year);
-                $grade = $this->mark->getGrade(round($cav), $class_type->id);
-            }*/
-            $grade = $this->mark->getGrade($total, $class_type->id);
+            $grade = $this->mark->getGrade($total, $major->id);
             $d['grade_id'] = $grade ? $grade->id : NULL;
 
             $this->exam->updateMark($mk->id, $d);
@@ -255,7 +249,7 @@ class MarkController extends Controller
         }
         /*Exam Record End*/
 
-       return Qs::jsonUpdateOk();
+       return jsonHelper::jsonUpdateOk();
     }
 
 //    public function batch_fix()
@@ -319,15 +313,15 @@ class MarkController extends Controller
 //        return Qs::jsonUpdateOk();
 //    }
 
-    public function comment_update(Request $req, $exr_id)
+    public function comment_update(Request $req, $exr_id): \Illuminate\Http\JsonResponse
     {
-        $d = Qs::userIsTeamSA() ? $req->only(['t_comment', 'p_comment']) : $req->only(['t_comment']);
+        $d = checkUsersHelper::userIsTeamSA() ? $req->only(['t_comment', 'p_comment']) : $req->only(['t_comment']);
 
         $this->exam->updateRecord(['id' => $exr_id], $d);
-        return Qs::jsonUpdateOk();
+        return jsonHelper::jsonUpdateOk();
     }
 
-    public function skills_update(Request $req, $skill, $exr_id)
+    public function skills_update(Request $req, $skill, $exr_id): \Illuminate\Http\JsonResponse
     {
         $d = [];
         if($skill == 'AF' || $skill == 'PS'){
@@ -336,7 +330,7 @@ class MarkController extends Controller
         }
 
         $this->exam->updateRecord(['id' => $exr_id], $d);
-        return Qs::jsonUpdateOk();
+        return jsonHelper::jsonUpdateOk();
     }
 
     public function bulk($class_id = NULL, $section_id = NULL)
@@ -358,7 +352,7 @@ class MarkController extends Controller
         return view('pages.support_team.marks.bulk', $d);
     }
 
-    public function bulk_select(Request $req)
+    public function bulk_select(Request $req): \Illuminate\Http\RedirectResponse
     {
         return redirect()->route('marks.bulk', [$req->my_class_id, $req->section_id]);
     }
@@ -377,7 +371,7 @@ class MarkController extends Controller
             $st_ids = $this->mark->getStudentIDs($wh);
 
             if(count($sub_ids) < 1 OR count($st_ids) < 1) {
-                return Qs::goWithDanger('marks.tabulation', __('msg.srnf'));
+                return routeHelper::goWithDanger('marks.tabulation', __('msg.srnf'));
             }
 
             $d['subjects'] = $this->my_class->getSubjectsByIDs($sub_ids);
@@ -396,8 +390,7 @@ class MarkController extends Controller
             $d['section']  = $this->my_class->findSection($section_id);
             $d['ex'] = $exam = $this->exam->find($exam_id);
             $d['tex'] = 'tex'.$exam->term;
-            //$d['class_type'] = $this->my_class->findTypeByClass($mc->id);
-            //$d['ct'] = $ct = $d['class_type']->code;
+
         }
 
         return view('pages.support_team.marks.tabulation.index', $d);
@@ -411,7 +404,7 @@ class MarkController extends Controller
         $st_ids = $this->mark->getStudentIDs($wh);
 
         if(count($sub_ids) < 1 OR count($st_ids) < 1) {
-            return Qs::goWithDanger('marks.tabulation', __('msg.srnf'));
+            return routeHelper::goWithDanger('marks.tabulation', __('msg.srnf'));
         }
 
         $d['subjects'] = $this->my_class->getSubjectsByIDs($sub_ids);
@@ -431,13 +424,12 @@ class MarkController extends Controller
         $d['s'] = Setting::all()->flatMap(function($s){
             return [$s->type => $s->description];
         });
-        //$d['class_type'] = $this->my_class->findTypeByClass($mc->id);
-        //$d['ct'] = $ct = $d['class_type']->code;
+
 
         return view('pages.support_team.marks.tabulation.print', $d);
     }
 
-    public function tabulation_select(Request $req)
+    public function tabulation_select(Request $req): \Illuminate\Http\RedirectResponse
     {
         return redirect()->route('marks.tabulation', [$req->exam_id, $req->my_class_id, $req->section_id]);
     }
@@ -450,7 +442,7 @@ class MarkController extends Controller
         if(!$year){
             if($student_exists && $years->count() > 0)
             {
-                $d =['years' => $years, 'student_id' => Qs::hash($student_id)];
+                $d =['years' => $years, 'student_id' => displayMessageHelper::hash($student_id)];
 
                 return view('pages.support_team.marks.select_year', $d);
             }
@@ -458,15 +450,15 @@ class MarkController extends Controller
             return $this->noStudentRecord();
         }
 
-        return ($student_exists && $years->contains('year', $year)) ? true  : false;
+        return $student_exists && $years->contains('year', $year);
     }
 
-    protected function noStudentRecord()
+    protected function noStudentRecord(): \Illuminate\Http\RedirectResponse
     {
         return redirect()->route('dashboard')->with('flash_danger', __('msg.srnf'));
     }
 
-    protected function checkPinVerified($st_id)
+    protected function checkPinVerified($st_id): bool
     {
         return Session::has('pin_verified') && Session::get('pin_verified') == $st_id;
     }

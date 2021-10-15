@@ -5,11 +5,11 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Edit User Details</h6>
-            {!! Qs::getPanelOptions() !!}
+            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
-            <form method="post" enctype="multipart/form-data" class="wizard-form steps-validation ajax-update" action="{{ route('users.update', Qs::hash($user->id)) }}" data-fouc>
+            <form method="post" enctype="multipart/form-data" class="wizard-form steps-validation ajax-update" action="{{ route('users.update', \App\Helpers\displayMessageHelper::hash($user->id)) }}" data-fouc>
                 @csrf @method('PUT')
                 <h6>Personal Data</h6>
                 <fieldset>
@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="row">
-                        @if(in_array($user->user_type, Qs::getStaff()))
+                        @if(in_array($user->user_type, \App\Helpers\getUsersHelper::getStaff()))
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Date of Employment:</label>

@@ -15,10 +15,10 @@ class CreateReceiptsTable extends Migration
     {
         Schema::create('receipts', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('pr_id');
-            $table->Integer('amt_paid');
-            $table->Integer('balance');
-            $table->string('year');
+            $table->unsignedInteger('pr_id')->nullable();
+            $table->Integer('amt_paid')->nullable();
+            $table->Integer('balance')->nullable();
+            $table->string('year')->nullable();
             $table->timestamps();
         });
     }

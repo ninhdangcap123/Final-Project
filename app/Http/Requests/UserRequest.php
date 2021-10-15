@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\displayMessageHelper;
 use App\Helpers\Qs;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -65,14 +66,14 @@ class UserRequest extends FormRequest
         if($this->method() === 'POST'){
             $input = $this->all();
 
-            $input['user_type'] = Qs::decodeHash($input['user_type']);
+            $input['user_type'] = displayMessageHelper::decodeHash($input['user_type']);
 
             $this->getInputSource()->replace($input);
 
         }
 
         if($this->method() === 'PUT'){
-            $this->user = Qs::decodeHash($this->user);
+            $this->user = displayMessageHelper::decodeHash($this->user);
         }
 
         return parent::getValidatorInstance();

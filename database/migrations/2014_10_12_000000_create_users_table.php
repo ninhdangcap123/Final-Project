@@ -18,12 +18,12 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email', 100)->unique()->nullable();
-            $table->string('code', 100)->unique();
+            $table->string('code', 100)->unique()->nullable();
             $table->string('username', 100)->nullable()->unique();
-            $table->string('user_type');
+            $table->string('user_type')->nullable();
             $table->string('dob')->nullable();
             $table->string('gender')->nullable();
-            $table->string('photo')->default(Qs::getDefaultUserImage());
+            $table->string('photo')->default(\App\Helpers\getPathHelper::getDefaultUserImage())->nullable();
             $table->string('phone')->nullable();
             $table->string('phone2')->nullable();
             $table->unsignedInteger('bg_id')->nullable();

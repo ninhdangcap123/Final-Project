@@ -11,11 +11,11 @@
     @foreach($exams as $ex)
         @foreach($exam_records->where('exam_id', $ex->id) as $exr)
 
-            @if(Qs::userIsAcademic())
+            @if(\App\Helpers\checkUsersHelper::userIsAcademic())
                 <div class="card">
                     <div class="card-header header-elements-inline">
                         <h6 class="font-weight-bold">{{ $ex->name.' - '.$ex->year }}</h6>
-                        {!! Qs::getPanelOptions() !!}
+                        {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
                     </div>
 
                     <div class="card-body collapse">
@@ -25,7 +25,7 @@
 
                         {{--Print Button--}}
                         <div class="text-center mt-3">
-                            <a target="_blank" href="{{ route('marks.print', [Qs::hash($student_id), $ex->id, $year]) }}" class="btn btn-secondary btn-lg">Print Marksheet <i class="icon-printer ml-2"></i></a>
+                            <a target="_blank" href="{{ route('marks.print', [\App\Helpers\displayMessageHelper::hash($student_id), $ex->id, $year]) }}" class="btn btn-secondary btn-lg">Print Marksheet <i class="icon-printer ml-2"></i></a>
                         </div>
 
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\getUserTypeHelper;
 use App\Helpers\Qs;
 use App\Repositories\LocationRepo;
 use App\Repositories\MyClassRepo;
@@ -41,7 +42,7 @@ class AjaxController extends Controller
         $sections = $this->my_class->getClassSections($class_id);
         $subjects = $this->my_class->findSubjectByClass($class_id);
 
-        if(Qs::userIsTeacher()){
+        if(getUserTypeHelper::userIsTeacher()){
             $subjects = $this->my_class->findSubjectByTeacher(Auth::user()->id)->where('my_class_id', $class_id);
         }
 

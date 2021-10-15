@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Manage Grades</h6>
-            {!! Qs::getPanelOptions() !!}
+            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -32,7 +32,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $gr->name }}</td>
-                                    <td>{{ $gr->class_type_id ? $class_types->where('id', $gr->class_type_id)->first()->name : ''}}</td>
+                                    <td>{{ $gr->major_id ? $majors->where('id', $gr->major_id)->first()->name : ''}}</td>
                                     <td>{{ $gr->mark_from.' - '.$gr->mark_to }}</td>
                                     <td>{{ $gr->remark }}</td>
                                     <td class="text-center">
@@ -43,11 +43,11 @@
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-left">
-                                                    @if(Qs::userIsTeamSA())
+                                                    @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
                                                     {{--Edit--}}
                                                     <a href="{{ route('grades.edit', $gr->id) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
                                                    @endif
-                                                    @if(Qs::userIsSuperAdmin())
+                                                    @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
                                                     {{--Delete--}}
                                                     <a id="{{ $gr->id }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
                                                     <form method="post" id="item-delete-{{ $gr->id }}" action="{{ route('grades.destroy', $gr->id) }}" class="hidden">@csrf @method('delete')</form>
@@ -85,12 +85,12 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="class_type_id" class="col-lg-3 col-form-label font-weight-semibold">Grade Type</label>
+                                    <label for="major_id" class="col-lg-3 col-form-label font-weight-semibold">Grade Type</label>
                                     <div class="col-lg-9">
-                                        <select class="form-control select" name="class_type_id" id="class_type_id">
+                                        <select class="form-control select" name="major_id" id="major_id">
                                             <option value="">Not Applicable</option>
-                                         @foreach($class_types as $ct)
-                                                <option {{ old('class_type_id') == $ct->id ? 'selected' : '' }} value="{{ $ct->id }}">{{ $ct->name }}</option>
+                                         @foreach($majors as $ct)
+                                                <option {{ old('major_id') == $ct->id ? 'selected' : '' }} value="{{ $ct->id }}">{{ $ct->name }}</option>
                                              @endforeach
                                         </select>
                                     </div>
@@ -115,7 +115,7 @@
                                     <div class="col-lg-9">
                                         <select class="form-control select" name="remark" id="remark">
                                             <option value="">Select Remark...</option>
-                                            @foreach(Mk::getRemarks() as $rem)
+                                            @foreach(\App\Helpers\printMarkSheetHelper::getRemarks() as $rem)
                                                 <option {{ old('remark') == $rem ? 'selected' : '' }} value="{{ $rem }}">{{ $rem }}</option>
                                             @endforeach
                                         </select>

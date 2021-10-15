@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\SupportTeam;
 
+use App\Helpers\getSystemInfoHelper;
+use App\Helpers\jsonHelper;
 use App\Helpers\Qs;
 use App\Http\Requests\TimeTable\TSRequest;
 use App\Http\Requests\TimeTable\TTRecordRequest;
@@ -22,7 +24,7 @@ class TimeTableController extends Controller
         $this->tt = $tt;
         $this->my_class = $mc;
         $this->exam = $exam;
-        $this->year = Qs::getCurrentSession();
+        $this->year = getSystemInfoHelper::getCurrentSession();
     }
 
     public function index()
@@ -63,7 +65,7 @@ class TimeTableController extends Controller
 
         $this->tt->create($data);
 
-        return Qs::jsonStoreOk();
+        return jsonHelper::jsonStoreOk();
     }
 
     public function update(TTRequest $req, $tt_id)
@@ -102,7 +104,7 @@ class TimeTableController extends Controller
         }
 
         $this->tt->createTimeSlot($data);
-        return Qs::jsonStoreOk();
+        return jsonHelper::jsonStoreOk();
     }
 
     public function use_time_slot(Request $req, $ttr_id)
@@ -237,7 +239,7 @@ class TimeTableController extends Controller
         $data['year'] = $this->year;
         $this->tt->createRecord($data);
 
-        return Qs::jsonStoreOk();
+        return jsonHelper::jsonStoreOk();
     }
 
     public function update_record(TTRecordRequest $req, $id)
@@ -245,7 +247,7 @@ class TimeTableController extends Controller
         $data = $req->all();
         $this->tt->updateRecord($id, $data);
 
-        return Qs::jsonUpdateOk();
+        return jsonHelper::jsonUpdateOk();
     }
 
     public function delete_record($ttr_id)

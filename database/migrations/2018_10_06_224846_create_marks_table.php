@@ -15,11 +15,11 @@ class CreateMarksTable extends Migration
     {
         Schema::create('marks', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('student_id');
-            $table->unsignedInteger('subject_id');
-            $table->unsignedInteger('my_class_id');
-            $table->unsignedInteger('section_id');
-            $table->unsignedInteger('exam_id');
+            $table->unsignedInteger('student_id')->nullable();
+            $table->unsignedInteger('subject_id')->nullable();
+            $table->unsignedInteger('my_class_id')->nullable();
+            $table->unsignedInteger('section_id')->nullable();
+            $table->unsignedInteger('exam_id')->nullable();
             $table->integer('t1')->nullable();
             $table->integer('t2')->nullable();
             $table->integer('t3')->nullable();

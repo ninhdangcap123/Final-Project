@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Student;
 
+use App\Helpers\displayMessageHelper;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Helpers\Qs;
 
@@ -58,7 +59,7 @@ class StudentRecordCreate extends FormRequest
     {
         $input = $this->all();
 
-        $input['my_parent_id'] = $input['my_parent_id'] ? Qs::decodeHash($input['my_parent_id']) : NULL;
+        $input['my_parent_id'] = $input['my_parent_id'] ? displayMessageHelper::decodeHash($input['my_parent_id']) : NULL;
 
         $this->getInputSource()->replace($input);
 
