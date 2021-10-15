@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Eloquent;
 
-class ClassType extends Eloquent
+class Major extends Eloquent
 {
     //
 }

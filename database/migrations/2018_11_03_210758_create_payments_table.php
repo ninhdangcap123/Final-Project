@@ -15,13 +15,13 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title', 100);
-            $table->integer('amount');
-            $table->string('ref_no', 100)->unique();
-            $table->string('method', 100)->default('cash');
+            $table->string('title', 100)->nullable();
+            $table->integer('amount')->nullable();
+            $table->string('ref_no', 100)->unique()->nullable();
+            $table->string('method', 100)->default('cash')->nullable();
             $table->unsignedInteger('my_class_id')->nullable();
             $table->string('description')->nullable();
-            $table->string('year');
+            $table->string('year')->nullable();
             $table->timestamps();
         });
 

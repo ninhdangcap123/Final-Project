@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\SupportTeam;
 
+use App\Helpers\jsonHelper;
 use App\Helpers\Qs;
+use App\Helpers\routeHelper;
 use App\Http\Requests\MyClass\ClassCreate;
 use App\Http\Requests\MyClass\ClassUpdate;
 use App\Repositories\MyClassRepo;
@@ -25,12 +27,12 @@ class MyClassController extends Controller
     public function index()
     {
         $d['my_classes'] = $this->my_class->all();
-        $d['class_types'] = $this->my_class->getTypes();
+        $d['majors'] = $this->my_class->getMajor();
 
         return view('pages.support_team.classes.index', $d);
     }
 
-    public function store(ClassCreate $req)
+    public function store(ClassCreate $req): \Illuminate\Http\JsonResponse
     {
         $data = $req->all();
         $mc = $this->my_class->create($data);
@@ -44,14 +46,14 @@ class MyClassController extends Controller
 
         $this->my_class->createSection($s);
 
-        return Qs::jsonStoreOk();
+        return jsonHelper::jsonStoreOk();
     }
 
     public function edit($id)
     {
-        $d['c'] = $c = $this->my_class->find($id);
+        $d['course'] = $course = $this->my_class->find($id);
 
-        return is_null($c) ? Qs::goWithDanger('classes.index') : view('pages.support_team.classes.edit', $d) ;
+        return is_null($course) ? routeHelper::goWithDanger('classes.index') : view('pages.support_team.classes.edit', $d) ;
     }
 
     public function update(ClassUpdate $req, $id)
@@ -59,7 +61,7 @@ class MyClassController extends Controller
         $data = $req->only(['name']);
         $this->my_class->update($id, $data);
 
-        return Qs::jsonUpdateOk();
+        return jsonHelper::jsonUpdateOk();
     }
 
     public function destroy($id)

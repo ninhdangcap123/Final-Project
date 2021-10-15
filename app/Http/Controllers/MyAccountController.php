@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Helpers\getPathHelper;
 use App\Helpers\Qs;
 use App\Http\Requests\UserChangePass;
 use App\Http\Requests\UserUpdate;
@@ -40,9 +41,9 @@ class MyAccountController extends Controller
 
         if($req->hasFile('photo')) {
             $photo = $req->file('photo');
-            $f = Qs::getFileMetaData($photo);
+            $f = getPathHelper::getFileMetaData($photo);
             $f['name'] = 'photo.' . $f['ext'];
-            $f['path'] = $photo->storeAs(Qs::getUploadPath($user_type).$code, $f['name']);
+            $f['path'] = $photo->storeAs(getPathHelper::getUploadPath($user_type).$code, $f['name']);
             $d['photo'] = asset('storage/' . $f['path']);
         }
 

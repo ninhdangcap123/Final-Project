@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClassTypesTable extends Migration
+class CreateMajorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateClassTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('class_types', function (Blueprint $table) {
+        Schema::create('majors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('code');
+            $table->string('name')->nullable();
+            $table->string('code')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateClassTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('class_types');
+        Schema::dropIfExists('majors');
     }
 }

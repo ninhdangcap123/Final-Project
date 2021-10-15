@@ -5,13 +5,13 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">My Account</h6>
-            {!! Qs::getPanelOptions() !!}
+            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
             <ul class="nav nav-tabs nav-tabs-highlight">
                 <li class="nav-item"><a href="#change-pass" class="nav-link active" data-toggle="tab">Change Password</a></li>
-                @if(Qs::userIsPTA())
+                @if(\App\Helpers\checkUsersHelper::userIsPTA())
                     <li class="nav-item"><a href="#edit-profile" class="nav-link" data-toggle="tab"><i class="icon-plus2"></i> Manage Profile</a></li>
                 @endif
             </ul>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                @if(Qs::userIsPTA())
+                @if(\App\Helpers\checkUsersHelper::userIsPTA())
                     <div class="tab-pane fade" id="edit-profile">
                         <div class="row">
                             <div class="col-md-6">

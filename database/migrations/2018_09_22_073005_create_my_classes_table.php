@@ -15,13 +15,13 @@ class CreateMyClassesTable extends Migration
     {
         Schema::create('my_classes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 100);
-            $table->unsignedInteger('class_type_id')->nullable();
+            $table->string('name', 100)->nullable();
+            $table->unsignedInteger('major_id')->nullable();
             $table->timestamps();
         });
 
         Schema::table('my_classes', function (Blueprint $table) {
-            $table->unique(['class_type_id', 'name']);
+            $table->unique(['major_id', 'name']);
         });
     }
 

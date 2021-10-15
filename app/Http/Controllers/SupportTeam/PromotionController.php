@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\SupportTeam;
 
+use App\Helpers\getSystemInfoHelper;
+use App\Helpers\jsonHelper;
 use App\Helpers\Qs;
 use App\Http\Controllers\Controller;
 use App\Models\Mark;
@@ -23,7 +25,7 @@ class PromotionController extends Controller
 
     public function promotion($fc = NULL, $fs = NULL, $tc = NULL, $ts = NULL)
     {
-        $d['old_year'] = $old_yr = Qs::getSetting('current_session');
+        $d['old_year'] = $old_yr = getSystemInfoHelper::getSetting('current_session');
         $old_yr = explode('-', $old_yr);
         $d['new_year'] = ++$old_yr[0].'-'.++$old_yr[1];
         $d['my_classes'] = $this->my_class->all();
@@ -53,7 +55,7 @@ class PromotionController extends Controller
 
     public function promote(Request $req, $fc, $fs, $tc, $ts)
     {
-        $oy = Qs::getSetting('current_session'); $d = [];
+        $oy = getSystemInfoHelper::getSetting('current_session'); $d = [];
         $old_yr = explode('-', $oy);
         $ny = ++$old_yr[0].'-'.++$old_yr[1];
         $students = $this->student->getRecord(['my_class_id' => $fc, 'section_id' => $fs, 'session' => $oy ])->get()->sortBy('user.name');
@@ -103,8 +105,8 @@ class PromotionController extends Controller
     public function manage()
     {
         $data['promotions'] = $this->student->getAllPromotions();
-        $data['old_year'] = Qs::getCurrentSession();
-        $data['new_year'] = Qs::getNextSession();
+        $data['old_year'] = getSystemInfoHelper::getCurrentSession();
+        $data['new_year'] = getSystemInfoHelper::getNextSession();
 
         return view('pages.support_team.students.promotion.reset', $data);
     }
@@ -116,10 +118,10 @@ class PromotionController extends Controller
         return redirect()->route('students.promotion_manage')->with('flash_success', __('msg.update_ok'));
     }
 
-    public function reset_all()
+    public function reset_all(): \Illuminate\Http\JsonResponse
     {
-        $next_session = Qs::getNextSession();
-        $where = ['from_session' => Qs::getCurrentSession(), 'to_session' => $next_session];
+        $next_session = getSystemInfoHelper::getNextSession();
+        $where = ['from_session' => getSystemInfoHelper::getCurrentSession(), 'to_session' => $next_session];
         $proms = $this->student->getPromotions($where);
 
         if ($proms->count()){
@@ -131,7 +133,7 @@ class PromotionController extends Controller
           }
         }
 
-        return Qs::jsonUpdateOk();
+        return jsonHelper::jsonUpdateOk();
     }
 
     protected function delete_old_marks($student_id, $year)

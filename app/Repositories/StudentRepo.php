@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Helpers\getSystemInfoHelper;
 use App\Helpers\Qs;
 use App\Models\Dorm;
 use App\Models\Promotion;
@@ -103,7 +104,7 @@ class StudentRepo {
 
     public function getAllPromotions()
     {
-        return Promotion::with(['student', 'fc', 'tc', 'fs', 'ts'])->where(['from_session' => Qs::getCurrentSession(), 'to_session' => Qs::getNextSession()])->get();
+        return Promotion::with(['student', 'fc', 'tc', 'fs', 'ts'])->where(['from_session' => getSystemInfoHelper::getCurrentSession(), 'to_session' => getSystemInfoHelper::getNextSession()])->get();
     }
 
     public function getPromotions(array $where)

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\SupportTeam;
 
+use App\Helpers\checkUsersHelper;
+use App\Helpers\displayMessageHelper;
 use App\Helpers\Qs;
 use App\Http\Requests\Pin\PinCreate;
 use App\Http\Requests\Pin\PinVerify;
@@ -43,7 +45,7 @@ class PinController extends Controller
 
     public function enter_pin($student_id)
     {
-        if(Qs::userIsTeamSA()) {
+        if(checkUsersHelper::userIsTeamSA()) {
             return redirect(route('dashboard'));
         }
 
@@ -77,7 +79,7 @@ class PinController extends Controller
             return Session::has('marks_url') ? redirect(Session::get('marks_url')) : redirect()->route('dashboard');
         }
 
-        return redirect()->route('pins.enter', Qs::hash($student_id))->with('flash_danger', __('msg.pin_fail'));
+        return redirect()->route('pins.enter', displayMessageHelper::hash($student_id))->with('flash_danger', __('msg.pin_fail'));
     }
 
     public function store(PinCreate $req)

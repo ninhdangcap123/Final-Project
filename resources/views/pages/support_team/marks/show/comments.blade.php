@@ -1,15 +1,15 @@
-@if(Qs::userIsTeamSAT())
+@if(\App\Helpers\checkUsersHelper::userIsTeamSAT())
     <div class="card">
         <div class="card-header header-elements-inline bg-dark">
             <h6 class="card-title font-weight-bold">Exam Comments</h6>
-            {!! Qs::getPanelOptions() !!}
+            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body collapse">
             <form class="ajax-update" method="post" action="{{ route('marks.comment_update', $exr->id) }}">
                 @csrf @method('PUT')
 
-                @if(Qs::userIsTeamSAT())
+                @if(\App\Helpers\checkUsersHelper::userIsTeamSAT())
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label font-weight-semibold">Teacher's Comment</label>
                         <div class="col-lg-10">
@@ -18,7 +18,7 @@
                     </div>
                 @endif
 
-                @if(Qs::userIsTeamSA())
+                @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label font-weight-semibold">Head Teacher's Comment</label>
                         <div class="col-lg-10">

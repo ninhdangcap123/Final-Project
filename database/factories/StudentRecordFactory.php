@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Helpers\getSystemInfoHelper;
 use App\Helpers\Qs;
 use App\Models\MyClass;
 use App\Models\Section;
@@ -25,7 +26,7 @@ class StudentRecordFactory extends Factory
     public function definition()
     {
         return [
-            'session' => Qs::getCurrentSession(),
+            'session' => getSystemInfoHelper::getCurrentSession(),
             'my_class_id' => MyClass::first()->id,
             'section_id' => Section::first()->id,
             'user_id' => null

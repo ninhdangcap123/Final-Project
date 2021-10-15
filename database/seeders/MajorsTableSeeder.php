@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ClassTypesTableSeeder extends Seeder
+class MajorsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class ClassTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('class_types')->delete();
+        DB::table('majors')->delete();
 
         $data = [
             ['name' => 'Công Nghệ Thông Tin', 'code' => 'CN1'],
@@ -25,7 +25,7 @@ class ClassTypesTableSeeder extends Seeder
             ['name' => 'Tự Động Hóa', 'code' => 'CN11'],
         ];
 
-        DB::table('class_types')->insert($data);
+        DB::table('majors')->insert($data);
 
     }
 }

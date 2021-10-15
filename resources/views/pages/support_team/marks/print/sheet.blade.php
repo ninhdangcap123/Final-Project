@@ -8,7 +8,7 @@
         <td><strong>CLASS:</strong> {{ strtoupper($my_class->name) }}</td>
     </tr>
     <tr>
-        <td><strong>REPORT SHEET FOR</strong> {!! strtoupper(Mk::getSuffix($ex->term)) !!} TERM </td>
+        <td><strong>REPORT SHEET FOR</strong> {!! strtoupper(\App\Helpers\printMarkSheetHelper::getSuffix($ex->term)) !!} TERM </td>
         <td><strong>ACADEMIC YEAR:</strong> {{ $ex->year }}</td>
         <td><strong>AGE:</strong> {{ $sr->age ?: ($sr->user->dob ? date_diff(date_create($sr->user->dob), date_create('now'))->y : '-') }}</td>
     </tr>
@@ -58,18 +58,18 @@
 
                 <td>{{ $mk->$tex ?: '-'}}</td>
                 <td>{{ $mk->grade ? $mk->grade->name : '-' }}</td>
-                <td>{!! ($mk->grade) ? Mk::getSuffix($mk->sub_pos) : '-' !!}</td>
+                <td>{!! ($mk->grade) ? \App\Helpers\printMarkSheetHelper::getSuffix($mk->sub_pos) : '-' !!}</td>
                 <td>{{ $mk->grade ? $mk->grade->remark : '-' }}</td>
 
-                {{--@if($ex->term == 3)
+                @if($ex->term == 3)
                     <td>{{ $mk->tex3 ?: '-' }}</td>
-                    <td>{{ Mk::getSubTotalTerm($student_id, $sub->id, 1, $mk->my_class_id, $year) }}</td>
-                    <td>{{ Mk::getSubTotalTerm($student_id, $sub->id, 2, $mk->my_class_id, $year) }}</td>
+                    <td>{{ \App\Helpers\printMarkSheetHelper::getSubTotalTerm($student_id, $sub->id, 1, $mk->my_class_id, $year) }}</td>
+                    <td>{{ \App\Helpers\printMarkSheetHelper::getSubTotalTerm($student_id, $sub->id, 2, $mk->my_class_id, $year) }}</td>
                     <td>{{ $mk->cum ?: '-' }}</td>
                     <td>{{ $mk->cum_ave ?: '-' }}</td>
                     <td>{{ $mk->grade ? $mk->grade->name : '-' }}</td>
                     <td>{{ $mk->grade ? $mk->grade->remark : '-' }}</td>
-                @endif--}}
+                @endif
 
             @endforeach
         </tr>

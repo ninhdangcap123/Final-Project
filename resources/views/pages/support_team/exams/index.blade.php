@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Manage Exams</h6>
-            {!! Qs::getPanelOptions() !!}
+            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -41,11 +41,11 @@
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-left">
-                                                    @if(Qs::userIsTeamSA())
+                                                    @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
                                                     {{--Edit--}}
                                                     <a href="{{ route('exams.edit', $ex->id) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
                                                    @endif
-                                                    @if(Qs::userIsSuperAdmin())
+                                                    @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
                                                     {{--Delete--}}
                                                     <a id="{{ $ex->id }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
                                                     <form method="post" id="item-delete-{{ $ex->id }}" action="{{ route('exams.destroy', $ex->id) }}" class="hidden">@csrf @method('delete')</form>
@@ -67,7 +67,7 @@
                             <div class="alert alert-info border-0 alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
 
-                                <span>You are creating an Exam for the Current Session <strong>{{ Qs::getSetting('current_session') }}</strong></span>
+                                <span>You are creating an Exam for the Current Session <strong>{{ \App\Helpers\getSystemInfoHelper::getSetting('current_session') }}</strong></span>
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\SuperAdmin;
 
+use App\Helpers\getPathHelper;
 use App\Helpers\Qs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingUpdate;
@@ -21,7 +22,7 @@ class SettingController extends Controller
     public function index()
     {
          $s = $this->setting->all();
-         $d['class_types'] = $this->my_class->getTypes();
+         $d['majors'] = $this->my_class->getMajor();
          $d['s'] = $s->flatMap(function($s){
             return [$s->type => $s->description];
         });
@@ -40,9 +41,9 @@ class SettingController extends Controller
 
         if($req->hasFile('logo')) {
             $logo = $req->file('logo');
-            $f = Qs::getFileMetaData($logo);
+            $f = getPathHelper::getFileMetaData($logo);
             $f['name'] = 'logo.' . $f['ext'];
-            $f['path'] = $logo->storeAs(Qs::getPublicUploadPath(), $f['name']);
+            $f['path'] = $logo->storeAs(getPathHelper::getPublicUploadPath(), $f['name']);
             $logo_path = asset('storage/' . $f['path']);
             $this->setting->update('logo', $logo_path);
         }

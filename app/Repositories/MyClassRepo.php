@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\ClassType;
+use App\Models\Major;
 use App\Models\MyClass;
 use App\Models\Section;
 use App\Models\Subject;
@@ -12,7 +12,7 @@ class MyClassRepo
 
     public function all()
     {
-        return MyClass::orderBy('name', 'asc')->with('class_type')->get();
+        return MyClass::orderBy('name', 'asc')->with('major')->get();
     }
 
     public function getMC($data)
@@ -40,19 +40,19 @@ class MyClassRepo
         return MyClass::destroy($id);
     }
 
-    public function getTypes()
+    public function getMajor()
     {
-        return ClassType::orderBy('name', 'asc')->get();
+        return Major::orderBy('name', 'asc')->get();
     }
 
-    public function findType($class_type_id)
+    public function findType($major_id)
     {
-        return ClassType::find($class_type_id);
+        return Major::find($major_id);
     }
 
     public function findTypeByClass($class_id)
     {
-        return ClassType::find($this->find($class_id)->class_type_id);
+        return Major::find($this->find($class_id)->major_id);
     }
 
     /************* Section *******************/

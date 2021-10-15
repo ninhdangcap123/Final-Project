@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\SupportTeam;
 
+use App\Helpers\getPaymentHelper;
+use App\Helpers\getSystemInfoHelper;
+use App\Helpers\jsonHelper;
 use App\Helpers\Qs;
 use App\Helpers\Pay;
+use App\Helpers\routeHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\PaymentCreate;
 use App\Http\Requests\Payment\PaymentUpdate;
@@ -24,7 +28,7 @@ class PaymentController extends Controller
     {
         $this->my_class = $my_class;
         $this->pay = $pay;
-        $this->year = Qs::getCurrentSession();
+        $this->year = getSystemInfoHelper::getCurrentSession();
         $this->student = $student;
 
         $this->middleware('teamAccount');
@@ -43,7 +47,7 @@ class PaymentController extends Controller
         $d['payments'] = $p = $this->pay->getPayment(['year' => $year])->get();
 
         if(($p->count() < 1)){
-            return Qs::goWithDanger('payments.index');
+            return routeHelper::goWithDanger('payments.index');
         }
 
         $d['selected'] = true;
@@ -57,7 +61,7 @@ class PaymentController extends Controller
 
     public function select_year(Request $req)
     {
-        return Qs::goToRoute(['payments.show', $req->year]);
+        return routeHelper::goToRoute(['payments.show', $req->year]);
     }
 
     public function create()
@@ -68,7 +72,7 @@ class PaymentController extends Controller
 
     public function invoice($st_id, $year = NULL)
     {
-        if(!$st_id) {return Qs::goWithDanger();}
+        if(!$st_id) {return routeHelper::goWithDanger();}
 
         $inv = $year ? $this->pay->getAllMyPR($st_id, $year) : $this->pay->getAllMyPR($st_id);
 
@@ -82,7 +86,7 @@ class PaymentController extends Controller
 
     public function receipts($pr_id)
     {
-        if(!$pr_id) {return Qs::goWithDanger();}
+        if(!$pr_id) {return routeHelper::goWithDanger();}
 
         try {
              $d['pr'] = $pr = $this->pay->getRecord(['id' => $pr_id])->with('receipt')->first();
@@ -101,7 +105,7 @@ class PaymentController extends Controller
 
     public function pdf_receipts($pr_id)
     {
-        if(!$pr_id) {return Qs::goWithDanger();}
+        if(!$pr_id) {return routeHelper::goWithDanger();}
 
         try {
             $d['pr'] = $pr = $this->pay->getRecord(['id' => $pr_id])->with('receipt')->first();
@@ -150,7 +154,7 @@ class PaymentController extends Controller
         $d2['year'] = $this->year;
 
         $this->pay->createReceipt($d2);
-        return Qs::jsonUpdateOk();
+        return jsonHelper::jsonUpdateOk();
     }
 
     public function manage($class_id = NULL)
@@ -161,7 +165,7 @@ class PaymentController extends Controller
         if($class_id){
             $d['students'] = $st = $this->student->getRecord(['my_class_id' => $class_id])->get()->sortBy('user.name');
             if($st->count() < 1){
-                return Qs::goWithDanger('payments.manage');
+                return routeHelper::goWithDanger('payments.manage');
             }
             $d['selected'] = true;
             $d['my_class_id'] = $class_id;
@@ -196,24 +200,24 @@ class PaymentController extends Controller
             }
         }
 
-        return Qs::goToRoute(['payments.manage', $class_id]);
+        return routeHelper::goToRoute(['payments.manage', $class_id]);
     }
 
     public function store(PaymentCreate $req)
     {
         $data = $req->all();
         $data['year'] = $this->year;
-        $data['ref_no'] = Pay::genRefCode();
+        $data['ref_no'] = getPaymentHelper::genRefCode();
         $this->pay->create($data);
 
-        return Qs::jsonStoreOk();
+        return jsonHelper::jsonStoreOk();
     }
 
     public function edit($id)
     {
         $d['payment'] = $pay = $this->pay->find($id);
 
-        return is_null($pay) ? Qs::goWithDanger('payments.index') : view('pages.support_team.payments.edit', $d);
+        return is_null($pay) ? routeHelper::goWithDanger('payments.index') : view('pages.support_team.payments.edit', $d);
     }
 
     public function update(PaymentUpdate $req, $id)
@@ -221,14 +225,14 @@ class PaymentController extends Controller
         $data = $req->all();
         $this->pay->update($id, $data);
 
-        return Qs::jsonUpdateOk();
+        return jsonHelper::jsonUpdateOk();
     }
 
     public function destroy($id)
     {
         $this->pay->find($id)->delete();
 
-        return Qs::deleteOk('payments.index');
+        return routeHelper::deleteOk('payments.index');
     }
 
     public function reset_record($id)

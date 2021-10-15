@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\SupportTeam;
 
+use App\Helpers\jsonHelper;
 use App\Helpers\Qs;
+use App\Helpers\routeHelper;
 use App\Http\Requests\Subject\SubjectCreate;
 use App\Http\Requests\Subject\SubjectUpdate;
 use App\Repositories\MyClassRepo;
@@ -36,7 +38,7 @@ class SubjectController extends Controller
         $data = $req->all();
         $this->my_class->createSubject($data);
 
-        return Qs::jsonStoreOk();
+        return jsonHelper::jsonStoreOk();
     }
 
     public function edit($id)
@@ -45,7 +47,7 @@ class SubjectController extends Controller
         $d['my_classes'] = $this->my_class->all();
         $d['teachers'] = $this->user->getUserByType('teacher');
 
-        return is_null($sub) ? Qs::goWithDanger('subjects.index') : view('pages.support_team.subjects.edit', $d);
+        return is_null($sub) ? routeHelper::goWithDanger('subjects.index') : view('pages.support_team.subjects.edit', $d);
     }
 
     public function update(SubjectUpdate $req, $id)
@@ -53,7 +55,7 @@ class SubjectController extends Controller
         $data = $req->all();
         $this->my_class->updateSubject($id, $data);
 
-        return Qs::jsonUpdateOk();
+        return jsonHelper::jsonUpdateOk();
     }
 
     public function destroy($id)

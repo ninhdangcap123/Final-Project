@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Edit Grade</h6>
-            {!! Qs::getPanelOptions() !!}
+            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -21,12 +21,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="class_type_id" class="col-lg-3 col-form-label font-weight-semibold">Grade Type</label>
+                            <label for="major_id" class="col-lg-3 col-form-label font-weight-semibold">Grade Type</label>
                             <div class="col-lg-9">
-                                <select class="form-control select" name="class_type_id" id="class_type_id">
+                                <select class="form-control select" name="major_id" id="major_id">
                                     <option value="">Not Applicable</option>
-                                    @foreach($class_types as $ct)
-                                        <option {{ $gr->class_type_id == $ct->id ? 'selected' : '' }} value="{{ $ct->id }}">{{ $ct->name }}</option>
+                                    @foreach($majors as $ct)
+                                        <option {{ $gr->major_id == $ct->id ? 'selected' : '' }} value="{{ $ct->id }}">{{ $ct->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -51,7 +51,7 @@
                             <div class="col-lg-9">
                                 <select  class="form-control select" name="remark" id="remark">
                                     <option value="">Select Remark...</option>
-                                    @foreach(Mk::getRemarks() as $rem)
+                                    @foreach(\App\Helpers\printMarkSheetHelper::getRemarks() as $rem)
                                         <option {{ $gr->remark == $rem ? 'selected' : '' }} value="{{ $rem }}">{{ $rem }}</option>
                                     @endforeach
                                 </select>

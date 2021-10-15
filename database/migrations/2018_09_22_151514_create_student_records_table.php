@@ -15,9 +15,9 @@ class CreateStudentRecordsTable extends Migration
     {
         Schema::create('student_records', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('my_class_id');
-            $table->unsignedInteger('section_id');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('my_class_id')->nullable();
+            $table->unsignedInteger('section_id')->nullable();
             $table->string('adm_no', 30)->unique()->nullable();
             $table->unsignedInteger('my_parent_id')->nullable();
             $table->unsignedInteger('dorm_id')->nullable();

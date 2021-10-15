@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BloodGroupsTableSeeder::class);
         $this->call(GradesTableSeeder::class);
         $this->call(DormsTableSeeder::class);
-        $this->call(ClassTypesTableSeeder::class);
+        $this->call(MajorsTableSeeder::class);
         $this->call(UserTypesTableSeeder::class);
         $this->call(MyClassesTableSeeder::class);
         $this->call(NationalitiesTableSeeder::class);
@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SectionsTableSeeder::class);
         $this->call(StudentRecordsTableSeeder::class);
         $this->call(SkillsTableSeeder::class);
+        $this->call(ExamsTableSeeder::class);
     }
 }
