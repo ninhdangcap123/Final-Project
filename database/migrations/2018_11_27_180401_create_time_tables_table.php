@@ -15,13 +15,13 @@ class CreateTimeTablesTable extends Migration
     {
         Schema::create('time_table_records', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 100)->unique()->nullable();
+            $table->string('name', 100)->nullable();
             $table->unsignedInteger('my_class_id')->nullable();
             $table->unsignedInteger('exam_id')->nullable();
             $table->string('year', 100)->nullable();
             $table->timestamps();
 
-            $table->unique(['my_class_id', 'exam_id', 'year']);
+//            $table->unique(['my_class_id', 'exam_id', 'year']);
         });
 
         Schema::create('time_slots', function (Blueprint $table) {
@@ -40,7 +40,7 @@ class CreateTimeTablesTable extends Migration
             $table->string('full', 100)->nullable();
             $table->timestamps();
 
-            $table->unique(['timestamp_from', 'timestamp_to', 'ttr_id']);
+//            $table->unique(['timestamp_from', 'timestamp_to', 'ttr_id']);
 
         });
 
@@ -56,8 +56,8 @@ class CreateTimeTablesTable extends Migration
             $table->tinyInteger('day_num')->nullable();
             $table->timestamps();
 
-            $table->unique(['ttr_id', 'ts_id', 'day']);
-            $table->unique(['ttr_id', 'ts_id', 'exam_date']);
+//            $table->unique(['ttr_id', 'ts_id', 'day']);
+//            $table->unique(['ttr_id', 'ts_id', 'exam_date']);
         });
 
     }

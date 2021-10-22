@@ -23,9 +23,9 @@ class CreateGradesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('grades', function (Blueprint $table) {
-            $table->unique(['name', 'major_id', 'remark']);
-        });
+//        Schema::table('grades', function (Blueprint $table) {
+//            $table->unique(['name', 'major_id', 'remark']);
+//        });
     }
 
     /**

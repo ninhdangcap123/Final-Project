@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\SupportTeam;
 
+use App\Helpers\checkExamInfoHelper;
 use App\Helpers\checkUsersHelper;
 use App\Helpers\displayMessageHelper;
 use App\Helpers\getSystemInfoHelper;
@@ -67,7 +68,7 @@ class MarkController extends Controller
             return redirect(route('dashboard'))->with('pop_error', __('msg.denied'));
         }
 
-        if(Mk::examIsLocked() && !checkUsersHelper::userIsTeamSA()){
+        if(checkExamInfoHelper::examIsLocked() && !checkUsersHelper::userIsTeamSA()){
             Session::put('marks_url', route('marks.show', [displayMessageHelper::hash($student_id), $year]));
 
             if(!$this->checkPinVerified($student_id)){
@@ -101,7 +102,7 @@ class MarkController extends Controller
             return redirect(route('dashboard'))->with('pop_error', __('msg.denied'));
         }
 
-        if(Mk::examIsLocked() && !checkUsersHelper::userIsTeamSA()){
+        if(checkExamInfoHelper::examIsLocked() && !checkUsersHelper::userIsTeamSA()){
             Session::put('marks_url', route('marks.show', [displayMessageHelper::hash($student_id), $year]));
 
             if(!$this->checkPinVerified($student_id)){

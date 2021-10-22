@@ -10,7 +10,7 @@ class Pay
 //    {
 //        return PaymentRecord::where(['student_id' => $st_id])->pluck('year')->unique();
 //    }
-
+//
 //    public static function genRefCode()
 //    {
 //        return date('Y').'/'.mt_rand(10000, 999999);

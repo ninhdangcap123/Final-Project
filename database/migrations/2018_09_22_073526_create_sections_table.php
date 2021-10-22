@@ -22,9 +22,9 @@ class CreateSectionsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('sections', function (Blueprint $table) {
-            $table->unique(['name', 'my_class_id']);
-        });
+//        Schema::table('sections', function (Blueprint $table) {
+//            $table->unique(['name', 'my_class_id']);
+//        });
     }
 
     /**
