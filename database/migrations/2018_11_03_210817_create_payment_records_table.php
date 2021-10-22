@@ -17,7 +17,7 @@ class CreatePaymentRecordsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('payment_id')->nullable();
             $table->unsignedInteger('student_id')->nullable();
-            $table->string('ref_no', 100)->unique()->nullable();
+            $table->string('ref_no', 100)->nullable();
             $table->integer('amt_paid')->nullable();
             $table->integer('balance')->nullable();
             $table->tinyInteger('paid')->default(0)->nullable();

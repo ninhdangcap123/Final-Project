@@ -26,34 +26,37 @@ class MyClassController extends Controller
 
     public function index()
     {
-        $d['my_classes'] = $this->my_class->all();
-        $d['majors'] = $this->my_class->getMajor();
+        $data['my_classes'] = $this->my_class->all();
+        $data['majors'] = $this->my_class->getMajor();
 
-        return view('pages.support_team.classes.index', $d);
+        return view('pages.support_team.classes.index', $data);
     }
 
     public function store(ClassCreate $req): \Illuminate\Http\JsonResponse
     {
         $data = $req->all();
-        $mc = $this->my_class->create($data);
+        $myCourse = $this->my_class->create($data);
 
         // Create Default Section
-        $s =['my_class_id' => $mc->id,
+        $section =
+            [
+            'my_class_id' => $myCourse->id,
             'name' => 'A',
             'active' => 1,
             'teacher_id' => NULL,
-        ];
+            ];
 
-        $this->my_class->createSection($s);
+        $this->my_class->createSection($section);
 
         return jsonHelper::jsonStoreOk();
     }
 
     public function edit($id)
     {
-        $d['course'] = $course = $this->my_class->find($id);
+        $data['course'] = $course = $this->my_class->find($id);
 
-        return is_null($course) ? routeHelper::goWithDanger('classes.index') : view('pages.support_team.classes.edit', $d) ;
+        return is_null($course) ? routeHelper::goWithDanger('classes.index') :
+            view('pages.support_team.classes.edit', $data) ;
     }
 
     public function update(ClassUpdate $req, $id)

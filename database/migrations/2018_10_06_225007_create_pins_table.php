@@ -15,7 +15,7 @@ class CreatePinsTable extends Migration
     {
         Schema::create('pins', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code', 40)->unique()->nullable();
+            $table->string('code', 40)->nullable();
             $table->string('used')->default(0)->nullable();
             $table->string('times_used')->default(0)->nullable();
             $table->unsignedInteger('user_id')->nullable();

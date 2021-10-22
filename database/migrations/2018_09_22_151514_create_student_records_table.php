@@ -18,7 +18,7 @@ class CreateStudentRecordsTable extends Migration
             $table->unsignedInteger('user_id')->nullable();
             $table->unsignedInteger('my_class_id')->nullable();
             $table->unsignedInteger('section_id')->nullable();
-            $table->string('adm_no', 30)->unique()->nullable();
+            $table->string('adm_no', 30)->nullable();
             $table->unsignedInteger('my_parent_id')->nullable();
             $table->unsignedInteger('dorm_id')->nullable();
             $table->string('dorm_room_no')->nullable();

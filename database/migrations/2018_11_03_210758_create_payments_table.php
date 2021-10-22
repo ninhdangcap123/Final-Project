@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->increments('id');
             $table->string('title', 100)->nullable();
             $table->integer('amount')->nullable();
-            $table->string('ref_no', 100)->unique()->nullable();
+            $table->string('ref_no', 100)->nullable();
             $table->string('method', 100)->default('cash')->nullable();
             $table->unsignedInteger('my_class_id')->nullable();
             $table->string('description')->nullable();
