@@ -6,16 +6,16 @@ use App\Http\Requests\Grade\GradeCreate;
 use App\Http\Requests\Grade\GradeUpdate;
 use App\Repositories\ExamRepo;
 use App\Http\Controllers\Controller;
-use App\Repositories\MyClassRepo;
+use App\Repositories\MyCourseRepo;
 
 class GradeController extends Controller
 {
-    protected $exam, $my_class;
+    protected $exam, $my_course;
 
-    public function __construct(ExamRepo $exam, MyClassRepo $my_class)
+    public function __construct(ExamRepo $exam, MyCourseRepo $my_course)
     {
         $this->exam = $exam;
-        $this->my_class = $my_class;
+        $this->my_course = $my_course;
 
         $this->middleware('teamSA', ['except' => ['destroy',] ]);
         $this->middleware('super_admin', ['only' => ['destroy',] ]);
@@ -24,7 +24,7 @@ class GradeController extends Controller
     public function index()
     {
          $d['grades'] = $this->exam->allGrades();
-         $d['majors'] = $this->my_class->getMajor();
+         $d['majors'] = $this->my_course->getMajor();
         return view('pages.support_team.grades.index', $d);
     }
 
@@ -38,7 +38,7 @@ class GradeController extends Controller
 
     public function edit($id)
     {
-        $d['majors'] = $this->my_class->getMajor();
+        $d['majors'] = $this->my_course->getMajor();
         $d['gr'] = $this->exam->findGrade($id);
         return view('pages.support_team.grades.edit', $d);
     }

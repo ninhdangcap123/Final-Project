@@ -42,7 +42,7 @@
 
 // Alternate styles
 //
-// Generate contextual modifier classes for colorizing the alert.
+// Generate contextual modifier courses for colorizing the alert.
 
 @each $color, $value in $theme-colors {
   .alert-#{$color} {

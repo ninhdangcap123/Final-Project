@@ -16,7 +16,7 @@ class DormUpdate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:dorms,id,name',
+            'name' => 'required|string',
         ];
     }
 

@@ -5,13 +5,13 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Edit Course</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
-                    <form class="ajax-update" data-reload="#page-header" method="post" action="{{ route('classes.update', $course->id) }}">
+                    <form class="ajax-update" data-reload="#page-header" method="post" action="{{ route('courses.update', $course->id) }}">
                         @csrf @method('PUT')
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label font-weight-semibold">Name <span class="text-danger">*</span></label>

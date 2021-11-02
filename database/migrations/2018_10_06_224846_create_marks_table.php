@@ -17,7 +17,7 @@ class CreateMarksTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('student_id')->nullable();
             $table->unsignedInteger('subject_id')->nullable();
-            $table->unsignedInteger('my_class_id')->nullable();
+            $table->unsignedInteger('my_course_id')->nullable();
             $table->unsignedInteger('section_id')->nullable();
             $table->unsignedInteger('exam_id')->nullable();
             $table->integer('t1')->nullable();

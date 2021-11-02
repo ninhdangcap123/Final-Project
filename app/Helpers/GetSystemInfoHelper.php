@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Setting;
 
-class getSystemInfoHelper
+class GetSystemInfoHelper
 {
     public static function getPanelOptions()
     {

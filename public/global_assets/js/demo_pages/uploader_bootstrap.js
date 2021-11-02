@@ -50,7 +50,7 @@ var FileUpload = function() {
             close: 'btn btn-light btn-icon btn-sm'
         };
 
-        // Icons inside zoom modal classes
+        // Icons inside zoom modal courses
         var previewZoomButtonIcons = {
             prev: '<i class="icon-arrow-left32"></i>',
             next: '<i class="icon-arrow-right32"></i>',

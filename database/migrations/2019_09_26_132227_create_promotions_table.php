@@ -16,9 +16,9 @@ class CreatePromotionsTable extends Migration
         Schema::create('promotions', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('student_id')->nullable();
-            $table->unsignedInteger('from_class')->nullable();
+            $table->unsignedInteger('from_course')->nullable();
             $table->unsignedInteger('from_section')->nullable();
-            $table->unsignedInteger('to_class')->nullable();
+            $table->unsignedInteger('to_course')->nullable();
             $table->unsignedInteger('to_section')->nullable();
             $table->tinyInteger('grad')->nullable();
             $table->string('from_session')->nullable();
@@ -29,10 +29,10 @@ class CreatePromotionsTable extends Migration
 
         Schema::table('promotions', function (Blueprint $table) {
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('from_class')->references('id')->on('my_classes')->onDelete('cascade');
+            $table->foreign('from_course')->references('id')->on('my_courses')->onDelete('cascade');
             $table->foreign('from_section')->references('id')->on('sections')->onDelete('cascade');
             $table->foreign('to_section')->references('id')->on('sections')->onDelete('cascade');
-            $table->foreign('to_class')->references('id')->on('my_classes')->onDelete('cascade');
+            $table->foreign('to_course')->references('id')->on('my_courses')->onDelete('cascade');
         });
     }
 

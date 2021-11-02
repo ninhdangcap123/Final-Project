@@ -87,8 +87,8 @@
                                     <tr>
                                         <td class="font-weight-bold">Children/Ward</td>
                                         <td>
-                                        @foreach(\App\Helpers\getUsersHelper::findMyChildren($user->id) as $sr)
-                                            <span> - <a href="{{ route('students.show', \App\Helpers\displayMessageHelper::hash($sr->id)) }}">{{ $sr->user->name.' - '.$sr->my_class->name. ' '.$sr->section->name }}</a></span><br>
+                                        @foreach(\App\Helpers\GetUsersHelper::findMyChildren($user->id) as $sr)
+                                            <span> - <a href="{{ route('students.show', \App\Helpers\DisplayMessageHelper::hash($sr->id)) }}">{{ $sr->user->name.' - '.$sr->my_course->name. ' '.$sr->section->name }}</a></span><br>
 
                                             @endforeach
                                         </td>
@@ -99,8 +99,8 @@
                                     <tr>
                                         <td class="font-weight-bold">My Subjects</td>
                                         <td>
-                                            @foreach(\App\Helpers\getUsersHelper::findTeacherSubjects($user->id) as $sub)
-                                                <span> - {{ $sub->name.' ('.$sub->my_class->name.')' }}</span><br>
+                                            @foreach(\App\Helpers\GetUsersHelper::findTeacherSubjects($user->id) as $sub)
+                                                <span> - {{ $sub->name.' ('.$sub->my_course->name.')' }}</span><br>
                                             @endforeach
                                         </td>
                                     </tr>

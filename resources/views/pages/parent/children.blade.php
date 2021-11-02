@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">My Children</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -28,7 +28,7 @@
                         <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}" alt="photo"></td>
                         <td>{{ $s->user->name }}</td>
                         <td>{{ $s->adm_no }}</td>
-                        <td>{{ $s->my_class->name.' '.$s->section->name }}</td>
+                        <td>{{ $s->my_course->name.' '.$s->section->name }}</td>
                         <td>{{ $s->user->email }}</td>
                         <td class="text-center">
                             <div class="list-icons">
@@ -38,8 +38,8 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-left">
-                                        <a href="{{ route('students.show', \App\Helpers\displayMessageHelper::hash($s->id)) }}" class="dropdown-item"><i class="icon-eye"></i> View Profile</a>
-                                        <a target="_blank" href="{{ route('marks.year_selector', \App\Helpers\displayMessageHelper::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-check"></i> Marksheet</a>
+                                        <a href="{{ route('students.show', \App\Helpers\DisplayMessageHelper::hash($s->id)) }}" class="dropdown-item"><i class="icon-eye"></i> View Profile</a>
+                                        <a target="_blank" href="{{ route('marks.year_selector', \App\Helpers\DisplayMessageHelper::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-check"></i> Marksheet</a>
 
                                     </div>
                                 </div>

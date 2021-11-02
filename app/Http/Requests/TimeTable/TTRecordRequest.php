@@ -20,21 +20,21 @@ class TTRecordRequest extends FormRequest
     {
         if($this->method() === 'POST'){
             return [
-                'name' => 'required|string|min:3|unique:time_table_records',
-                'my_class_id' => 'required',
+                'name' => 'required|string|min:3',
+                'my_course_id' => 'required',
             ];
         }
 
         return [
-            'name' => 'required|string|min:3|unique:time_table_records,name,'.$this->ttr,
-            'my_class_id' => 'required',
+            'name' => 'required|string|min:3'.$this->ttr,
+            'my_course_id' => 'required',
         ];
     }
 
     public function attributes()
     {
         return  [
-            'my_class_id' => 'Class',
+            'my_course_id' => 'Course',
         ];
     }
 

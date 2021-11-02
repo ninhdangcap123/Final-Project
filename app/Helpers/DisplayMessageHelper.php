@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use Hashids\Hashids;
 
-class displayMessageHelper
+class DisplayMessageHelper
 {
     public static function displayError($errors)
     {

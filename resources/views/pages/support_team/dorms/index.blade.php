@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Manage Dorms</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -26,11 +26,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($dorms as $d)
+                            @foreach($dorms as $dorm)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $d->name }}</td>
-                                    <td>{{ $d->description}}</td>
+                                    <td>{{ $dorm->name }}</td>
+                                    <td>{{ $dorm->description}}</td>
                                     <td class="text-center">
                                         <div class="list-icons">
                                             <div class="dropdown">
@@ -39,14 +39,14 @@
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-left">
-                                                    @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
+                                                    @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
                                                     {{--Edit--}}
-                                                    <a href="{{ route('dorms.edit', $d->id) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
+                                                    <a href="{{ route('dorms.edit', $dorm->id) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
                                                    @endif
-                                                        @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
+                                                        @if(\App\Helpers\GetUserTypeHelper::userIsSuperAdmin())
                                                     {{--Delete--}}
-                                                    <a id="{{ $d->id }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
-                                                    <form method="post" id="item-delete-{{ $d->id }}" action="{{ route('dorms.destroy', $d->id) }}" class="hidden">@csrf @method('delete')</form>
+                                                    <a id="{{ $dorm->id }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
+                                                    <form method="post" id="item-delete-{{ $dorm->id }}" action="{{ route('dorms.destroy', $dorm->id) }}" class="hidden">@csrf @method('delete')</form>
                                                         @endif
 
                                                 </div>

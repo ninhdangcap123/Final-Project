@@ -2,33 +2,33 @@
 
 namespace App\Http\Controllers\SupportTeam;
 
-use App\Helpers\jsonHelper;
+use App\Helpers\JsonHelper;
 use App\Helpers\Qs;
-use App\Helpers\routeHelper;
+use App\Helpers\RouteHelper;
 use App\Http\Requests\Subject\SubjectCreate;
 use App\Http\Requests\Subject\SubjectUpdate;
-use App\Repositories\MyClassRepo;
+use App\Repositories\MyCourseRepo;
 use App\Repositories\UserRepo;
 use App\Http\Controllers\Controller;
 
 class SubjectController extends Controller
 {
-    protected $my_class, $user;
+    protected $my_course, $user;
 
-    public function __construct(MyClassRepo $my_class, UserRepo $user)
+    public function __construct(MyCourseRepo $my_course, UserRepo $user)
     {
         $this->middleware('teamSA', ['except' => ['destroy',] ]);
         $this->middleware('super_admin', ['only' => ['destroy',] ]);
 
-        $this->my_class = $my_class;
+        $this->my_course = $my_course;
         $this->user = $user;
     }
 
     public function index()
     {
-        $d['my_classes'] = $this->my_class->all();
+        $d['my_courses'] = $this->my_course->all();
         $d['teachers'] = $this->user->getUserByType('teacher');
-        $d['subjects'] = $this->my_class->getAllSubjects();
+        $d['subjects'] = $this->my_course->getAllSubjects();
 
         return view('pages.support_team.subjects.index', $d);
     }
@@ -36,31 +36,31 @@ class SubjectController extends Controller
     public function store(SubjectCreate $req)
     {
         $data = $req->all();
-        $this->my_class->createSubject($data);
+        $this->my_course->createSubject($data);
 
-        return jsonHelper::jsonStoreOk();
+        return JsonHelper::jsonStoreOk();
     }
 
     public function edit($id)
     {
-        $d['s'] = $sub = $this->my_class->findSubject($id);
-        $d['my_classes'] = $this->my_class->all();
+        $d['s'] = $sub = $this->my_course->findSubject($id);
+        $d['my_courses'] = $this->my_course->all();
         $d['teachers'] = $this->user->getUserByType('teacher');
 
-        return is_null($sub) ? routeHelper::goWithDanger('subjects.index') : view('pages.support_team.subjects.edit', $d);
+        return is_null($sub) ? RouteHelper::goWithDanger('subjects.index') : view('pages.support_team.subjects.edit', $d);
     }
 
     public function update(SubjectUpdate $req, $id)
     {
         $data = $req->all();
-        $this->my_class->updateSubject($id, $data);
+        $this->my_course->updateSubject($id, $data);
 
-        return jsonHelper::jsonUpdateOk();
+        return JsonHelper::jsonUpdateOk();
     }
 
     public function destroy($id)
     {
-        $this->my_class->deleteSubject($id);
+        $this->my_course->deleteSubject($id);
         return back()->with('flash_success', __('msg.del_ok'));
     }
 }

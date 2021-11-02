@@ -17,13 +17,13 @@ class CreateSubjectsTable extends Migration
             $table->increments('id');
             $table->string('name', 100);
             $table->string('slug', 100);
-            $table->unsignedInteger('my_class_id')->nullable();
+            $table->unsignedInteger('my_course_id')->nullable();
             $table->unsignedInteger('teacher_id')->nullable();
             $table->timestamps();
         });
 
 //        Schema::table('subjects', function (Blueprint $table) {
-//            $table->unique(['my_class_id', 'name']);
+//            $table->unique(['my_course_id', 'name']);
 //        });
     }
 

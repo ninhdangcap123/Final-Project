@@ -7,7 +7,7 @@ use App\Models\Grade;
 use App\Models\Mark;
 use Illuminate\Database\Eloquent\Collection;
 
-class printMarkSheetHelper
+class PrintMarkSheetHelper
 {
     public static function getRemarks()
     {

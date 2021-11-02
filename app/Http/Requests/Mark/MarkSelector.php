@@ -20,10 +20,10 @@ class MarkSelector extends FormRequest
     public function rules()
     {
         return [
-            'exam_id' => 'required|exists:exams,id',
-            'my_class_id' => 'required|exists:my_classes,id',
-            'section_id' => 'required|exists:sections,id',
-            'subject_id' => 'required|exists:subjects,id',
+            'exam_id' => 'required',
+            'my_course_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required',
         ];
     }
 
@@ -31,7 +31,7 @@ class MarkSelector extends FormRequest
     {
         return  [
             'exam_id' => 'Exam',
-            'my_class_id' => 'Class',
+            'my_course_id' => 'Course',
             'section_id' => 'Section',
             'subject_id' => 'Subject',
         ];

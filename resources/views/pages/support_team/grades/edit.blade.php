@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Edit Grade</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -51,7 +51,7 @@
                             <div class="col-lg-9">
                                 <select  class="form-control select" name="remark" id="remark">
                                     <option value="">Select Remark...</option>
-                                    @foreach(\App\Helpers\printMarkSheetHelper::getRemarks() as $rem)
+                                    @foreach(\App\Helpers\PrintMarkSheetHelper::getRemarks() as $rem)
                                         <option {{ $gr->remark == $rem ? 'selected' : '' }} value="{{ $rem }}">{{ $rem }}</option>
                                     @endforeach
                                 </select>

@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('user_type')->nullable();
             $table->string('dob')->nullable();
             $table->string('gender')->nullable();
-            $table->string('photo')->default(\App\Helpers\getPathHelper::getDefaultUserImage())->nullable();
+            $table->string('photo')->default(\App\Helpers\GetPathHelper::getDefaultUserImage())->nullable();
             $table->string('phone')->nullable();
             $table->string('phone2')->nullable();
             $table->unsignedInteger('bg_id')->nullable();

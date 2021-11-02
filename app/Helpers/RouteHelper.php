@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use Illuminate\Http\Request;
 
-class routeHelper
+class RouteHelper
 {
     public static function goToRoute($goto, $status = 302, $headers = [], $secure = null)
     {
@@ -44,7 +44,7 @@ class routeHelper
     {
         return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     }
-    public function select_year(Request $req)
+    public function selectYear(Request $req)
     {
         return self::goToRoute(['payments.show', $req->year]);
     }

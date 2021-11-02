@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Helpers\getUsersHelper;
+use App\Helpers\GetUsersHelper;
 use App\Helpers\Qs;
 use App\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -26,7 +26,7 @@ class UserFactory extends Factory
     public function definition()
     {
         // Create random User Type
-        $user_type = getUsersHelper::getStaff(['super_admin', 'librarian'])[rand(0,2)];
+        $user_type = GetUsersHelper::getStaff(['super_admin', 'librarian'])[rand(0,2)];
 
         return [
             'name' => $this->faker->name,

@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use Illuminate\Support\Facades\Auth;
 
-class getUserTypeHelper
+class GetUserTypeHelper
 {
     public static function getAllUserTypes($remove=[])
     {

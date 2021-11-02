@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Helpers\displayMessageHelper;
+use App\Helpers\DisplayMessageHelper;
 use App\Helpers\Qs;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,8 +27,8 @@ class UserRequest extends FormRequest
             'user_type' => 'required',
             'gender' => 'required|string',
             'phone' => 'sometimes|nullable|string|min:6|max:20',
-            'email' => 'sometimes|nullable|email|max:100|unique:users',
-            'username' => 'sometimes|nullable|alpha_dash|min:8|max:100|unique:users',
+            'email' => 'sometimes|nullable|email|max:100',
+            'username' => 'sometimes|nullable|alpha_dash|min:8|max:100',
             'photo' => 'sometimes|nullable|image|mimes:jpeg,gif,png,jpg|max:2048',
             'address' => 'required|string|min:6|max:120',
             'state_id' => 'required',
@@ -66,14 +66,14 @@ class UserRequest extends FormRequest
         if($this->method() === 'POST'){
             $input = $this->all();
 
-            $input['user_type'] = displayMessageHelper::decodeHash($input['user_type']);
+            $input['user_type'] = DisplayMessageHelper::decodeHash($input['user_type']);
 
             $this->getInputSource()->replace($input);
 
         }
 
         if($this->method() === 'PUT'){
-            $this->user = displayMessageHelper::decodeHash($this->user);
+            $this->user = DisplayMessageHelper::decodeHash($this->user);
         }
 
         return parent::getValidatorInstance();

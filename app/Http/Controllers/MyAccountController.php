@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Helpers\getPathHelper;
+use App\Helpers\GetPathHelper;
 use App\Helpers\Qs;
 use App\Http\Requests\UserChangePass;
 use App\Http\Requests\UserUpdate;
@@ -20,13 +20,13 @@ class MyAccountController extends Controller
         $this->user = $user;
     }
 
-    public function edit_profile()
+    public function editProfile()
     {
         $d['my'] = Auth::user();
         return view('pages.support_team.my_account', $d);
     }
 
-    public function update_profile(UserUpdate $req)
+    public function updateProfile(UserUpdate $req)
     {
         $user = Auth::user();
 
@@ -41,9 +41,9 @@ class MyAccountController extends Controller
 
         if($req->hasFile('photo')) {
             $photo = $req->file('photo');
-            $f = getPathHelper::getFileMetaData($photo);
+            $f = GetPathHelper::getFileMetaData($photo);
             $f['name'] = 'photo.' . $f['ext'];
-            $f['path'] = $photo->storeAs(getPathHelper::getUploadPath($user_type).$code, $f['name']);
+            $f['path'] = $photo->storeAs(GetPathHelper::getUploadPath($user_type).$code, $f['name']);
             $d['photo'] = asset('storage/' . $f['path']);
         }
 
@@ -51,7 +51,7 @@ class MyAccountController extends Controller
         return back()->with('flash_success', __('msg.update_ok'));
     }
 
-    public function change_pass(UserChangePass $req)
+    public function changePass(UserChangePass $req)
     {
         $user_id = Auth::user()->id;
         $my_pass = Auth::user()->password;

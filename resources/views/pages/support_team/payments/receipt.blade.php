@@ -12,7 +12,7 @@
 
                 <td>
                     <strong><span
-                                style="color: #1b0c80; font-size: 25px;">{{ strtoupper(\App\Helpers\getSystemInfoHelper::getSetting('system_name')) }}</span></strong><br/>
+                                style="color: #1b0c80; font-size: 25px;">{{ strtoupper(\App\Helpers\GetSystemInfoHelper::getSetting('system_name')) }}</span></strong><br/>
                     {{-- <strong><span style="color: #1b0c80; font-size: 20px;">MINNA, NIGER STATE</span></strong><br/>--}}
                     <strong><span
                                 style="color: #000; font-size: 15px;"><i>{{ ucwords($s['address']) }}</i></span></strong>
@@ -63,7 +63,7 @@
                </tr>
                <tr>
                    <td class="bold">CLASS:</td>
-                   <td>{{ $sr->my_class->name }}</td>
+                   <td>{{ $sr->my_course->name }}</td>
                </tr>
            </table>
        </div>

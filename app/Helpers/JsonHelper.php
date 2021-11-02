@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-class jsonHelper
+class JsonHelper
 {
     public static function json($msg, $ok = TRUE, $arr = [])
     {

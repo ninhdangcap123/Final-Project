@@ -5,7 +5,7 @@
             <div class="card-header bg-white header-elements-inline">
                 <h6 class="card-title">Please fill The form Below To Admit A New Student</h6>
 
-                {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+                {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
             </div>
 
             <form id="ajax-reg" method="post" enctype="multipart/form-data" class="wizard-form steps-validation" action="{{ route('students.store') }}" data-fouc>
@@ -131,11 +131,11 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="my_class_id">Class: <span class="text-danger">*</span></label>
-                                <select onchange="getClassSections(this.value)" data-placeholder="Choose..." required name="my_class_id" id="my_class_id" class="select-search form-control">
+                                <label for="my_course_id">Class: <span class="text-danger">*</span></label>
+                                <select onchange="getClassSections(this.value)" data-placeholder="Choose..." required name="my_course_id" id="my_course_id" class="select-search form-control">
                                     <option value=""></option>
-                                    @foreach($my_classes as $c)
-                                        <option {{ (old('my_class_id') == $c->id ? 'selected' : '') }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                    @foreach($my_courses as $c)
+                                        <option {{ (old('my_course_id') == $c->id ? 'selected' : '') }} value="{{ $c->id }}">{{ $c->name }}</option>
                                         @endforeach
                                 </select>
                         </div>
@@ -156,7 +156,7 @@
                                 <select data-placeholder="Choose..."  name="my_parent_id" id="my_parent_id" class="select-search form-control">
                                     <option  value=""></option>
                                     @foreach($parents as $p)
-                                        <option {{ (old('my_parent_id') == \App\Helpers\displayMessageHelper::hash($p->id)) ? 'selected' : '' }} value="{{ \App\Helpers\displayMessageHelper::hash($p->id) }}">{{ $p->name }}</option>
+                                        <option {{ (old('my_parent_id') == \App\Helpers\DisplayMessageHelper::hash($p->id)) ? 'selected' : '' }} value="{{ \App\Helpers\DisplayMessageHelper::hash($p->id) }}">{{ $p->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

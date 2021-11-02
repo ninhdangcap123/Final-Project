@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\checkUsersHelper;
-use App\Helpers\getSystemInfoHelper;
+use App\Helpers\CheckUsersHelper;
+use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\Qs;
 use App\Repositories\UserRepo;
 
@@ -21,26 +21,26 @@ class HomeController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function privacy_policy()
+    public function privacyPolicy()
     {
         $data['app_name'] = config('app.name');
         $data['app_url'] = config('app.url');
-        $data['contact_phone'] = getSystemInfoHelper::getSetting('phone');
+        $data['contact_phone'] = GetSystemInfoHelper::getSetting('phone');
         return view('pages.other.privacy_policy', $data);
     }
 
-    public function terms_of_use()
+    public function termsOfUse()
     {
         $data['app_name'] = config('app.name');
         $data['app_url'] = config('app.url');
-        $data['contact_phone'] = getSystemInfoHelper::getSetting('phone');
+        $data['contact_phone'] = GetSystemInfoHelper::getSetting('phone');
         return view('pages.other.terms_of_use', $data);
     }
 
     public function dashboard()
     {
         $d=[];
-        if(checkUsersHelper::userIsTeamSAT()){
+        if(CheckUsersHelper::userIsTeamSAT()){
             $d['users'] = $this->user->getAll();
         }
 

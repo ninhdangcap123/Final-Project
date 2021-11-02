@@ -5,7 +5,7 @@ namespace App\Helpers;
 use App\Models\StudentRecord;
 use App\Models\Subject;
 
-class getUsersHelper
+class GetUsersHelper
 {
 
     public static function getUserRecord($remove = [])

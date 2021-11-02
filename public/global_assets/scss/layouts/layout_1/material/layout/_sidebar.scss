@@ -949,7 +949,7 @@
 
 
 //
-// Generate series of `.sidebar-expand-*` responsive classes for configuring
+// Generate series of `.sidebar-expand-*` responsive courses for configuring
 // where sidebar collapses. If togglers are in main navbar, make sure breakpoints match.
 // ------------------------------
 
@@ -1105,7 +1105,7 @@
 
 		[class*=col] {
 			padding-left: ($grid-gutter-width / 4);
-			padding-right: ($grid-gutter-width / 4);	
+			padding-right: ($grid-gutter-width / 4);
 		}
 	}
 }
@@ -1158,7 +1158,7 @@
 
 			// Link
 			.nav-link {
-				color: $navigation-dark-color;			
+				color: $navigation-dark-color;
 
 				// Hover state
 				@include hover-focus {
@@ -1302,15 +1302,15 @@
 // Base
 .sidebar-user-material {
 
-	// Add backgroupd image    
+	// Add backgroupd image
     .sidebar-user-material-body {
 		background: url(#{$img-path}/backgrounds/user_bg3.jpg) center center no-repeat;
 	    background-size: cover;
     }
-        
+
     // Navigation menu wrapper
 	.collapse {
-		
+
     	.sidebar-dark & {
 			background-color: $sidebar-dark-user-menu-bg;
 			border-bottom: $sidebar-dark-user-menu-border-width solid $sidebar-dark-user-menu-border-color;
@@ -1327,7 +1327,7 @@
 
 // User menu
 .sidebar-user-material-footer {
-	
+
 	// Link
 	> a {
     	padding: $nav-link-padding-y $nav-link-padding-x;
@@ -1335,7 +1335,7 @@
 		color: $white;
 		background-color: rgba($black, 0.15);
 		@include transition(background-color ease-in-out $component-transition-timer);
-		
+
 		// Hover effect
 		&:hover,
 		&[aria-expanded="true"] {
@@ -1345,12 +1345,12 @@
 		&:after {
 			@include transition(all ease-in-out $component-transition-timer);
 		}
-					
+
 		// Rotate caret
 		&[aria-expanded="true"]:after {
 			transform: rotate(180deg);
 		}
-	}    	
+	}
 }
 
 // Inside mini sidebar

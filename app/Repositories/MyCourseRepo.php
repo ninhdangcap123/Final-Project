@@ -3,41 +3,41 @@
 namespace App\Repositories;
 
 use App\Models\Major;
-use App\Models\MyClass;
+use App\Models\MyCourse;
 use App\Models\Section;
 use App\Models\Subject;
 
-class MyClassRepo
+class MyCourseRepo
 {
 
     public function all()
     {
-        return MyClass::orderBy('name', 'asc')->with('major')->get();
+        return MyCourse::orderBy('name', 'asc')->with('major')->get();
     }
 
     public function getMC($data)
     {
-        return MyClass::where($data)->with('section');
+        return MyCourse::where($data)->with('section');
     }
 
     public function find($id)
     {
-        return MyClass::find($id);
+        return MyCourse::find($id);
     }
 
     public function create($data)
     {
-        return MyClass::create($data);
+        return MyCourse::create($data);
     }
 
     public function update($id, $data)
     {
-        return MyClass::find($id)->update($data);
+        return MyCourse::find($id)->update($data);
     }
 
     public function delete($id)
     {
-        return MyClass::destroy($id);
+        return MyCourse::destroy($id);
     }
 
     public function getMajor()
@@ -50,9 +50,9 @@ class MyClassRepo
         return Major::find($major_id);
     }
 
-    public function findTypeByClass($class_id)
+    public function findTypeByClass($course_id)
     {
-        return Major::find($this->find($class_id)->major_id);
+        return Major::find($this->find($course_id)->major_id);
     }
 
     /************* Section *******************/
@@ -84,12 +84,12 @@ class MyClassRepo
 
     public function getAllSections()
     {
-        return Section::orderBy('name', 'asc')->with(['my_class', 'teacher'])->get();
+        return Section::orderBy('name', 'asc')->with(['my_course', 'teacher'])->get();
     }
 
-    public function getClassSections($class_id)
+    public function getClassSections($course_id)
     {
-        return Section::where(['my_class_id' => $class_id])->orderBy('name', 'asc')->get();
+        return Section::where(['my_course_id' => $course_id])->orderBy('name', 'asc')->get();
     }
 
     /************* Subject *******************/
@@ -104,9 +104,9 @@ class MyClassRepo
         return Subject::find($id);
     }
 
-    public function findSubjectByClass($class_id, $order_by = 'name')
+    public function findSubjectByClass($course_id, $order_by = 'name')
     {
-        return $this->getSubject(['my_class_id'=> $class_id])->orderBy($order_by)->get();
+        return $this->getSubject(['my_course_id'=> $course_id])->orderBy($order_by)->get();
     }
 
     public function findSubjectByTeacher($teacher_id, $order_by = 'name')
@@ -136,7 +136,7 @@ class MyClassRepo
 
     public function getAllSubjects()
     {
-        return Subject::orderBy('name', 'asc')->with(['my_class', 'teacher'])->get();
+        return Subject::orderBy('name', 'asc')->with(['my_course', 'teacher'])->get();
     }
 
 }

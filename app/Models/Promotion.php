@@ -7,7 +7,8 @@ use Eloquent;
 
 class Promotion extends Eloquent
 {
-    protected $fillable = ['from_class', 'from_section', 'to_class', 'to_section', 'grad', 'student_id', 'from_session', 'to_session', 'status'];
+    protected $fillable = ['from_course', 'from_section', 'to_course',
+        'to_section', 'grad', 'student_id', 'from_session', 'to_session', 'status'];
 
     public function student()
     {
@@ -16,7 +17,7 @@ class Promotion extends Eloquent
 
     public function fc()
     {
-        return $this->belongsTo(MyClass::class, 'from_class');
+        return $this->belongsTo(MyCourse::class, 'from_course');
     }
 
     public function fs()
@@ -31,6 +32,6 @@ class Promotion extends Eloquent
 
     public function tc()
     {
-        return $this->belongsTo(MyClass::class, 'to_class');
+        return $this->belongsTo(MyCourse::class, 'to_course');
     }
 }

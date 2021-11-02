@@ -1,21 +1,21 @@
 @extends('layouts.master')
-@section('page_title', 'Student Information - '.$my_class->name)
+@section('page_title', 'Student Information - '.$my_course->name)
 @section('content')
 
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Students List</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
             <ul class="nav nav-tabs nav-tabs-highlight">
-                <li class="nav-item"><a href="#all-students" class="nav-link active" data-toggle="tab">All {{ $my_class->name }} Students</a></li>
+                <li class="nav-item"><a href="#all-students" class="nav-link active" data-toggle="tab">All {{ $my_course->name }} Students</a></li>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Sections</a>
                     <div class="dropdown-menu dropdown-menu-right">
                         @foreach($sections as $s)
-                            <a href="#s{{ $s->id }}" class="dropdown-item" data-toggle="tab">{{ $my_class->name.' '.$s->name }}</a>
+                            <a href="#s{{ $s->id }}" class="dropdown-item" data-toggle="tab">{{ $my_course->name.' '.$s->name }}</a>
                         @endforeach
                     </div>
                 </li>
@@ -42,7 +42,7 @@
                                 <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}" alt="photo"></td>
                                 <td>{{ $s->user->name }}</td>
                                 <td>{{ $s->adm_no }}</td>
-                                <td>{{ $my_class->name.' '.$s->section->name }}</td>
+                                <td>{{ $my_course->name.' '.$s->section->name }}</td>
                                 <td>{{ $s->user->email }}</td>
                                 <td class="text-center">
                                     <div class="list-icons">
@@ -52,17 +52,17 @@
                                             </a>
 
                                             <div class="dropdown-menu dropdown-menu-left">
-                                                <a href="{{ route('students.show', \App\Helpers\displayMessageHelper::hash($s->id)) }}" class="dropdown-item"><i class="icon-eye"></i> View Profile</a>
-                                                @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
-                                                    <a href="{{ route('students.edit', \App\Helpers\displayMessageHelper::hash($s->id)) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
-                                                    <a href="{{ route('st.reset_pass', \App\Helpers\displayMessageHelper::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-lock"></i> Reset password</a>
+                                                <a href="{{ route('students.show', \App\Helpers\DisplayMessageHelper::hash($s->id)) }}" class="dropdown-item"><i class="icon-eye"></i> View Profile</a>
+                                                @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
+                                                    <a href="{{ route('students.edit', \App\Helpers\DisplayMessageHelper::hash($s->id)) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
+                                                    <a href="{{ route('st.reset_pass', \App\Helpers\DisplayMessageHelper::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-lock"></i> Reset password</a>
                                                 @endif
-                                                <a target="_blank" href="{{ route('marks.year_selector', \App\Helpers\displayMessageHelper::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-check"></i> Marksheet</a>
+                                                <a target="_blank" href="{{ route('marks.year_selector', \App\Helpers\DisplayMessageHelper::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-check"></i> Marksheet</a>
 
                                                 {{--Delete--}}
-                                                @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
-                                                    <a id="{{ \App\Helpers\displayMessageHelper::hash($s->user->id) }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
-                                                    <form method="post" id="item-delete-{{ \App\Helpers\displayMessageHelper::hash($s->user->id) }}" action="{{ route('students.destroy', \App\Helpers\displayMessageHelper::hash($s->user->id)) }}" class="hidden">@csrf @method('delete')</form>
+                                                @if(\App\Helpers\GetUserTypeHelper::userIsSuperAdmin())
+                                                    <a id="{{ \App\Helpers\DisplayMessageHelper::hash($s->user->id) }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
+                                                    <form method="post" id="item-delete-{{ \App\Helpers\DisplayMessageHelper::hash($s->user->id) }}" action="{{ route('students.destroy', \App\Helpers\DisplayMessageHelper::hash($s->user->id)) }}" class="hidden">@csrf @method('delete')</form>
                                                 @endif
                                             </div>
                                         </div>
@@ -102,17 +102,17 @@
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('students.show', \App\Helpers\displayMessageHelper::hash($sr->id)) }}" class="dropdown-item"><i class="icon-eye"></i> View Info</a>
-                                                    @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
-                                                        <a href="{{ route('students.edit', \App\Helpers\displayMessageHelper::hash($sr->id)) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
-                                                        <a href="{{ route('st.reset_pass', \App\Helpers\displayMessageHelper::hash($sr->user->id)) }}" class="dropdown-item"><i class="icon-lock"></i> Reset password</a>
+                                                    <a href="{{ route('students.show', \App\Helpers\DisplayMessageHelper::hash($sr->id)) }}" class="dropdown-item"><i class="icon-eye"></i> View Info</a>
+                                                    @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
+                                                        <a href="{{ route('students.edit', \App\Helpers\DisplayMessageHelper::hash($sr->id)) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
+                                                        <a href="{{ route('st.reset_pass', \App\Helpers\DisplayMessageHelper::hash($sr->user->id)) }}" class="dropdown-item"><i class="icon-lock"></i> Reset password</a>
                                                     @endif
                                                     <a href="#" class="dropdown-item"><i class="icon-check"></i> Marksheet</a>
 
                                                     {{--Delete--}}
-                                                    @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
-                                                        <a id="{{ \App\Helpers\displayMessageHelper::hash($sr->user->id) }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
-                                                        <form method="post" id="item-delete-{{ \App\Helpers\displayMessageHelper::hash($sr->user->id) }}" action="{{ route('students.destroy', \App\Helpers\displayMessageHelper::hash($sr->user->id)) }}" class="hidden">@csrf @method('delete')</form>
+                                                    @if(\App\Helpers\GetUserTypeHelper::userIsSuperAdmin())
+                                                        <a id="{{ \App\Helpers\DisplayMessageHelper::hash($sr->user->id) }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
+                                                        <form method="post" id="item-delete-{{ \App\Helpers\DisplayMessageHelper::hash($sr->user->id) }}" action="{{ route('students.destroy', \App\Helpers\DisplayMessageHelper::hash($sr->user->id)) }}" class="hidden">@csrf @method('delete')</form>
                                                     @endif
 
                                                 </div>

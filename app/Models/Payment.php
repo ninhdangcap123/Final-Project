@@ -6,10 +6,10 @@ use Eloquent;
 
 class Payment extends Eloquent
 {
-    protected $fillable = ['title', 'amount', 'my_class_id', 'description', 'year', 'ref_no'];
+    protected $fillable = ['title', 'amount', 'my_course_id', 'description', 'year', 'ref_no'];
 
-    public function my_class()
+    public function my_course()
     {
-        return $this->belongsTo(MyClass::class);
+        return $this->belongsTo(MyCourse::class);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-class getPathHelper
+class GetPathHelper
 {
     public static function getPublicUploadPath()
     {

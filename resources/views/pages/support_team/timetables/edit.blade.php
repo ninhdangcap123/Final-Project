@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Edit TimeTable Record</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -20,11 +20,11 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class <span class="text-danger">*</span></label>
+                        <label for="my_course_id" class="col-lg-3 col-form-label font-weight-semibold">Class <span class="text-danger">*</span></label>
                         <div class="col-lg-9">
-                            <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
-                                @foreach($my_classes as $mc)
-                                    <option {{ $ttr->my_class_id == $mc->id ? 'selected' : '' }} value="{{ $mc->id }}">{{ $mc->name }}</option>
+                            <select required data-placeholder="Select Class" class="form-control select" name="my_course_id" id="my_course_id">
+                                @foreach($my_courses as $mc)
+                                    <option {{ $ttr->my_course_id == $mc->id ? 'selected' : '' }} value="{{ $mc->id }}">{{ $mc->name }}</option>
                                 @endforeach
                             </select>
                         </div>

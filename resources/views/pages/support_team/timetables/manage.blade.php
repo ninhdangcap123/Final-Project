@@ -4,8 +4,8 @@
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title font-weight-bold">{{ $ttr->name.' ('.$my_class->name.')'.' '.$ttr->year }}</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            <h6 class="card-title font-weight-bold">{{ $ttr->name.' ('.$my_course->name.')'.' '.$ttr->year }}</h6>
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">

@@ -6,11 +6,11 @@ use Eloquent;
 
 class TimeTableRecord extends Eloquent
 {
-    protected $fillable = ['name', 'my_class_id', 'exam_id', 'year'];
+    protected $fillable = ['name', 'my_course_id', 'exam_id', 'year'];
 
-    public function my_class()
+    public function my_course()
     {
-        return $this->belongsTo(MyClass::class);
+        return $this->belongsTo(MyCourse::class);
     }
 
     public function exam()

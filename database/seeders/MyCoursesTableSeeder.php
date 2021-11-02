@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 
-class MyClassesTableSeeder extends Seeder
+class MyCoursesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class MyClassesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('my_classes')->delete();
+        DB::table('my_courses')->delete();
         $major = Major::pluck('id')->all();
 
         $data = [
@@ -31,7 +31,7 @@ class MyClassesTableSeeder extends Seeder
             ['name' => 'Lập trình nhúng', 'major_id' => $major[5]],
         ];
 
-        DB::table('my_classes')->insert($data);
+        DB::table('my_courses')->insert($data);
 
     }
 }

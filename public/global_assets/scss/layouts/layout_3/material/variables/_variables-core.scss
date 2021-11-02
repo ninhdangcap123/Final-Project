@@ -139,7 +139,7 @@ $spacers: map-merge((
     5:    ($spacer * 3)
 ), $spacers);
 
-// This variable affects the `.h-*` and `.w-*` classes.
+// This variable affects the `.h-*` and `.w-*` courses.
 $sizes: ();
 $sizes: map-merge((
     25:      25%,

@@ -35,13 +35,13 @@
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Class</td>
-                                <td>{{ $sr->my_class->name.' '.$sr->section->name }}</td>
+                                <td>{{ $sr->my_course->name.' '.$sr->section->name }}</td>
                             </tr>
                             @if($sr->my_parent_id)
                                 <tr>
                                     <td class="font-weight-bold">Parent</td>
                                     <td>
-                                        <span><a target="_blank" href="{{ route('users.show', \App\Helpers\displayMessageHelper::hash($sr->my_parent_id)) }}">{{ $sr->my_parent->name }}</a></span>
+                                        <span><a target="_blank" href="{{ route('users.show', \App\Helpers\DisplayMessageHelper::hash($sr->my_parent_id)) }}">{{ $sr->my_parent->name }}</a></span>
                                     </td>
                                 </tr>
                             @endif

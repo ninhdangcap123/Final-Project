@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Manage Subjects</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -14,7 +14,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Manage Subjects</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        @foreach($my_classes as $c)
+                        @foreach($my_courses as $c)
                             <a href="#c{{ $c->id }}" class="dropdown-item" data-toggle="tab">{{ $c->name }}</a>
                         @endforeach
                     </div>
@@ -42,12 +42,12 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Select Class <span class="text-danger">*</span></label>
+                                    <label for="my_course_id" class="col-lg-3 col-form-label font-weight-semibold">Select Class <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
-                                        <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
+                                        <select required data-placeholder="Select Class" class="form-control select" name="my_course_id" id="my_course_id">
                                             <option value=""></option>
-                                            @foreach($my_classes as $c)
-                                                <option {{ old('my_class_id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                            @foreach($my_courses as $c)
+                                                <option {{ old('my_course_id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -59,7 +59,7 @@
                                         <select required data-placeholder="Select Teacher" class="form-control select-search" name="teacher_id" id="teacher_id">
                                             <option value=""></option>
                                             @foreach($teachers as $t)
-                                                <option {{ old('teacher_id') == \App\Helpers\displayMessageHelper::hash($t->id) ? 'selected' : '' }} value="{{ \App\Helpers\displayMessageHelper::hash($t->id) }}">{{ $t->name }}</option>
+                                                <option {{ old('teacher_id') == \App\Helpers\DisplayMessageHelper::hash($t->id) ? 'selected' : '' }} value="{{ \App\Helpers\DisplayMessageHelper::hash($t->id) }}">{{ $t->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -73,7 +73,7 @@
                     </div>
                 </div>
 
-                @foreach($my_classes as $c)
+                @foreach($my_courses as $c)
                     <div class="tab-pane fade" id="c{{ $c->id }}">                         <table class="table datatable-button-html5-columns">
                             <thead>
                             <tr>
@@ -86,12 +86,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($subjects->where('my_class.id', $c->id) as $s)
+                            @foreach($subjects->where('my_course.id', $c->id) as $s)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $s->name }} </td>
                                     <td>{{ $s->slug }} </td>
-                                    <td>{{ $s->my_class->name }}</td>
+                                    <td>{{ $s->my_course->name }}</td>
                                     <td>{{ $s->teacher->name }}</td>
                                     <td class="text-center">
                                         <div class="list-icons">
@@ -102,11 +102,11 @@
 
                                                 <div class="dropdown-menu dropdown-menu-left">
                                                     {{--edit--}}
-                                                    @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
+                                                    @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
                                                         <a href="{{ route('subjects.edit', $s->id) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
                                                     @endif
                                                     {{--Delete--}}
-                                                    @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
+                                                    @if(\App\Helpers\GetUserTypeHelper::userIsSuperAdmin())
                                                         <a id="{{ $s->id }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
                                                         <form method="post" id="item-delete-{{ $s->id }}" action="{{ route('subjects.destroy', $s->id) }}" class="hidden">@csrf @method('delete')</form>
                                                     @endif

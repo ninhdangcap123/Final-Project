@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Helpers\getSystemInfoHelper;
+use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\Qs;
-use App\Models\MyClass;
+use App\Models\MyCourse;
 use App\Models\Section;
 use App\Models\StudentRecord;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -26,8 +26,8 @@ class StudentRecordFactory extends Factory
     public function definition()
     {
         return [
-            'session' => getSystemInfoHelper::getCurrentSession(),
-            'my_class_id' => MyClass::first()->id,
+            'session' => GetSystemInfoHelper::getCurrentSession(),
+            'my_course_id' => MyCourse::first()->id,
             'section_id' => Section::first()->id,
             'user_id' => null
         ];

@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\SuperAdmin;
 
-use App\Helpers\getPathHelper;
+use App\Helpers\GetPathHelper;
 use App\Helpers\Qs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingUpdate;
-use App\Repositories\MyClassRepo;
+use App\Repositories\MyCourseRepo;
 use App\Repositories\SettingRepo;
 
 class SettingController extends Controller
 {
-    protected $setting, $my_class;
+    protected $setting, $my_course;
 
-    public function __construct(SettingRepo $setting, MyClassRepo $my_class)
+    public function __construct(SettingRepo $setting, MyCourseRepo $my_course)
     {
         $this->setting = $setting;
-        $this->my_class = $my_class;
+        $this->my_course = $my_course;
     }
 
     public function index()
     {
          $s = $this->setting->all();
-         $d['majors'] = $this->my_class->getMajor();
+         $d['majors'] = $this->my_course->getMajor();
          $d['s'] = $s->flatMap(function($s){
             return [$s->type => $s->description];
         });
@@ -41,9 +41,9 @@ class SettingController extends Controller
 
         if($req->hasFile('logo')) {
             $logo = $req->file('logo');
-            $f = getPathHelper::getFileMetaData($logo);
+            $f = GetPathHelper::getFileMetaData($logo);
             $f['name'] = 'logo.' . $f['ext'];
-            $f['path'] = $logo->storeAs(getPathHelper::getPublicUploadPath(), $f['name']);
+            $f['path'] = $logo->storeAs(GetPathHelper::getPublicUploadPath(), $f['name']);
             $logo_path = asset('storage/' . $f['path']);
             $this->setting->update('logo', $logo_path);
         }

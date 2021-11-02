@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Subject;
 
-use App\Helpers\displayMessageHelper;
+use App\Helpers\DisplayMessageHelper;
 use App\Helpers\Qs;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,8 +23,8 @@ class SubjectUpdate extends FormRequest
     {
         return [
             'name' => 'required|string|min:3',
-            'my_class_id' => 'required',
-            'teacher_id' => 'sometimes|nullable|exists:users,id',
+            'my_course_id' => 'required',
+            'teacher_id' => 'sometimes|nullable',
             'slug' => 'nullable|string|min:3',
         ];
     }
@@ -32,7 +32,7 @@ class SubjectUpdate extends FormRequest
     public function attributes()
     {
         return  [
-            'my_class_id' => 'Class',
+            'my_course_id' => 'Course',
             'teacher_id' => 'Teacher',
             'slug' => 'Short Name',
         ];
@@ -42,7 +42,7 @@ class SubjectUpdate extends FormRequest
     {
         $input = $this->all();
 
-        $input['teacher_id'] = $input['teacher_id'] ? displayMessageHelper::decodeHash($input['teacher_id']) : NULL;
+        $input['teacher_id'] = $input['teacher_id'] ? DisplayMessageHelper::decodeHash($input['teacher_id']) : NULL;
 
         $this->getInputSource()->replace($input);
 

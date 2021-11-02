@@ -7,11 +7,11 @@ use Eloquent;
 
 class Section extends Eloquent
 {
-    protected $fillable = ['name', 'my_class_id', 'active', 'teacher_id'];
+    protected $fillable = ['name', 'my_course_id', 'active', 'teacher_id'];
 
-    public function my_class()
+    public function my_course()
     {
-        return $this->belongsTo(MyClass::class);
+        return $this->belongsTo(MyCourse::class);
     }
 
     public function teacher()
@@ -19,7 +19,7 @@ class Section extends Eloquent
         return $this->belongsTo(User::class, 'teacher_id');
     }
 
-    public function student_record()
+    public function studentRecord()
     {
         return $this->hasMany(StudentRecord::class);
     }

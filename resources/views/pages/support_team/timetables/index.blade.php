@@ -5,18 +5,18 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Manage TimeTables</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
             <ul class="nav nav-tabs nav-tabs-highlight">
-                @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
+                @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
                 <li class="nav-item"><a href="#add-tt" class="nav-link active" data-toggle="tab">Create Timetable</a></li>
                 @endif
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Show TimeTables</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        @foreach($my_classes as $mc)
+                        @foreach($my_courses as $mc)
                             <a href="#ttr{{ $mc->id }}" class="dropdown-item" data-toggle="tab">{{ $mc->name }}</a>
                         @endforeach
                     </div>
@@ -26,7 +26,7 @@
 
             <div class="tab-content">
 
-                @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
+                @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
                 <div class="tab-pane fade show active" id="add-tt">
                    <div class="col-md-8">
                        <form class="ajax-store" method="post" action="{{ route('ttr.store') }}">
@@ -39,21 +39,21 @@
                            </div>
 
                            <div class="form-group row">
-                               <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class <span class="text-danger">*</span></label>
+                               <label for="my_course_id" class="col-lg-3 col-form-label font-weight-semibold">Class <span class="text-danger">*</span></label>
                                <div class="col-lg-9">
-                                   <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
-                                       @foreach($my_classes as $mc)
-                                           <option {{ old('my_class_id') == $mc->id ? 'selected' : '' }} value="{{ $mc->id }}">{{ $mc->name }}</option>
+                                   <select required data-placeholder="Select Class" class="form-control select" name="my_course_id" id="my_course_id">
+                                       @foreach($my_courses as $mc)
+                                           <option {{ old('my_course_id') == $mc->id ? 'selected' : '' }} value="{{ $mc->id }}">{{ $mc->name }}</option>
                                        @endforeach
                                    </select>
                                </div>
                            </div>
 
                            <div class="form-group row">
-                               <label for="exam_id" class="col-lg-3 col-form-label font-weight-semibold">Type (Class or Exam)</label>
+                               <label for="exam_id" class="col-lg-3 col-form-label font-weight-semibold">Type (Course or Exam)</label>
                                <div class="col-lg-9">
                                    <select class="select form-control" name="exam_id" id="exam_id">
-                                       <option value="">Class Timetable</option>
+                                       <option value="">Course Timetable</option>
                                        @foreach($exams as $ex)
                                            <option {{ old('exam_id') == $ex->id ? 'selected' : '' }} value="{{ $ex->id }}">{{ $ex->name }}</option>
                                        @endforeach
@@ -71,8 +71,12 @@
                 </div>
                 @endif
 
-                @foreach($my_classes as $mc)
-                    <div class="tab-pane fade" id="ttr{{ $mc->id }}">                         <table class="table datatable-button-html5-columns">
+
+
+                @foreach($my_courses as $mc)
+
+                    <div class="tab-pane fade" id="ttr{{ $mc->id }}">
+                        <table class="table datatable-button-html5-columns">
                             <thead>
                             <tr>
                                 <th>S/N</th>
@@ -84,12 +88,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($tt_records->where('my_class_id', $mc->id) as $ttr)
+                            @foreach($tt_records->where('my_course_id', $mc->id) as $ttr)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $ttr->name }}</td>
-                                    <td>{{ $ttr->my_class->name }}</td>
-                                    <td>{{ ($ttr->exam_id) ? $ttr->exam->name : 'Class TimeTable' }}
+                                    <td>{{ $ttr->my_course->name }}</td>
+                                    <td>{{ ($ttr->exam_id) ? $ttr->exam->name : 'Course TimeTable' }}
                                     <td>{{ $ttr->year }}</td>
                                     <td class="text-center">
                                         <div class="list-icons">
@@ -102,7 +106,7 @@
                                                     {{--View--}}
                                                     <a href="{{ route('ttr.show', $ttr->id) }}" class="dropdown-item"><i class="icon-eye"></i> View</a>
 
-                                                    @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
+                                                    @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
                                                     {{--Manage--}}
                                                     <a href="{{ route('ttr.manage', $ttr->id) }}" class="dropdown-item"><i class="icon-plus-circle2"></i> Manage</a>
                                                     {{--Edit--}}
@@ -110,7 +114,7 @@
                                                     @endif
 
                                                     {{--Delete--}}
-                                                    @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
+                                                    @if(\App\Helpers\GetUserTypeHelper::userIsSuperAdmin())
                                                         <a id="{{ $ttr->id }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
                                                         <form method="post" id="item-delete-{{ $ttr->id }}" action="{{ route('ttr.destroy', $ttr->id) }}" class="hidden">@csrf @method('delete')</form>
                                                     @endif

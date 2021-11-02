@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Helpers\displayMessageHelper;
+use App\Helpers\DisplayMessageHelper;
 use App\Helpers\Qs;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
         //parent::boot();
 
         Route::bind('id', function($value){
-            return displayMessageHelper::decodeHash($value);
+            return DisplayMessageHelper::decodeHash($value);
         });
 
         $this->configureRateLimiting();

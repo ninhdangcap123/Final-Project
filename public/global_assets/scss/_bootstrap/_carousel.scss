@@ -1,4 +1,4 @@
-// Notes on the classes:
+// Notes on the courses:
 //
 // 1. The .carousel-item-left and .carousel-item-right is used to indicate where
 //    the active slide is heading.
@@ -192,7 +192,7 @@
     cursor: pointer;
     background-color: rgba($carousel-indicator-active-bg, .5);
 
-    // Use pseudo classes to increase the hit area by 10px on top and bottom.
+    // Use pseudo courses to increase the hit area by 10px on top and bottom.
     &::before {
       position: absolute;
       top: -10px;

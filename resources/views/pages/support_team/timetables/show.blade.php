@@ -6,7 +6,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-4"><h6 class="card-title"><strong>Name: </strong> {{ $ttr->name }}</h6></div>
-                <div class="col-md-4"><h6 class="card-title"><strong>Class: </strong> {{ $my_class->name }}</h6></div>
+                <div class="col-md-4"><h6 class="card-title"><strong>Class: </strong> {{ $my_course->name }}</h6></div>
                 <div class="col-md-4"><h6 class="card-title"><strong>Year: </strong> {{ ($ttr->exam_id) ? 'Exam TimeTable' : 'Class TimeTable' }} {{ '('.$ttr->year.')' }}</h6></div>
             </div>
         </div>

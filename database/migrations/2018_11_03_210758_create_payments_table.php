@@ -19,7 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('amount')->nullable();
             $table->string('ref_no', 100)->nullable();
             $table->string('method', 100)->default('cash')->nullable();
-            $table->unsignedInteger('my_class_id')->nullable();
+            $table->unsignedInteger('my_course_id')->nullable();
             $table->string('description')->nullable();
             $table->string('year')->nullable();
             $table->timestamps();

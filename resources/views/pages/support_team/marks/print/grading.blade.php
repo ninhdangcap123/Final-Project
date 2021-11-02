@@ -3,8 +3,8 @@
         <tr>
             <td><strong>KEY TO THE GRADING</strong></td>
 {{--            {{dd($major->id)}}--}}
-            @if(\App\Helpers\printMarkSheetHelper::getGradeList($major->id)->count())
-                @foreach(\App\Helpers\printMarkSheetHelper::getGradeList($major->id) as $gr)
+            @if(\App\Helpers\PrintMarkSheetHelper::getGradeList($major->id)->count())
+                @foreach(\App\Helpers\PrintMarkSheetHelper::getGradeList($major->id) as $gr)
                     <td><strong>{{ $gr->name }}</strong>
                         => {{ $gr->mark_from.' - '.$gr->mark_to }}
                     </td>
@@ -20,11 +20,11 @@
     <tbody>
     <tr>
         <td><strong>NUMBER OF : </strong></td>
-        <td><strong>Distinctions:</strong> {{ \App\Helpers\printMarkSheetHelper::countDistinctions($marks) }}</td>
-        <td><strong>Credits:</strong> {{ \App\Helpers\printMarkSheetHelper::countCredits($marks) }}</td>
-        <td><strong>Passes:</strong> {{ \App\Helpers\printMarkSheetHelper::countPasses($marks) }}</td>
-        <td><strong>Failures:</strong> {{ \App\Helpers\printMarkSheetHelper::countFailures($marks) }}</td>
-        <td><strong>Subjects Offered:</strong> {{ \App\Helpers\printMarkSheetHelper::countSubjectsOffered($marks) }}</td>
+        <td><strong>Distinctions:</strong> {{ \App\Helpers\PrintMarkSheetHelper::countDistinctions($marks) }}</td>
+        <td><strong>Credits:</strong> {{ \App\Helpers\PrintMarkSheetHelper::countCredits($marks) }}</td>
+        <td><strong>Passes:</strong> {{ \App\Helpers\PrintMarkSheetHelper::countPasses($marks) }}</td>
+        <td><strong>Failures:</strong> {{ \App\Helpers\PrintMarkSheetHelper::countFailures($marks) }}</td>
+        <td><strong>Subjects Offered:</strong> {{ \App\Helpers\PrintMarkSheetHelper::countSubjectsOffered($marks) }}</td>
     </tr>
 
     </tbody>

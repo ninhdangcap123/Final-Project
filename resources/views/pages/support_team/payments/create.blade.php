@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Create Payment</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -21,12 +21,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class </label>
+                            <label for="my_course_id" class="col-lg-3 col-form-label font-weight-semibold">Class </label>
                             <div class="col-lg-9">
-                                <select class="form-control select-search" name="my_class_id" id="my_class_id">
-                                    <option value="">All Classes</option>
-                                    @foreach($my_classes as $c)
-                                        <option {{ old('my_class_id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                <select class="form-control select-search" name="my_course_id" id="my_course_id">
+                                    <option value="">All Courses</option>
+                                    @foreach($my_courses as $c)
+                                        <option {{ old('my_course_id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

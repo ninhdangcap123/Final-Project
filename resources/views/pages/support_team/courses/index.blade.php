@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Manage Courses</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -26,7 +26,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($my_classes as $course)
+                            @foreach($my_courses as $course)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $course->name }}</td>
@@ -39,14 +39,14 @@
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-left">
-                                                    @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
+                                                    @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
                                                     {{--Edit--}}
-                                                    <a href="{{ route('classes.edit', $course->id) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
+                                                    <a href="{{ route('courses.edit', $course->id) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
                                                    @endif
-                                                        @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
+                                                        @if(\App\Helpers\GetUserTypeHelper::userIsSuperAdmin())
                                                     {{--Delete--}}
                                                     <a id="{{ $course->id }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
-                                                    <form method="post" id="item-delete-{{ $course->id }}" action="{{ route('classes.destroy', $course->id) }}" class="hidden">
+                                                    <form method="post" id="item-delete-{{ $course->id }}" action="{{ route('courses.destroy', $course->id) }}" class="hidden">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
@@ -75,7 +75,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <form class="ajax-store" method="post" action="{{ route('classes.store') }}">
+                            <form class="ajax-store" method="post" action="{{ route('courses.store') }}">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-lg-3 col-form-label font-weight-semibold">Name <span class="text-danger">*</span></label>

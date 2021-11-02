@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Exam Pins</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -72,9 +72,9 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $up->code }}</td>
-                                        <td><a href="{{ $up->user->user_type == 'student' ? route('students.show', \App\Helpers\displayMessageHelper::hash(\App\Helpers\getUsersHelper::getSRByUserID($up->user->id)->id)) : route('users.show', \App\Helpers\displayMessageHelper::hash($up->user->id)) }}">{{ $up->user->name }}</a></td>
+                                        <td><a href="{{ $up->user->user_type == 'student' ? route('students.show', \App\Helpers\DisplayMessageHelper::hash(\App\Helpers\GetUsersHelper::getSRByUserID($up->user->id)->id)) : route('users.show', \App\Helpers\DisplayMessageHelper::hash($up->user->id)) }}">{{ $up->user->name }}</a></td>
                                         <td>{{ $up->user->user_type }}</td>
-                                        <td><a href="{{ route('students.show', \App\Helpers\displayMessageHelper::hash(\App\Helpers\getUsersHelper::getSRByUserID($up->student->id)->id))  }}">{{ $up->student->name }}</a></td>
+                                        <td><a href="{{ route('students.show', \App\Helpers\DisplayMessageHelper::hash(\App\Helpers\GetUsersHelper::getSRByUserID($up->student->id)->id))  }}">{{ $up->student->name }}</a></td>
                                         <td>{{ $up->updated_at }}</td>
                                     </tr>
                                 @endforeach

@@ -5,33 +5,33 @@ namespace App\Helpers;
 use App\Models\StudentRecord;
 use Illuminate\Support\Facades\Auth;
 
-class checkUsersHelper
+class CheckUsersHelper
 {
     public static function userIsTeamSAS(){
-        return in_array(Auth::user()->user_type, getUsersHelper::getTeamSAS());
+        return in_array(Auth::user()->user_type, GetUsersHelper::getTeamSAS());
     }
 
     public static function userIsTeamSAT()
     {
-        return in_array(Auth::user()->user_type, getUsersHelper::getTeamSAT());
+        return in_array(Auth::user()->user_type, GetUsersHelper::getTeamSAT());
     }
     public static function userIsTeamSA()
     {
-        return in_array(Auth::user()->user_type, getUsersHelper::getTeamSA());
+        return in_array(Auth::user()->user_type, GetUsersHelper::getTeamSA());
     }
 
     public static function userIsTeamAccount()
     {
-        return in_array(Auth::user()->user_type, getUsersHelper::getTeamAccount());
+        return in_array(Auth::user()->user_type, GetUsersHelper::getTeamAccount());
     }
     public static function userIsAcademic()
     {
-        return in_array(Auth::user()->user_type, getUsersHelper::getTeamAcademic());
+        return in_array(Auth::user()->user_type, GetUsersHelper::getTeamAcademic());
     }
 
     public static function userIsAdministrative()
     {
-        return in_array(Auth::user()->user_type, getUsersHelper::getTeamAdministrative());
+        return in_array(Auth::user()->user_type, GetUsersHelper::getTeamAdministrative());
     }
     public static function userIsMyChild($student_id, $parent_id)
     {
@@ -40,7 +40,7 @@ class checkUsersHelper
     }
     public static function userIsPTA()
     {
-        return in_array(Auth::user()->user_type, getUsersHelper::getPTA());
+        return in_array(Auth::user()->user_type, GetUsersHelper::getPTA());
     }
 
     public static function headSA(int $user_id)
