@@ -16,12 +16,12 @@ class CreateTimeTablesTable extends Migration
         Schema::create('time_table_records', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100)->nullable();
-            $table->unsignedInteger('my_class_id')->nullable();
+            $table->unsignedInteger('my_course_id')->nullable();
             $table->unsignedInteger('exam_id')->nullable();
             $table->string('year', 100)->nullable();
             $table->timestamps();
 
-//            $table->unique(['my_class_id', 'exam_id', 'year']);
+//            $table->unique(['my_course_id', 'exam_id', 'year']);
         });
 
         Schema::create('time_slots', function (Blueprint $table) {

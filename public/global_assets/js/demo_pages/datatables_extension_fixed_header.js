@@ -27,7 +27,7 @@ var DatatableFixedHeader = function() {
         // Setting datatable defaults
         $.extend( $.fn.dataTable.defaults, {
             autoWidth: false,
-            columnDefs: [{ 
+            columnDefs: [{
                 orderable: false,
                 targets: [ 5 ]
             }],
@@ -60,7 +60,7 @@ var DatatableFixedHeader = function() {
         var table_offset = $('.datatable-header-offset').DataTable({
             fixedHeader: {
                 header: true,
-                
+
             }
         });
 
@@ -72,7 +72,7 @@ var DatatableFixedHeader = function() {
         toggleType.onchange = function() {
             if(toggleType.checked) {
 
-                // Toggle necessary body and navbar classes
+                // Toggle necessary body and navbar courses
                 $('body').children('.navbar').first().addClass('fixed-top');
                 $('body').addClass('navbar-top');
 
@@ -84,7 +84,7 @@ var DatatableFixedHeader = function() {
             }
             else {
 
-                // Toggle necessary body and navbar classes
+                // Toggle necessary body and navbar courses
                 $('body').children('.navbar').first().removeClass('fixed-top');
                 $('body').removeClass('navbar-top');
 

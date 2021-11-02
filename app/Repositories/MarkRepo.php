@@ -30,19 +30,19 @@ class MarkRepo
         return NULL;
     }
 
-    public function getSubTotalTerm($st_id, $sub_id, $term, $class_id, $year)
+    public function getSubTotalTerm($st_id, $sub_id, $term, $course_id, $year)
     {
         // You may wish to get exam id from term Exam::where(['term' => $term, 'year' => $yr])
-        $d = ['student_id' => $st_id, 'subject_id' => $sub_id, 'my_class_id' => $class_id, 'year' => $year];
+        $d = ['student_id' => $st_id, 'subject_id' => $sub_id, 'my_course_id' => $course_id, 'year' => $year];
 
         $tex = 'tex'.$term;
         $sub_total = Mark::where($d)->select($tex)->get()->where($tex, '>', 0);
         return $sub_total->count() > 0 ? $sub_total->first()->$tex : NULL;
     }
 
-    public function getExamTotalTerm($exam, $st_id, $class_id, $year)
+    public function getExamTotalTerm($exam, $st_id, $course_id, $year)
     {
-        $d = ['student_id' => $st_id, 'exam_id' => $exam->id, 'my_class_id' => $class_id, 'year' => $year];
+        $d = ['student_id' => $st_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'year' => $year];
 
         $tex = 'tex'.$exam->term;
         $mk =Mark::where($d);
@@ -56,9 +56,9 @@ class MarkRepo
         return $t1 + $t2 + $t3;*/
     }
 
-    public function getExamAvgTerm($exam, $st_id, $class_id, $sec_id, $year)
+    public function getExamAvgTerm($exam, $st_id, $course_id, $sec_id, $year)
     {
-        $d = ['student_id' => $st_id, 'exam_id' => $exam->id, 'my_class_id' => $class_id, 'section_id' => $sec_id, 'year' => $year];
+        $d = ['student_id' => $st_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'section_id' => $sec_id, 'year' => $year];
 
         $tex = 'tex'.$exam->term;
 
@@ -81,19 +81,19 @@ class MarkRepo
         return ($avg > 0) ? round($avg/$count, 1) : 0;*/
     }
 
-    public function getSubCumTotal($tex3, $st_id, $sub_id, $class_id, $year)
+    public function getSubCumTotal($tex3, $st_id, $sub_id, $course_id, $year)
     {
-        $tex1 = $this->getSubTotalTerm($st_id, $sub_id, 1, $class_id, $year);
-        $tex2 = $this->getSubTotalTerm($st_id, $sub_id, 2, $class_id, $year);
+        $tex1 = $this->getSubTotalTerm($st_id, $sub_id, 1, $course_id, $year);
+        $tex2 = $this->getSubTotalTerm($st_id, $sub_id, 2, $course_id, $year);
         return $tex1 + $tex2 + $tex3;
     }
 
-    public function getSubCumAvg($tex3, $st_id, $sub_id, $class_id, $year)
+    public function getSubCumAvg($tex3, $st_id, $sub_id, $course_id, $year)
     {
         $count = 0;
-        $tex1 = $this->getSubTotalTerm($st_id, $sub_id, 1, $class_id, $year);
+        $tex1 = $this->getSubTotalTerm($st_id, $sub_id, 1, $course_id, $year);
         $count = $tex1 ? $count + 1 : $count;
-        $tex2 = $this->getSubTotalTerm($st_id, $sub_id, 2, $class_id, $year);
+        $tex2 = $this->getSubTotalTerm($st_id, $sub_id, 2, $course_id, $year);
         $count = $tex2 ? $count + 1 : $count;
         $count = $tex3 ? $count + 1 : $count;
         $total = $tex1 + $tex2 + $tex3;
@@ -101,28 +101,28 @@ class MarkRepo
         return ($total > 0) ? round($total/$count, 1) : 0;
     }
 
-    public function getSubjectMark($exam, $class_id, $sub_id, $st_id, $year)
+    public function getSubjectMark($exam, $course_id, $sub_id, $st_id, $year)
     {
-        $d = [ 'exam_id' => $exam->id, 'my_class_id' => $class_id, 'subject_id' => $sub_id, 'student_id' => $st_id, 'year' => $year ];
+        $d = [ 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'subject_id' => $sub_id, 'student_id' => $st_id, 'year' => $year ];
         $tex = 'tex'.$exam->term;
 
         return Mark::where($d)->select($tex)->get()->first()->$tex;
     }
 
-    public function getSubPos($st_id, $exam, $class_id, $sub_id, $year)
+    public function getSubPos($st_id, $exam, $course_id, $sub_id, $year)
     {
-        $d = ['exam_id' => $exam->id, 'my_class_id' => $class_id, 'subject_id' => $sub_id, 'year' => $year];
+        $d = ['exam_id' => $exam->id, 'my_course_id' => $course_id, 'subject_id' => $sub_id, 'year' => $year];
         $tex = 'tex'.$exam->term;
 
-        $sub_mk = $this->getSubjectMark($exam, $class_id, $sub_id, $st_id, $year);
+        $sub_mk = $this->getSubjectMark($exam, $course_id, $sub_id, $st_id, $year);
 
         $sub_mks = Mark::where($d)->whereNotNull($tex)->orderBy($tex, 'DESC')->select($tex)->get()->pluck($tex);
         return $sub_pos = $sub_mks->count() > 0 ? $sub_mks->search($sub_mk) + 1 : NULL;
     }
 
-    public function countExSubjects($exam, $st_id, $class_id, $year)
+    public function countExSubjects($exam, $st_id, $course_id, $year)
     {
-        $d = [ 'exam_id' => $exam->id, 'my_class_id' => $class_id, 'student_id' => $st_id, 'year' => $year ];
+        $d = [ 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'student_id' => $st_id, 'year' => $year ];
         $tex = 'tex'.$exam->term;
 
         if($exam->term == 3){ unset($d['exam_id']); }
@@ -130,18 +130,18 @@ class MarkRepo
         return Mark::where($d)->whereNotNull($tex)->count();
     }
 
-    public function getClassAvg($exam, $class_id, $year)
+    public function getClassAvg($exam, $course_id, $year)
     {
-        $d = [ 'exam_id' => $exam->id, 'my_class_id' => $class_id, 'year' => $year ];
+        $d = [ 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'year' => $year ];
         $tex = 'tex'.$exam->term;
 
         $avg = Mark::where($d)->select($tex)->avg($tex);
         return round($avg, 1);
     }
 
-    public function getPos($st_id, $exam, $class_id, $sec_id, $year)
+    public function getPos($st_id, $exam, $course_id, $sec_id, $year)
     {
-        $d = ['student_id' => $st_id, 'exam_id' => $exam->id, 'my_class_id' => $class_id, 'section_id' => $sec_id, 'year' => $year ]; $all_mks = [];
+        $d = ['student_id' => $st_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'section_id' => $sec_id, 'year' => $year ]; $all_mks = [];
         $tex = 'tex'.$exam->term;
 
         $my_mk = Mark::where($d)->select($tex)->sum($tex);
@@ -154,7 +154,7 @@ class MarkRepo
         $mk = Mark::where($d);
         $students = $mk->select('student_id')->distinct()->get();
         foreach($students as $s){
-            $all_mks[] = $this->getExamTotalTerm($exam, $s->student_id, $class_id, $year);
+            $all_mks[] = $this->getExamTotalTerm($exam, $s->student_id, $course_id, $year);
         }
         rsort($all_mks);
         return array_search($my_mk, $all_mks) + 1;

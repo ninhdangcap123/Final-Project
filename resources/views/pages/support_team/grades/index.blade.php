@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Manage Grades</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -43,11 +43,11 @@
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-left">
-                                                    @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
+                                                    @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
                                                     {{--Edit--}}
                                                     <a href="{{ route('grades.edit', $gr->id) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
                                                    @endif
-                                                    @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
+                                                    @if(\App\Helpers\GetUserTypeHelper::userIsSuperAdmin())
                                                     {{--Delete--}}
                                                     <a id="{{ $gr->id }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
                                                     <form method="post" id="item-delete-{{ $gr->id }}" action="{{ route('grades.destroy', $gr->id) }}" class="hidden">@csrf @method('delete')</form>
@@ -115,7 +115,7 @@
                                     <div class="col-lg-9">
                                         <select class="form-control select" name="remark" id="remark">
                                             <option value="">Select Remark...</option>
-                                            @foreach(\App\Helpers\printMarkSheetHelper::getRemarks() as $rem)
+                                            @foreach(\App\Helpers\PrintMarkSheetHelper::getRemarks() as $rem)
                                                 <option {{ old('remark') == $rem ? 'selected' : '' }} value="{{ $rem }}">{{ $rem }}</option>
                                             @endforeach
                                         </select>

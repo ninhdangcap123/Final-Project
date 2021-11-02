@@ -1,11 +1,11 @@
 @extends('layouts.master')
-@section('page_title', 'Edit Subject - '.$s->name. ' ('.$s->my_class->name.')')
+@section('page_title', 'Edit Subject - '.$s->name. ' ('.$s->my_course->name.')')
 @section('content')
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">Edit Subject - {{$s->my_class->name }}</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            <h6 class="card-title">Edit Subject - {{$s->my_course->name }}</h6>
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -28,11 +28,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class <span class="text-danger">*</span></label>
+                            <label for="my_course_id" class="col-lg-3 col-form-label font-weight-semibold">Class <span class="text-danger">*</span></label>
                             <div class="col-lg-9">
-                                <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
-                                    @foreach($my_classes as $c)
-                                        <option {{ $s->my_class_id == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                <select required data-placeholder="Select Class" class="form-control select" name="my_course_id" id="my_course_id">
+                                    @foreach($my_courses as $c)
+                                        <option {{ $s->my_course_id == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -44,7 +44,7 @@
                                 <select data-placeholder="Select Teacher" class="form-control select-search" name="teacher_id" id="teacher_id">
                                     <option value=""></option>
                                     @foreach($teachers as $t)
-                                        <option {{ $s->teacher_id == $t->id ? 'selected' : '' }} value="{{ \App\Helpers\displayMessageHelper::hash($t->id) }}">{{ $t->name }}</option>
+                                        <option {{ $s->teacher_id == $t->id ? 'selected' : '' }} value="{{ \App\Helpers\DisplayMessageHelper::hash($t->id) }}">{{ $t->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

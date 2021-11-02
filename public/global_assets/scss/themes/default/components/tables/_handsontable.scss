@@ -619,7 +619,7 @@
 
 
     //
-    // Alignment classes
+    // Alignment courses
     //
 
     .handsontable {
@@ -1366,7 +1366,7 @@
             }
 
             &:active:after {
-                border-color: $gray-400;            
+                border-color: $gray-400;
             }
         }
 
@@ -1620,7 +1620,7 @@
     .ht__manualColumnMove--guideline {
         width: ($table-border-width * 2);
         margin-left: -($table-border-width);
-        top: 0;    
+        top: 0;
     }
     .ht__manualRowMove--guideline {
         height: ($table-border-width * 2);

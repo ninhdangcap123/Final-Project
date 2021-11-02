@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h5 class="card-title"><i class="icon-cash2 mr-2"></i> Select year</h5>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -43,7 +43,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title">Manage Payments for {{ $year }} Session</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -52,7 +52,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Class Payments</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        @foreach($my_classes as $mc)
+                        @foreach($my_courses as $mc)
                             <a href="#pc-{{ $mc->id }}" class="dropdown-item" data-toggle="tab">{{ $mc->name }}</a>
                         @endforeach
                     </div>
@@ -81,7 +81,7 @@
                                     <td>{{ $p->title }}</td>
                                     <td>{{ $p->amount }}</td>
                                     <td>{{ $p->ref_no }}</td>
-                                    <td>{{ $p->my_class_id ? $p->my_class->name : '' }}</td>
+                                    <td>{{ $p->my_course_id ? $p->my_course->name : '' }}</td>
                                     <td>{{ ucwords($p->method) }}</td>
                                     <td>{{ $p->description }}</td>
                                     <td class="text-center">
@@ -108,7 +108,7 @@
                         </table>
                     </div>
 
-                @foreach($my_classes as $mc)
+                @foreach($my_courses as $mc)
                     <div class="tab-pane fade" id="pc-{{ $mc->id }}">
                         <table class="table datatable-button-html5-columns">
                             <thead>
@@ -124,13 +124,13 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($payments->where('my_class_id', $mc->id) as $p)
+                            @foreach($payments->where('my_course_id', $mc->id) as $p)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $p->title }}</td>
                                     <td>{{ $p->amount }}</td>
                                     <td>{{ $p->ref_no }}</td>
-                                    <td>{{ $p->my_class_id ? $p->my_class->name : '' }}</td>
+                                    <td>{{ $p->my_course_id ? $p->my_course->name : '' }}</td>
                                     <td>{{ ucwords($p->method) }}</td>
                                     <td>{{ $p->description }}</td>
                                     <td class="text-center">

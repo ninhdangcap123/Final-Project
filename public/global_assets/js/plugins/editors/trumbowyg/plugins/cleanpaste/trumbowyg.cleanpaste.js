@@ -8,7 +8,7 @@
 
 /**
  * This plugin will perform a "cleaning" on any paste, in particular
- * it will clean pasted content of microsoft word document tags and classes.
+ * it will clean pasted content of microsoft word document tags and courses.
  */
 (function ($) {
     'use strict';

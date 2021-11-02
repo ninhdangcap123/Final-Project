@@ -136,7 +136,7 @@ select.form-control {
 
 // Form control sizing
 //
-// Build on `.form-control` with modifier classes to decrease or increase the
+// Build on `.form-control` with modifier courses to decrease or increase the
 // height and font-size of form controls.
 //
 // The `.form-group-* form-control` variations are sadly duplicated to avoid the
@@ -172,7 +172,7 @@ select.form-control-lg {
 // Form groups
 //
 // Designed to help with the organization and spacing of vertical forms. For
-// horizontal forms, use the predefined grid classes.
+// horizontal forms, use the predefined grid courses.
 
 .form-group {
   margin-bottom: $form-group-margin-bottom;
@@ -246,7 +246,7 @@ select.form-control-lg {
 //
 // Provide feedback to users when form field values are valid or invalid. Works
 // primarily for client-side validation via scoped `:invalid` and `:valid`
-// pseudo-classes but also includes `.is-invalid` and `.is-valid` classes for
+// pseudo-courses but also includes `.is-invalid` and `.is-valid` courses for
 // server side validation.
 
 @include form-validation-state("valid", $form-feedback-valid-color);

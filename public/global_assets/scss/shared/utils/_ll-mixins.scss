@@ -21,12 +21,12 @@
 // Colors (for color system)
 //
 
-// For .bg-* classes
+// For .bg-* courses
 @mixin ll-background-variant($color) {
     background-color: $color;
 }
 
-// For .text-* classes
+// For .text-* courses
 @mixin ll-text-color-variant($color) {
     color: $color;
 
@@ -38,27 +38,27 @@
     }
 }
 
-// For .border-* classes
+// For .border-* courses
 @mixin ll-border-color-variant($color) {
     border-color: $color;
 }
 
-// For .border-top-* classes
+// For .border-top-* courses
 @mixin ll-border-top-color-variant($color) {
     border-top-color: $color;
 }
 
-// For .border-bottom-* classes
+// For .border-bottom-* courses
 @mixin ll-border-bottom-color-variant($color) {
     border-bottom-color: $color;
 }
 
-// For .border-left-* classes
+// For .border-left-* courses
 @mixin ll-border-left-color-variant($color) {
     border-left-color: $color;
 }
 
-// For .border-right-* classes
+// For .border-right-* courses
 @mixin ll-border-right-color-variant($color) {
     border-right-color: $color;
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\MyClass;
+namespace App\Http\Requests\MyCourse;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClassCreate extends FormRequest
+class CourseUpdate extends FormRequest
 {
 
     public function authorize()
@@ -21,15 +21,6 @@ class ClassCreate extends FormRequest
     {
         return [
             'name' => 'required|string|min:3',
-            'major_id' => 'required',
         ];
     }
-
-    public function attributes()
-    {
-        return  [
-            'major_id' => 'Major',
-        ];
-    }
-
 }

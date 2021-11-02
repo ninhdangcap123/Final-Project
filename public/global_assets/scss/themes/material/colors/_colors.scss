@@ -170,42 +170,42 @@ $ll-theme-colors: (
     $base-color-value: map-get($color-variants, 'base');
     $shade-50: map-get($color-variants, 50);
 
-    // Generate .alpha-* classes
+    // Generate .alpha-* courses
     .alpha-#{$color-key} {
         @include ll-background-variant($shade-50);
     }
 
-    // Generate .text-* classes
+    // Generate .text-* courses
     .text-#{$color-key} {
         @include ll-text-color-variant($base-color-value);
     }
 
-    // Generate .bg-* classes
+    // Generate .bg-* courses
     .bg-#{$color-key} {
         @include ll-background-variant($base-color-value);
     }
 
-    // Generate .border-* classes
+    // Generate .border-* courses
     .border-#{$color-key} {
         @include ll-border-color-variant($base-color-value);
     }
 
-    // Generate .border-top-* classes
+    // Generate .border-top-* courses
     .border-top-#{$color-key} {
         @include ll-border-top-color-variant($base-color-value);
     }
 
-    // Generate .border-bottom-* classes
+    // Generate .border-bottom-* courses
     .border-bottom-#{$color-key} {
         @include ll-border-bottom-color-variant($base-color-value);
     }
 
-    // Generate .border-left-* classes
+    // Generate .border-left-* courses
     .border-left-#{$color-key} {
         @include ll-border-left-color-variant($base-color-value);
     }
 
-    // Generate .border-right-* classes
+    // Generate .border-right-* courses
     .border-right-#{$color-key} {
         @include ll-border-right-color-variant($base-color-value);
     }
@@ -221,37 +221,37 @@ $ll-theme-colors: (
         // Ignore 'base' and '50' tones
         @if ($variant-name != 'base' and $variant-name != 50) {
 
-            // Generate .text-*-* classes
+            // Generate .text-*-* courses
             .text-#{$color-key}-#{$variant-name} {
                 @include ll-text-color-variant($shade-color-value);
             }
 
-            // Generate .bg-*-* classes
+            // Generate .bg-*-* courses
             .bg-#{$color-key}-#{$variant-name} {
                 @include ll-background-variant($shade-color-value);
             }
 
-            // Generate .border-*-* classes
+            // Generate .border-*-* courses
             .border-#{$color-key}-#{$variant-name} {
                 @include ll-border-color-variant($shade-color-value);
             }
 
-            // Generate .border-top-*-* classes
+            // Generate .border-top-*-* courses
             .border-top-#{$color-key}-#{$variant-name} {
                 @include ll-border-top-color-variant($shade-color-value);
             }
 
-            // Generate .border-bottom-*-* classes
+            // Generate .border-bottom-*-* courses
             .border-bottom-#{$color-key}-#{$variant-name} {
                 @include ll-border-bottom-color-variant($shade-color-value);
             }
 
-            // Generate .border-left-*-* classes
+            // Generate .border-left-*-* courses
             .border-left-#{$color-key}-#{$variant-name} {
                 @include ll-border-left-color-variant($shade-color-value);
             }
 
-            // Generate .border-right-*-* classes
+            // Generate .border-right-*-* courses
             .border-right-#{$color-key}-#{$variant-name} {
                 @include ll-border-right-color-variant($shade-color-value);
             }
@@ -261,7 +261,7 @@ $ll-theme-colors: (
 
 
 //
-// Other color classes
+// Other color courses
 //
 
 // Transparent border

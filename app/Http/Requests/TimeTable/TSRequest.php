@@ -19,7 +19,7 @@ class TSRequest extends FormRequest
     public function rules()
     {
         return [
-            'ttr_id' => 'required|exists:time_table_records,id',
+            'ttr_id' => 'required',
             'hour_from' => 'required|numeric|between:1,12',
             'min_from' => 'required|string|size:2',
             'meridian_from' => 'required|string|size:2',

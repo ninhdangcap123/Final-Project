@@ -6,10 +6,10 @@
             <div class="card-header bg-white header-elements-inline">
                 <h6 id="ajax-title" class="card-title">Please fill The form Below To Edit record of {{ $sr->user->name }}</h6>
 
-                {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+                {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
             </div>
 
-            <form method="post" enctype="multipart/form-data" class="wizard-form steps-validation ajax-update" data-reload="#ajax-title" action="{{ route('students.update', \App\Helpers\displayMessageHelper::hash($sr->id)) }}" data-fouc>
+            <form method="post" enctype="multipart/form-data" class="wizard-form steps-validation ajax-update" data-reload="#ajax-title" action="{{ route('students.update', \App\Helpers\DisplayMessageHelper::hash($sr->id)) }}" data-fouc>
                 @csrf @method('PUT')
                 <h6>Personal data</h6>
                 <fieldset>
@@ -134,11 +134,11 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="my_class_id">Class: </label>
-                                <select onchange="getClassSections(this.value)" name="my_class_id" required id="my_class_id" class="form-control select-search" data-placeholder="Select Class">
+                                <label for="my_course_id">Class: </label>
+                                <select onchange="getClassSections(this.value)" name="my_course_id" required id="my_course_id" class="form-control select-search" data-placeholder="Select Class">
                                     <option value=""></option>
-                                    @foreach($my_classes as $c)
-                                        <option {{ $sr->my_class_id == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                    @foreach($my_courses as $c)
+                                        <option {{ $sr->my_course_id == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                         @endforeach
                                     </select>
                             </div>
@@ -159,7 +159,7 @@
                                 <select data-placeholder="Choose..."  name="my_parent_id" id="my_parent_id" class="select-search form-control">
                                     <option  value=""></option>
                                     @foreach($parents as $p)
-                                        <option {{ (\App\Helpers\displayMessageHelper::hash($sr->parent_id) == \App\Helpers\displayMessageHelper::hash($p->id)) ? 'selected' : '' }} value="{{ \App\Helpers\displayMessageHelper::hash($p->id) }}">{{ $p->name }}</option>
+                                        <option {{ (\App\Helpers\DisplayMessageHelper::hash($sr->parent_id) == \App\Helpers\DisplayMessageHelper::hash($p->id)) ? 'selected' : '' }} value="{{ \App\Helpers\DisplayMessageHelper::hash($p->id) }}">{{ $p->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

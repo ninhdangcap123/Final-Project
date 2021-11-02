@@ -158,7 +158,7 @@ $.ui.fancytree.registerExtension({
 // See also the [complete list of available hook functions](http://www.wwwendt.de/tech/fancytree/doc/jsdoc/Fancytree_Hooks.html).
 
 	/* Init */
-// `treeInit` is triggered when a tree is initalized. We can set up classes or
+// `treeInit` is triggered when a tree is initalized. We can set up courses or
 // bind event handlers here...
 	treeInit: function(ctx){
 		var tree = this, // same as ctx.tree,

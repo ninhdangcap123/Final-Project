@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware\Custom;
 
-use App\Helpers\getUserTypeHelper;
+use App\Helpers\GetUserTypeHelper;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\Qs;
@@ -18,6 +18,6 @@ class MyParent
      */
     public function handle(\Illuminate\Http\Request $request, Closure $next)
     {
-        return (Auth::check() && getUserTypeHelper::userIsParent()) ? $next($request) : redirect()->route('login');
+        return (Auth::check() && GetUserTypeHelper::userIsParent()) ? $next($request) : redirect()->route('login');
     }
 }

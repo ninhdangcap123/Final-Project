@@ -176,7 +176,7 @@
     }
 }
 
-// Generate series of `.navbar-expand-*` responsive classes for configuring
+// Generate series of `.navbar-expand-*` responsive courses for configuring
 // where your navbar collapses.
 .navbar-expand {
     @each $breakpoint in map-keys($grid-breakpoints) {
@@ -226,7 +226,7 @@
                         }
                     }
                 }
-                    
+
                 // Add top borders for better visual separation
                 &.navbar-dark .navbar-collapse {
                     border-top: $navbar-dark-collapse-border-width solid $navbar-dark-collapse-border-color;
@@ -416,7 +416,7 @@
         .active > .nav-link,
         .nav-link.show,
         .nav-link.active {
-            color: $nav-link-active-color;            
+            color: $nav-link-active-color;
         }
     }
 
@@ -625,13 +625,13 @@
     padding-right: $dropdown-content-body-padding-x;
     @include border-top-radius($dropdown-border-radius - rem-calc($dropdown-border-width));
 
-    // If header has no background classes
+    // If header has no background courses
     &:not([class*=bg-]) {
         padding-top: $dropdown-content-body-padding-y;
         padding-bottom: $dropdown-content-body-padding-y;
     }
 
-    // If header has background classes
+    // If header has background courses
     &[class*=bg-] {
         padding-top: $dropdown-content-header-padding-y;
         padding-bottom: $dropdown-content-header-padding-y;

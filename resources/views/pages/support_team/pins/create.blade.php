@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h5 class="card-title"><i class="icon-alarm mr-2"></i> Generate Pins</h5>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">

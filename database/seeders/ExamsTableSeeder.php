@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\getSystemInfoHelper;
+use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\Qs;
 use DB;
 use Illuminate\Database\Seeder;
@@ -20,37 +20,37 @@ class ExamsTableSeeder extends Seeder
             [
                 'name' => 'First test',
                 'term' => '1',
-                'year' => getSystemInfoHelper::getCurrentSession(),
+                'year' => GetSystemInfoHelper::getCurrentSession(),
 
             ],
             [
                 'name' => 'Final test',
                 'term' => '1',
-                'year' => getSystemInfoHelper::getCurrentSession(),
+                'year' => GetSystemInfoHelper::getCurrentSession(),
 
             ],
             [
                 'name' => 'First test',
                 'term' => '2',
-                'year' => getSystemInfoHelper::getCurrentSession(),
+                'year' => GetSystemInfoHelper::getCurrentSession(),
 
             ],
             [
                 'name' => 'Final test',
                 'term' => '2',
-                'year' => getSystemInfoHelper::getCurrentSession(),
+                'year' => GetSystemInfoHelper::getCurrentSession(),
 
             ],
             [
                 'name' => 'First test',
                 'term' => '3',
-                'year' => getSystemInfoHelper::getCurrentSession(),
+                'year' => GetSystemInfoHelper::getCurrentSession(),
 
             ],
             [
                 'name' => 'Final test',
                 'term' => '3',
-                'year' => getSystemInfoHelper::getCurrentSession(),
+                'year' => GetSystemInfoHelper::getCurrentSession(),
 
             ],
 

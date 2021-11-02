@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h5 class="card-title"><i class="icon-wrench mr-2"></i> Batch Fix </h5>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -28,11 +28,11 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="my_class_id" class="col-form-label font-weight-bold">Class:</label>
-                                        <select required onchange="getClassSections(this.value)" id="my_class_id" name="my_class_id" class="form-control select">
-                                            <option value="">Select Class</option>
-                                            @foreach($my_classes as $c)
-                                                <option {{ ($selected && $my_class_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                        <label for="my_course_id" class="col-form-label font-weight-bold">Class:</label>
+                                        <select required onchange="getClassSections(this.value)" id="my_course_id" name="my_course_id" class="form-control select">
+                                            <option value="">Select Course</option>
+                                            @foreach($my_courses as $c)
+                                                <option {{ ($selected && $my_course_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

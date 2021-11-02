@@ -52,7 +52,7 @@
                 </li>
 
                 {{--Academics--}}
-                @if(\App\Helpers\checkUsersHelper::userIsAcademic())
+                @if(\App\Helpers\CheckUsersHelper::userIsAcademic())
                     <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['tt.index', 'ttr.edit', 'ttr.show', 'ttr.manage']) ? 'nav-item-expanded nav-item-open' : '' }} ">
                         <a href="#" class="nav-link"><i class="icon-graduation2"></i> <span> Academics</span></a>
 
@@ -65,20 +65,20 @@
                     @endif
 
                 {{--Administrative--}}
-                @if(\App\Helpers\checkUsersHelper::userIsTeamSAS())
+                @if(\App\Helpers\CheckUsersHelper::userIsTeamSAS())
                     <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['payments.index', 'payments.create', 'payments.invoice', 'payments.receipts', 'payments.edit', 'payments.manage', 'payments.show',]) ? 'nav-item-expanded nav-item-open' : '' }} ">
                         <a href="#" class="nav-link"><i class="icon-office"></i> <span> Administrative</span></a>
 
                         <ul class="nav nav-group-sub" data-submenu-title="Administrative">
 
                             {{--Payments--}}
-                            @if(\App\Helpers\checkUsersHelper::userIsTeamSAS())
+                            @if(\App\Helpers\CheckUsersHelper::userIsTeamSAS())
                             <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['payments.index', 'payments.create', 'payments.edit', 'payments.manage', 'payments.show', 'payments.invoice']) ? 'nav-item-expanded' : '' }}">
 
                                 <a href="#" class="nav-link {{ in_array(Route::currentRouteName(), ['payments.index', 'payments.edit', 'payments.create', 'payments.manage', 'payments.show', 'payments.invoice']) ? 'active' : '' }}">Payments</a>
 
                                 <ul class="nav nav-group-sub">
-                                    @if(\App\Helpers\checkUsersHelper::userIsAdministrative())
+                                    @if(\App\Helpers\CheckUsersHelper::userIsAdministrative())
                                     <li class="nav-item"><a href="{{ route('payments.create') }}" class="nav-link {{ Route::is('payments.create') ? 'active' : '' }}">Create Payment</a></li>
                                     <li class="nav-item"><a href="{{ route('payments.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['payments.index', 'payments.edit', 'payments.show']) ? 'active' : '' }}">Manage Payments</a></li>
                                     @endif
@@ -93,13 +93,13 @@
                 @endif
 
                 {{--Manage Students--}}
-                @if(\App\Helpers\checkUsersHelper::userIsTeamSAT())
+                @if(\App\Helpers\CheckUsersHelper::userIsTeamSAT())
                     <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['students.create', 'students.list', 'students.edit', 'students.show', 'students.promotion', 'students.promotion_manage', 'students.graduated']) ? 'nav-item-expanded nav-item-open' : '' }} ">
                         <a href="#" class="nav-link"><i class="icon-users"></i> <span> Students</span></a>
 
                         <ul class="nav nav-group-sub" data-submenu-title="Manage Students">
                             {{--Admit Student--}}
-                            @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
+                            @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
                                 <li class="nav-item">
                                     <a href="{{ route('students.create') }}"
                                        class="nav-link {{ (Route::is('students.create')) ? 'active' : '' }}">Admit Student</a>
@@ -110,13 +110,13 @@
                             <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['students.list', 'students.edit', 'students.show']) ? 'nav-item-expanded' : '' }}">
                                 <a href="#" class="nav-link {{ in_array(Route::currentRouteName(), ['students.list', 'students.edit', 'students.show']) ? 'active' : '' }}">Student Information</a>
                                 <ul class="nav nav-group-sub">
-                                    @foreach(App\Models\MyClass::orderBy('name')->get() as $c)
+                                    @foreach(App\Models\MyCourse::orderBy('name')->get() as $c)
                                         <li class="nav-item"><a href="{{ route('students.list', $c->id) }}" class="nav-link ">{{ $c->name }}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
 
-                            @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
+                            @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
 
                             {{--Student Promotion--}}
                             <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['students.promotion', 'students.promotion_manage']) ? 'nav-item-expanded' : '' }}"><a href="#" class="nav-link {{ in_array(Route::currentRouteName(), ['students.promotion', 'students.promotion_manage' ]) ? 'active' : '' }}">Student Promotion</a>
@@ -135,7 +135,7 @@
                     </li>
                 @endif
 
-                @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
+                @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
                     {{--Manage Users--}}
                     <li class="nav-item">
                         <a href="{{ route('users.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['users.index', 'users.show', 'users.edit']) ? 'active' : '' }}"><i class="icon-users4"></i> <span> Users</span></a>
@@ -143,7 +143,7 @@
 
                     {{--Manage Classes--}}
                     <li class="nav-item">
-                        <a href="{{ route('classes.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['classes.index','classes.edit']) ? 'active' : '' }}"><i class="icon-windows2"></i> <span> Classes</span></a>
+                        <a href="{{ route('courses.index') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['courses.index','courses.edit']) ? 'active' : '' }}"><i class="icon-windows2"></i> <span> Courses</span></a>
                     </li>
 
                     {{--Manage Dorms--}}
@@ -163,12 +163,12 @@
                 @endif
 
                 {{--Exam--}}
-                @if(\App\Helpers\checkUsersHelper::userIsTeamSAT())
+                @if(\App\Helpers\CheckUsersHelper::userIsTeamSAT())
                 <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['exams.index', 'exams.edit', 'grades.index', 'grades.edit', 'marks.index', 'marks.manage', 'marks.bulk', 'marks.tabulation', 'marks.show', 'marks.batch_fix',]) ? 'nav-item-expanded nav-item-open' : '' }} ">
                     <a href="#" class="nav-link"><i class="icon-books"></i> <span> Exams</span></a>
 
                     <ul class="nav nav-group-sub" data-submenu-title="Manage Exams">
-                        @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
+                        @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
 
                         {{--Exam list--}}
                             <li class="nav-item">
@@ -193,7 +193,7 @@
 {{--                            </li>--}}
                         @endif
 
-                        @if(\App\Helpers\checkUsersHelper::userIsTeamSAT())
+                        @if(\App\Helpers\CheckUsersHelper::userIsTeamSAT())
                             {{--Marks Manage--}}
                             <li class="nav-item">
                                 <a href="{{ route('marks.index') }}"
@@ -214,7 +214,7 @@
 
                 {{--End Exam--}}
 
-                @include('pages.'.\App\Helpers\getUserTypeHelper::getUserType().'.menu')
+                @include('pages.'.\App\Helpers\GetUserTypeHelper::getUserType().'.menu')
 
                 {{--Manage Account--}}
                 <li class="nav-item">

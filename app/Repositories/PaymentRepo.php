@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Helpers\getSystemInfoHelper;
+use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\Qs;
 use App\Models\Payment;
 use App\Models\PaymentRecord;
@@ -18,17 +18,17 @@ class PaymentRepo
 
     public function getPayment($data)
     {
-        return Payment::where($data)->with('my_class');
+        return Payment::where($data)->with('my_course');
     }
 
     public function getGeneralPayment($data)
     {
-        return Payment::whereNull('my_class_id')->where($data)->with('my_class');
+        return Payment::whereNull('my_course_id')->where($data)->with('my_course');
     }
 
     public function getActivePayments()
     {
-        return $this->getPayment(['year' => getSystemInfoHelper::getCurrentSession()]);
+        return $this->getPayment(['year' => GetSystemInfoHelper::getCurrentSession()]);
     }
 
     public function getPaymentYears()

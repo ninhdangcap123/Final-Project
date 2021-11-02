@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Eloquent;
 
-class MyClass extends Eloquent
+class MyCourse extends Eloquent
 {
     protected $fillable = ['name', 'major_id'];
 

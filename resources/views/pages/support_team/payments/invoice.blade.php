@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h6 class="card-title font-weight-bold">Manage Payment Records for {{ $sr->user->name}} </h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -39,21 +39,21 @@
                             <td>{{ $uc->payment->ref_no }}</td>
 
                             {{--Amount--}}
-                            <td class="font-weight-bold" id="amt-{{ \App\Helpers\displayMessageHelper::hash($uc->id) }}" data-amount="{{ $uc->payment->amount }}">{{ $uc->payment->amount }}</td>
+                            <td class="font-weight-bold" id="amt-{{ \App\Helpers\DisplayMessageHelper::hash($uc->id) }}" data-amount="{{ $uc->payment->amount }}">{{ $uc->payment->amount }}</td>
 
                             {{--Amount Paid--}}
-                            <td id="amt_paid-{{ \App\Helpers\displayMessageHelper::hash($uc->id) }}" data-amount="{{ $uc->amt_paid ?: 0 }}" class="text-blue font-weight-bold">{{ $uc->amt_paid ?: '0.00' }}</td>
+                            <td id="amt_paid-{{ \App\Helpers\DisplayMessageHelper::hash($uc->id) }}" data-amount="{{ $uc->amt_paid ?: 0 }}" class="text-blue font-weight-bold">{{ $uc->amt_paid ?: '0.00' }}</td>
 
                             {{--Balance--}}
-                            <td id="bal-{{ \App\Helpers\displayMessageHelper::hash($uc->id) }}" class="text-danger font-weight-bold">{{ $uc->balance ?: $uc->payment->amount }}</td>
+                            <td id="bal-{{ \App\Helpers\DisplayMessageHelper::hash($uc->id) }}" class="text-danger font-weight-bold">{{ $uc->balance ?: $uc->payment->amount }}</td>
 
                             {{--Pay Now Form--}}
                             <td>
-                                <form id="{{ \App\Helpers\displayMessageHelper::hash($uc->id) }}" method="post" class="ajax-pay" action="{{ route('payments.pay_now', \App\Helpers\displayMessageHelper::hash($uc->id)) }}">
+                                <form id="{{ \App\Helpers\DisplayMessageHelper::hash($uc->id) }}" method="post" class="ajax-pay" action="{{ route('payments.pay_now', \App\Helpers\DisplayMessageHelper::hash($uc->id)) }}">
                                     @csrf
                              <div class="row">
                                  <div class="col-md-7">
-                                     <input min="1" max="{{ $uc->balance ?: $uc->payment->amount }}" id="val-{{ \App\Helpers\displayMessageHelper::hash($uc->id) }}" class="form-control" required placeholder="Pay Now" title="Pay Now" name="amt_paid" type="number">
+                                     <input min="1" max="{{ $uc->balance ?: $uc->payment->amount }}" id="val-{{ \App\Helpers\DisplayMessageHelper::hash($uc->id) }}" class="form-control" required placeholder="Pay Now" title="Pay Now" name="amt_paid" type="number">
                                  </div>
                                  <div class="col-md-5">
                                      <button data-text="Pay" class="btn btn-danger" type="submit">Pay <i class="icon-paperplane ml-2"></i></button>
@@ -76,11 +76,11 @@
                                         <div class="dropdown-menu dropdown-menu-left">
 
                                             {{--Reset Payment--}}
-                                            <a id="{{ \App\Helpers\displayMessageHelper::hash($uc->id) }}" onclick="confirmReset(this.id)" href="#" class="dropdown-item"><i class="icon-reset"></i> Reset Payment</a>
-                                            <form method="post" id="item-reset-{{ \App\Helpers\displayMessageHelper::hash($uc->id) }}" action="{{ route('payments.reset_record', \App\Helpers\displayMessageHelper::hash($uc->id)) }}" class="hidden">@csrf @method('delete')</form>
+                                            <a id="{{ \App\Helpers\DisplayMessageHelper::hash($uc->id) }}" onclick="confirmReset(this.id)" href="#" class="dropdown-item"><i class="icon-reset"></i> Reset Payment</a>
+                                            <form method="post" id="item-reset-{{ \App\Helpers\DisplayMessageHelper::hash($uc->id) }}" action="{{ route('payments.reset_record', \App\Helpers\DisplayMessageHelper::hash($uc->id)) }}" class="hidden">@csrf @method('delete')</form>
 
                                             {{--Receipt--}}
-                                                <a target="_blank" href="{{ route('payments.receipts', \App\Helpers\displayMessageHelper::hash($uc->id)) }}" class="dropdown-item"><i class="icon-printer"></i> Print Receipt</a>
+                                                <a target="_blank" href="{{ route('payments.receipts', \App\Helpers\DisplayMessageHelper::hash($uc->id)) }}" class="dropdown-item"><i class="icon-printer"></i> Print Receipt</a>
                                             {{--PDF Receipt--}}
                             {{--                    <a  href="{{ route('payments.pdf_receipts', Qs::hash($uc->id)) }}" class="dropdown-item download-receipt"><i class="icon-download"></i> Download Receipt</a>--}}
 
@@ -131,11 +131,11 @@
                                         <div class="dropdown-menu dropdown-menu-left">
 
                                             {{--Reset Payment--}}
-                                            <a id="{{ \App\Helpers\displayMessageHelper::hash($cl->id) }}" onclick="confirmReset(this.id)" href="#" class="dropdown-item"><i class="icon-reset"></i> Reset Payment</a>
-                                            <form method="post" id="item-reset-{{ \App\Helpers\displayMessageHelper::hash($cl->id) }}" action="{{ route('payments.reset_record', \App\Helpers\displayMessageHelper::hash($cl->id)) }}" class="hidden">@csrf @method('delete')</form>
+                                            <a id="{{ \App\Helpers\DisplayMessageHelper::hash($cl->id) }}" onclick="confirmReset(this.id)" href="#" class="dropdown-item"><i class="icon-reset"></i> Reset Payment</a>
+                                            <form method="post" id="item-reset-{{ \App\Helpers\DisplayMessageHelper::hash($cl->id) }}" action="{{ route('payments.reset_record', \App\Helpers\DisplayMessageHelper::hash($cl->id)) }}" class="hidden">@csrf @method('delete')</form>
 
                                             {{--Receipt--}}
-                                            <a target="_blank" href="{{ route('payments.receipts', \App\Helpers\displayMessageHelper::hash($cl->id)) }}" class="dropdown-item"><i class="icon-printer"></i> Print Receipt</a>
+                                            <a target="_blank" href="{{ route('payments.receipts', \App\Helpers\DisplayMessageHelper::hash($cl->id)) }}" class="dropdown-item"><i class="icon-printer"></i> Print Receipt</a>
 
                                             {{--PDF Receipt--}}
                                             {{--                    <a  href="{{ route('payments.pdf_receipts', Qs::hash($uc->id)) }}" class="dropdown-item download-receipt"><i class="icon-download"></i> Download Receipt</a>--}}

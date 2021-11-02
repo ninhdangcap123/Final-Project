@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Section;
 
-use App\Helpers\displayMessageHelper;
+use App\Helpers\DisplayMessageHelper;
 use App\Helpers\Qs;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,7 +23,7 @@ class SectionUpdate extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'teacher_id' => 'sometimes|nullable|exists:users,id',
+            'teacher_id' => 'sometimes|nullable',
         ];
     }
 
@@ -38,7 +38,7 @@ class SectionUpdate extends FormRequest
     {
         $input = $this->all();
 
-        $input['teacher_id'] = $input['teacher_id'] ? displayMessageHelper::decodeHash($input['teacher_id']) : NULL;
+        $input['teacher_id'] = $input['teacher_id'] ? DisplayMessageHelper::decodeHash($input['teacher_id']) : NULL;
 
         $this->getInputSource()->replace($input);
 

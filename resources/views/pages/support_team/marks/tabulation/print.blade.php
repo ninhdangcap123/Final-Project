@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Tabulation Sheet - {{ $my_class->name.' '.$section->name.' - '.$ex->name.' ('.$year.')' }}</title>
+    <title>Tabulation Sheet - {{ $my_course->name.' '.$section->name.' - '.$ex->name.' ('.$year.')' }}</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/print_tabulation.css') }}" />
 </head>
 <body>
@@ -12,11 +12,11 @@
                 {{--<td><img src="{{ $s['logo'] }}" style="max-height : 100px;"></td>--}}
 
                 <td >
-                    <strong><span style="color: #1b0c80; font-size: 25px;">{{ strtoupper(\App\Helpers\getSystemInfoHelper::getSetting('system_name')) }}</span></strong><br/>
+                    <strong><span style="color: #1b0c80; font-size: 25px;">{{ strtoupper(\App\Helpers\GetSystemInfoHelper::getSetting('system_name')) }}</span></strong><br/>
                     {{-- <strong><span style="color: #1b0c80; font-size: 20px;">MINNA, NIGER STATE</span></strong><br/>--}}
                     <strong><span
                                 style="color: #000; font-size: 15px;"><i>{{ ucwords($s['address']) }}</i></span></strong><br/>
-                    <strong><span style="color: #000; font-size: 15px;"> TABULATION SHEET FOR {{ strtoupper($my_class->name.' '.$section->name.' - '.$ex->name.' ('.$year.')' ) }}
+                    <strong><span style="color: #000; font-size: 15px;"> TABULATION SHEET FOR {{ strtoupper($my_course->name.' '.$section->name.' - '.$ex->name.' ('.$year.')' ) }}
                     </span></strong>
                 </td>
             </tr>
@@ -70,7 +70,7 @@
 
                     <td style="color: darkred">{{ $exr->where('student_id', $s->user_id)->first()->total ?: '-' }}</td>
                     <td style="color: darkblue">{{ $exr->where('student_id', $s->user_id)->first()->ave ?: '-' }}</td>
-                    <td style="color: darkgreen">{!! \App\Helpers\printMarkSheetHelper::getSuffix($exr->where('student_id', $s->user_id)->first()->pos) ?: '-' !!}</td>
+                    <td style="color: darkgreen">{!! \App\Helpers\PrintMarkSheetHelper::getSuffix($exr->where('student_id', $s->user_id)->first()->pos) ?: '-' !!}</td>
                 </tr>
             @endforeach
             </tbody>

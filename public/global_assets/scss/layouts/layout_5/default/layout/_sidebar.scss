@@ -968,7 +968,7 @@
 
 
 //
-// Generate series of `.sidebar-expand-*` responsive classes for configuring
+// Generate series of `.sidebar-expand-*` responsive courses for configuring
 // where sidebar collapses. If togglers are in main navbar, make sure breakpoints match.
 // ------------------------------
 
@@ -1017,7 +1017,7 @@
 						right: 0;
 					}
 				}
-				
+
 				// Sidebar content
 				.sidebar-content {
 					position: static;
@@ -1113,7 +1113,7 @@
 
 		[class*=col] {
 			padding-left: ($grid-gutter-width / 4);
-			padding-right: ($grid-gutter-width / 4);	
+			padding-right: ($grid-gutter-width / 4);
 		}
 	}
 }
@@ -1166,7 +1166,7 @@
 
 			// Link
 			.nav-link {
-				color: $navigation-dark-color;			
+				color: $navigation-dark-color;
 
 				// Hover state
 				@include hover-focus {

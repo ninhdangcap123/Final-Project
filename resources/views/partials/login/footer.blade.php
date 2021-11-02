@@ -8,7 +8,7 @@
 
     <div class="navbar-collapse collapse" id="navbar-footer">
 					<span class="navbar-text">
-						&copy; {{ date('Y') }}. <a href="#">{{ \App\Helpers\getSystemInfoHelper::getSystemName() }}</a> by <a href="#" >TGMA</a>
+						&copy; {{ date('Y') }}. <a href="#">{{ \App\Helpers\GetSystemInfoHelper::getSystemName() }}</a> by <a href="#" >TGMA</a>
 					</span>
 
         <ul class="navbar-nav ml-lg-auto">

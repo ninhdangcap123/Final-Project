@@ -6,11 +6,11 @@ use App\Models\Exam;
 use App\Models\ExamRecord;
 use App\Models\Mark;
 
-class checkExamInfoHelper
+class CheckExamInfoHelper
 {
     public static function examIsLocked()
     {
-        return getSystemInfoHelper::getSetting('lock_exam');
+        return GetSystemInfoHelper::getSetting('lock_exam');
     }
     /*Get Exam Avg Per Term*/
     public static function getTermAverage($st_id, $term, $year)

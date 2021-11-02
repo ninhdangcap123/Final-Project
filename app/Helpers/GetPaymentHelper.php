@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use App\Models\PaymentRecord;
 
-class getPaymentHelper
+class GetPaymentHelper
 {
     public static function getYears($st_id)
     {

@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\SupportTeam;
 
-use App\Helpers\getPaymentHelper;
-use App\Helpers\getSystemInfoHelper;
-use App\Helpers\jsonHelper;
+use App\Helpers\GetPaymentHelper;
+use App\Helpers\GetSystemInfoHelper;
+use App\Helpers\JsonHelper;
 use App\Helpers\Qs;
 use App\Helpers\Pay;
-use App\Helpers\routeHelper;
+use App\Helpers\RouteHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\PaymentCreate;
 use App\Http\Requests\Payment\PaymentUpdate;
 use App\Models\Setting;
-use App\Repositories\MyClassRepo;
+use App\Repositories\MyCourseRepo;
 use App\Repositories\PaymentRepo;
 use App\Repositories\StudentRepo;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -22,13 +22,13 @@ use PDF;
 
 class PaymentController extends Controller
 {
-    protected $my_class, $pay, $student, $year;
+    protected $my_course, $pay, $student, $year;
 
-    public function __construct(MyClassRepo $my_class, PaymentRepo $pay, StudentRepo $student)
+    public function __construct(MyCourseRepo $my_course, PaymentRepo $pay, StudentRepo $student)
     {
-        $this->my_class = $my_class;
+        $this->my_course = $my_course;
         $this->pay = $pay;
-        $this->year = getSystemInfoHelper::getCurrentSession();
+        $this->year = GetSystemInfoHelper::getCurrentSession();
         $this->student = $student;
 
         $this->middleware('teamAccount');
@@ -47,11 +47,11 @@ class PaymentController extends Controller
         $d['payments'] = $p = $this->pay->getPayment(['year' => $year])->get();
 
         if(($p->count() < 1)){
-            return routeHelper::goWithDanger('payments.index');
+            return RouteHelper::goWithDanger('payments.index');
         }
 
         $d['selected'] = true;
-        $d['my_classes'] = $this->my_class->all();
+        $d['my_courses'] = $this->my_course->all();
         $d['years'] = $this->pay->getPaymentYears();
         $d['year'] = $year;
 
@@ -59,20 +59,20 @@ class PaymentController extends Controller
 
     }
 
-    public function select_year(Request $req)
+    public function selectYear(Request $req)
     {
-        return routeHelper::goToRoute(['payments.show', $req->year]);
+        return RouteHelper::goToRoute(['payments.show', $req->year]);
     }
 
     public function create()
     {
-        $d['my_classes'] = $this->my_class->all();
+        $d['my_courses'] = $this->my_course->all();
         return view('pages.support_team.payments.create', $d);
     }
 
     public function invoice($st_id, $year = NULL)
     {
-        if(!$st_id) {return routeHelper::goWithDanger();}
+        if(!$st_id) {return RouteHelper::goWithDanger();}
 
         $inv = $year ? $this->pay->getAllMyPR($st_id, $year) : $this->pay->getAllMyPR($st_id);
 
@@ -86,7 +86,7 @@ class PaymentController extends Controller
 
     public function receipts($pr_id)
     {
-        if(!$pr_id) {return routeHelper::goWithDanger();}
+        if(!$pr_id) {return RouteHelper::goWithDanger();}
 
         try {
              $d['pr'] = $pr = $this->pay->getRecord(['id' => $pr_id])->with('receipt')->first();
@@ -103,9 +103,9 @@ class PaymentController extends Controller
         return view('pages.support_team.payments.receipt', $d);
     }
 
-    public function pdf_receipts($pr_id)
+    public function pdfReceipts($pr_id)
     {
-        if(!$pr_id) {return routeHelper::goWithDanger();}
+        if(!$pr_id) {return RouteHelper::goWithDanger();}
 
         try {
             $d['pr'] = $pr = $this->pay->getRecord(['id' => $pr_id])->with('receipt')->first();
@@ -134,7 +134,7 @@ class PaymentController extends Controller
         return PDF::loadHTML($html)->download($name);
     }
 
-    public function pay_now(Request $req, $pr_id)
+    public function payNow(Request $req, $pr_id)
     {
         $this->validate($req, [
             'amt_paid' => 'required|numeric'
@@ -154,35 +154,35 @@ class PaymentController extends Controller
         $d2['year'] = $this->year;
 
         $this->pay->createReceipt($d2);
-        return jsonHelper::jsonUpdateOk();
+        return JsonHelper::jsonUpdateOk();
     }
 
-    public function manage($class_id = NULL)
+    public function manage($course_id = NULL)
     {
-        $d['my_classes'] = $this->my_class->all();
+        $d['my_courses'] = $this->my_course->all();
         $d['selected'] = false;
 
-        if($class_id){
-            $d['students'] = $st = $this->student->getRecord(['my_class_id' => $class_id])->get()->sortBy('user.name');
+        if($course_id){
+            $d['students'] = $st = $this->student->getRecord(['my_course_id' => $course_id])->get()->sortBy('user.name');
             if($st->count() < 1){
-                return routeHelper::goWithDanger('payments.manage');
+                return RouteHelper::goWithDanger('payments.manage');
             }
             $d['selected'] = true;
-            $d['my_class_id'] = $class_id;
+            $d['my_course_id'] = $course_id;
         }
 
         return view('pages.support_team.payments.manage', $d);
     }
 
-    public function select_class(Request $req)
+    public function selectClass(Request $req)
     {
         $this->validate($req, [
-            'my_class_id' => 'required|exists:my_classes,id'
-        ], [], ['my_class_id' => 'Class']);
+            'my_course_id' => 'required'
+        ], [], ['my_course_id' => 'Course']);
 
-        $wh['my_class_id'] = $class_id = $req->my_class_id;
+        $wh['my_course_id'] = $course_id = $req->my_course_id;
 
-        $pay1 = $this->pay->getPayment(['my_class_id' => $class_id, 'year' => $this->year])->get();
+        $pay1 = $this->pay->getPayment(['my_course_id' => $course_id, 'year' => $this->year])->get();
         $pay2 = $this->pay->getGeneralPayment(['year' => $this->year])->get();
         $payments = $pay2->count() ? $pay1->merge($pay2) : $pay1;
         $students = $this->student->getRecord($wh)->get();
@@ -200,24 +200,24 @@ class PaymentController extends Controller
             }
         }
 
-        return routeHelper::goToRoute(['payments.manage', $class_id]);
+        return RouteHelper::goToRoute(['payments.manage', $course_id]);
     }
 
     public function store(PaymentCreate $req)
     {
         $data = $req->all();
         $data['year'] = $this->year;
-        $data['ref_no'] = getPaymentHelper::genRefCode();
+        $data['ref_no'] = GetPaymentHelper::genRefCode();
         $this->pay->create($data);
 
-        return jsonHelper::jsonStoreOk();
+        return JsonHelper::jsonStoreOk();
     }
 
     public function edit($id)
     {
         $d['payment'] = $pay = $this->pay->find($id);
 
-        return is_null($pay) ? routeHelper::goWithDanger('payments.index') : view('pages.support_team.payments.edit', $d);
+        return is_null($pay) ? RouteHelper::goWithDanger('payments.index') : view('pages.support_team.payments.edit', $d);
     }
 
     public function update(PaymentUpdate $req, $id)
@@ -225,14 +225,14 @@ class PaymentController extends Controller
         $data = $req->all();
         $this->pay->update($id, $data);
 
-        return jsonHelper::jsonUpdateOk();
+        return JsonHelper::jsonUpdateOk();
     }
 
     public function destroy($id)
     {
         $this->pay->find($id)->delete();
 
-        return routeHelper::deleteOk('payments.index');
+        return RouteHelper::deleteOk('payments.index');
     }
 
     public function reset_record($id)

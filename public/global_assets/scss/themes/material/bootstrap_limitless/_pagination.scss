@@ -23,7 +23,7 @@
     @include transition(all ease-in-out $component-transition-timer);
 
     // White links bg. Needs separate class to avoid
-    // default BS's !important conditions in .bg-* classes
+    // default BS's !important conditions in .bg-* courses
     &-white {
         background-color: $white;
     }

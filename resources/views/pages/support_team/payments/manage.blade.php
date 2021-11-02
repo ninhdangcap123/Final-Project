@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h5 class="card-title"><i class="icon-cash2 mr-2"></i> Student Payments</h5>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -15,11 +15,11 @@
                       <div class="row">
                           <div class="col-md-10">
                               <div class="form-group">
-                                  <label for="my_class_id" class="col-form-label font-weight-bold">Class:</label>
-                                  <select required id="my_class_id" name="my_class_id" class="form-control select">
+                                  <label for="my_course_id" class="col-form-label font-weight-bold">Class:</label>
+                                  <select required id="my_course_id" name="my_course_id" class="form-control select">
                                       <option value="">Select Class</option>
-                                      @foreach($my_classes as $c)
-                                          <option {{ ($selected && $my_class_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                      @foreach($my_courses as $c)
+                                          <option {{ ($selected && $my_course_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                       @endforeach
                                   </select>
                               </div>
@@ -63,10 +63,10 @@
                                     <a href="#" class=" btn btn-danger" data-toggle="dropdown"> Manage Payments <i class="icon-arrow-down5"></i>
                                     </a>
                             <div class="dropdown-menu dropdown-menu-left">
-                                <a href="{{ route('payments.invoice', [\App\Helpers\displayMessageHelper::hash($s->user_id)]) }}" class="dropdown-item">All Payments</a>
-                                @foreach(\App\Helpers\getPaymentHelper::getYears($s->user_id) as $py)
+                                <a href="{{ route('payments.invoice', [\App\Helpers\DisplayMessageHelper::hash($s->user_id)]) }}" class="dropdown-item">All Payments</a>
+                                @foreach(\App\Helpers\GetPaymentHelper::getYears($s->user_id) as $py)
                                 @if($py)
-                                    <a href="{{ route('payments.invoice', [\App\Helpers\displayMessageHelper::hash($s->user_id), $py]) }}" class="dropdown-item">{{ $py }}</a>
+                                    <a href="{{ route('payments.invoice', [\App\Helpers\DisplayMessageHelper::hash($s->user_id), $py]) }}" class="dropdown-item">{{ $py }}</a>
                                 @endif
                                 @endforeach
                             </div>

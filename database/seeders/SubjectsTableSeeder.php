@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\MyClass;
+use App\Models\MyCourse;
 use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -26,29 +26,29 @@ class SubjectsTableSeeder extends Seeder
         $subjects = ['Giới Thiệu Môn', 'Chuyên Ngành', 'Kết Thúc Môn'];
         $sub_slug = ['GT', 'CN', 'KT'];
         $teacher_id = User::where(['user_type' => 'teacher'])->first()->id;
-        $my_classes = MyClass::all();
+        $my_courses = MyCourse::all();
 
-        foreach ($my_classes as $my_class) {
+        foreach ($my_courses as $my_course) {
 
             $data = [
 
                 [
                     'name' => $subjects[0],
                     'slug' => $sub_slug[0],
-                    'my_class_id' => $my_class->id,
+                    'my_course_id' => $my_course->id,
                     'teacher_id' => $teacher_id
                 ],
 
                 [
                     'name' => $subjects[1],
                     'slug' => $sub_slug[1],
-                    'my_class_id' => $my_class->id,
+                    'my_course_id' => $my_course->id,
                     'teacher_id' => $teacher_id
                 ],
                 [
                     'name' => $subjects[2],
                     'slug' => $sub_slug[2],
-                    'my_class_id' => $my_class->id,
+                    'my_course_id' => $my_course->id,
                     'teacher_id' => $teacher_id
                 ],
 

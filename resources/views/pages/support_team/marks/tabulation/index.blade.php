@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h5 class="card-title"><i class="icon-books mr-2"></i> Tabulation Sheet</h5>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body">
@@ -25,11 +25,11 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="my_class_id" class="col-form-label font-weight-bold">Class:</label>
-                                            <select onchange="getClassSections(this.value)" required id="my_class_id" name="my_class_id" class="form-control select" data-placeholder="Select Class">
+                                            <label for="my_course_id" class="col-form-label font-weight-bold">Class:</label>
+                                            <select onchange="getClassSections(this.value)" required id="my_course_id" name="my_course_id" class="form-control select" data-placeholder="Select Course">
                                                 <option value=""></option>
-                                                @foreach($my_classes as $c)
-                                                    <option {{ ($selected && $my_class_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                                @foreach($my_courses as $c)
+                                                    <option {{ ($selected && $my_course_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -38,9 +38,9 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="section_id" class="col-form-label font-weight-bold">Section:</label>
-                                <select required id="section_id" name="section_id" data-placeholder="Select Class First" class="form-control select">
+                                <select required id="section_id" name="section_id" data-placeholder="Select Course First" class="form-control select">
                                     @if($selected)
-                                        @foreach($sections->where('my_class_id', $my_class_id) as $s)
+                                        @foreach($sections->where('my_class_id', $my_course_id) as $s)
                                             <option {{ $section_id == $s->id ? 'selected' : '' }} value="{{ $s->id }}">{{ $s->name }}</option>
                                         @endforeach
                                     @endif
@@ -66,7 +66,7 @@
     @if($selected)
         <div class="card">
             <div class="card-header">
-                <h6 class="card-title font-weight-bold">Tabulation Sheet for {{ $my_class->name.' '.$section->name.' - '.$ex->name.' ('.$year.')' }}</h6>
+                <h6 class="card-title font-weight-bold">Tabulation Sheet for {{ $my_course->name.' '.$section->name.' - '.$ex->name.' ('.$year.')' }}</h6>
             </div>
             <div class="card-body">
                 <table class="table table-responsive table-striped">
@@ -109,14 +109,14 @@
 
                             <td style="color: darkred">{{ $exr->where('student_id', $s->user_id)->first()->total ?: '-' }}</td>
                             <td style="color: darkblue">{{ $exr->where('student_id', $s->user_id)->first()->ave ?: '-' }}</td>
-                            <td style="color: darkgreen">{!! \App\Helpers\printMarkSheetHelper::getSuffix($exr->where('student_id', $s->user_id)->first()->pos) ?: '-' !!}</td>
+                            <td style="color: darkgreen">{!! \App\Helpers\PrintMarkSheetHelper::getSuffix($exr->where('student_id', $s->user_id)->first()->pos) ?: '-' !!}</td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
                 {{--Print Button--}}
                 <div class="text-center mt-4">
-                    <a target="_blank" href="{{  route('marks.print_tabulation', [$exam_id, $my_class_id, $section_id]) }}" class="btn btn-danger btn-lg"><i class="icon-printer mr-2"></i> Print Tabulation Sheet</a>
+                    <a target="_blank" href="{{  route('marks.print_tabulation', [$exam_id, $my_course_id, $section_id]) }}" class="btn btn-danger btn-lg"><i class="icon-printer mr-2"></i> Print Tabulation Sheet</a>
                 </div>
             </div>
         </div>

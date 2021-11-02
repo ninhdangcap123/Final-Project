@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Helpers\getSystemInfoHelper;
+use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\Qs;
 use App\Models\Dorm;
 use App\Models\Promotion;
@@ -11,9 +11,9 @@ use App\Models\StudentRecord;
 class StudentRepo {
 
 
-    public function findStudentsByClass($class_id)
+    public function findStudentsByClass($course_id)
     {
-        return $this->activeStudents()->where(['my_class_id' => $class_id])->with(['my_class', 'user'])->get()->sortBy('user.name');
+        return $this->activeStudents()->where(['my_course_id' => $course_id])->with(['my_course', 'user'])->get()->sortBy('user.name');
     }
 
     public function activeStudents()
@@ -28,12 +28,12 @@ class StudentRepo {
 
     public function allGradStudents()
     {
-        return $this->gradStudents()->with(['my_class', 'section', 'user'])->get()->sortBy('user.name');
+        return $this->gradStudents()->with(['my_course', 'section', 'user'])->get()->sortBy('user.name');
     }
 
     public function findStudentsBySection($sec_id)
     {
-        return $this->activeStudents()->where('section_id', $sec_id)->with(['user', 'my_class'])->get();
+        return $this->activeStudents()->where('section_id', $sec_id)->with(['user', 'my_course'])->get();
     }
 
     public function createRecord($data)
@@ -104,7 +104,7 @@ class StudentRepo {
 
     public function getAllPromotions()
     {
-        return Promotion::with(['student', 'fc', 'tc', 'fs', 'ts'])->where(['from_session' => getSystemInfoHelper::getCurrentSession(), 'to_session' => getSystemInfoHelper::getNextSession()])->get();
+        return Promotion::with(['student', 'fc', 'tc', 'fs', 'ts'])->where(['from_session' => GetSystemInfoHelper::getCurrentSession(), 'to_session' => GetSystemInfoHelper::getNextSession()])->get();
     }
 
     public function getPromotions(array $where)

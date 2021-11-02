@@ -31,7 +31,7 @@ class StudentRecordsTableSeeder extends Seeder
                     StudentRecord::factory()
                         ->state([
                             'section_id' => $section->id,
-                            'my_class_id' => $section->my_class_id,
+                            'my_course_id' => $section->my_course_id,
                             'user_id' => function(User $user){
                                 return ['user_id' => $user->id];
                             },
@@ -59,7 +59,7 @@ class StudentRecordsTableSeeder extends Seeder
         ]);
 
         StudentRecord::factory()->create([
-            'my_class_id' => $section->my_class_id,
+            'my_course_id' => $section->my_course_id,
             'user_id' => $user->id,
             'section_id' => $section->id
         ]);

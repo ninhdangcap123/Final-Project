@@ -1,15 +1,15 @@
-@if(\App\Helpers\checkUsersHelper::userIsTeamSAT())
+@if(\App\Helpers\CheckUsersHelper::userIsTeamSAT())
     <div class="card">
         <div class="card-header header-elements-inline bg-dark">
             <h6 class="card-title font-weight-bold">Exam Comments</h6>
-            {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+            {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 
         <div class="card-body collapse">
             <form class="ajax-update" method="post" action="{{ route('marks.comment_update', $exr->id) }}">
                 @csrf @method('PUT')
 
-                @if(\App\Helpers\checkUsersHelper::userIsTeamSAT())
+                @if(\App\Helpers\CheckUsersHelper::userIsTeamSAT())
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label font-weight-semibold">Teacher's Comment</label>
                         <div class="col-lg-10">
@@ -18,7 +18,7 @@
                     </div>
                 @endif
 
-                @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
+                @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label font-weight-semibold">Head Teacher's Comment</label>
                         <div class="col-lg-10">

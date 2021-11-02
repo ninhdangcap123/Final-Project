@@ -20,7 +20,7 @@ class PinVerify extends FormRequest
     public function rules()
     {
         return [
-            'pin_code' => 'required|exists:pins,code',
+            'pin_code' => 'required',
         ];
     }
 

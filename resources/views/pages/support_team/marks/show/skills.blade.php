@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-header header-elements-inline bg-danger">
                 <h6 class="card-title font-weight-bold">AFFECTIVE TRAITS</h6>
-                {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+                {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
             </div>
 
             <div class="card-body collapse">
@@ -38,7 +38,7 @@
         <div class="card">
             <div class="card-header header-elements-inline bg-success">
                 <h6 class="card-title font-weight-bold">PSYCHOMOTOR SKILLS</h6>
-                {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
+                {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
             </div>
 
             <div class="card-body collapse">
