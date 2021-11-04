@@ -24,7 +24,7 @@ class GetUsersHelper
 
     public static function getStudentData($remove = [])
     {
-        $data = ['my_class_id', 'section_id', 'my_parent_id', 'dorm_id', 'dorm_room_no', 'year_admitted', 'house', 'age'];
+        $data = ['my_course_id', 'class_id', 'my_parent_id', 'dorm_id', 'dorm_room_no', 'year_admitted', 'house', 'age'];
 
         return $remove ? array_values(array_diff($data, $remove)) : $data;
 
@@ -59,12 +59,12 @@ class GetUsersHelper
     }
     public static function findMyChildren($parent_id)
     {
-        return StudentRecord::where('my_parent_id', $parent_id)->with(['user', 'my_class'])->get();
+        return StudentRecord::where('my_parent_id', $parent_id)->with(['user', 'my_course'])->get();
     }
 
     public static function findTeacherSubjects($teacher_id)
     {
-        return Subject::where('teacher_id', $teacher_id)->with('my_class')->get();
+        return Subject::where('teacher_id', $teacher_id)->with('my_course')->get();
     }
 
     public static function findStudentRecord($user_id)

@@ -16,7 +16,7 @@
                     <th>Photo</th>
                     <th>Name</th>
                     <th>ADM_No</th>
-                    <th>Section</th>
+                    <th>Classes</th>
                     <th>Email</th>
                     <th>Action</th>
                 </tr>
@@ -28,7 +28,7 @@
                         <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}" alt="photo"></td>
                         <td>{{ $s->user->name }}</td>
                         <td>{{ $s->adm_no }}</td>
-                        <td>{{ $s->my_course->name.' '.$s->section->name }}</td>
+                        <td>{{ $s->myCourse->name.' '.$s->classes->name }}</td>
                         <td>{{ $s->user->email }}</td>
                         <td class="text-center">
                             <div class="list-icons">

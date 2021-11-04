@@ -12,9 +12,9 @@
             <ul class="nav nav-tabs nav-tabs-highlight">
                 <li class="nav-item"><a href="#all-students" class="nav-link active" data-toggle="tab">All {{ $my_course->name }} Students</a></li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Sections</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Classes</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        @foreach($sections as $s)
+                        @foreach($classes as $s)
                             <a href="#s{{ $s->id }}" class="dropdown-item" data-toggle="tab">{{ $my_course->name.' '.$s->name }}</a>
                         @endforeach
                     </div>
@@ -30,7 +30,7 @@
                             <th>Photo</th>
                             <th>Name</th>
                             <th>ADM_No</th>
-                            <th>Section</th>
+                            <th>Classes</th>
                             <th>Email</th>
                             <th>Action</th>
                         </tr>
@@ -42,7 +42,7 @@
                                 <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}" alt="photo"></td>
                                 <td>{{ $s->user->name }}</td>
                                 <td>{{ $s->adm_no }}</td>
-                                <td>{{ $my_course->name.' '.$s->section->name }}</td>
+                                <td>{{ $my_course->name.' '.$s->classes->name }}</td>
                                 <td>{{ $s->user->email }}</td>
                                 <td class="text-center">
                                     <div class="list-icons">
@@ -74,8 +74,9 @@
                     </table>
                 </div>
 
-                @foreach($sections as $se)
-                    <div class="tab-pane fade" id="s{{$se->id}}">                         <table class="table datatable-button-html5-columns">
+                @foreach($classes as $se)
+                    <div class="tab-pane fade" id="s{{$se->id}}">
+                        <table class="table datatable-button-html5-columns">
                             <thead>
                             <tr>
                                 <th>S/N</th>
@@ -87,7 +88,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($students->where('section_id', $se->id) as $sr)
+                            @foreach($students->where('class_id', $se->id) as $sr)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $sr->user->photo }}" alt="photo"></td>

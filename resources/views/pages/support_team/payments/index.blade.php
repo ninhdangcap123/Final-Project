@@ -48,9 +48,9 @@
 
         <div class="card-body">
             <ul class="nav nav-tabs nav-tabs-highlight">
-                <li class="nav-item"><a href="#all-payments" class="nav-link active" data-toggle="tab">All Classes</a></li>
+                <li class="nav-item"><a href="#all-payments" class="nav-link active" data-toggle="tab">All Courses</a></li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Class Payments</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Course Payments</a>
                     <div class="dropdown-menu dropdown-menu-right">
                         @foreach($my_courses as $mc)
                             <a href="#pc-{{ $mc->id }}" class="dropdown-item" data-toggle="tab">{{ $mc->name }}</a>
@@ -68,7 +68,7 @@
                                 <th>Title</th>
                                 <th>Amount</th>
                                 <th>Ref_No</th>
-                                <th>Class</th>
+                                <th>Course</th>
                                 <th>Method</th>
                                 <th>Info</th>
                                 <th>Action</th>
@@ -81,7 +81,7 @@
                                     <td>{{ $p->title }}</td>
                                     <td>{{ $p->amount }}</td>
                                     <td>{{ $p->ref_no }}</td>
-                                    <td>{{ $p->my_course_id ? $p->my_course->name : '' }}</td>
+                                    <td>{{ $p->myCourse_id ? $p->myCourse->name : 'All Courses' }}</td>
                                     <td>{{ ucwords($p->method) }}</td>
                                     <td>{{ $p->description }}</td>
                                     <td class="text-center">
@@ -130,7 +130,7 @@
                                     <td>{{ $p->title }}</td>
                                     <td>{{ $p->amount }}</td>
                                     <td>{{ $p->ref_no }}</td>
-                                    <td>{{ $p->my_course_id ? $p->my_course->name : '' }}</td>
+                                    <td>{{ $p->my_course_id ? $p->myCourse->name : '' }}</td>
                                     <td>{{ ucwords($p->method) }}</td>
                                     <td>{{ $p->description }}</td>
                                     <td class="text-center">

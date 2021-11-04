@@ -1,4 +1,4 @@
-<form class="ajax-update" action="{{ route('marks.update', [$exam_id, $my_course_id, $section_id, $subject_id]) }}" method="post">
+<form class="ajax-update" action="{{ route('marks.update', [$exam_id, $my_course_id, $class_id, $subject_id]) }}" method="post">
     @csrf @method('put')
     <table class="table table-striped">
         <thead>

@@ -22,12 +22,12 @@ class Promotion extends Eloquent
 
     public function fs()
     {
-        return $this->belongsTo(Section::class, 'from_section');
+        return $this->belongsTo(Classes::class, 'from_section');
     }
 
     public function ts()
     {
-        return $this->belongsTo(Section::class, 'to_section');
+        return $this->belongsTo(Classes::class, 'to_section');
     }
 
     public function tc()

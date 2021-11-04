@@ -7,9 +7,9 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="fc" class="col-form-label font-weight-bold">From Class:</label>
+                            <label for="fc" class="col-form-label font-weight-bold">From Course:</label>
                             <select required onchange="getClassSections(this.value, '#fs')" id="fc" name="fc" class="form-control select">
-                                <option value="">Select Class</option>
+                                <option value="">Select Courses</option>
                                 @foreach($my_courses as $c)
                                     <option {{ ($selected && $fc == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                 @endforeach
@@ -19,10 +19,10 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="fs" class="col-form-label font-weight-bold">From Section:</label>
+                            <label for="fs" class="col-form-label font-weight-bold">From Courses:</label>
                             <select required id="fs" name="fs" data-placeholder="Select Class First" class="form-control select">
                                 @if($selected && $fs)
-                                    <option value="{{ $fs }}">{{ $sections->where('id', $fs)->first()->name }}</option>
+                                    <option value="{{ $fs }}">{{ $classes->where('id', $fs)->first()->name }}</option>
                                 @endif
                             </select>
                         </div>
@@ -30,9 +30,9 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="tc" class="col-form-label font-weight-bold">To Class:</label>
+                            <label for="tc" class="col-form-label font-weight-bold">To Course:</label>
                             <select required onchange="getClassSections(this.value, '#ts')" id="tc" name="tc" class="form-control select">
-                                <option value="">Select Class</option>
+                                <option value="">Select Courses</option>
                                 @foreach($my_courses as $c)
                                     <option {{ ($selected && $tc == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                 @endforeach
@@ -42,10 +42,10 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="ts" class="col-form-label font-weight-bold">To Section:</label>
+                            <label for="ts" class="col-form-label font-weight-bold">To Courses:</label>
                             <select required id="ts" name="ts" data-placeholder="Select Class First" class="form-control select">
                                 @if($selected && $ts)
-                                    <option value="{{ $ts }}">{{ $sections->where('id', $ts)->first()->name }}</option>
+                                    <option value="{{ $ts }}">{{ $classes->where('id', $ts)->first()->name }}</option>
                                 @endif
                             </select>
                         </div>

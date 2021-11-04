@@ -25,7 +25,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label for="my_course_id" class="col-form-label font-weight-bold">Class:</label>
+                                            <label for="my_course_id" class="col-form-label font-weight-bold">Course:</label>
                                             <select onchange="getClassSections(this.value)" required id="my_course_id" name="my_course_id" class="form-control select" data-placeholder="Select Course">
                                                 <option value=""></option>
                                                 @foreach($my_courses as $c)
@@ -37,11 +37,11 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="section_id" class="col-form-label font-weight-bold">Section:</label>
-                                <select required id="section_id" name="section_id" data-placeholder="Select Course First" class="form-control select">
+                                <label for="section_id" class="col-form-label font-weight-bold">Classes:</label>
+                                <select required id="section_id" name="class_id" data-placeholder="Select Course First" class="form-control select">
                                     @if($selected)
-                                        @foreach($sections->where('my_class_id', $my_course_id) as $s)
-                                            <option {{ $section_id == $s->id ? 'selected' : '' }} value="{{ $s->id }}">{{ $s->name }}</option>
+                                        @foreach($classes->where('my_course_id', $my_course_id) as $s)
+                                            <option {{ $class_id == $s->id ? 'selected' : '' }} value="{{ $s->id }}">{{ $s->name }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -66,7 +66,7 @@
     @if($selected)
         <div class="card">
             <div class="card-header">
-                <h6 class="card-title font-weight-bold">Tabulation Sheet for {{ $my_course->name.' '.$section->name.' - '.$ex->name.' ('.$year.')' }}</h6>
+                <h6 class="card-title font-weight-bold">Tabulation Sheet for {{ $my_course->name.' '.$class->name.' - '.$ex->name.' ('.$year.')' }}</h6>
             </div>
             <div class="card-body">
                 <table class="table table-responsive table-striped">
@@ -77,13 +77,7 @@
                        @foreach($subjects as $sub)
                        <th title="{{ $sub->name }}" rowspan="2">{{ strtoupper($sub->slug ?: $sub->name) }}</th>
                        @endforeach
-                        {{--@if($ex->term == 3)
-                        <th>1ST TERM TOTAL</th>
-                        <th>2ND TERM TOTAL</th>
-                        <th>3RD TERM TOTAL</th>
-                        <th style="color: darkred">CUM Total</th>
-                        <th style="color: darkblue">CUM Average</th>
-                        @endif--}}
+
                         <th style="color: darkred">Total</th>
                         <th style="color: darkblue">Average</th>
                         <th style="color: darkgreen">Position</th>
@@ -98,14 +92,7 @@
                             <td>{{ $marks->where('student_id', $s->user_id)->where('subject_id', $sub->id)->first()->$tex ?? '-' ?: '-' }}</td>
                             @endforeach
 
-                            {{--@if($ex->term == 3)
-                                --}}{{--1st term Total--}}{{--
-                            <td>{{ Mk::getTermTotal($s->user_id, 1, $year) ?? '-' }}</td>
-                            --}}{{--2nd Term Total--}}{{--
-                            <td>{{ Mk::getTermTotal($s->user_id, 2, $year) ?? '-' }}</td>
-                            --}}{{--3rd Term total--}}{{--
-                            <td>{{ Mk::getTermTotal($s->user_id, 3, $year) ?? '-' }}</td>
-                            @endif--}}
+
 
                             <td style="color: darkred">{{ $exr->where('student_id', $s->user_id)->first()->total ?: '-' }}</td>
                             <td style="color: darkblue">{{ $exr->where('student_id', $s->user_id)->first()->ave ?: '-' }}</td>
@@ -116,7 +103,7 @@
                 </table>
                 {{--Print Button--}}
                 <div class="text-center mt-4">
-                    <a target="_blank" href="{{  route('marks.print_tabulation', [$exam_id, $my_course_id, $section_id]) }}" class="btn btn-danger btn-lg"><i class="icon-printer mr-2"></i> Print Tabulation Sheet</a>
+                    <a target="_blank" href="{{  route('marks.print_tabulation', [$exam_id, $my_course_id, $class_id]) }}" class="btn btn-danger btn-lg"><i class="icon-printer mr-2"></i> Print Tabulation Sheet</a>
                 </div>
             </div>
         </div>

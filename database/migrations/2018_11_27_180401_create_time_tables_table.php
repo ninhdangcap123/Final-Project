@@ -21,7 +21,7 @@ class CreateTimeTablesTable extends Migration
             $table->string('year', 100)->nullable();
             $table->timestamps();
 
-//            $table->unique(['my_course_id', 'exam_id', 'year']);
+
         });
 
         Schema::create('time_slots', function (Blueprint $table) {
@@ -40,7 +40,7 @@ class CreateTimeTablesTable extends Migration
             $table->string('full', 100)->nullable();
             $table->timestamps();
 
-//            $table->unique(['timestamp_from', 'timestamp_to', 'ttr_id']);
+
 
         });
 
@@ -56,8 +56,6 @@ class CreateTimeTablesTable extends Migration
             $table->tinyInteger('day_num')->nullable();
             $table->timestamps();
 
-//            $table->unique(['ttr_id', 'ts_id', 'day']);
-//            $table->unique(['ttr_id', 'ts_id', 'exam_date']);
         });
 
     }

@@ -30,11 +30,11 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="section_id" class="col-form-label font-weight-bold">Section:</label>
-                                            <select required id="section_id" name="section_id" data-placeholder="Select Class First" class="form-control select">
-                                        @if($selected)
-                                            @foreach($sections as $s)
-                                                    <option {{ ($section_id == $s->id ? 'selected' : '') }} value="{{ $s->id }}">{{ $s->name }}</option>
+                                            <label for="section_id" class="col-form-label font-weight-bold">Classes:</label>
+                                            <select required id="section_id" name="class_id" data-placeholder="Select Class First" class="form-control select">
+                                            @if($selected)
+                                            @foreach($classes as $s)
+                                                    <option {{ ($class_id == $s->id ? 'selected' : '') }} value="{{ $s->id }}">{{ $s->name }}</option>
                                             @endforeach
                                             @endif
                                             </select>

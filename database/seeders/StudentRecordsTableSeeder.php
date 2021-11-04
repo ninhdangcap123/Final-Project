@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Section;
+use App\Models\Classes;
 use App\Models\StudentRecord;
 use App\User;
 use Illuminate\Database\Seeder;
@@ -23,15 +23,15 @@ class StudentRecordsTableSeeder extends Seeder
 
     protected function createManyStudentRecords(int $count)
     {
-        $sections = Section::all();
+        $classes = Classes::all();
 
-        foreach ($sections as $section){
+        foreach ($classes as $class){
             User::factory()
                 ->has(
                     StudentRecord::factory()
                         ->state([
-                            'section_id' => $section->id,
-                            'my_course_id' => $section->my_course_id,
+                            'class_id' => $class->id,
+                            'my_course_id' => $class->my_course_id,
                             'user_id' => function(User $user){
                                 return ['user_id' => $user->id];
                             },
@@ -47,7 +47,7 @@ class StudentRecordsTableSeeder extends Seeder
 
     protected function createStudentRecord()
     {
-        $section = Section::first();
+        $class = Classes::first();
 
         $user = User::factory()->create([
             'name' => 'Student Ninh',
@@ -59,9 +59,9 @@ class StudentRecordsTableSeeder extends Seeder
         ]);
 
         StudentRecord::factory()->create([
-            'my_course_id' => $section->my_course_id,
+            'my_course_id' => $class->my_course_id,
             'user_id' => $user->id,
-            'section_id' => $section->id
+            'class_id' => $class->id
         ]);
     }
 }

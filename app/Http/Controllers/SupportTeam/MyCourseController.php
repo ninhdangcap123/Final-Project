@@ -37,7 +37,7 @@ class MyCourseController extends Controller
         $data = $req->all();
         $my_course = $this->my_course->create($data);
 
-        // Create Default Section
+        // Create Default Classes
         $section =
             [
             'my_course_id' => $my_course->id,

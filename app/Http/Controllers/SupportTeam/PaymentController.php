@@ -44,18 +44,18 @@ class PaymentController extends Controller
 
     public function show($year)
     {
-        $d['payments'] = $p = $this->pay->getPayment(['year' => $year])->get();
+        $data['payments'] = $p = $this->pay->getPayment(['year' => $year])->get();
 
         if(($p->count() < 1)){
             return RouteHelper::goWithDanger('payments.index');
         }
 
-        $d['selected'] = true;
-        $d['my_courses'] = $this->my_course->all();
-        $d['years'] = $this->pay->getPaymentYears();
-        $d['year'] = $year;
+        $data['selected'] = true;
+        $data['my_courses'] = $this->my_course->all();
+        $data['years'] = $this->pay->getPaymentYears();
+        $data['year'] = $year;
 
-        return view('pages.support_team.payments.index', $d);
+        return view('pages.support_team.payments.index', $data);
 
     }
 

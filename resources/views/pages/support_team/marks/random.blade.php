@@ -1,4 +1,4 @@
-<form class="ajax-update" action="{{ route('marks.update', [$exam_id, $my_course_id, $section_id, $subject_id]) }}" method="post">
+<form class="ajax-update" action="{{ route('marks.update', [$exam_id, $my_course_id, $class_id, $subject_id]) }}" method="post">
     @csrf @method('put')
     <table class="table table-striped">
         <thead>
@@ -8,7 +8,7 @@
             <th>ADM_NO</th>
             @if($major->code == 'J')
                 <th>1ST CA (10)</th>
-                <th>MT CA (20)</th>
+                <th>MT CA (20)</th>c
                 <th>2ND CA (10)</th>
                 <th>EXAM (60)</th>
             @endif

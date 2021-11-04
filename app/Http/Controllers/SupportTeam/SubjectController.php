@@ -26,11 +26,11 @@ class SubjectController extends Controller
 
     public function index()
     {
-        $d['my_courses'] = $this->my_course->all();
-        $d['teachers'] = $this->user->getUserByType('teacher');
-        $d['subjects'] = $this->my_course->getAllSubjects();
+        $data['my_courses'] = $this->my_course->all();
+        $data['teachers'] = $this->user->getUserByType('teacher');
+        $data['subjects'] = $this->my_course->getAllSubjects();
 
-        return view('pages.support_team.subjects.index', $d);
+        return view('pages.support_team.subjects.index', $data);
     }
 
     public function store(SubjectCreate $req)
@@ -43,11 +43,11 @@ class SubjectController extends Controller
 
     public function edit($id)
     {
-        $d['s'] = $sub = $this->my_course->findSubject($id);
-        $d['my_courses'] = $this->my_course->all();
-        $d['teachers'] = $this->user->getUserByType('teacher');
+        $data['s'] = $sub = $this->my_course->findSubject($id);
+        $data['my_courses'] = $this->my_course->all();
+        $data['teachers'] = $this->user->getUserByType('teacher');
 
-        return is_null($sub) ? RouteHelper::goWithDanger('subjects.index') : view('pages.support_team.subjects.edit', $d);
+        return is_null($sub) ? RouteHelper::goWithDanger('subjects.index') : view('pages.support_team.subjects.edit', $data);
     }
 
     public function update(SubjectUpdate $req, $id)

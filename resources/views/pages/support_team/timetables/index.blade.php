@@ -92,7 +92,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $ttr->name }}</td>
-                                    <td>{{ $ttr->my_course->name }}</td>
+                                    <td>{{ $ttr->myCourse->name }}</td>
                                     <td>{{ ($ttr->exam_id) ? $ttr->exam->name : 'Course TimeTable' }}
                                     <td>{{ $ttr->year }}</td>
                                     <td class="text-center">

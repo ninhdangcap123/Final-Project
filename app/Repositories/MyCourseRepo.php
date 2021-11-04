@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Major;
 use App\Models\MyCourse;
-use App\Models\Section;
+use App\Models\Classes;
 use App\Models\Subject;
 
 class MyCourseRepo
@@ -17,7 +17,7 @@ class MyCourseRepo
 
     public function getMC($data)
     {
-        return MyCourse::where($data)->with('section');
+        return MyCourse::where($data)->with('classes');
     }
 
     public function find($id)
@@ -55,41 +55,41 @@ class MyCourseRepo
         return Major::find($this->find($course_id)->major_id);
     }
 
-    /************* Section *******************/
+    /************* Classes *******************/
 
     public function createSection($data)
     {
-        return Section::create($data);
+        return Classes::create($data);
     }
 
     public function findSection($id)
     {
-        return Section::find($id);
+        return Classes::find($id);
     }
 
     public function updateSection($id, $data)
     {
-        return Section::find($id)->update($data);
+        return Classes::find($id)->update($data);
     }
 
     public function deleteSection($id)
     {
-        return Section::destroy($id);
+        return Classes::destroy($id);
     }
 
-    public function isActiveSection($section_id)
+    public function isActiveSection($class_id)
     {
-        return Section::where(['id' => $section_id, 'active' => 1])->exists();
+        return Classes::where(['id' => $class_id, 'active' => 1])->exists();
     }
 
     public function getAllSections()
     {
-        return Section::orderBy('name', 'asc')->with(['my_course', 'teacher'])->get();
+        return Classes::orderBy('name', 'asc')->with(['myCourse', 'teacher'])->get();
     }
 
     public function getClassSections($course_id)
     {
-        return Section::where(['my_course_id' => $course_id])->orderBy('name', 'asc')->get();
+        return Classes::where(['my_course_id' => $course_id])->orderBy('name', 'asc')->get();
     }
 
     /************* Subject *******************/
@@ -136,7 +136,7 @@ class MyCourseRepo
 
     public function getAllSubjects()
     {
-        return Subject::orderBy('name', 'asc')->with(['my_course', 'teacher'])->get();
+        return Subject::orderBy('name', 'asc')->with(['myCourse', 'teacher'])->get();
     }
 
 }

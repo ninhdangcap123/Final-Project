@@ -109,8 +109,7 @@ Route::group(['middleware' => 'auth'], function () {
 
            // FOR teamSA
             Route::group(['middleware' => 'teamSA'], function(){
-//                Route::get('batch_fix', 'MarkController@batch_fix')->name('marks.batch_fix');
-//                Route::put('batch_update', 'MarkController@batch_update')->name('marks.batch_update');
+
                 Route::get('tabulation/{exam?}/{class?}/{sec_id?}', 'MarkController@tabulation')->name('marks.tabulation');
                 Route::post('tabulation', 'MarkController@tabulationSelect')->name('marks.tabulation_select');
                 Route::get('tabulation/print/{exam}/{class}/{sec_id}', 'MarkController@printTabulation')->name('marks.print_tabulation');
@@ -119,12 +118,12 @@ Route::group(['middleware' => 'auth'], function () {
             // FOR teamSAT
             Route::group(['middleware' => 'teamSAT'], function(){
                 Route::get('/', 'MarkController@index')->name('marks.index');
-                Route::get('manage/{exam}/{class}/{section}/{subject}', 'MarkController@manage')->name('marks.manage');
-                Route::put('update/{exam}/{class}/{section}/{subject}', 'MarkController@update')->name('marks.update');
+                Route::get('manage/{exam}/{courses}/{classes}/{subject}', 'MarkController@manage')->name('marks.manage');
+                Route::put('update/{exam}/{courses}/{classes}/{subject}', 'MarkController@update')->name('marks.update');
                 Route::put('comment_update/{exr_id}', 'MarkController@commentUpdate')->name('marks.comment_update');
                 Route::put('skills_update/{skill}/{exr_id}', 'MarkController@skillsUpdate')->name('marks.skills_update');
                 Route::post('selector', 'MarkController@selector')->name('marks.selector');
-                Route::get('bulk/{class?}/{section?}', 'MarkController@bulk')->name('marks.bulk');
+                Route::get('bulk/{courses?}/{classes?}', 'MarkController@bulk')->name('marks.bulk');
                 Route::post('bulk', 'MarkController@bulkSelect')->name('marks.bulk_select');
             });
 
@@ -138,7 +137,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('students', 'StudentRecordController');
         Route::resource('users', 'UserController');
         Route::resource('courses', 'MyCourseController');
-        Route::resource('sections', 'SectionController');
+        Route::resource('classes', 'ClassController');
         Route::resource('subjects', 'SubjectController');
         Route::resource('grades', 'GradeController');
         Route::resource('exams', 'ExamController');

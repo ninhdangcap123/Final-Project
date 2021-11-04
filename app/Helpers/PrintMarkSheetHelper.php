@@ -23,9 +23,9 @@ class PrintMarkSheetHelper
         else
             return $number . '<sup>' . $ends[$number % 10] . '</sup>';
     }
-    public static function getSubTotalTerm($st_id, $sub_id, $term, $class_id, $year)
+    public static function getSubTotalTerm($st_id, $sub_id, $term, $my_course_id, $year)
     {
-        $d = ['student_id' => $st_id, 'subject_id' => $sub_id, 'my_class_id' => $class_id, 'year' => $year];
+        $d = ['student_id' => $st_id, 'subject_id' => $sub_id, 'my_course_id' => $my_course_id, 'year' => $year];
 
         $tex = 'tex'.$term;
         $sub_total = Mark::where($d)->select($tex)->get()->where($tex, '>', 0);
@@ -40,13 +40,13 @@ class PrintMarkSheetHelper
         }
         return $grades;
     }
-    public static function deleteOldRecord($st_id, $class_id)
+    public static function deleteOldRecord($st_id, $my_course_id)
     {
         $d = ['student_id' => $st_id, 'year' => self::getCurrentSession()];
 
-        $marks = Mark::where('my_class_id', '<>', $class_id)->where($d);
+        $marks = Mark::where('my_course_id', '<>', $my_course_id)->where($d);
         if($marks->get()->count() > 0){
-            $exr = ExamRecord::where('my_class_id', '<>', $class_id)->where($d);
+            $exr = ExamRecord::where('my_course_id', '<>', $my_course_id)->where($d);
             $marks->delete();
             $exr->delete();
         }
@@ -82,15 +82,16 @@ class PrintMarkSheetHelper
         return self::markGradeFilter($marks, $gradeIDS);
     }
 
-    public static function countStudents($exam_id, $class_id, $section_id, $year)
+    public static function countStudents($exam_id, $my_course_id, $class_id, $year)
     {
-        $d = ['exam_id' => $exam_id, 'my_class_id' => $class_id, 'section_id' => $section_id, 'year' => $year];
+        $d = ['exam_id' => $exam_id, 'my_course_id' => $my_course_id, 'class_id' => $class_id, 'year' => $year];
         return Mark::where($d)->select('student_id')->distinct()->get()->count();
     }
     public static function countSubjectsOffered(Collection $mark)
     {
         return $mark->filter(function($mk) {
             return ($mk->tca + $mk->exm) > 0 ;
+
         })->count();
     }
 

@@ -13,7 +13,7 @@ class StudentRepo {
 
     public function findStudentsByClass($course_id)
     {
-        return $this->activeStudents()->where(['my_course_id' => $course_id])->with(['my_course', 'user'])->get()->sortBy('user.name');
+        return $this->activeStudents()->where(['my_course_id' => $course_id])->with(['myCourse', 'user'])->get()->sortBy('user.name');
     }
 
     public function activeStudents()
@@ -28,12 +28,12 @@ class StudentRepo {
 
     public function allGradStudents()
     {
-        return $this->gradStudents()->with(['my_course', 'section', 'user'])->get()->sortBy('user.name');
+        return $this->gradStudents()->with(['myCourse', 'classes', 'user'])->get()->sortBy('user.name');
     }
 
-    public function findStudentsBySection($sec_id)
+    public function findStudentsBySection($class_id)
     {
-        return $this->activeStudents()->where('section_id', $sec_id)->with(['user', 'my_course'])->get();
+        return $this->activeStudents()->where('class_id', $class_id)->with(['user', 'myCourse'])->get();
     }
 
     public function createRecord($data)

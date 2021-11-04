@@ -95,7 +95,7 @@ class StudentRecordController extends Controller
     {
         $data['my_course'] = $mc = $this->my_course->getMC(['id' => $course_id])->first();
         $data['students'] = $this->student->findStudentsByClass($course_id);
-        $data['sections'] = $this->my_course->getClassSections($course_id);
+        $data['classes'] = $this->my_course->getClassSections($course_id);
 
         return is_null($mc) ? RouteHelper::goWithDanger() : view('pages.support_team.students.list', $data);
     }
@@ -170,7 +170,7 @@ class StudentRecordController extends Controller
 
         $this->student->updateRecord($sr_id, $srec); // Update St Rec
 
-        /*** If Class/Section is Changed in Same Year, Delete Marks/ExamRecord of Previous Class/Section ****/
+        /*** If Class/Classes is Changed in Same Year, Delete Marks/ExamRecord of Previous Class/Classes ****/
         PrintMarkSheetHelper::deleteOldRecord($sr->user->id, $srec['my_course_id']);
 
         return JsonHelper::jsonUpdateOk();

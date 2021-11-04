@@ -91,7 +91,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $s->name }} </td>
                                     <td>{{ $s->slug }} </td>
-                                    <td>{{ $s->my_course->name }}</td>
+                                    <td>{{ $s->myCourse->name }}</td>
                                     <td>{{ $s->teacher->name }}</td>
                                     <td class="text-center">
                                         <div class="list-icons">
