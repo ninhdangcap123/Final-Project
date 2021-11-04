@@ -23,7 +23,7 @@
                         <div class="form-group row">
                             <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class </label>
                             <div class="col-lg-9">
-                                <input class="form-control" title="Class" disabled value="{{ $payment->my_class_id ? $payment->my_course->name : 'All Classes' }}" type="text">
+                                <input class="form-control" title="Class" disabled value="{{ $payment->my_class_id ? $payment->myCourse->name : 'All Classes' }}" type="text">
                             </div>
                         </div>
 

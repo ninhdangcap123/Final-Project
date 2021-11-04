@@ -63,7 +63,7 @@
                </tr>
                <tr>
                    <td class="bold">CLASS:</td>
-                   <td>{{ $sr->my_course->name }}</td>
+                   <td>{{ $sr->myCourse->name }}</td>
                </tr>
            </table>
        </div>

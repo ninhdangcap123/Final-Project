@@ -57,7 +57,7 @@
                 console.log(resp);
                 section.empty();
                 subject.empty();
-                $.each(resp.sections, function (i, data) {
+                $.each(resp.classes, function (i, data) {
                     section.append($('<option>', {
                         value: data.id,
                         text: data.name
@@ -280,7 +280,5 @@
         form.find('.select, .select-search').val([]).select2({ placeholder: 'Select...'});
         form[0].reset();
     }
-
-
 
 </script>

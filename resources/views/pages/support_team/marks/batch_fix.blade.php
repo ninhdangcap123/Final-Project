@@ -40,10 +40,10 @@
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="section_id" class="col-form-label font-weight-bold">Section:</label>
+                                        <label for="section_id" class="col-form-label font-weight-bold">Classes:</label>
                                         <select required id="section_id" name="section_id" data-placeholder="Select Class First" class="form-control select">
                                             @if($selected)
-                                                @foreach($sections->where('my_class_id', $my_class_id) as $s)
+                                                @foreach($classes->where('my_class_id', $my_class_id) as $s)
                                                     <option {{ $section_id == $s->id ? 'selected' : '' }} value="{{ $s->id }}">{{ $s->name }}</option>
                                                 @endforeach
                                             @endif

@@ -4,7 +4,7 @@
 
     <div class="card">
         <div class="card-header text-center">
-            <h4 class="card-title font-weight-bold">Student Marksheet for =>  {{ $sr->user->name.' ('.$my_course->name.' '.$my_course->section->first()->name.')' }} </h4>
+            <h4 class="card-title font-weight-bold">Student Marksheet for =>  {{ $sr->user->name.' ('.$my_course->name.' '.$my_course->classes->first()->name.')' }} </h4>
         </div>
     </div>
 

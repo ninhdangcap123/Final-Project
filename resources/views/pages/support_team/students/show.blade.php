@@ -34,8 +34,8 @@
                                 <td>{{ $sr->adm_no }}</td>
                             </tr>
                             <tr>
-                                <td class="font-weight-bold">Class</td>
-                                <td>{{ $sr->my_course->name.' '.$sr->section->name }}</td>
+                                <td class="font-weight-bold">Course</td>
+                                <td>{{ $sr->my_course->name.' '.$sr->classes->name }}</td>
                             </tr>
                             @if($sr->my_parent_id)
                                 <tr>

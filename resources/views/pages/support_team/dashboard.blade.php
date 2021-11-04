@@ -70,11 +70,21 @@
     <div class="card">
         <div class="card-header header-elements-inline">
             <h5 class="card-title">School Events Calendar</h5>
-         {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
+{{--         {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}--}}
+            <div class="header-elements">
+                <div class="list-icons">
+                    <a class="list-icons-item" data-action="collapse"></a>
+
+                    <a class="list-icons-item" data-action="remove"></a>
+                </div>
+            </div>
+
         </div>
 
         <div class="card-body">
-            <div class="fullcalendar-basic"></div>
+            <div class="fullcalendar-basic" >
+
+            </div>
         </div>
     </div>
     {{--Events Calendar Ends--}}

@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class AjaxController extends Controller
 {
-    protected $loc, $my_class;
+    protected $loc, $my_course;
 
-    public function __construct(LocationRepo $loc, MyCourseRepo $my_class)
+    public function __construct(LocationRepo $loc, MyCourseRepo $my_course)
     {
         $this->loc = $loc;
-        $this->my_class = $my_class;
+        $this->my_course = $my_course;
     }
 
     public function getLga($state_id)
@@ -31,22 +31,22 @@ class AjaxController extends Controller
 
     public function getClassSections($class_id)
     {
-        $sections = $this->my_class->getClassSections($class_id);
-        return $sections = $sections->map(function($q){
+        $classes = $this->my_course->getClassSections($class_id);
+        return $sections = $classes->map(function($q){
             return ['id' => $q->id, 'name' => $q->name];
         })->all();
     }
 
     public function getClassSubjects($class_id)
     {
-        $sections = $this->my_class->getClassSections($class_id);
-        $subjects = $this->my_class->findSubjectByClass($class_id);
+        $classes = $this->my_course->getClassSections($class_id);
+        $subjects = $this->my_course->findSubjectByClass($class_id);
 
         if(GetUserTypeHelper::userIsTeacher()){
-            $subjects = $this->my_class->findSubjectByTeacher(Auth::user()->id)->where('my_class_id', $class_id);
+            $subjects = $this->my_course->findSubjectByTeacher(Auth::user()->id)->where('my_class_id', $class_id);
         }
 
-        $d['sections'] = $sections->map(function($q){
+        $d['classes'] = $classes->map(function($q){
             return ['id' => $q->id, 'name' => $q->name];
         })->all();
         $d['subjects'] = $subjects->map(function($q){

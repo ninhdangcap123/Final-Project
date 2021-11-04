@@ -8,9 +8,9 @@ class TimeTableRecord extends Eloquent
 {
     protected $fillable = ['name', 'my_course_id', 'exam_id', 'year'];
 
-    public function my_course()
+    public function myCourse()
     {
-        return $this->belongsTo(MyCourse::class);
+        return $this->belongsTo(MyCourse::class,'my_course_id');
     }
 
     public function exam()

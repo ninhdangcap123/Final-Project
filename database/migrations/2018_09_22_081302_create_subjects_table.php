@@ -22,9 +22,7 @@ class CreateSubjectsTable extends Migration
             $table->timestamps();
         });
 
-//        Schema::table('subjects', function (Blueprint $table) {
-//            $table->unique(['my_course_id', 'name']);
-//        });
+
     }
 
     /**

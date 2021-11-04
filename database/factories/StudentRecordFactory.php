@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\Qs;
 use App\Models\MyCourse;
-use App\Models\Section;
+use App\Models\Classes;
 use App\Models\StudentRecord;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,7 +28,7 @@ class StudentRecordFactory extends Factory
         return [
             'session' => GetSystemInfoHelper::getCurrentSession(),
             'my_course_id' => MyCourse::first()->id,
-            'section_id' => Section::first()->id,
+            'class_id' => Classes::first()->id,
             'user_id' => null
         ];
     }

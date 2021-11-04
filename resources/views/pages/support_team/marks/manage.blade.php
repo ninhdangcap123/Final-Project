@@ -18,7 +18,9 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-md-4"><h6 class="card-title"><strong>Subject: </strong> {{ $m->subject->name }}</h6></div>
-                <div class="col-md-4"><h6 class="card-title"><strong>Class: </strong> {{ $m->my_course->name.' '.$m->section->name }}</h6></div>
+
+                <div class="col-md-4"><h6 class="card-title"><strong>Class: </strong> {{ $m->myCourse->name.' '.$m->classes->name }}</h6></div>
+
                 <div class="col-md-4"><h6 class="card-title"><strong>Exam: </strong> {{ $m->exam->name.' - '.$m->year }}</h6></div>
             </div>
         </div>

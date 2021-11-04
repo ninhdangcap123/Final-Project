@@ -18,12 +18,12 @@ class PaymentRepo
 
     public function getPayment($data)
     {
-        return Payment::where($data)->with('my_course');
+        return Payment::where($data)->with('myCourse');
     }
 
     public function getGeneralPayment($data)
     {
-        return Payment::whereNull('my_course_id')->where($data)->with('my_course');
+        return Payment::whereNull('my_course_id')->where($data)->with('myCourse');
     }
 
     public function getActivePayments()

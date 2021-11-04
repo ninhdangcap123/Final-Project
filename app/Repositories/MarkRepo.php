@@ -58,7 +58,7 @@ class MarkRepo
 
     public function getExamAvgTerm($exam, $st_id, $course_id, $sec_id, $year)
     {
-        $d = ['student_id' => $st_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'section_id' => $sec_id, 'year' => $year];
+        $d = ['student_id' => $st_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'class_id' => $sec_id, 'year' => $year];
 
         $tex = 'tex'.$exam->term;
 
@@ -141,7 +141,7 @@ class MarkRepo
 
     public function getPos($st_id, $exam, $course_id, $sec_id, $year)
     {
-        $d = ['student_id' => $st_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'section_id' => $sec_id, 'year' => $year ]; $all_mks = [];
+        $d = ['student_id' => $st_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'class_id' => $sec_id, 'year' => $year ]; $all_mks = [];
         $tex = 'tex'.$exam->term;
 
         $my_mk = Mark::where($d)->select($tex)->sum($tex);

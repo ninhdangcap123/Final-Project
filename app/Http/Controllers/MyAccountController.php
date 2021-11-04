@@ -22,8 +22,8 @@ class MyAccountController extends Controller
 
     public function editProfile()
     {
-        $d['my'] = Auth::user();
-        return view('pages.support_team.my_account', $d);
+        $data['my'] = Auth::user();
+        return view('pages.support_team.my_account', $data);
     }
 
     public function updateProfile(UserUpdate $req)

@@ -19,10 +19,7 @@ class CreateMyCoursesTable extends Migration
             $table->unsignedInteger('major_id')->nullable();
             $table->timestamps();
         });
-//
-//        Schema::table('my_classes', function (Blueprint $table) {
-//            $table->unique(['major_id', 'name']);
-//        });
+
     }
 
     /**

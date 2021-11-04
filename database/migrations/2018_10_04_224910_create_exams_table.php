@@ -21,9 +21,7 @@ class CreateExamsTable extends Migration
             $table->timestamps();
         });
 
-//        Schema::table('exams', function (Blueprint $table) {
-//            $table->unique(['term', 'year']);
-//        });
+
     }
 
     /**

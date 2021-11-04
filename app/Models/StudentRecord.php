@@ -11,7 +11,7 @@ class StudentRecord extends Eloquent
     use HasFactory;
 
     protected $fillable = [
-        'session', 'user_id', 'my_course_id', 'section_id', 'my_parent_id',
+        'session', 'user_id', 'my_course_id', 'class_id', 'my_parent_id',
         'dorm_id', 'dorm_room_no', 'adm_no', 'year_admitted', 'wd', 'wd_date', 'grad', 'grad_date', 'house', 'age'
     ];
 
@@ -20,23 +20,23 @@ class StudentRecord extends Eloquent
         return $this->belongsTo(User::class);
     }
 
-    public function my_parent()
+    public function myParent()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
-    public function my_course()
+    public function myCourse()
     {
-        return $this->belongsTo(MyCourse::class);
+        return $this->belongsTo(MyCourse::class,'my_course_id');
     }
 
-    public function section()
+    public function classes()
     {
-        return $this->belongsTo(Section::class);
+        return $this->belongsTo(Classes::class,'class_id');
     }
 
     public function dorm()
     {
-        return $this->belongsTo(Dorm::class);
+        return $this->belongsTo(Dorm::class, 'dorm_id');
     }
 }

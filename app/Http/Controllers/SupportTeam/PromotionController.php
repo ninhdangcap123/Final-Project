@@ -29,7 +29,7 @@ class PromotionController extends Controller
         $old_yr = explode('-', $old_yr);
         $data['new_year'] = ++$old_yr[0].'-'.++$old_yr[1];
         $data['my_courses'] = $this->my_course->all();
-        $data['sections'] = $this->my_course->getAllSections();
+        $data['classes'] = $this->my_course->getAllSections();
         $data['selected'] = false;
 
         if($fc && $fs && $tc && $ts){
@@ -38,7 +38,7 @@ class PromotionController extends Controller
             $data['fs'] = $fs;
             $data['tc'] = $tc;
             $data['ts'] = $ts;
-            $data['students'] = $sts = $this->student->getRecord(['my_course_id' => $fc, 'section_id' => $fs, 'session' => $data['old_year']])->get();
+            $data['students'] = $sts = $this->student->getRecord(['my_course_id' => $fc, 'class_id' => $fs, 'session' => $data['old_year']])->get();
 
             if($sts->count() < 1){
                 return redirect()->route('students.promotion')->with('flash_success', __('msg.nstp'));
@@ -55,10 +55,10 @@ class PromotionController extends Controller
 
     public function promote(Request $req, $fc, $fs, $tc, $ts)
     {
-        $oy = GetSystemInfoHelper::getSetting('current_session'); $d = [];
+        $oy = GetSystemInfoHelper::getSetting('current_session'); $data = [];
         $old_yr = explode('-', $oy);
         $ny = ++$old_yr[0].'-'.++$old_yr[1];
-        $students = $this->student->getRecord(['my_course_id' => $fc, 'section_id' => $fs, 'session' => $oy ])->get()->sortBy('user.name');
+        $students = $this->student->getRecord(['my_course_id' => $fc, 'class_id' => $fs, 'session' => $oy ])->get()->sortBy('user.name');
 
         if($students->count() < 1){
             return redirect()->route('students.promotion')->with('flash_danger', __('msg.srnf'));
@@ -68,23 +68,23 @@ class PromotionController extends Controller
             $p = 'p-'.$st->id;
             $p = $req->$p;
             if($p === 'P'){ // Promote
-                $d['my_course_id'] = $tc;
-                $d['section_id'] = $ts;
-                $d['session'] = $ny;
+                $data['my_course_id'] = $tc;
+                $data['class_id'] = $ts;
+                $data['session'] = $ny;
             }
             if($p === 'D'){ // Don't Promote
-                $d['my_course_id'] = $fc;
-                $d['section_id'] = $fs;
-                $d['session'] = $ny;
+                $data['my_course_id'] = $fc;
+                $data['class_id'] = $fs;
+                $data['session'] = $ny;
             }
             if($p === 'G'){ // Graduated
-                $d['my_course_id'] = $fc;
-                $d['section_id'] = $fs;
-                $d['grad'] = 1;
-                $d['grad_date'] = $oy;
+                $data['my_course_id'] = $fc;
+                $data['class_id'] = $fs;
+                $data['grad'] = 1;
+                $data['grad_date'] = $oy;
             }
 
-            $this->student->updateRecord($st->id, $d);
+            $this->student->updateRecord($st->id, $data);
 
 //            Insert New Promotion Data
             $promote['from_course'] = $fc;
@@ -144,7 +144,7 @@ class PromotionController extends Controller
         $prom = $this->student->findPromotion($promotion_id);
 
         $data['my_course_id'] = $prom->from_course;
-        $data['section_id'] = $prom->from_section;
+        $data['class_id'] = $prom->from_section;
         $data['session'] = $prom->from_session;
         $data['grad'] = 0;
         $data['grad_date'] = null;

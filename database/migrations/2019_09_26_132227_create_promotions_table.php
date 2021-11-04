@@ -30,8 +30,8 @@ class CreatePromotionsTable extends Migration
         Schema::table('promotions', function (Blueprint $table) {
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('from_course')->references('id')->on('my_courses')->onDelete('cascade');
-            $table->foreign('from_section')->references('id')->on('sections')->onDelete('cascade');
-            $table->foreign('to_section')->references('id')->on('sections')->onDelete('cascade');
+            $table->foreign('from_section')->references('id')->on('classes')->onDelete('cascade');
+            $table->foreign('to_section')->references('id')->on('classes')->onDelete('cascade');
             $table->foreign('to_course')->references('id')->on('my_courses')->onDelete('cascade');
         });
     }

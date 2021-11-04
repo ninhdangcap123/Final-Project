@@ -18,7 +18,7 @@ class CreateExamRecordsTable extends Migration
             $table->unsignedInteger('exam_id')->nullable();
             $table->unsignedInteger('student_id')->nullable();
             $table->unsignedInteger('my_course_id')->nullable();
-            $table->unsignedInteger('section_id')->nullable();
+            $table->unsignedInteger('class_id')->nullable();
             $table->integer('total')->nullable();
             $table->string('ave')->nullable();
             $table->string('class_ave')->nullable();

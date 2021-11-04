@@ -12,7 +12,7 @@
         <ul class="nav nav-tabs nav-tabs-highlight">
             <li class="nav-item"><a href="#all-students" class="nav-link active" data-toggle="tab">All Graduated Students</a></li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Select Class</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Select Course</a>
                 <div class="dropdown-menu dropdown-menu-right">
                     @foreach($my_courses as $c)
                     <a href="#c{{ $c->id }}" class="dropdown-item" data-toggle="tab">{{ $c->name }}</a>
@@ -30,7 +30,7 @@
                         <th>Photo</th>
                         <th>Name</th>
                         <th>ADM_No</th>
-                        <th>Section</th>
+                        <th>Classes</th>
                         <th>Grad Year</th>
                         <th>Action</th>
                     </tr>
@@ -42,7 +42,7 @@
                         <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}" alt="photo"></td>
                         <td>{{ $s->user->name }}</td>
                         <td>{{ $s->adm_no }}</td>
-                        <td>{{ $s->my_course->name.' '.$s->section->name }}</td>
+                        <td>{{ $s->myCourse->name.' '.$s->section->name }}</td>
                         <td>{{ $s->grad_date }}</td>
                         <td class="text-center">
                             <div class="list-icons">
@@ -87,7 +87,7 @@
                         <th>Photo</th>
                         <th>Name</th>
                         <th>ADM_No</th>
-                        <th>Section</th>
+                        <th>Classes</th>
                         <th>Grad Year</th>
                         <th>Action</th>
                     </tr>
@@ -99,7 +99,7 @@
                             <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}" alt="photo"></td>
                             <td>{{ $s->user->name }}</td>
                             <td>{{ $s->adm_no }}</td>
-                            <td>{{ $s->my_course->name.' '.$s->section->name }}</td>
+                            <td>{{ $s->myCourse->name.' '.$s->section->name }}</td>
                             <td>{{ $s->grad_date }}</td>
                             <td class="text-center">
                                 <div class="list-icons">

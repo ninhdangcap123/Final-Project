@@ -30,7 +30,7 @@ class StudentRecordUpdate extends FormRequest
             'address' => 'required|string|min:6|max:120',
             'bg_id' => 'sometimes|nullable',
             'my_course_id' => 'required',
-            'section_id' => 'required',
+            'class_id' => 'required',
             'state_id' => 'required',
             'lga_id' => 'required',
             'nal_id' => 'required',
@@ -49,7 +49,7 @@ class StudentRecordUpdate extends FormRequest
             'bg_id' => 'Blood Group',
             'my_parent_id' => 'Parent',
             'my_course_id' => 'Course',
-            'section_id' => 'Section',
+            'class_id' => 'Classes',
         ];
     }
 

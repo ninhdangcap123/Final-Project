@@ -22,7 +22,7 @@ class MarkSelector extends FormRequest
         return [
             'exam_id' => 'required',
             'my_course_id' => 'required',
-            'section_id' => 'required',
+            'class_id' => 'required',
             'subject_id' => 'required',
         ];
     }
@@ -31,8 +31,8 @@ class MarkSelector extends FormRequest
     {
         return  [
             'exam_id' => 'Exam',
-            'my_course_id' => 'Course',
-            'section_id' => 'Section',
+            'my_course_id' => 'Courses',
+            'class_id' => 'Classes',
             'subject_id' => 'Subject',
         ];
     }

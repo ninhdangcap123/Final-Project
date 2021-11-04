@@ -1,10 +1,10 @@
 @extends('layouts.master')
-@section('page_title', 'Edit Subject - '.$s->name. ' ('.$s->my_course->name.')')
+@section('page_title', 'Edit Subject - '.$s->name. ' ('.$s->myCourse->name.')')
 @section('content')
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">Edit Subject - {{$s->my_course->name }}</h6>
+            <h6 class="card-title">Edit Subject - {{$s->myCourse->name }}</h6>
             {!! \App\Helpers\GetSystemInfoHelper::getPanelOptions() !!}
         </div>
 

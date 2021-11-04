@@ -68,7 +68,7 @@
                             <div class="alert alert-info border-0 alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
 
-                                <span>When a course is created, a class will be automatically created for the course, you can edit it or add more classes to the course at <a target="_blank" href="{{ route('sections.index') }}">Manage Classes</a></span>
+                                <span>When a course is created, a class will be automatically created for the course, you can edit it or add more classes to the course at <a target="_blank" href="{{ route('classes.index') }}">Manage Classes</a></span>
                             </div>
                         </div>
                     </div>

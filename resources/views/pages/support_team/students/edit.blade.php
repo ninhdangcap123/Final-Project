@@ -146,8 +146,8 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="section_id">Section: </label>
-                                <select name="section_id" required id="section_id" class="form-control select" data-placeholder="Select Section">
+                                <label for="section_id">Classes: </label>
+                                <select name="section_id" required id="section_id" class="form-control select" data-placeholder="Select Classes">
                                     <option value="{{ $sr->section_id }}">{{ $sr->section->name }}</option>
                                 </select>
                             </div>

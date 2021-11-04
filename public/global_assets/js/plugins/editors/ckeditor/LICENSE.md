@@ -159,7 +159,7 @@ you may at your option offer warranty protection in exchange for a fee.
 
   2. You may modify your copy or copies of the Program or any portion
 of it, thus forming a work based on the Program, and copy and
-distribute such modifications or work under the terms of Section 1
+distribute such modifications or work under the terms of Classes 1
 above, provided that you also meet all of these conditions:
 
     a) You must cause the modified files to carry prominent notices
@@ -182,11 +182,11 @@ above, provided that you also meet all of these conditions:
     the Program is not required to print an announcement.)
 
 These requirements apply to the modified work as a whole.  If
-identifiable sections of that work are not derived from the Program,
+identifiable classes of that work are not derived from the Program,
 and can be reasonably considered independent and separate works in
 themselves, then this License, and its terms, do not apply to those
-sections when you distribute them as separate works.  But when you
-distribute the same sections as part of a whole which is a work based
+classes when you distribute them as separate works.  But when you
+distribute the same classes as part of a whole which is a work based
 on the Program, the distribution of the whole must be on the terms of
 this License, whose permissions for other licensees extend to the
 entire whole, and thus to each and every part regardless of who wrote it.
@@ -202,7 +202,7 @@ a storage or distribution medium does not bring the other work under
 the scope of this License.
 
   3. You may copy and distribute the Program (or a work based on it,
-under Section 2) in object code or executable form under the terms of
+under Classes 2) in object code or executable form under the terms of
 Sections 1 and 2 above provided that you also do one of the following:
 
     a) Accompany it with the complete corresponding machine-readable
@@ -517,7 +517,7 @@ fee.
 
   2. You may modify your copy or copies of the Library or any portion
 of it, thus forming a work based on the Library, and copy and
-distribute such modifications or work under the terms of Section 1
+distribute such modifications or work under the terms of Classes 1
 above, provided that you also meet all of these conditions:
 
     a) The modified work must itself be a software library.
@@ -544,11 +544,11 @@ above, provided that you also meet all of these conditions:
     root function must still compute square roots.)
 
 These requirements apply to the modified work as a whole.  If
-identifiable sections of that work are not derived from the Library,
+identifiable classes of that work are not derived from the Library,
 and can be reasonably considered independent and separate works in
 themselves, then this License, and its terms, do not apply to those
-sections when you distribute them as separate works.  But when you
-distribute the same sections as part of a whole which is a work based
+classes when you distribute them as separate works.  But when you
+distribute the same classes as part of a whole which is a work based
 on the Library, the distribution of the whole must be on the terms of
 this License, whose permissions for other licensees extend to the
 entire whole, and thus to each and every part regardless of who wrote
@@ -581,7 +581,7 @@ subsequent copies and derivative works made from that copy.
 the Library into a program that is not a library.
 
   4. You may copy and distribute the Library (or a portion or
-derivative of it, under Section 2) in object code or executable form
+derivative of it, under Classes 2) in object code or executable form
 under the terms of Sections 1 and 2 above provided that you accompany
 it with the complete corresponding machine-readable source code, which
 must be distributed under the terms of Sections 1 and 2 above on a
@@ -603,7 +603,7 @@ therefore falls outside the scope of this License.
 creates an executable that is a derivative of the Library (because it
 contains portions of the Library), rather than a "work that uses the
 library".  The executable is therefore covered by this License.
-Section 6 states terms for distribution of such executables.
+Classes 6 states terms for distribution of such executables.
 
   When a "work that uses the Library" uses material from a header file
 that is part of the Library, the object code for the work may be a
@@ -617,11 +617,11 @@ structure layouts and accessors, and small macros and small inline
 functions (ten lines or less in length), then the use of the object
 file is unrestricted, regardless of whether it is legally a derivative
 work.  (Executables containing this object code plus portions of the
-Library will still fall under Section 6.)
+Library will still fall under Classes 6.)
 
   Otherwise, if the work is a derivative of the Library, you may
-distribute the object code for the work under the terms of Section 6.
-Any executables containing that work also fall under Section 6,
+distribute the object code for the work under the terms of Classes 6.
+Any executables containing that work also fall under Classes 6,
 whether or not they are linked directly with the Library itself.
 
   6. As an exception to the Sections above, you may also combine or
@@ -888,7 +888,7 @@ Version 1.1
 
      1.12. "You" (or "Your")  means an individual or a legal entity
      exercising rights under, and complying with all of the terms of, this
-     License or a future version of this License issued under Section 6.1.
+     License or a future version of this License issued under Classes 6.1.
      For legal entities, "You" includes any entity which controls, is
      controlled by, or is under common control with You. For purposes of
      this definition, "control" means (a) the power, direct or indirect,
@@ -914,11 +914,11 @@ Version 1.1
           sell, and offer for sale, and/or otherwise dispose of the
           Original Code (or portions thereof).
 
-          (c) the licenses granted in this Section 2.1(a) and (b) are
+          (c) the licenses granted in this Classes 2.1(a) and (b) are
           effective on the date Initial Developer first distributes
           Original Code under the terms of this License.
 
-          (d) Notwithstanding Section 2.1(b) above, no patent license is
+          (d) Notwithstanding Classes 2.1(b) above, no patent license is
           granted: 1) for code that You delete from the Original Code; 2)
           separate from the Original Code;  or 3) for infringements caused
           by: i) the modification of the Original Code or ii) the
@@ -948,7 +948,7 @@ Version 1.1
           effective on the date Contributor first makes Commercial Use of
           the Covered Code.
 
-          (d)    Notwithstanding Section 2.2(b) above, no patent license is
+          (d)    Notwithstanding Classes 2.2(b) above, no patent license is
           granted: 1) for any code that Contributor has deleted from the
           Contributor Version; 2)  separate from the Contributor Version;
           3)  for infringements caused by: i) third party modifications of
@@ -963,15 +963,15 @@ Version 1.1
      3.1. Application of License.
      The Modifications which You create or to which You contribute are
      governed by the terms of this License, including without limitation
-     Section 2.2. The Source Code version of Covered Code may be
+     Classes 2.2. The Source Code version of Covered Code may be
      distributed only under the terms of this License or a future version
-     of this License released under Section 6.1, and You must include a
+     of this License released under Classes 6.1, and You must include a
      copy of this License with every copy of the Source Code You
      distribute. You may not offer or impose any terms on any Source Code
      version that alters or restricts the applicable version of this
      License or the recipients' rights hereunder. However, You may include
      an additional document offering the additional rights described in
-     Section 3.5.
+     Classes 3.5.
 
      3.2. Availability of Source Code.
      Any Modification which You create or to which You contribute must be
@@ -1005,7 +1005,7 @@ Version 1.1
           distribution titled "LEGAL" which describes the claim and the
           party making the claim in sufficient detail that a recipient will
           know whom to contact. If Contributor obtains such knowledge after
-          the Modification is made available as described in Section 3.2,
+          the Modification is made available as described in Classes 3.2,
           Contributor shall promptly modify the LEGAL file in all copies
           Contributor makes available thereafter and shall take other steps
           (such as notifying appropriate mailing lists or newsgroups)
@@ -1020,7 +1020,7 @@ Version 1.1
 
                (c)    Representations.
           Contributor represents that, except as disclosed pursuant to
-          Section 3.4(a) above, Contributor believes that Contributor's
+          Classes 3.4(a) above, Contributor believes that Contributor's
           Modifications are Contributor's original creation(s) and/or
           Contributor has sufficient rights to grant the rights conveyed by
           this License.
@@ -1047,11 +1047,11 @@ Version 1.1
 
      3.6. Distribution of Executable Versions.
      You may distribute Covered Code in Executable form only if the
-     requirements of Section 3.1-3.5 have been met for that Covered Code,
+     requirements of Classes 3.1-3.5 have been met for that Covered Code,
      and if You include a notice stating that the Source Code version of
      the Covered Code is available under the terms of this License,
      including a description of how and where You have fulfilled the
-     obligations of Section 3.2. The notice must be conspicuously included
+     obligations of Classes 3.2. The notice must be conspicuously included
      in any notice in an Executable version, related documentation or
      collateral in which You describe recipients' rights relating to the
      Covered Code. You may distribute the Executable version of Covered
@@ -1081,7 +1081,7 @@ Version 1.1
      statute, judicial order, or regulation then You must: (a) comply with
      the terms of this License to the maximum extent possible; and (b)
      describe the limitations and the code they affect. Such description
-     must be included in the LEGAL file described in Section 3.4 and must
+     must be included in the LEGAL file described in Classes 3.4 and must
      be included with all distributions of the Source Code. Except to the
      extent prohibited by statute or regulation, such description must be
      sufficiently detailed for a recipient of ordinary skill to be able to

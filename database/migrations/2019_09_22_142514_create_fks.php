@@ -24,7 +24,7 @@ class CreateFks extends Migration
             $table->foreign('major_id')->references('id')->on('majors')->onDelete('set null');
         });
 
-        Schema::table('sections', function (Blueprint $table) {
+        Schema::table('classes', function (Blueprint $table) {
             $table->foreign('my_course_id')->references('id')->on('my_courses')->onDelete('cascade');
             $table->foreign('teacher_id')->references('id')->on('users')->onDelete('set null');
         });
@@ -37,7 +37,7 @@ class CreateFks extends Migration
         Schema::table('student_records', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('my_course_id')->references('id')->on('my_courses')->onDelete('cascade');
-            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->foreign('my_parent_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('dorm_id')->references('id')->on('dorms')->onDelete('set null');
         });
@@ -45,7 +45,7 @@ class CreateFks extends Migration
         Schema::table('marks', function (Blueprint $table) {
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('my_course_id')->references('id')->on('my_courses')->onDelete('cascade');
-            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
             $table->foreign('grade_id')->references('id')->on('grades')->onDelete('set null');
@@ -64,7 +64,7 @@ class CreateFks extends Migration
             $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
             $table->foreign('my_course_id')->references('id')->on('my_courses')->onDelete('cascade');
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
         });
 
         Schema::table('staff_records', function (Blueprint $table) {

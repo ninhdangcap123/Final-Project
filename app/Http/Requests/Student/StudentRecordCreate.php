@@ -35,7 +35,7 @@ class StudentRecordCreate extends FormRequest
             'lga_id' => 'required',
             'nal_id' => 'required',
             'my_course_id' => 'required',
-            'section_id' => 'required',
+            'class_id' => 'required',
             'my_parent_id' => 'sometimes|nullable',
             'dorm_id' => 'sometimes|nullable',
         ];
@@ -44,7 +44,7 @@ class StudentRecordCreate extends FormRequest
     public function attributes()
     {
         return  [
-            'section_id' => 'Section',
+            'class_id' => 'Classes',
             'nal_id' => 'Nationality',
             'my_course_id' => 'Course',
             'dorm_id' => 'Dormitory',

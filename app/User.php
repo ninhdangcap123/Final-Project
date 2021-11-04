@@ -35,7 +35,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function student_record()
+    public function studentRecord()
     {
         return $this->hasOne(StudentRecord::class);
     }
@@ -55,7 +55,7 @@ class User extends Authenticatable
         return $this->belongsTo(Nationality::class, 'nal_id');
     }
 
-    public function blood_group()
+    public function bloodGroup()
     {
         return $this->belongsTo(BloodGroup::class, 'bg_id');
     }
