@@ -7,6 +7,7 @@ use App\Helpers\GetPathHelper;
 use App\Helpers\Qs;
 use App\Http\Requests\UserChangePass;
 use App\Http\Requests\UserUpdate;
+use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,7 @@ class MyAccountController extends Controller
 {
     protected $user;
 
-    public function __construct(UserRepo $user)
+    public function __construct(UserRepositoryInterface $user)
     {
         $this->user = $user;
     }

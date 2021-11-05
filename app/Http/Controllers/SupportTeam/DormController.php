@@ -8,13 +8,14 @@ use App\Helpers\RouteHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dorm\DormCreate;
 use App\Http\Requests\Dorm\DormUpdate;
+use App\Repositories\Dorm\DormRepositoryInterface;
 use App\Repositories\DormRepo;
 
 class DormController extends Controller
 {
     protected  $dorm;
 
-    public function __construct(DormRepo $dorm)
+    public function __construct(DormRepositoryInterface $dorm)
     {
         $this->middleware('teamSA', ['except' => ['destroy',] ]);
         $this->middleware('super_admin', ['only' => ['destroy',] ]);

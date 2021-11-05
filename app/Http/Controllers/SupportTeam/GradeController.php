@@ -4,18 +4,25 @@ namespace App\Http\Controllers\SupportTeam;
 
 use App\Http\Requests\Grade\GradeCreate;
 use App\Http\Requests\Grade\GradeUpdate;
+use App\Repositories\Exam\ExamRepositoryInterface;
 use App\Repositories\ExamRepo;
 use App\Http\Controllers\Controller;
+use App\Repositories\Grade\GradeRepositoryInterface;
+use App\Repositories\Major\MajorRepositoryInterface;
+use App\Repositories\MyCourse\MyCourseRepositoryInterface;
 use App\Repositories\MyCourseRepo;
 
 class GradeController extends Controller
 {
-    protected $exam, $my_course;
+    protected $exam, $grade, $my_course, $major;
 
-    public function __construct(ExamRepo $exam, MyCourseRepo $my_course)
+    public function __construct(GradeRepositoryInterface $grade, ExamRepositoryInterface $exam,
+                                MajorRepositoryInterface $major, MyCourseRepositoryInterface $my_course)
     {
         $this->exam = $exam;
         $this->my_course = $my_course;
+        $this->major = $major;
+        $this->grade = $grade;
 
         $this->middleware('teamSA', ['except' => ['destroy',] ]);
         $this->middleware('super_admin', ['only' => ['destroy',] ]);
@@ -23,8 +30,8 @@ class GradeController extends Controller
 
     public function index()
     {
-         $d['grades'] = $this->exam->allGrades();
-         $d['majors'] = $this->my_course->getMajor();
+         $d['grades'] = $this->grade->getAll();
+         $d['majors'] = $this->major->getAll();
         return view('pages.support_team.grades.index', $d);
     }
 
@@ -32,28 +39,28 @@ class GradeController extends Controller
     {
         $data = $req->all();
 
-        $this->exam->createGrade($data);
+        $this->grade->create($data);
         return back()->with('flash_success', __('msg.store_ok'));
     }
 
     public function edit($id)
     {
-        $d['majors'] = $this->my_course->getMajor();
-        $d['gr'] = $this->exam->findGrade($id);
-        return view('pages.support_team.grades.edit', $d);
+        $data['majors'] = $this->major->getAll();
+        $data['gr'] = $this->grade->find($id);
+        return view('pages.support_team.grades.edit', $data);
     }
 
     public function update(GradeUpdate $req, $id)
     {
         $data = $req->all();
 
-        $this->exam->updateGrade($id, $data);
+        $this->grade->update($id, $data);
         return back()->with('flash_success', __('msg.update_ok'));
     }
 
     public function destroy($id)
     {
-        $this->exam->deleteGrade($id);
+        $this->grade->delete($id);
         return back()->with('flash_success', __('msg.del_ok'));
     }
 }

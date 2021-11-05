@@ -9,29 +9,40 @@ use App\Http\Requests\TimeTable\TSRequest;
 use App\Http\Requests\TimeTable\TTRecordRequest;
 use App\Http\Requests\TimeTable\TTRequest;
 use App\Models\Setting;
+use App\Repositories\Exam\ExamRepositoryInterface;
 use App\Repositories\ExamRepo;
+use App\Repositories\MyCourse\MyCourseRepositoryInterface;
 use App\Repositories\MyCourseRepo;
+use App\Repositories\Subject\SubjectRepositoryInterface;
+use App\Repositories\TimeSlot\TimeSlotRepositoryInterface;
+use App\Repositories\TimeTable\TimeTableRepositoryInterface;
+use App\Repositories\TimeTableRecord\TimeTableRecordRepositoryInterface;
 use App\Repositories\TimeTableRepo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class TimeTableController extends Controller
 {
-    protected $tt, $my_course, $exam, $year;
+    protected $tt, $ttr, $ts , $my_course, $exam, $year, $subject;
 
-    public function __construct(TimeTableRepo $tt, MyCourseRepo $mc, ExamRepo $exam)
+    public function __construct(TimeSlotRepositoryInterface $ts, TimeTableRecordRepositoryInterface $ttr, TimeTableRepositoryInterface $tt,
+                                SubjectRepositoryInterface $subject, MyCourseRepositoryInterface $my_course, ExamRepositoryInterface $exam)
     {
         $this->tt = $tt;
-        $this->my_course = $mc;
+        $this->ts = $ts;
+        $this->ttr = $ttr;
+        $this->my_course = $my_course;
         $this->exam = $exam;
+        $this->subject = $subject;
         $this->year = GetSystemInfoHelper::getCurrentSession();
     }
 
     public function index()
+
     {
         $d['exams'] = $this->exam->getExam(['year' => $this->year]);
-        $d['my_courses'] = $this->my_course->all();
-        $d['tt_records'] = $this->tt->getAllRecords();
+        $d['my_courses'] = $this->my_course->getAll();
+        $d['tt_records'] = $this->ttr->getAll();
 
         return view('pages.support_team.timetables.index', $d);
     }
@@ -39,10 +50,10 @@ class TimeTableController extends Controller
     public function manage($ttr_id)
     {
         $d['ttr_id'] = $ttr_id;
-        $d['ttr'] = $ttr = $this->tt->findRecord($ttr_id);
-        $d['time_slots'] = $this->tt->getTimeSlotByTTR($ttr_id);
-        $d['ts_existing'] = $this->tt->getExistingTS($ttr_id);
-        $d['subjects'] = $this->my_course->getSubject(['my_course_id' => $ttr->my_course_id])->get();
+        $d['ttr'] = $ttr = $this->ttr->find($ttr_id);
+        $d['time_slots'] = $this->ts->getTimeSlotByTTR($ttr_id);
+        $d['ts_existing'] = $this->ts->getExistingTS($ttr_id);
+        $d['subjects'] = $this->subject->getSubject(['my_course_id' => $ttr->my_course_id])->get();
         $d['my_course'] = $this->my_course->find($ttr->my_course_id);
 
         if($ttr->exam_id){
@@ -58,7 +69,7 @@ class TimeTableController extends Controller
     public function store(TTRequest $req)
     {
         $data = $req->all();
-        $tms = $this->tt->findTimeSlot($req->ts_id);
+        $tms = $this->ts->find($req->ts_id);
         $d_date = $req->exam_date ?? $req->day;
         $data['timestamp_from'] = strtotime($d_date.' '.$tms->time_from);
         $data['timestamp_to'] = strtotime($d_date.' '.$tms->time_to);
@@ -71,7 +82,7 @@ class TimeTableController extends Controller
     public function update(TTRequest $req, $tt_id)
     {
         $data = $req->all();
-        $tms = $this->tt->findTimeSlot($req->ts_id);
+        $tms = $this->ts->find($req->ts_id);
         $d_date = $req->exam_date ?? $req->day;
         $data['timestamp_from'] = strtotime($d_date.' '.$tms->time_from);
         $data['timestamp_to'] = strtotime($d_date.' '.$tms->time_to);
@@ -103,7 +114,7 @@ class TimeTableController extends Controller
             return response()->json(['msg' => __('msg.invalid_time_slot'), 'ok' => FALSE]);
         }
 
-        $this->tt->createTimeSlot($data);
+        $this->ts->create($data);
         return JsonHelper::jsonStoreOk();
     }
 
@@ -112,12 +123,12 @@ class TimeTableController extends Controller
         $this->validate($req, ['ttr_id' => 'required'], [], ['ttr_id' => 'TimeTable Record']);
 
         $d = [];  //  Empty Current Time Slot Before Adding New
-        $this->tt->deleteTimeSlots(['ttr_id' => $ttr_id]);
+        $this->ts->deleteTimeSlotByIDs(['ttr_id' => $ttr_id]);
         $time_slots = $this->tt->getTimeSlotByTTR($req->ttr_id)->toArray();
 
         foreach($time_slots as $ts){
             $ts['ttr_id'] = $ttr_id;
-            $this->tt->createTimeSlot($ts);
+            $this->ts->create($ts);
         }
 
         return redirect()->route('ttr.manage', $ttr_id)->with('flash_success', __('msg.update_ok'));
@@ -126,7 +137,7 @@ class TimeTableController extends Controller
 
     public function editTimeSlot($ts_id)
     {
-        $d['tms'] = $this->tt->findTimeSlot($ts_id);
+        $d['tms'] = $this->ts->find($ts_id);
         return view('pages.support_team.timetables.time_slots.edit', $d);
     }
 
@@ -143,13 +154,13 @@ class TimeTableController extends Controller
             return back()->with('flash_danger', __('msg.invalid_time_slot'));
         }
 
-        $this->tt->updateTimeSlot($ts_id, $data);
+        $this->ts->update($ts_id, $data);
         return redirect()->route('ttr.manage', $req->ttr_id)->with('flash_success', __('msg.update_ok'));
     }
 
     public function deleteTimeSlot($ts_id)
     {
-        $this->tt->deleteTimeSlot($ts_id);
+        $this->ts->delete($ts_id);
         return back()->with('flash_success', __('msg.delete_ok'));
     }
 
@@ -158,9 +169,9 @@ class TimeTableController extends Controller
 
     public function editRecord($ttr_id)
     {
-        $d['ttr'] = $ttr = $this->tt->findRecord($ttr_id);
+        $d['ttr'] = $ttr = $this->ttr->find($ttr_id);
         $d['exams'] = $this->exam->getExam(['year' => $ttr->year]);
-        $d['my_courses'] = $this->my_course->all();
+        $d['my_courses'] = $this->my_course->getAll();
 
         return view('pages.support_team.timetables.edit', $d);
     }
@@ -168,7 +179,7 @@ class TimeTableController extends Controller
     public function showRecord($ttr_id)
     {
         $d_time = [];
-        $d['ttr'] = $ttr = $this->tt->findRecord($ttr_id);
+        $d['ttr'] = $ttr = $this->ttr->find($ttr_id);
         $d['ttr_id'] = $ttr_id;
         $d['my_course'] = $this->my_course->find($ttr->my_course_id);
 
@@ -200,7 +211,7 @@ class TimeTableController extends Controller
     public function printRecord($ttr_id)
     {
         $d_time = [];
-        $d['ttr'] = $ttr = $this->tt->findRecord($ttr_id);
+        $d['ttr'] = $ttr = $this->ttr->find($ttr_id);
         $d['ttr_id'] = $ttr_id;
         $d['my_course'] = $this->my_course->find($ttr->my_course_id);
 
@@ -237,7 +248,7 @@ class TimeTableController extends Controller
     {
         $data = $req->all();
         $data['year'] = $this->year;
-        $this->tt->createRecord($data);
+        $this->ttr->create($data);
 
         return JsonHelper::jsonStoreOk();
     }
@@ -245,14 +256,14 @@ class TimeTableController extends Controller
     public function updateRecord(TTRecordRequest $req, $id)
     {
         $data = $req->all();
-        $this->tt->updateRecord($id, $data);
+        $this->ttr->update($id, $data);
 
         return JsonHelper::jsonUpdateOk();
     }
 
     public function deleteRecord($ttr_id)
     {
-        $this->tt->deleteRecord($ttr_id);
+        $this->ttr->delete($ttr_id);
         return back()->with('flash_success', __('msg.delete_ok'));
     }
 }

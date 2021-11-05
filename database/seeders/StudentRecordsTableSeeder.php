@@ -35,7 +35,7 @@ class StudentRecordsTableSeeder extends Seeder
                             'user_id' => function(User $user){
                                 return ['user_id' => $user->id];
                             },
-                        ]), 'student_record')
+                        ]), 'studentRecord')
                 ->count($count)
                 ->create([
                     'user_type' => 'student',

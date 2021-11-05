@@ -16,7 +16,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $mk->user->name }} </td>
-                <td>{{ $mk->user->student_record->adm_no }}</td>
+                <td>{{ $mk->user->studentRecord->adm_no }}</td>
 
 {{--                CA AND EXAMS --}}
                 <td><input title="1ST CA" min="1" max="20" class="text-center" name="t1_{{ $mk->id }}" value="{{ $mk->t1 }}" type="number"></td>
