@@ -7,20 +7,27 @@ use App\Helpers\JsonHelper;
 use App\Helpers\Qs;
 use App\Http\Controllers\Controller;
 use App\Models\Mark;
+use App\Repositories\Classes\ClassesRepositoryInterface;
+use App\Repositories\MyCourse\MyCourseRepositoryInterface;
 use App\Repositories\MyCourseRepo;
+use App\Repositories\Promotion\PromotionRepositoryInterface;
+use App\Repositories\Student\StudentRepositoryInterface;
 use App\Repositories\StudentRepo;
 use Illuminate\Http\Request;
 
 class PromotionController extends Controller
 {
-    protected $my_course, $student;
+    protected $my_course, $student, $class, $promotion;
 
-    public function __construct(MyCourseRepo $my_course, StudentRepo $student)
+    public function __construct(MyCourseRepositoryInterface $my_course, PromotionRepositoryInterface $promotion, ClassesRepositoryInterface $class,
+                                StudentRepositoryInterface $student)
     {
         $this->middleware('teamSA');
 
         $this->my_course = $my_course;
         $this->student = $student;
+        $this->class = $class;
+        $this->promotion = $promotion;
     }
 
     public function promotion($fc = NULL, $fs = NULL, $tc = NULL, $ts = NULL)
@@ -28,8 +35,8 @@ class PromotionController extends Controller
         $data['old_year'] = $old_yr = GetSystemInfoHelper::getSetting('current_session');
         $old_yr = explode('-', $old_yr);
         $data['new_year'] = ++$old_yr[0].'-'.++$old_yr[1];
-        $data['my_courses'] = $this->my_course->all();
-        $data['classes'] = $this->my_course->getAllSections();
+        $data['my_courses'] = $this->my_course->getAll();
+        $data['classes'] = $this->class->getAll();
         $data['selected'] = false;
 
         if($fc && $fs && $tc && $ts){
@@ -97,14 +104,14 @@ class PromotionController extends Controller
             $promote['to_session'] = $ny;
             $promote['status'] = $p;
 
-            $this->student->createPromotion($promote);
+            $this->promotion->create($promote);
         }
         return redirect()->route('students.promotion')->with('flash_success', __('msg.update_ok'));
     }
 
     public function manage()
     {
-        $data['promotions'] = $this->student->getAllPromotions();
+        $data['promotions'] = $this->promotion->getAll();
         $data['old_year'] = GetSystemInfoHelper::getCurrentSession();
         $data['new_year'] = GetSystemInfoHelper::getNextSession();
 
@@ -122,7 +129,7 @@ class PromotionController extends Controller
     {
         $next_session = GetSystemInfoHelper::getNextSession();
         $where = ['from_session' => GetSystemInfoHelper::getCurrentSession(), 'to_session' => $next_session];
-        $proms = $this->student->getPromotions($where);
+        $proms = $this->promotion->getPromotions($where);
 
         if ($proms->count()){
           foreach ($proms as $prom){
@@ -141,7 +148,7 @@ class PromotionController extends Controller
 
     protected function resetSingle($promotion_id)
     {
-        $prom = $this->student->findPromotion($promotion_id);
+        $prom = $this->promotion->find($promotion_id);
 
         $data['my_course_id'] = $prom->from_course;
         $data['class_id'] = $prom->from_section;
@@ -151,6 +158,6 @@ class PromotionController extends Controller
 
         $this->student->update(['user_id' => $prom->student_id], $data);
 
-        return $this->student->deletePromotion($promotion_id);
+        return $this->promotion->delete($promotion_id);
     }
 }

@@ -13,34 +13,50 @@ use App\Helpers\Mk;
 use App\Helpers\RouteHelper;
 use App\Http\Requests\Mark\MarkSelector;
 use App\Models\Setting;
+use App\Repositories\Classes\ClassesRepositoryInterface;
+use App\Repositories\Exam\ExamRepositoryInterface;
+use App\Repositories\ExamRecord\ExamRecordRepositoryInterface;
 use App\Repositories\ExamRepo;
+use App\Repositories\Major\MajorRepositoryInterface;
+use App\Repositories\Mark\MarkRepositoryInterface;
 use App\Repositories\MarkRepo;
+use App\Repositories\MyCourse\MyCourseRepositoryInterface;
 use App\Repositories\MyCourseRepo;
 use App\Http\Controllers\Controller;
+use App\Repositories\Skill\SkillRepositoryInterface;
+use App\Repositories\Student\StudentRepositoryInterface;
 use App\Repositories\StudentRepo;
+use App\Repositories\Subject\SubjectRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class MarkController extends Controller
 {
-    protected $my_course, $exam, $student, $year, $user, $mark;
+    protected $my_course, $exam_record, $skill, $class, $exam, $student, $year, $user, $mark, $subject, $major;
 
-    public function __construct(MyCourseRepo $my_course, ExamRepo $exam, StudentRepo $student, MarkRepo $mark)
+    public function __construct(ExamRecordRepositoryInterface $exam_record, SkillRepositoryInterface $skill, MyCourseRepositoryInterface $my_course,
+                                ClassesRepositoryInterface $class,SubjectRepositoryInterface $subject, ExamRepositoryInterface $exam,
+                                StudentRepositoryInterface $student,MarkRepositoryInterface $mark, MajorRepositoryInterface $major)
     {
         $this->exam =  $exam;
         $this->mark =  $mark;
+        $this->subject = $subject;
         $this->student =  $student;
         $this->my_course =  $my_course;
+        $this->class = $class;
+        $this->major = $major;
+        $this->skill = $skill;
+        $this->exam_record = $exam_record;
         $this->year =  GetSystemInfoHelper::getSetting('current_session');
     }
 
     public function index()
     {
         $d['exams'] = $this->exam->getExam(['year' => $this->year]);
-        $d['my_courses'] = $this->my_course->all();
-        $d['classes'] = $this->my_course->getAllSections();
-        $d['subjects'] = $this->my_course->getAllSubjects();
+        $d['my_courses'] = $this->my_course->getAll();
+        $d['classes'] = $this->class->getAll();
+        $d['subjects'] = $this->subject->getAll();
         $d['selected'] = false;
 
         return view('pages.support_team.marks.index', $d);
@@ -81,16 +97,16 @@ class MarkController extends Controller
         }
 
         $wh = ['student_id' => $student_id, 'year' => $year ];
-        $data['marks'] = $this->exam->getMark($wh);
-        $data['exam_records'] = $exr = $this->exam->getRecord($wh);
+        $data['marks'] = $this->mark->getMark($wh);
+        $data['exam_records'] = $exr = $this->exam_record->getRecord($wh);
         $data['exams'] = $this->exam->getExam(['year' => $year]);
         $data['sr'] = $this->student->getRecord(['user_id' => $student_id])->first();
         $data['my_course'] = $mc = $this->my_course->getMC(['id' => $exr->first()->my_course_id])->first();
-        $data['major'] = $this->my_course->findTypeByClass($mc->id);
-        $data['subjects'] = $this->my_course->findSubjectByClass($mc->id);
+        $data['major'] = $this->major->findMajorByCourse($mc->id);
+        $data['subjects'] = $this->subject->findSubjectByCourse($mc->id);
         $data['year'] = $year;
         $data['student_id'] = $student_id;
-        $data['skills'] = $this->exam->getSkillByClassType() ?: NULL;
+        $data['skills'] = $this->skill->getSkillByMajor() ?: NULL;
 
         return view('pages.support_team.marks.show.index', $data);
     }
@@ -115,22 +131,22 @@ class MarkController extends Controller
         }
 
         $wh = ['student_id' => $student_id, 'exam_id' => $exam_id, 'year' => $year ];
-        $d['marks'] = $mks = $this->exam->getMark($wh);
-        $d['exr'] = $exr = $this->exam->getRecord($wh)->first();
+        $d['marks'] = $mks = $this->mark->getMark($wh);
+        $d['exr'] = $exr = $this->exam_record->getRecord($wh)->first();
         $d['my_course'] = $mc = $this->my_course->find($exr->my_course_id);
         $d['class_id'] = $exr->class_id;
         $d['ex'] = $exam = $this->exam->find($exam_id);
         $d['tex'] = 'tex'.$exam->term;
         $d['sr'] = $sr =$this->student->getRecord(['user_id' => $student_id])->first();
-        $d['major'] = $this->my_course->findTypeByClass($mc->id);
-        $d['subjects'] = $this->my_course->findSubjectByClass($mc->id);
+        $d['major'] = $this->major->findMajorByCourse($mc->id);
+        $d['subjects'] = $this->subject->findSubjectByCourse($mc->id);
 
         $d['major'] = $major = $d['major'];
         $d['year'] = $year;
         $d['student_id'] = $student_id;
         $d['exam_id'] = $exam_id;
 
-        $d['skills'] = $this->exam->getSkillByClassType() ?: NULL;
+        $d['skills'] = $this->skill->getSkillByMajor() ?: NULL;
         $d['s'] = Setting::all()->flatMap(function($s){
             return [$s->type => $s->description];
         });
@@ -152,8 +168,8 @@ class MarkController extends Controller
 
         foreach ($students as $s){
             $data['student_id'] = $d2['student_id'] = $s->user_id;
-            $this->exam->createMark($data);
-            $this->exam->createRecord($d2);
+            $this->mark->create($data);
+            $this->exam_record->create($d2);
         }
 
         return redirect()->route('marks.manage', [$req->exam_id, $req->my_course_id, $req->class_id, $req->subject_id]);
@@ -163,21 +179,21 @@ class MarkController extends Controller
     {
         $data = ['exam_id' => $exam_id, 'my_course_id' => $my_course_id, 'class_id' => $class_id, 'subject_id' => $subject_id, 'year' => $this->year];
 
-        $data['marks'] = $this->exam->getMark($data);
+        $data['marks'] = $this->mark->getMark($data);
         if($data['marks']->count() < 1){
             return $this->noStudentRecord();
         }
 
         $data['m'] =  $data['marks']->first();
-        $data['exams'] = $this->exam->all();
-        $data['my_courses'] = $this->my_course->all();
-        $data['classes'] = $this->my_course->getAllSections();
-        $data['subjects'] = $this->my_course->getAllSubjects();
+        $data['exams'] = $this->exam->getAll();
+        $data['my_courses'] = $this->my_course->getAll();
+        $data['classes'] = $this->class->getAll();
+        $data['subjects'] = $this->subject->getAll();
         if(GetUserTypeHelper::userIsTeacher()){
-            $data['subjects'] = $this->my_course->findSubjectByTeacher(Auth::user()->id)->where('my_courses_id', $my_course_id);
+            $data['subjects'] = $this->subject->findSubjectByTeacher(Auth::user()->id)->where('my_courses_id', $my_course_id);
         }
         $data['selected'] = true;
-        $data['major'] = $this->my_course->findTypeByClass($my_course_id);
+        $data['major'] = $this->major->findMajorByCourse($my_course_id);
 
         return view('pages.support_team.marks.manage', $data);
     }
@@ -189,8 +205,8 @@ class MarkController extends Controller
         $d = $d3 = $all_st_ids = [];
 
         $exam = $this->exam->find($exam_id);
-        $marks = $this->exam->getMark($p);
-        $major = $this->my_course->findTypeByClass($my_course_id);
+        $marks = $this->mark->getMark($p);
+        $major = $this->major->findMajorByCourse($my_course_id);
 
         $mks = $req->all();
 
@@ -217,7 +233,7 @@ class MarkController extends Controller
             $grade = $this->mark->getGrade($total, $major->id);
             $d['grade_id'] = $grade ? $grade->id : NULL;
 
-            $this->exam->updateMark($mk->id, $d);
+            $this->mark->update($mk->id, $d);
         }
 
         /** Sub Position Begin  **/
@@ -227,7 +243,7 @@ class MarkController extends Controller
 
             $d2['sub_pos'] = $this->mark->getSubPos($mk->student_id, $exam, $my_course_id, $subject_id, $this->year);
 
-            $this->exam->updateMark($mk->id, $d2);
+            $this->mark->update($mk->id, $d2);
         }
 
         /*Sub Position End*/
@@ -244,7 +260,7 @@ class MarkController extends Controller
             $d3['class_ave'] = $this->mark->getClassAvg($exam, $my_course_id, $this->year);
             $d3['pos'] = $this->mark->getPos($st_id, $exam, $my_course_id, $class_id, $this->year);
 
-            $this->exam->updateRecord($p, $d3);
+            $this->exam_record->update($p, $d3);
         }
         /*Exam Record End*/
 
@@ -255,7 +271,7 @@ class MarkController extends Controller
     {
         $d = CheckUsersHelper::userIsTeamSA() ? $req->only(['t_comment', 'p_comment']) : $req->only(['t_comment']);
 
-        $this->exam->updateRecord(['id' => $exr_id], $d);
+        $this->exam_record->update(['id' => $exr_id], $d);
         return JsonHelper::jsonUpdateOk();
     }
 
@@ -267,17 +283,17 @@ class MarkController extends Controller
             $d[$skill] = implode(',', $req->$sk);
         }
 
-        $this->exam->updateRecord(['id' => $exr_id], $d);
+        $this->exam_record->update(['id' => $exr_id], $d);
         return JsonHelper::jsonUpdateOk();
     }
 
     public function bulk($my_course_id = NULL, $class_id = NULL)
     {
-        $data['my_courses'] = $this->my_course->all();
+        $data['my_courses'] = $this->my_course->getAll();
         $data['selected'] = false;
 
         if($my_course_id && $class_id){
-            $data['classes'] = $this->my_course->getAllSections()->where('my_course_id', $my_course_id);
+            $data['classes'] = $this->class->getAll()->where('my_course_id', $my_course_id);
             $data['students'] = $st = $this->student->getRecord(['my_course_id' => $my_course_id, 'class_id' => $class_id])->get()->sortBy('user.name');
             if($st->count() < 1){
                 return redirect()->route('marks.bulk')->with('flash_danger', __('msg.srnf'));
@@ -297,7 +313,7 @@ class MarkController extends Controller
 
     public function tabulation($exam_id = NULL, $my_course_id = NULL, $class_id = NULL)
     {
-        $data['my_courses'] = $this->my_course->all();
+        $data['my_courses'] = $this->my_course->getAll();
         $data['exams'] = $this->exam->getExam(['year' => $this->year]);
         $data['selected'] = FALSE;
 
@@ -313,20 +329,20 @@ class MarkController extends Controller
                 return RouteHelper::goWithDanger('marks.tabulation', __('msg.srnf'));
             }
 
-            $data['subjects'] = $this->my_course->getSubjectsByIDs($sub_ids);
+            $data['subjects'] = $this->subject->getSubjectsByIDs($sub_ids);
             $data['students'] = $this->student->getRecordByUserIDs($st_ids)->get()->sortBy('user.name');
-            $data['classes'] = $this->my_course->getAllSections();
+            $data['classes'] = $this->class->getAll();
 
             $data['selected'] = TRUE;
             $data['my_course_id'] = $my_course_id;
             $data['class_id'] = $class_id;
             $data['exam_id'] = $exam_id;
             $data['year'] = $this->year;
-            $data['marks'] = $mks = $this->exam->getMark($wh);
-            $data['exr'] = $exr = $this->exam->getRecord($wh);
+            $data['marks'] = $mks = $this->mark->getMark($wh);
+            $data['exr'] = $exr = $this->exam_record->getRecord($wh);
 
             $data['my_course'] = $mc = $this->my_course->find($my_course_id);
-            $data['class']  = $this->my_course->findSection($class_id);
+            $data['class']  = $this->class->find($class_id);
             $data['ex'] = $exam = $this->exam->find($exam_id);
             $data['tex'] = 'tex'.$exam->term;
 
@@ -346,18 +362,18 @@ class MarkController extends Controller
             return RouteHelper::goWithDanger('marks.tabulation', __('msg.srnf'));
         }
 
-        $d['subjects'] = $this->my_course->getSubjectsByIDs($sub_ids);
+        $d['subjects'] = $this->subject->getSubjectsByIDs($sub_ids);
         $d['students'] = $this->student->getRecordByUserIDs($st_ids)->get()->sortBy('user.name');
 
         $d['my_course_id'] = $my_course_id;
         $d['exam_id'] = $exam_id;
         $d['year'] = $this->year;
         $wh = ['exam_id' => $exam_id, 'my_course_id' => $my_course_id];
-        $d['marks'] = $mks = $this->exam->getMark($wh);
-        $d['exr'] = $exr = $this->exam->getRecord($wh);
+        $d['marks'] = $mks = $this->mark->getMark($wh);
+        $d['exr'] = $exr = $this->exam_record->getRecord($wh);
 
         $d['my_course'] = $mc = $this->my_course->find($my_course_id);
-        $d['class']  = $this->my_course->findSection($class_id);
+        $d['class']  = $this->class->find($class_id);
         $d['ex'] = $exam = $this->exam->find($exam_id);
         $d['tex'] = 'tex'.$exam->term;
         $d['s'] = Setting::all()->flatMap(function($s){
@@ -375,7 +391,7 @@ class MarkController extends Controller
 
     protected function verifyStudentExamYear($student_id, $year = null)
     {
-        $years = $this->exam->getExamYears($student_id);
+        $years = $this->mark->getExamYears($student_id);
         $student_exists = $this->student->exists($student_id);
 
         if(!$year){

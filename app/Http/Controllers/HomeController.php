@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Helpers\CheckUsersHelper;
 use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\Qs;
+use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
 
 class HomeController extends Controller
 {
     protected $user;
-    public function __construct(UserRepo $user)
+    public function __construct(UserRepositoryInterface $user)
     {
         $this->user = $user;
     }

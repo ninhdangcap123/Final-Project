@@ -11,10 +11,18 @@ use App\Helpers\GetUserTypeHelper;
 use App\Helpers\JsonHelper;
 use App\Helpers\Qs;
 use App\Http\Requests\UserRequest;
+use App\Repositories\BloodGroup\BloodGroupRepositoryInterface;
 use App\Repositories\LocationRepo;
+use App\Repositories\MyCourse\MyCourseRepositoryInterface;
 use App\Repositories\MyCourseRepo;
+use App\Repositories\Nationals\NationalRepositoryInterface;
+use App\Repositories\StaffRecord\StaffRecordRepositoryInterface;
+use App\Repositories\State\StateRepositoryInterface;
+use App\Repositories\Subject\SubjectRepositoryInterface;
+use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
 use App\Http\Controllers\Controller;
+use App\Repositories\UserType\UserTypeRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -23,28 +31,35 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    protected $user, $loc, $my_course;
+    protected $user, $user_type, $staff, $my_course, $state, $nal, $subject, $bg;
 
-    public function __construct(UserRepo $user, LocationRepo $loc, MyCourseRepo $my_course)
+    public function __construct(UserRepositoryInterface $user, UserTypeRepositoryInterface $user_type, StaffRecordRepositoryInterface $staff,
+                                BloodGroupRepositoryInterface $bg, SubjectRepositoryInterface $subject, MyCourseRepositoryInterface $my_course,
+                                StateRepositoryInterface $state, NationalRepositoryInterface $nal)
     {
         $this->middleware('teamSA', ['only' => ['index', 'store', 'edit', 'update'] ]);
         $this->middleware('super_admin', ['only' => ['reset_pass','destroy'] ]);
 
         $this->user = $user;
-        $this->loc = $loc;
         $this->my_course = $my_course;
+        $this->state = $state;
+        $this->nal = $nal;
+        $this->bg = $bg;
+        $this->user_type = $user_type;
+        $this->staff = $staff;
+        $this->subject = $subject;
     }
 
     public function index()
     {
-        $ut = $this->user->getAllTypes();
+        $ut = $this->user_type->getAll();
         $ut2 = $ut->where('level', '>', 2);
 
         $d['user_types'] = GetUserTypeHelper::userIsAdmin() ? $ut2 : $ut;
-        $d['states'] = $this->loc->getStates();
+        $d['states'] = $this->state->getStates();
         $d['users'] = $this->user->getPTAUsers();
-        $d['nationals'] = $this->loc->getAllNationals();
-        $d['blood_groups'] = $this->user->getBloodGroups();
+        $d['nationals'] = $this->nal->getAllNationals();
+        $d['blood_groups'] = $this->bg->getAll();
         return view('pages.support_team.users.index', $d);
     }
 
@@ -52,10 +67,10 @@ class UserController extends Controller
     {
         $id = DisplayMessageHelper::decodeHash($id);
         $d['user'] = $this->user->find($id);
-        $d['states'] = $this->loc->getStates();
+        $d['states'] = $this->state->getStates();
         $d['users'] = $this->user->getPTAUsers();
-        $d['blood_groups'] = $this->user->getBloodGroups();
-        $d['nationals'] = $this->loc->getAllNationals();
+        $d['blood_groups'] = $this->bg->getAll();
+        $d['nationals'] = $this->nal->getAllNationals();
         return view('pages.support_team.users.edit', $d);
     }
 
@@ -73,7 +88,7 @@ class UserController extends Controller
 
     public function store(UserRequest $req)
     {
-        $user_type = $this->user->findType($req->user_type)->title;
+        $user_type = $this->user_type->find($req->user_type)->title;
 
         $data = $req->except(GetUsersHelper::getStaffRecord());
         $data['name'] = ucwords($req->name);
@@ -110,7 +125,7 @@ class UserController extends Controller
             $d2 = $req->only(GetUsersHelper::getStaffRecord());
             $d2['user_id'] = $user->id;
             $d2['code'] = $staff_id;
-            $this->user->createStaffRecord($d2);
+            $this->staff->create($d2);
         }
 
         return JsonHelper::jsonStoreOk();
@@ -155,7 +170,7 @@ class UserController extends Controller
         if($user_is_staff){
             $d2 = $req->only(GetUsersHelper::getStaffRecord());
             $d2['code'] = $data['username'];
-            $this->user->updateStaffRecord(['user_id' => $id], $d2);
+            $this->staff->update(['user_id' => $id], $d2);
         }
 
         return JsonHelper::jsonUpdateOk();
@@ -200,7 +215,7 @@ class UserController extends Controller
 
     protected function userTeachesSubject($user): bool
     {
-        $subjects = $this->my_course->findSubjectByTeacher($user->id);
+        $subjects = $this->subject->findSubjectByTeacher($user->id);
         return $subjects->count() > 0;
     }
 

@@ -6,13 +6,14 @@ use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\Qs;
 use App\Http\Requests\Exam\ExamCreate;
 use App\Http\Requests\Exam\ExamUpdate;
+use App\Repositories\Exam\ExamRepositoryInterface;
 use App\Repositories\ExamRepo;
 use App\Http\Controllers\Controller;
 
 class ExamController extends Controller
 {
     protected $exam;
-    public function __construct(ExamRepo $exam)
+    public function __construct(ExamRepositoryInterface $exam)
     {
         $this->middleware('teamSA', ['except' => ['destroy',] ]);
         $this->middleware('super_admin', ['only' => ['destroy',] ]);
@@ -22,7 +23,7 @@ class ExamController extends Controller
 
     public function index()
     {
-        $d['exams'] = $this->exam->all();
+        $d['exams'] = $this->exam->getAll();
         return view('pages.support_team.exams.index', $d);
     }
 

@@ -14,9 +14,17 @@ use App\Helpers\Mk;
 use App\Helpers\RouteHelper;
 use App\Http\Requests\Student\StudentRecordCreate;
 use App\Http\Requests\Student\StudentRecordUpdate;
+use App\Repositories\Classes\ClassesRepositoryInterface;
 use App\Repositories\LocationRepo;
+use App\Repositories\Major\MajorRepositoryInterface;
+use App\Repositories\MyCourse\MyCourseRepositoryInterface;
 use App\Repositories\MyCourseRepo;
+use App\Repositories\Nationals\NationalRepositoryInterface;
+use App\Repositories\Promotion\PromotionRepositoryInterface;
+use App\Repositories\State\StateRepositoryInterface;
+use App\Repositories\Student\StudentRepositoryInterface;
 use App\Repositories\StudentRepo;
+use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -26,17 +34,24 @@ use Illuminate\Support\Str;
 
 class StudentRecordController extends Controller
 {
-    protected $loc, $my_course, $user, $student;
+    protected $my_course, $promotion, $major, $class, $user, $student, $state, $nal;
 
-   public function __construct(LocationRepo $loc, MyCourseRepo $my_course, UserRepo $user, StudentRepo $student)
+   public function __construct(PromotionRepositoryInterface $promotion, ClassesRepositoryInterface $class, MyCourseRepositoryInterface $my_course,
+                               UserRepositoryInterface $user, StudentRepositoryInterface $student, StateRepositoryInterface $state,
+                               NationalRepositoryInterface $nal, MajorRepositoryInterface $major)
    {
        $this->middleware('teamSA', ['only' => ['edit','update', 'reset_pass', 'create', 'store', 'graduated'] ]);
        $this->middleware('super_admin', ['only' => ['destroy',] ]);
 
-        $this->loc = $loc;
+
         $this->my_course = $my_course;
         $this->user = $user;
         $this->student = $student;
+        $this->state = $state;
+        $this->class = $class;
+        $this->major = $major;
+        $this->nal = $nal;
+        $this->promotion = $promotion;
    }
 
     public function resetPass($st_id)
@@ -49,11 +64,11 @@ class StudentRecordController extends Controller
 
     public function create()
     {
-        $data['my_courses'] = $this->my_course->all();
+        $data['my_courses'] = $this->my_course->getAll();
         $data['parents'] = $this->user->getUserByType('parent');
         $data['dorms'] = $this->student->getAllDorms();
-        $data['states'] = $this->loc->getStates();
-        $data['nationals'] = $this->loc->getAllNationals();
+        $data['states'] = $this->state->getStates();
+        $data['nationals'] = $this->nal->getAllNationals();
         return view('pages.support_team.students.add', $data);
     }
 
@@ -62,7 +77,7 @@ class StudentRecordController extends Controller
        $data =  $req->only(GetUsersHelper::getUserRecord());
        $sr =  $req->only(GetUsersHelper::getStudentData());
 
-        $ct = $this->my_course->findTypeByClass($req->my_course_id)->code;
+        $ct = $this->major->findMajorByCourse($req->my_course_id)->code;
 
 
         $data['user_type'] = 'student';
@@ -94,15 +109,15 @@ class StudentRecordController extends Controller
     public function listByClass($course_id)
     {
         $data['my_course'] = $mc = $this->my_course->getMC(['id' => $course_id])->first();
-        $data['students'] = $this->student->findStudentsByClass($course_id);
-        $data['classes'] = $this->my_course->getClassSections($course_id);
+        $data['students'] = $this->student->findStudentsByCourse($course_id);
+        $data['classes'] = $this->class->getCourseClasses($course_id);
 
         return is_null($mc) ? RouteHelper::goWithDanger() : view('pages.support_team.students.list', $data);
     }
 
     public function graduated()
     {
-        $data['my_courses'] = $this->my_course->all();
+        $data['my_courses'] = $this->my_course->getAll();
         $data['students'] = $this->student->allGradStudents();
 
         return view('pages.support_team.students.graduated', $data);
@@ -139,11 +154,11 @@ class StudentRecordController extends Controller
         if(!$sr_id){return RouteHelper::goWithDanger();}
 
         $data['sr'] = $this->student->getRecord(['id' => $sr_id])->first();
-        $data['my_courses'] = $this->my_course->all();
+        $data['my_courses'] = $this->my_course->getAll();
         $data['parents'] = $this->user->getUserByType('parent');
         $data['dorms'] = $this->student->getAllDorms();
-        $data['states'] = $this->loc->getStates();
-        $data['nationals'] = $this->loc->getAllNationals();
+        $data['states'] = $this->state->getStates();
+        $data['nationals'] = $this->nal->getAllNationals();
         return view('pages.support_team.students.edit', $data);
     }
 

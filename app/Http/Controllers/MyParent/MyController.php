@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\MyParent;
 use App\Http\Controllers\Controller;
+use App\Repositories\Student\StudentRepositoryInterface;
 use App\Repositories\StudentRepo;
 use Illuminate\Support\Facades\Auth;
 
 class MyController extends Controller
 {
     protected $student;
-    public function __construct(StudentRepo $student)
+    public function __construct(StudentRepositoryInterface $student)
     {
         $this->student = $student;
     }

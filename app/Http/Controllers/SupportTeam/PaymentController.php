@@ -12,8 +12,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\PaymentCreate;
 use App\Http\Requests\Payment\PaymentUpdate;
 use App\Models\Setting;
+use App\Repositories\MyCourse\MyCourseRepositoryInterface;
 use App\Repositories\MyCourseRepo;
+use App\Repositories\Payment\PaymentRepositoryInterface;
+use App\Repositories\PaymentRecord\PaymentRecordRepositoryInterface;
 use App\Repositories\PaymentRepo;
+use App\Repositories\Receipt\ReceiptRepositoryInterface;
+use App\Repositories\Student\StudentRepositoryInterface;
 use App\Repositories\StudentRepo;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -22,12 +27,15 @@ use PDF;
 
 class PaymentController extends Controller
 {
-    protected $my_course, $pay, $student, $year;
+    protected $my_course, $payment_record, $receipt, $pay, $student, $year;
 
-    public function __construct(MyCourseRepo $my_course, PaymentRepo $pay, StudentRepo $student)
+    public function __construct(PaymentRecordRepositoryInterface $payment_record, ReceiptRepositoryInterface $receipt, MyCourseRepositoryInterface $my_course,
+                                PaymentRepositoryInterface $pay, StudentRepositoryInterface $student)
     {
         $this->my_course = $my_course;
         $this->pay = $pay;
+        $this->receipt = $receipt;
+        $this->payment_record = $payment_record;
         $this->year = GetSystemInfoHelper::getCurrentSession();
         $this->student = $student;
 
@@ -51,7 +59,7 @@ class PaymentController extends Controller
         }
 
         $data['selected'] = true;
-        $data['my_courses'] = $this->my_course->all();
+        $data['my_courses'] = $this->my_course->getAll();
         $data['years'] = $this->pay->getPaymentYears();
         $data['year'] = $year;
 
@@ -66,7 +74,7 @@ class PaymentController extends Controller
 
     public function create()
     {
-        $d['my_courses'] = $this->my_course->all();
+        $d['my_courses'] = $this->my_course->getAll();
         return view('pages.support_team.payments.create', $d);
     }
 
@@ -74,7 +82,7 @@ class PaymentController extends Controller
     {
         if(!$st_id) {return RouteHelper::goWithDanger();}
 
-        $inv = $year ? $this->pay->getAllMyPR($st_id, $year) : $this->pay->getAllMyPR($st_id);
+        $inv = $year ? $this->payment_record->getAllMyPR($st_id, $year) : $this->payment_record->getAllMyPR($st_id);
 
         $d['sr'] = $this->student->findByUserId($st_id)->first();
         $pr = $inv->get();
@@ -89,7 +97,7 @@ class PaymentController extends Controller
         if(!$pr_id) {return RouteHelper::goWithDanger();}
 
         try {
-             $d['pr'] = $pr = $this->pay->getRecord(['id' => $pr_id])->with('receipt')->first();
+             $d['pr'] = $pr = $this->payment_record->getRecord(['id' => $pr_id])->with('receipt')->first();
         } catch (ModelNotFoundException $ex) {
             return back()->with('flash_danger', __('msg.rnf'));
         }
@@ -108,7 +116,7 @@ class PaymentController extends Controller
         if(!$pr_id) {return RouteHelper::goWithDanger();}
 
         try {
-            $d['pr'] = $pr = $this->pay->getRecord(['id' => $pr_id])->with('receipt')->first();
+            $d['pr'] = $pr = $this->payment_record->getRecord(['id' => $pr_id])->with('receipt')->first();
         } catch (ModelNotFoundException $ex) {
             return back()->with('flash_danger', __('msg.rnf'));
         }
@@ -140,26 +148,26 @@ class PaymentController extends Controller
             'amt_paid' => 'required|numeric'
         ], [], ['amt_paid' => 'Amount Paid']);
 
-        $pr = $this->pay->findRecord($pr_id);
+        $pr = $this->payment_record->find($pr_id);
         $payment = $this->pay->find($pr->payment_id);
         $d['amt_paid'] = $amt_p = $pr->amt_paid + $req->amt_paid;
         $d['balance'] = $bal = $payment->amount - $amt_p;
         $d['paid'] = $bal < 1 ? 1 : 0;
 
-        $this->pay->updateRecord($pr_id, $d);
+        $this->payment_record->update($pr_id, $d);
 
         $d2['amt_paid'] = $req->amt_paid;
         $d2['balance'] = $bal;
         $d2['pr_id'] = $pr_id;
         $d2['year'] = $this->year;
 
-        $this->pay->createReceipt($d2);
+        $this->receipt->create($d2);
         return JsonHelper::jsonUpdateOk();
     }
 
     public function manage($course_id = NULL)
     {
-        $d['my_courses'] = $this->my_course->all();
+        $d['my_courses'] = $this->my_course->getAll();
         $d['selected'] = false;
 
         if($course_id){
@@ -193,7 +201,7 @@ class PaymentController extends Controller
                     $pr['student_id'] = $st->user_id;
                     $pr['payment_id'] = $p->id;
                     $pr['year'] = $this->year;
-                    $rec = $this->pay->createRecord($pr);
+                    $rec = $this->payment_record->create($pr);
                     $rec->ref_no ?: $rec->update(['ref_no' => mt_rand(100000, 99999999)]);
 
                 }
@@ -238,8 +246,8 @@ class PaymentController extends Controller
     public function reset_record($id)
     {
         $pr['amt_paid'] = $pr['paid'] = $pr['balance'] = 0;
-        $this->pay->updateRecord($id, $pr);
-        $this->pay->deleteReceipts(['pr_id' => $id]);
+        $this->payment_record->update($id, $pr);
+        $this->receipt->delete(['pr_id' => $id]);
 
         return back()->with('flash_success', __('msg.update_ok'));
     }

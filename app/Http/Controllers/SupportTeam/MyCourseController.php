@@ -7,27 +7,34 @@ use App\Helpers\Qs;
 use App\Helpers\RouteHelper;
 use App\Http\Requests\MyCourse\CourseCreate;
 use App\Http\Requests\MyCourse\CourseUpdate;
+use App\Repositories\Classes\ClassesRepositoryInterface;
+use App\Repositories\Major\MajorRepositoryInterface;
+use App\Repositories\MyCourse\MyCourseRepositoryInterface;
 use App\Repositories\MyCourseRepo;
+use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
 use App\Http\Controllers\Controller;
 
 class MyCourseController extends Controller
 {
-    protected $my_course, $user;
+    protected $my_course, $user, $class, $major;
 
-    public function __construct(MyCourseRepo $my_course, UserRepo $user)
+    public function __construct(MyCourseRepositoryInterface $my_course, MajorRepositoryInterface $major, ClassesRepositoryInterface $class,
+                                UserRepositoryInterface $user)
     {
         $this->middleware('teamSA', ['except' => ['destroy',] ]);
         $this->middleware('super_admin', ['only' => ['destroy',] ]);
 
         $this->my_course = $my_course;
         $this->user = $user;
+        $this->major = $major;
+        $this->class = $class;
     }
 
     public function index()
     {
-        $data['my_courses'] = $this->my_course->all();
-        $data['majors'] = $this->my_course->getMajor();
+        $data['my_courses'] = $this->my_course->getAll();
+        $data['majors'] = $this->major->getAll();
 
         return view('pages.support_team.courses.index', $data);
     }
@@ -46,7 +53,7 @@ class MyCourseController extends Controller
             'teacher_id' => NULL,
             ];
 
-        $this->my_course->createSection($section);
+        $this->class->create($section);
 
         return JsonHelper::jsonStoreOk();
     }

@@ -7,8 +7,11 @@ use App\Helpers\DisplayMessageHelper;
 use App\Helpers\Qs;
 use App\Http\Requests\Pin\PinCreate;
 use App\Http\Requests\Pin\PinVerify;
+use App\Repositories\Pin\PinRepository;
+use App\Repositories\Pin\PinRepositoryInterface;
 use App\Repositories\PinRepo;
 use App\Http\Controllers\Controller;
+use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -18,7 +21,7 @@ class PinController extends Controller
 {
     protected  $pin, $examIsLocked, $user;
 
-    public function __construct(PinRepo $pin, UserRepo $user)
+    public function __construct(PinRepositoryInterface $pin, UserRepositoryInterface $user)
     {
         $this->pin = $pin;
         $this->user = $user;
@@ -85,13 +88,15 @@ class PinController extends Controller
     public function store(PinCreate $req)
     {
         $num = $req->pin_count;
+
         $data = [];
         for($i = 0; $i < $num; $i++){
             $code = Str::random(5).'-'.Str::random(5).'-'.Str::random(6);
             $data[] = ['code' => strtoupper($code)];
         }
 
-         $this->pin->create($data);
+        $this->pin->insert($data);
+
         return redirect()->route('pins.index')->with('flash_success', __('msg.pin_create'));
     }
 
