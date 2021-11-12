@@ -16,7 +16,10 @@ class PaymentRecordRepository extends BaseRepository implements PaymentRecordRep
     public function getAllMyPR($st_id, $year = NULL)
     {
         // TODO: Implement getAllMyPR() method.
-        return $year ? $this->getRecord([ 'student_id' => $st_id, 'year' => $year ]) : $this->getRecord([ 'student_id' => $st_id ]);
+        return $year ? $this->getRecord([
+            'student_id' => $st_id,
+            'year' => $year
+        ]) : $this->getRecord([ 'student_id' => $st_id ]);
     }
 
     public function getRecord($data)

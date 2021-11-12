@@ -34,7 +34,11 @@ class PinRepository extends BaseRepository implements PinRepositoryInterface
     public function getUserPin($code, $user_id, $st_id)
     {
         // TODO: Implement getUserPin() method.
-        return $this->find([ 'code' => $code, 'user_id' => $user_id, 'student_id' => $st_id ])->get();
+        return $this->find([
+            'code' => $code,
+            'user_id' => $user_id,
+            'student_id' => $st_id
+        ])->get();
     }
 
     public function findValidCode($code)

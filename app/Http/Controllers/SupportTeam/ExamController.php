@@ -28,7 +28,7 @@ class ExamController extends Controller
 
     public function store(ExamCreate $request)
     {
-        $data = $request->only([ 'name', 'term' ]);
+        $data = $request->validated();
         $data['year'] = GetSystemInfoHelper::getSetting('current_session');
         $this->examRepo->create($data);
         return back()->with('flash_success', __('msg.store_ok'));
@@ -42,7 +42,7 @@ class ExamController extends Controller
 
     public function update(ExamUpdate $request, $id)
     {
-        $data = $request->only([ 'name', 'term' ]);
+        $data = $request->validated();
         $this->examRepo->update($id, $data);
         return back()->with('flash_success', __('msg.update_ok'));
     }

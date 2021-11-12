@@ -13,7 +13,7 @@ class Mark extends Eloquent
 
     public function exam()
     {
-        return $this->belongsTo(Exam::class);
+        return $this->belongsTo(Exam::class,'exam_id');
     }
 
     public function classes()
@@ -33,11 +33,11 @@ class Mark extends Eloquent
 
     public function subject()
     {
-        return $this->belongsTo(Subject::class);
+        return $this->belongsTo(Subject::class,'subject_id');
     }
 
     public function grade()
     {
-        return $this->belongsTo(Grade::class);
+        return $this->belongsTo(Grade::class,'grade_id');
     }
 }

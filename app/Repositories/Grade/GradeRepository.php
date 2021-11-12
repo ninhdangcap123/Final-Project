@@ -24,14 +24,14 @@ class GradeRepository extends BaseRepository implements GradeRepositoryInterface
     {
         // TODO: Implement getGrade() method.
         if( $total < 1 ) {
-            return NULL;
+            return [];
         }
 
         $grades = $this->model->where([ 'major_id' => $major_id ])->get();
 
-        if( $grades->count() > 0 ) {
-            $gr = $grades->where('mark_from', '<=', $total)->where('mark_to', '>=', $total);
-            return $gr->count() > 0 ? $gr->first() : $this->getGrade2($total);
+        if( $grades->isNotEmpty() ) {
+            $grade = $grades->where('mark_from', '<=', $total)->where('mark_to', '>=', $total);
+            return $grade->isNotEmpty() ? $grade->first() : $this->getGrade2($total);
         }
         return $this->getGrade2($total);
     }
@@ -40,9 +40,9 @@ class GradeRepository extends BaseRepository implements GradeRepositoryInterface
     {
         // TODO: Implement getGrade2() method.
         $grades = $this->model->whereNull('major_id')->get();
-        if( $grades->count() > 0 ) {
+        if( $grades->isNotEmpty() ) {
             return $grades->where('mark_from', '<=', $total)->where('mark_to', '>=', $total)->first();
         }
-        return NULL;
+        return [];
     }
 }

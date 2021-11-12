@@ -17,7 +17,15 @@ class PromotionRepository extends BaseRepository implements PromotionRepositoryI
     public function getAll()
     {
         // TODO: Implement getAll() method.
-        return $this->model->with([ 'student', 'fromCourse', 'toCourse', 'fromSection', 'toSection' ])->where([ 'from_session' => GetSystemInfoHelper::getCurrentSession(), 'to_session' => GetSystemInfoHelper::getNextSession() ])->get();
+        return $this->model->with([
+            'student',
+            'fromCourse',
+            'toCourse',
+            'fromSection',
+            'toSection' ])
+            ->where([
+                'from_session' => GetSystemInfoHelper::getCurrentSession(),
+                'to_session' => GetSystemInfoHelper::getNextSession() ])->get();
 
     }
 

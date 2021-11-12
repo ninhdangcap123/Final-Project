@@ -6,7 +6,12 @@ use Eloquent;
 
 class TimeTableRecord extends Eloquent
 {
-    protected $fillable = [ 'name', 'my_course_id', 'exam_id', 'year' ];
+    protected $fillable = [
+        'name',
+        'my_course_id',
+        'exam_id',
+        'year'
+    ];
 
     public function myCourse()
     {

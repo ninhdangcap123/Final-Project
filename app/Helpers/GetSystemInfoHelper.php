@@ -18,9 +18,9 @@ class GetSystemInfoHelper
 
     public static function getNextSession(): string
     {
-        $oy = self::getCurrentSession();
-        $old_yr = explode('-', $oy);
-        return ++$old_yr[0].'-'.++$old_yr[1];
+        $currentSession = self::getCurrentSession();
+        $oldYear = explode('-', $currentSession);
+        return ++$oldYear[0].'-'.++$oldYear[1];
     }
 
     public static function getCurrentSession()

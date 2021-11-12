@@ -34,8 +34,8 @@ Route::group([ 'middleware' => 'auth' ], function () {
             Route::get('promotion/manage', 'PromotionController@manage')->name('students.promotion_manage');
             Route::delete('promotion/reset/{pid}', 'PromotionController@reset')->name('students.promotion_reset');
             Route::delete('promotion/reset_all', 'PromotionController@resetAll')->name('students.promotion_reset_all');
-            Route::get('promotion/{fc?}/{fs?}/{tc?}/{ts?}', 'PromotionController@promotion')->name('students.promotion');
-            Route::post('promote/{fc}/{fs}/{tc}/{ts}', 'PromotionController@promote')->name('students.promote');
+            Route::get('promotion/{fromCourse?}/{fromSection?}/{toCourse?}/{toSection?}', 'PromotionController@promotion')->name('students.promotion');
+            Route::post('promote/{fromCourse}/{fromSection}/{toCourse}/{toSection}', 'PromotionController@promote')->name('students.promote');
 
         });
 
@@ -119,7 +119,7 @@ Route::group([ 'middleware' => 'auth' ], function () {
             Route::group([ 'middleware' => 'teamSAT' ], function () {
                 Route::get('/', 'MarkController@index')->name('marks.index');
                 Route::get('manage/{exam}/{courses}/{classes}/{subject}', 'MarkController@manage')->name('marks.manage');
-                Route::put('update/{exam}/{courses}/{classes}/{subject}', 'MarkController@update')->name('marks.update');
+                Route::put('update/{exam}/{my_courses}/{classes}/{subject}', 'MarkController@update')->name('marks.update');
                 Route::put('comment_update/{exr_id}', 'MarkController@commentUpdate')->name('marks.comment_update');
                 Route::put('skills_update/{skill}/{exr_id}', 'MarkController@skillsUpdate')->name('marks.skills_update');
                 Route::post('selector', 'MarkController@selector')->name('marks.selector');

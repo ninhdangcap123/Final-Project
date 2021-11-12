@@ -87,7 +87,6 @@ class StudentRecordController extends Controller
 
         $major = $this->majorRepo->findMajorByCourse($request->my_course_id)->code;
 
-
         $data['user_type'] = 'student';
         $data['name'] = ucwords($request->name);
         $data['code'] = strtoupper(Str::random(10));
@@ -150,7 +149,9 @@ class StudentRecordController extends Controller
         $data['sr'] = $this->studentRepo->getRecord([ 'id' => $sr_id ])->first();
 
         /* Prevent Other Students/Parents from viewing Profile of others */
-        if( Auth::user()->id != $data['sr']->user_id && !CheckUsersHelper::userIsTeamSAT() && !CheckUsersHelper::userIsMyChild($data['sr']->user_id, Auth::user()->id) ) {
+        if( Auth::user()->id != $data['sr']->user_id
+            && !CheckUsersHelper::userIsTeamSAT()
+            && !CheckUsersHelper::userIsMyChild($data['sr']->user_id, Auth::user()->id) ) {
             return redirect(route('dashboard'))->with('pop_error', __('msg.denied'));
         }
 

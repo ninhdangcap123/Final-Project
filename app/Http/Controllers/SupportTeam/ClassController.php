@@ -55,7 +55,7 @@ class ClassController extends Controller
 
     public function update(ClassUpdate $request, $id)
     {
-        $data = $request->only([ 'name', 'teacher_id' ]);
+        $data = $request->validated();
         $this->classRepo->update($id, $data);
 
         return JsonHelper::jsonUpdateSuccess();

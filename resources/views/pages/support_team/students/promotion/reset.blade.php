@@ -35,14 +35,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($promotions->sortBy('fc.name')->sortBy('student.name') as $p)
+                @foreach($promotions->sortBy('fromCourse.name')->sortBy('student.name') as $p)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td><img class="rounded-circle" style="height: 40px; width: 40px;"
                                  src="{{ $p->student->photo }}" alt="photo"></td>
                         <td>{{ $p->student->name }}</td>
-                        <td>{{ $p->fc->name.' '.$p->fs->name }}</td>
-                        <td>{{ $p->tc->name.' '.$p->ts->name }}</td>
+                        <td>{{ $p->fromCourse->name.' '.$p->fromSection->name }}</td>
+                        <td>{{ $p->toCourse->name.' '.$p->toSection->name }}</td>
                         @if($p->status === 'P')
                             <td><span class="text-success">Promoted</span></td>
                         @elseif($p->status === 'D')

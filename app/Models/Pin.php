@@ -7,7 +7,13 @@ use Eloquent;
 
 class Pin extends Eloquent
 {
-    protected $fillable = [ 'code', 'user_id', 'student_id', 'times_used', 'used' ];
+    protected $fillable = [
+        'code',
+        'user_id',
+        'student_id',
+        'times_used',
+        'used'
+    ];
 
     public function student()
     {

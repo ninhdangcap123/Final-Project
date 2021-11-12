@@ -89,7 +89,6 @@ class UserController extends Controller
         if( CheckUsersHelper::headSA($id) ) {
             return back()->with('flash_danger', __('msg.denied'));
         }
-
         $data['password'] = Hash::make('user');
         $this->userRepo->update($id, $data);
         return back()->with('flash_success', __('msg.pu_reset'));
@@ -194,7 +193,9 @@ class UserController extends Controller
         $data['user'] = $this->userRepo->find($user_id);
 
         /* Prevent Other Students from viewing Profile of others*/
-        if( Auth::user()->id != $user_id && !CheckUsersHelper::userIsTeamSAT() && !CheckUsersHelper::userIsMyChild(Auth::user()->id, $user_id) ) {
+        if( Auth::user()->id != $user_id
+            && !CheckUsersHelper::userIsTeamSAT()
+            && !CheckUsersHelper::userIsMyChild(Auth::user()->id, $user_id) ) {
             return redirect(route('dashboard'))->with('pop_error', __('msg.denied'));
         }
 
@@ -211,7 +212,6 @@ class UserController extends Controller
         }
 
         $user = $this->userRepo->find($id);
-
         if( $user->user_type == 'teacher' && $this->userTeachesSubject($user) ) {
             return back()->with('pop_error', __('msg.del_teacher'));
         }
