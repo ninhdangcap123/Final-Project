@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var NotyJgrowl = function() {
+var NotyJgrowl = function () {
 
 
     //
@@ -18,7 +18,7 @@ var NotyJgrowl = function() {
     //
 
     // Noty.js examples
-    var _componentNoty = function() {
+    var _componentNoty = function () {
         if (typeof Noty == 'undefined') {
             console.warn('Warning - noty.min.js is not loaded.');
             return;
@@ -38,7 +38,7 @@ var NotyJgrowl = function() {
         //
 
         // Error
-        $('#noty_error').on('click', function() {
+        $('#noty_error').on('click', function () {
             new Noty({
                 text: 'Change a few things up and try submitting again.',
                 type: 'error'
@@ -46,7 +46,7 @@ var NotyJgrowl = function() {
         });
 
         // Success
-        $('#noty_success').on('click', function() {
+        $('#noty_success').on('click', function () {
             new Noty({
                 text: 'You successfully read this important alert message.',
                 type: 'success'
@@ -54,7 +54,7 @@ var NotyJgrowl = function() {
         });
 
         // Warning
-        $('#noty_warning').on('click', function() {
+        $('#noty_warning').on('click', function () {
             new Noty({
                 text: 'Warning! Best check yo self, you\'re not looking too good.',
                 type: 'warning'
@@ -62,7 +62,7 @@ var NotyJgrowl = function() {
         });
 
         // Info
-        $('#noty_info').on('click', function() {
+        $('#noty_info').on('click', function () {
             new Noty({
                 text: 'This alert needs your attention, but it\'s not super important.',
                 type: 'info'
@@ -70,7 +70,7 @@ var NotyJgrowl = function() {
         });
 
         // Alert
-        $('#noty_alert').on('click', function() {
+        $('#noty_alert').on('click', function () {
             new Noty({
                 text: 'Best check yourself, you\'re not looking too good.',
                 type: 'alert'
@@ -78,7 +78,7 @@ var NotyJgrowl = function() {
         });
 
         // Confirmation
-        $('#noty_confirm').on('click', function() {
+        $('#noty_confirm').on('click', function () {
             var notyConfirm = new Noty({
                 text: '<h6 class="mb-3">Please confirm your action</h6><label>Enter comment (optional)</label> <input type="text" class="form-control" placeholder="Enter comment">',
                 timeout: false,
@@ -107,7 +107,7 @@ var NotyJgrowl = function() {
         //
 
         // Top
-        $('#noty_top').on('click', function() {
+        $('#noty_top').on('click', function () {
             new Noty({
                 layout: 'top',
                 text: 'Best check yourself, you\'re not looking too good.',
@@ -116,7 +116,7 @@ var NotyJgrowl = function() {
         });
 
         // Left
-        $('#noty_top_left').on('click', function() {
+        $('#noty_top_left').on('click', function () {
             new Noty({
                 layout: 'topLeft',
                 text: 'Best check yourself, you\'re not looking too good.',
@@ -125,7 +125,7 @@ var NotyJgrowl = function() {
         });
 
         // Center
-        $('#noty_top_center').on('click', function() {
+        $('#noty_top_center').on('click', function () {
             new Noty({
                 layout: 'topCenter',
                 text: 'Best check yourself, you\'re not looking too good.',
@@ -134,7 +134,7 @@ var NotyJgrowl = function() {
         });
 
         // Right (default)
-        $('#noty_top_right').on('click', function() {
+        $('#noty_top_right').on('click', function () {
             new Noty({
                 text: 'Best check yourself, you\'re not looking too good.',
                 type: 'alert'
@@ -147,7 +147,7 @@ var NotyJgrowl = function() {
         //
 
         // Left
-        $('#noty_center_left').on('click', function() {
+        $('#noty_center_left').on('click', function () {
             new Noty({
                 layout: 'centerLeft',
                 text: 'You successfully read this important alert message.',
@@ -156,7 +156,7 @@ var NotyJgrowl = function() {
         });
 
         // Center
-        $('#noty_center').on('click', function() {
+        $('#noty_center').on('click', function () {
             new Noty({
                 layout: 'center',
                 text: 'You successfully read this important alert message.',
@@ -165,7 +165,7 @@ var NotyJgrowl = function() {
         });
 
         // Right
-        $('#noty_center_right').on('click', function() {
+        $('#noty_center_right').on('click', function () {
             new Noty({
                 layout: 'centerRight',
                 text: 'You successfully read this important alert message.',
@@ -179,7 +179,7 @@ var NotyJgrowl = function() {
         //
 
         // Bottom
-        $('#noty_bottom').on('click', function() {
+        $('#noty_bottom').on('click', function () {
             new Noty({
                 layout: 'bottom',
                 text: 'This alert needs your attention, but it\'s not super important.',
@@ -188,7 +188,7 @@ var NotyJgrowl = function() {
         });
 
         // Left
-        $('#noty_bottom_left').on('click', function() {
+        $('#noty_bottom_left').on('click', function () {
             new Noty({
                 layout: 'bottomLeft',
                 text: 'This alert needs your attention, but it\'s not super important.',
@@ -197,7 +197,7 @@ var NotyJgrowl = function() {
         });
 
         // Center
-        $('#noty_bottom_center').on('click', function() {
+        $('#noty_bottom_center').on('click', function () {
             new Noty({
                 layout: 'bottomCenter',
                 text: 'This alert needs your attention, but it\'s not super important.',
@@ -206,7 +206,7 @@ var NotyJgrowl = function() {
         });
 
         // Right (default)
-        $('#noty_bottom_right').on('click', function() {
+        $('#noty_bottom_right').on('click', function () {
             new Noty({
                 layout: 'bottomRight',
                 text: 'This alert needs your attention, but it\'s not super important.',
@@ -220,7 +220,7 @@ var NotyJgrowl = function() {
         //
 
         // Overlay
-        $('#noty_overlay').on('click', function() {
+        $('#noty_overlay').on('click', function () {
             new Noty({
                 text: 'This alert needs your attention, but it\'s not super important.',
                 type: 'info',
@@ -229,7 +229,7 @@ var NotyJgrowl = function() {
         });
 
         // Sticky
-        $('#noty_sticky').on('click', function() {
+        $('#noty_sticky').on('click', function () {
             new Noty({
                 text: 'This alert needs your attention, but it\'s not super important.',
                 type: 'info',
@@ -238,7 +238,7 @@ var NotyJgrowl = function() {
         });
 
         // Close button
-        $('#noty_close').on('click', function() {
+        $('#noty_close').on('click', function () {
             new Noty({
                 text: 'This alert needs your attention, but it\'s not super important.',
                 type: 'info',
@@ -247,7 +247,7 @@ var NotyJgrowl = function() {
         });
 
         // No progress
-        $('#noty_progress').on('click', function() {
+        $('#noty_progress').on('click', function () {
             new Noty({
                 text: 'This alert needs your attention, but it\'s not super important.',
                 type: 'info',
@@ -256,7 +256,7 @@ var NotyJgrowl = function() {
         });
 
         // Styled
-        $('#noty_styled').on('click', function() {
+        $('#noty_styled').on('click', function () {
             new Noty({
                 theme: ' alert alert-danger alert-styled-left p-0',
                 text: 'Change a few things up and try submitting again.',
@@ -267,7 +267,7 @@ var NotyJgrowl = function() {
         });
 
         // Styled with white background
-        $('#noty_styled_white').on('click', function() {
+        $('#noty_styled_white').on('click', function () {
             new Noty({
                 theme: ' alert alert-success alert-styled-left p-0 bg-white',
                 text: 'You successfully read this important alert message.',
@@ -278,7 +278,7 @@ var NotyJgrowl = function() {
         });
 
         // Solid styled
-        $('#noty_solid_styled').on('click', function() {
+        $('#noty_solid_styled').on('click', function () {
             new Noty({
                 theme: ' alert bg-info text-white alert-styled-left p-0',
                 text: 'This alert needs your attention, but it\'s not super important.',
@@ -290,7 +290,7 @@ var NotyJgrowl = function() {
     };
 
     // jGrowl examples
-    var _componentJgrowl = function() {
+    var _componentJgrowl = function () {
         if (!$().jGrowl) {
             console.warn('Warning - jgrowl.min.js is not loaded.');
             return;
@@ -451,13 +451,13 @@ var NotyJgrowl = function() {
                 theme: 'bg-slate-600',
                 life: 5000,
                 header: 'Callbacks',
-                beforeOpen: function(e,m,o) {
+                beforeOpen: function (e, m, o) {
                     console.log("I am going to be opened!", this);
                 },
-                afterOpen: function(e,m,o) {
+                afterOpen: function (e, m, o) {
                     console.log("I am opened!", this);
                 },
-                close: function(e,m,o) {
+                close: function (e, m, o) {
                     console.log("I am closed!", this);
                 }
             });
@@ -556,7 +556,7 @@ var NotyJgrowl = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentNoty();
             _componentJgrowl();
         }
@@ -567,6 +567,6 @@ var NotyJgrowl = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     NotyJgrowl.init();
 });

@@ -6,11 +6,12 @@ use Illuminate\Support\Facades\Auth;
 
 class GetUserTypeHelper
 {
-    public static function getAllUserTypes($remove=[])
+    public static function getAllUserTypes($remove = [])
     {
-        $data =  ['super_admin', 'admin', 'teacher', 'accountant', 'librarian', 'student', 'parent'];
+        $data = [ 'super_admin', 'admin', 'teacher', 'accountant', 'librarian', 'student', 'parent' ];
         return $remove ? array_values(array_diff($data, $remove)) : $data;
     }
+
     public static function userIsAdmin()
     {
         return Auth::user()->user_type == 'admin';

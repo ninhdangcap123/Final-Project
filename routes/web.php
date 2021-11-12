@@ -7,23 +7,23 @@ Route::get('/privacy-policy', 'HomeController@privacyPolicy')->name('privacy_pol
 Route::get('/terms-of-use', 'HomeController@termsOfUse')->name('terms_of_use');
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group([ 'middleware' => 'auth' ], function () {
 
     Route::get('/', 'HomeController@dashboard')->name('home');
     Route::get('/home', 'HomeController@dashboard')->name('home');
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 
-    Route::group(['prefix' => 'my_account'], function() {
+    Route::group([ 'prefix' => 'my_account' ], function () {
         Route::get('/', 'MyAccountController@editProfile')->name('my_account');
         Route::put('/', 'MyAccountController@updateProfile')->name('my_account.update');
         Route::put('/change_password', 'MyAccountController@changePass')->name('my_account.change_pass');
     });
 
     /*************** Support Team *****************/
-    Route::group(['namespace' => 'SupportTeam',], function(){
+    Route::group([ 'namespace' => 'SupportTeam', ], function () {
 
         /*************** Students *****************/
-        Route::group(['prefix' => 'students'], function(){
+        Route::group([ 'prefix' => 'students' ], function () {
             Route::get('reset_pass/{st_id}', 'StudentRecordController@resetPass')->name('st.reset_pass');
             Route::get('graduated', 'StudentRecordController@graduated')->name('students.graduated');
             Route::put('not_graduated/{id}', 'StudentRecordController@notGraduated')->name('st.not_graduated');
@@ -40,24 +40,24 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         /*************** Users *****************/
-        Route::group(['prefix' => 'users'], function(){
+        Route::group([ 'prefix' => 'users' ], function () {
             Route::get('reset_pass/{id}', 'UserController@resetpass')->name('users.reset_pass');
         });
 
         /*************** TimeTables *****************/
-        Route::group(['prefix' => 'timetables'], function(){
+        Route::group([ 'prefix' => 'timetables' ], function () {
             Route::get('/', 'TimeTableController@index')->name('tt.index');
 
-            Route::group(['middleware' => 'teamSA'], function() {
+            Route::group([ 'middleware' => 'teamSA' ], function () {
                 Route::post('/', 'TimeTableController@store')->name('tt.store');
                 Route::put('/{tt}', 'TimeTableController@update')->name('tt.update');
                 Route::delete('/{tt}', 'TimeTableController@delete')->name('tt.delete');
             });
 
             /*************** TimeTable Records *****************/
-            Route::group(['prefix' => 'records'], function(){
+            Route::group([ 'prefix' => 'records' ], function () {
 
-                Route::group(['middleware' => 'teamSA'], function(){
+                Route::group([ 'middleware' => 'teamSA' ], function () {
                     Route::get('manage/{ttr}', 'TimeTableController@manage')->name('ttr.manage');
                     Route::post('/', 'TimeTableController@storeRecord')->name('ttr.store');
                     Route::get('edit/{ttr}', 'TimeTableController@editrecord')->name('ttr.edit');
@@ -71,7 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
             });
 
             /*************** Time Slots *****************/
-            Route::group(['prefix' => 'time_slots', 'middleware' => 'teamSA'], function(){
+            Route::group([ 'prefix' => 'time_slots', 'middleware' => 'teamSA' ], function () {
                 Route::post('/', 'TimeTableController@storeTimeSlot')->name('ts.store');
                 Route::post('/use/{ttr}', 'TimeTableController@useTimeSlot')->name('ts.use');
                 Route::get('edit/{ts}', 'TimeTableController@editTimeSlot')->name('ts.edit');
@@ -82,7 +82,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         /*************** Payments *****************/
-        Route::group(['prefix' => 'payments'], function(){
+        Route::group([ 'prefix' => 'payments' ], function () {
 
             Route::get('manage/{class_id?}', 'PaymentController@manage')->name('payments.manage');
             Route::get('invoice/{id}/{year?}', 'PaymentController@invoice')->name('payments.invoice');
@@ -95,7 +95,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         /*************** Pins *****************/
-        Route::group(['prefix' => 'pins'], function(){
+        Route::group([ 'prefix' => 'pins' ], function () {
             Route::get('create', 'PinController@create')->name('pins.create');
             Route::get('/', 'PinController@index')->name('pins.index');
             Route::post('/', 'PinController@store')->name('pins.store');
@@ -105,10 +105,10 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         /*************** Marks *****************/
-        Route::group(['prefix' => 'marks'], function(){
+        Route::group([ 'prefix' => 'marks' ], function () {
 
-           // FOR teamSA
-            Route::group(['middleware' => 'teamSA'], function(){
+            // FOR teamSA
+            Route::group([ 'middleware' => 'teamSA' ], function () {
 
                 Route::get('tabulation/{exam?}/{class?}/{sec_id?}', 'MarkController@tabulation')->name('marks.tabulation');
                 Route::post('tabulation', 'MarkController@tabulationSelect')->name('marks.tabulation_select');
@@ -116,7 +116,7 @@ Route::group(['middleware' => 'auth'], function () {
             });
 
             // FOR teamSAT
-            Route::group(['middleware' => 'teamSAT'], function(){
+            Route::group([ 'middleware' => 'teamSAT' ], function () {
                 Route::get('/', 'MarkController@index')->name('marks.index');
                 Route::get('manage/{exam}/{courses}/{classes}/{subject}', 'MarkController@manage')->name('marks.manage');
                 Route::put('update/{exam}/{courses}/{classes}/{subject}', 'MarkController@update')->name('marks.update');
@@ -147,7 +147,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     /************************ AJAX ****************************/
-    Route::group(['prefix' => 'ajax'], function() {
+    Route::group([ 'prefix' => 'ajax' ], function () {
         Route::get('get_lga/{state_id}', 'AjaxController@getLga')->name('get_lga');
         Route::get('get_class_sections/{class_id}', 'AjaxController@getClassSections')->name('get_class_sections');
         Route::get('get_class_subjects/{class_id}', 'AjaxController@getClassSubjects')->name('get_class_subjects');
@@ -156,7 +156,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 /************************ SUPER ADMIN ****************************/
-Route::group(['namespace' => 'SuperAdmin','middleware' => 'super_admin', 'prefix' => 'super_admin'], function(){
+Route::group([ 'namespace' => 'SuperAdmin', 'middleware' => 'super_admin', 'prefix' => 'super_admin' ], function () {
 
     Route::get('/settings', 'SettingController@index')->name('settings');
     Route::put('/settings', 'SettingController@update')->name('settings.update');
@@ -164,7 +164,7 @@ Route::group(['namespace' => 'SuperAdmin','middleware' => 'super_admin', 'prefix
 });
 
 /************************ PARENT ****************************/
-Route::group(['namespace' => 'MyParent','middleware' => 'my_parent',], function(){
+Route::group([ 'namespace' => 'MyParent', 'middleware' => 'my_parent', ], function () {
 
     Route::get('/my_children', 'MyController@children')->name('my_children');
 

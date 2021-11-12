@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleMapDrawingCircles = function() {
+var GoogleMapDrawingCircles = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleMapDrawingCircles = function() {
     //
 
     // Line chart
-    var _googleMapDrawingCircles = function() {
+    var _googleMapDrawingCircles = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Maps library is not loaded.');
             return;
@@ -56,6 +56,7 @@ var GoogleMapDrawingCircles = function() {
 
         // Initialize
         var cityCircle;
+
         function initialize() {
 
             // Define map element
@@ -103,7 +104,7 @@ var GoogleMapDrawingCircles = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleMapDrawingCircles();
         }
     }
@@ -113,6 +114,6 @@ var GoogleMapDrawingCircles = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     GoogleMapDrawingCircles.init();
 });

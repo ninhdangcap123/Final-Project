@@ -25,7 +25,7 @@
         // On a new line
         &.d-block {
             margin-left: 0;
-            
+
             &:before {
                 content: none;
             }
@@ -64,7 +64,7 @@
 .page-header-light {
     background-color: $page-header-light-bg;
     border-bottom: $page-header-border-width solid $page-header-light-border-color;
-    
+
     // Cover image
     &.has-cover {
         background: url(#{$img-path}/backgrounds/seamless.png); // feel free to change
@@ -100,7 +100,7 @@
             color: rgba($page-header-dark-color, 0.5);
         }
     }
-    
+
     // Cover image
     &.has-cover {
         background: url(#{$img-path}/login_cover.jpg); // feel free to change

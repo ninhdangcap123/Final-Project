@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var NavbarMultipleSticky = function() {
+var NavbarMultipleSticky = function () {
 
 
     //
@@ -18,7 +18,7 @@ var NavbarMultipleSticky = function() {
     //
 
     // Sticky.js
-    var _componentSticky = function() {
+    var _componentSticky = function () {
         if (!$().stick_in_parent) {
             console.warn('Warning - sticky.min.js is not loaded.');
             return;
@@ -34,7 +34,7 @@ var NavbarMultipleSticky = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentSticky();
         }
     }
@@ -44,6 +44,6 @@ var NavbarMultipleSticky = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     NavbarMultipleSticky.init();
 });

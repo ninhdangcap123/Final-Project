@@ -25,30 +25,10 @@ class MarkRepository extends BaseRepository implements MarkRepositoryInterface
         return $this->model->where($data)->with('grade')->get();
     }
 
-    public function getSubjectTotalTerm($student_id, $subject_id, $term, $course_id, $year)
-    {
-        // TODO: Implement getSubTotalTerm() method.
-        $data = ['student_id' => $student_id, 'subject_id' => $subject_id, 'my_course_id' => $course_id, 'year' => $year];
-
-        $tex = 'tex'.$term;
-        $subjectTotal = $this->model->where($data)->select($tex)->get()->where($tex, '>', 0);
-        return $subjectTotal->count() > 0 ? $subjectTotal->first()->$tex : NULL;
-    }
-
-    public function getExamTotalTerm($exam, $student_id, $course_id, $year)
-    {
-        // TODO: Implement getExamTotalTerm() method.
-        $data = ['student_id' => $student_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'year' => $year];
-
-        $tex = 'tex'.$exam->term;
-        $mark = $this->model->where($data);
-        return $mark->select($tex)->sum($tex);
-    }
-
     public function getExamAverageTerm($exam, $student_id, $course_id, $sec_id, $year)
     {
         // TODO: Implement getExamAvgTerm() method.
-        $data = ['student_id' => $student_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'class_id' => $sec_id, 'year' => $year];
+        $data = [ 'student_id' => $student_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'class_id' => $sec_id, 'year' => $year ];
 
         $tex = 'tex'.$exam->term;
 
@@ -65,6 +45,16 @@ class MarkRepository extends BaseRepository implements MarkRepositoryInterface
         return $tex1 + $tex2 + $tex3;
     }
 
+    public function getSubjectTotalTerm($student_id, $subject_id, $term, $course_id, $year)
+    {
+        // TODO: Implement getSubTotalTerm() method.
+        $data = [ 'student_id' => $student_id, 'subject_id' => $subject_id, 'my_course_id' => $course_id, 'year' => $year ];
+
+        $tex = 'tex'.$term;
+        $subjectTotal = $this->model->where($data)->select($tex)->get()->where($tex, '>', 0);
+        return $subjectTotal->count() > 0 ? $subjectTotal->first()->$tex : NULL;
+    }
+
     public function getSubCumAvg($tex3, $student_id, $subject_id, $course_id, $year)
     {
         // TODO: Implement getSubCumAvg() method.
@@ -75,8 +65,20 @@ class MarkRepository extends BaseRepository implements MarkRepositoryInterface
         $count = $tex2 ? $count + 1 : $count;
         $count = $tex3 ? $count + 1 : $count;
         $total = $tex1 + $tex2 + $tex3;
-        return ($total > 0) ? round($total/$count, 1) : 0;
+        return ( $total > 0 ) ? round($total / $count, 1) : 0;
 
+    }
+
+    public function getSubjectPosition($student_id, $exam, $course_id, $subject_id, $year)
+    {
+        // TODO: Implement getSubPos() method.
+        $data = [ 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'subject_id' => $subject_id, 'year' => $year ];
+        $tex = 'tex'.$exam->term;
+
+        $subjectMark = $this->getSubjectMark($exam, $course_id, $subject_id, $student_id, $year);
+
+        $subjectMarks = $this->model->where($data)->whereNotNull($tex)->orderBy($tex, 'DESC')->select($tex)->get()->pluck($tex);
+        return $sub_pos = $subjectMarks->count() > 0 ? $subjectMarks->search($subjectMark) + 1 : NULL;
     }
 
     public function getSubjectMark($exam, $course_id, $subject_id, $student_id, $year)
@@ -88,25 +90,15 @@ class MarkRepository extends BaseRepository implements MarkRepositoryInterface
         return $this->model->where($data)->select($tex)->get()->first()->$tex;
     }
 
-    public function getSubjectPosition($student_id, $exam, $course_id, $subject_id, $year)
-    {
-        // TODO: Implement getSubPos() method.
-        $data = ['exam_id' => $exam->id, 'my_course_id' => $course_id, 'subject_id' => $subject_id, 'year' => $year];
-        $tex = 'tex'.$exam->term;
-
-        $subjectMark = $this->getSubjectMark($exam, $course_id, $subject_id, $student_id, $year);
-
-        $subjectMarks = $this->model->where($data)->whereNotNull($tex)->orderBy($tex, 'DESC')->select($tex)->get()->pluck($tex);
-        return $sub_pos = $subjectMarks->count() > 0 ? $subjectMarks->search($subjectMark) + 1 : NULL;
-    }
-
     public function countExamSubjects($exam, $student_id, $course_id, $year)
     {
         // TODO: Implement countExSubjects() method.
         $data = [ 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'student_id' => $student_id, 'year' => $year ];
         $tex = 'tex'.$exam->term;
 
-        if($exam->term == 3){ unset($data['exam_id']); }
+        if( $exam->term == 3 ) {
+            unset($data['exam_id']);
+        }
 
         return $this->model->where($data)->whereNotNull($tex)->count();
     }
@@ -124,7 +116,8 @@ class MarkRepository extends BaseRepository implements MarkRepositoryInterface
     public function getPosition($student_id, $exam, $course_id, $class_id, $year)
     {
         // TODO: Implement getPos() method.
-        $data = ['student_id' => $student_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'class_id' => $class_id, 'year' => $year ]; $allMarks = [];
+        $data = [ 'student_id' => $student_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'class_id' => $class_id, 'year' => $year ];
+        $allMarks = [];
         $tex = 'tex'.$exam->term;
 
         $myMark = $this->model->where($data)->select($tex)->sum($tex);
@@ -132,11 +125,21 @@ class MarkRepository extends BaseRepository implements MarkRepositoryInterface
         unset($data['student_id']);
         $mark = $this->model->where($data);
         $students = $mark->select('student_id')->distinct()->get();
-        foreach($students as $student){
+        foreach( $students as $student ) {
             $allMarks[] = $this->getExamTotalTerm($exam, $student->student_id, $course_id, $year);
         }
         rsort($allMarks);
         return array_search($myMark, $allMarks) + 1;
+    }
+
+    public function getExamTotalTerm($exam, $student_id, $course_id, $year)
+    {
+        // TODO: Implement getExamTotalTerm() method.
+        $data = [ 'student_id' => $student_id, 'exam_id' => $exam->id, 'my_course_id' => $course_id, 'year' => $year ];
+
+        $tex = 'tex'.$exam->term;
+        $mark = $this->model->where($data);
+        return $mark->select($tex)->sum($tex);
     }
 
     public function getSubjectIDs($data)

@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\SupportTeam;
 
 use App\Helpers\GetSystemInfoHelper;
-use App\Helpers\Qs;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Exam\ExamCreate;
 use App\Http\Requests\Exam\ExamUpdate;
 use App\Repositories\Exam\ExamRepositoryInterface;
 use App\Repositories\ExamRepo;
-use App\Http\Controllers\Controller;
 
 class ExamController extends Controller
 {
     protected $examRepo;
+
     public function __construct(ExamRepositoryInterface $examRepo)
     {
-        $this->middleware('teamSA', ['except' => ['destroy',] ]);
-        $this->middleware('super_admin', ['only' => ['destroy',] ]);
+        $this->middleware('teamSA', [ 'except' => [ 'destroy', ] ]);
+        $this->middleware('super_admin', [ 'only' => [ 'destroy', ] ]);
         $this->examRepo = $examRepo;
     }
 
@@ -28,7 +28,7 @@ class ExamController extends Controller
 
     public function store(ExamCreate $request)
     {
-        $data = $request->only(['name', 'term']);
+        $data = $request->only([ 'name', 'term' ]);
         $data['year'] = GetSystemInfoHelper::getSetting('current_session');
         $this->examRepo->create($data);
         return back()->with('flash_success', __('msg.store_ok'));
@@ -42,7 +42,7 @@ class ExamController extends Controller
 
     public function update(ExamUpdate $request, $id)
     {
-        $data = $request->only(['name', 'term']);
+        $data = $request->only([ 'name', 'term' ]);
         $this->examRepo->update($id, $data);
         return back()->with('flash_success', __('msg.update_ok'));
     }

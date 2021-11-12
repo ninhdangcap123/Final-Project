@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleAreaHorizontalGrouped = function() {
+var DimpleAreaHorizontalGrouped = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleAreaHorizontalGrouped = function() {
     //
 
     // Chart
-    var _areaHorizontalGrouped = function() {
+    var _areaHorizontalGrouped = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleAreaHorizontalGrouped = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -62,7 +62,7 @@ var DimpleAreaHorizontalGrouped = function() {
 
                 // Horizontal
                 var x = myChart.addCategoryAxis("x", ["Owner", "Month"]);
-                    x.addGroupOrderRule("Date");
+                x.addGroupOrderRule("Date");
 
                 // Vertical
                 var y = myChart.addMeasureAxis("y", "Unit Sales");
@@ -126,7 +126,7 @@ var DimpleAreaHorizontalGrouped = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _areaHorizontalGrouped();
         }
     }
@@ -136,6 +136,6 @@ var DimpleAreaHorizontalGrouped = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleAreaHorizontalGrouped.init();
 });

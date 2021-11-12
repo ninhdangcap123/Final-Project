@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleStepVerticalMultipleGrouped = function() {
+var DimpleStepVerticalMultipleGrouped = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleStepVerticalMultipleGrouped = function() {
     //
 
     // Chart
-    var _stepVerticalMultipleGrouped = function() {
+    var _stepVerticalMultipleGrouped = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleStepVerticalMultipleGrouped = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -65,7 +65,7 @@ var DimpleStepVerticalMultipleGrouped = function() {
 
                 // Vertical
                 var y = myChart.addCategoryAxis("y", ["Owner", "Month"]);
-                    y.addGroupOrderRule("Date");
+                y.addGroupOrderRule("Date");
 
 
                 // Construct layout
@@ -139,7 +139,7 @@ var DimpleStepVerticalMultipleGrouped = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _stepVerticalMultipleGrouped();
         }
     }
@@ -149,6 +149,6 @@ var DimpleStepVerticalMultipleGrouped = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleStepVerticalMultipleGrouped.init();
 });

@@ -10,7 +10,8 @@
         <span>1 - Poor</span> <br>
     </div>
 
-    <table align="left" style="width:40%; border-collapse:collapse; border: 1px solid #000; margin:10px 20px;" border="1">
+    <table align="left" style="width:40%; border-collapse:collapse; border: 1px solid #000; margin:10px 20px;"
+           border="1">
         <thead>
         <tr>
             <td><strong>AFFECTIVE TRAITS</strong></td>
@@ -27,7 +28,8 @@
         </tbody>
     </table>
 
-    <table align="left" style="width:35%; border-collapse:collapse;border: 1px solid #000;  margin: 10px 20px;" border="1">
+    <table align="left" style="width:35%; border-collapse:collapse;border: 1px solid #000;  margin: 10px 20px;"
+           border="1">
         <thead>
         <tr>
             <td><strong>PSYCHOMOTOR</strong></td>

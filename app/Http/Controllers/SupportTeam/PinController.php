@@ -4,13 +4,11 @@ namespace App\Http\Controllers\SupportTeam;
 
 use App\Helpers\CheckUsersHelper;
 use App\Helpers\DisplayMessageHelper;
-use App\Helpers\Qs;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Pin\PinCreate;
 use App\Http\Requests\Pin\PinVerify;
-use App\Repositories\Pin\PinRepository;
 use App\Repositories\Pin\PinRepositoryInterface;
 use App\Repositories\PinRepo;
-use App\Http\Controllers\Controller;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +27,7 @@ class PinController extends Controller
         $this->pinRepo = $pinRepo;
         $this->userRepo = $userRepo;
         $this->middleware('examIsLocked');
-        $this->middleware('teamSA', ['except' => ['verify', 'enter_pin'] ]);
+        $this->middleware('teamSA', [ 'except' => [ 'verify', 'enter_pin' ] ]);
     }
 
     public function index()
@@ -42,7 +40,7 @@ class PinController extends Controller
 
     public function create()
     {
-        if($this->pinRepo->countValid() > 500){
+        if( $this->pinRepo->countValid() > 500 ) {
             return redirect()->route('pins.index')->with('flash_danger', __('msg.pin_max'));
         }
         return view('pages.support_team.pins.create');
@@ -50,26 +48,30 @@ class PinController extends Controller
 
     public function enterPin($student_id)
     {
-        if(CheckUsersHelper::userIsTeamSA()) {
+        if( CheckUsersHelper::userIsTeamSA() ) {
             return redirect(route('dashboard'));
         }
 
-        if($this->checkPinVerified($student_id))
-        {
+        if( $this->checkPinVerified($student_id) ) {
             return Session::has('marks_url') ? redirect(Session::get('marks_url')) : redirect()->route('dashboard');
         }
         $data['student'] = $this->userRepo->find($student_id);
         return view('pages.support_team.pins.enter', $data);
     }
 
+    protected function checkPinVerified($st_id)
+    {
+        return Session::has('pin_verified') && Session::get('pin_verified') == $st_id;
+    }
+
     public function verify(PinVerify $request, $student_id)
     {
         $user = Auth::user();
         $code = $this->pinRepo->findValidCode($request->pin_code);
-        if($code->count() < 1){
+        if( $code->count() < 1 ) {
             $code = $this->pinRepo->getUserPin($request->pin_code, $user->id, $student_id);
         }
-        if($code->count() > 0 && $code->first()->times_used < 6 ){
+        if( $code->count() > 0 && $code->first()->times_used < 6 ) {
             $code = $code->first();
             $data['times_used'] = $code->times_used + 1;
             $data['user_id'] = $user->id;
@@ -89,9 +91,9 @@ class PinController extends Controller
         $pinCount = $request->pin_count;
 
         $data = [];
-        for($i = 0; $i < $pinCount; $i++){
+        for( $i = 0; $i < $pinCount; $i++ ) {
             $code = Str::random(5).'-'.Str::random(5).'-'.Str::random(6);
-            $data[] = ['code' => strtoupper($code)];
+            $data[] = [ 'code' => strtoupper($code) ];
         }
         $this->pinRepo->insert($data);
         return redirect()->route('pins.index')->with('flash_success', __('msg.pin_create'));
@@ -101,11 +103,6 @@ class PinController extends Controller
     {
         $this->pinRepo->deleteUsed();
         return back()->with('flash_success', 'Pins Deleted Successfully');
-    }
-
-    protected function checkPinVerified($st_id)
-    {
-        return Session::has('pin_verified') && Session::get('pin_verified') == $st_id;
     }
 
 }

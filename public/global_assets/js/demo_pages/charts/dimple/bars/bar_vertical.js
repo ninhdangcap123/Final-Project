@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleBarVertical = function() {
+var DimpleBarVertical = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleBarVertical = function() {
     //
 
     // Chart
-    var _barVertical = function() {
+    var _barVertical = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleBarVertical = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -62,7 +62,7 @@ var DimpleBarVertical = function() {
 
                 // Vertical
                 var y = myChart.addCategoryAxis("y", "Month");
-                    y.addOrderRule("Date");
+                y.addOrderRule("Date");
 
 
                 // Construct layout
@@ -121,7 +121,7 @@ var DimpleBarVertical = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _barVertical();
         }
     }
@@ -131,6 +131,6 @@ var DimpleBarVertical = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleBarVertical.init();
 });

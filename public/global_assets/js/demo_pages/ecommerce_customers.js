@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var EcommerceCustomers = function() {
+var EcommerceCustomers = function () {
 
 
     //
@@ -18,7 +18,7 @@ var EcommerceCustomers = function() {
     //
 
     // Chart
-    var _componentEcharts = function() {
+    var _componentEcharts = function () {
         if (typeof echarts == 'undefined') {
             console.warn('Warning - echarts.min.js is not loaded.');
             return;
@@ -42,7 +42,7 @@ var EcommerceCustomers = function() {
             customers_chart.setOption({
 
                 // Define colors
-                color: ['#EF5350', '#03A9F4','#4CAF50'],
+                color: ['#EF5350', '#03A9F4', '#4CAF50'],
 
                 // Global text styles
                 textStyle: {
@@ -64,7 +64,7 @@ var EcommerceCustomers = function() {
 
                 // Add legend
                 legend: {
-                    data: ['New customers','Returned customers','Orders'],
+                    data: ['New customers', 'Returned customers', 'Orders'],
                     itemHeight: 8,
                     itemGap: 20,
                     textStyle: {
@@ -92,7 +92,7 @@ var EcommerceCustomers = function() {
                 // Horizontal axis
                 xAxis: [{
                     type: 'category',
-                    data: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+                    data: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                     axisLabel: {
                         color: '#333'
                     },
@@ -205,12 +205,12 @@ var EcommerceCustomers = function() {
         //
 
         // Resize function
-        var triggerChartResize = function() {
+        var triggerChartResize = function () {
             customers_chart_element && customers_chart.resize();
         };
 
         // On sidebar width change
-        $(document).on('click', '.sidebar-control', function() {
+        $(document).on('click', '.sidebar-control', function () {
             setTimeout(function () {
                 triggerChartResize();
             }, 0);
@@ -227,7 +227,7 @@ var EcommerceCustomers = function() {
     };
 
     // Datatable
-    var _componentDatatable = function() {
+    var _componentDatatable = function () {
         if (!$().DataTable) {
             console.warn('Warning - datatables.min.js is not loaded.');
             return;
@@ -241,7 +241,7 @@ var EcommerceCustomers = function() {
                     targets: 0,
                     width: 400
                 },
-                { 
+                {
                     orderable: false,
                     width: 16,
                     targets: 6
@@ -252,15 +252,20 @@ var EcommerceCustomers = function() {
                     targets: -1
                 },
             ],
-            order: [[ 0, 'asc' ]],
+            order: [[0, 'asc']],
             dom: '<"datatable-header datatable-header-accent"fBl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
             language: {
                 search: '<span>Search people:</span> _INPUT_',
                 searchPlaceholder: 'Type to filter...',
                 lengthMenu: '<span>Show:</span> _MENU_',
-                paginate: { 'first': 'First', 'last': 'Last', 'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;', 'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;' }
+                paginate: {
+                    'first': 'First',
+                    'last': 'Last',
+                    'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;',
+                    'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;'
+                }
             },
-            lengthMenu: [ 25, 50, 75, 100 ],
+            lengthMenu: [25, 50, 75, 100],
             displayLength: 50,
             responsive: {
                 details: {
@@ -275,7 +280,7 @@ var EcommerceCustomers = function() {
                     className: 'btn bg-blue',
                     orientation: 'landscape',
                     exportOptions: {
-                        columns: [ 0, 1, 2, 3, 4, 5 ],
+                        columns: [0, 1, 2, 3, 4, 5],
                         stripHtml: true
                     },
                     customize: function (doc) {
@@ -287,7 +292,7 @@ var EcommerceCustomers = function() {
     };
 
     // Select2
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -307,7 +312,7 @@ var EcommerceCustomers = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentEcharts();
             _componentDatatable();
             _componentSelect2();
@@ -319,6 +324,6 @@ var EcommerceCustomers = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     EcommerceCustomers.init();
 });

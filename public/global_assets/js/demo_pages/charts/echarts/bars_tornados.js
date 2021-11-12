@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var EchartsBarsTornados = function() {
+var EchartsBarsTornados = function () {
 
 
     //
@@ -18,7 +18,7 @@ var EchartsBarsTornados = function() {
     //
 
     // Bar and tornado charts
-    var _barsTornadosExamples = function() {
+    var _barsTornadosExamples = function () {
         if (typeof echarts == 'undefined') {
             console.warn('Warning - echarts.min.js is not loaded.');
             return;
@@ -121,7 +121,7 @@ var EchartsBarsTornados = function() {
                 // Vertical axis
                 yAxis: [{
                     type: 'category',
-                    data: ['Germany','France','Spain','Netherlands','Belgium'],
+                    data: ['Germany', 'France', 'Spain', 'Netherlands', 'Belgium'],
                     axisLabel: {
                         color: '#333'
                     },
@@ -204,7 +204,7 @@ var EchartsBarsTornados = function() {
 
                 // Add legend
                 legend: {
-                    data: ['Internet Explorer','Opera','Safari','Firefox','Chrome'],
+                    data: ['Internet Explorer', 'Opera', 'Safari', 'Firefox', 'Chrome'],
                     itemHeight: 8,
                     itemGap: 20,
                     textStyle: {
@@ -293,7 +293,7 @@ var EchartsBarsTornados = function() {
                                 }
                             }
                         },
-                        data:[320, 302, 301, 334, 390, 330, 320]
+                        data: [320, 302, 301, 334, 390, 330, 320]
                     },
                     {
                         name: 'Opera',
@@ -310,7 +310,7 @@ var EchartsBarsTornados = function() {
                                 }
                             }
                         },
-                        data:[120, 132, 101, 134, 120, 230, 210]
+                        data: [120, 132, 101, 134, 120, 230, 210]
                     },
                     {
                         name: 'Safari',
@@ -327,7 +327,7 @@ var EchartsBarsTornados = function() {
                                 }
                             }
                         },
-                        data:[220, 182, 191, 234, 290, 330, 310]
+                        data: [220, 182, 191, 234, 290, 330, 310]
                     },
                     {
                         name: 'Firefox',
@@ -344,7 +344,7 @@ var EchartsBarsTornados = function() {
                                 }
                             }
                         },
-                        data:[150, 212, 201, 154, 190, 330, 410]
+                        data: [150, 212, 201, 154, 190, 330, 410]
                     },
                     {
                         name: 'Chrome',
@@ -361,7 +361,7 @@ var EchartsBarsTornados = function() {
                                 }
                             }
                         },
-                        data:[820, 832, 901, 934, 1290, 1330, 1320]
+                        data: [820, 832, 901, 934, 1290, 1330, 1320]
                     }
                 ]
             });
@@ -402,8 +402,8 @@ var EchartsBarsTornados = function() {
                 // Add legend
                 legend: {
                     data: [
-                        'Version 1.7 - 2k data','Version 1.7 - 2w data','Version 1.7 - 20w data','',
-                        'Version 2.0 - 2k data','Version 2.0 - 2w data','Version 2.0 - 20w data'
+                        'Version 1.7 - 2k data', 'Version 1.7 - 2w data', 'Version 1.7 - 20w data', '',
+                        'Version 2.0 - 2k data', 'Version 2.0 - 2w data', 'Version 2.0 - 20w data'
                     ],
                     itemHeight: 2,
                     itemGap: 8,
@@ -453,7 +453,7 @@ var EchartsBarsTornados = function() {
                 yAxis: [
                     {
                         type: 'category',
-                        data: ['Line','Bar','Scatter','Pies'],
+                        data: ['Line', 'Bar', 'Scatter', 'Pies'],
                         axisLabel: {
                             color: '#333'
                         },
@@ -477,12 +477,12 @@ var EchartsBarsTornados = function() {
                     },
                     {
                         type: 'category',
-                        axisLine: {show:false},
-                        axisTick: {show:false},
-                        axisLabel: {show:false},
-                        splitArea: {show:false},
-                        splitLine: {show:false},
-                        data: ['Line','Bar','Scatter','Pies']
+                        axisLine: {show: false},
+                        axisTick: {show: false},
+                        axisLabel: {show: false},
+                        splitArea: {show: false},
+                        splitLine: {show: false},
+                        data: ['Line', 'Bar', 'Scatter', 'Pies']
                     }
                 ],
 
@@ -630,7 +630,7 @@ var EchartsBarsTornados = function() {
                     color: 'transparent'
                 }
             };
-            var dataStyle = { 
+            var dataStyle = {
                 normal: {
                     barBorderRadius: 3,
                     label: {
@@ -667,7 +667,7 @@ var EchartsBarsTornados = function() {
 
                 // Add legend
                 legend: {
-                    data: ['GML', 'PYP','WTC', 'ZTW'],
+                    data: ['GML', 'PYP', 'WTC', 'ZTW'],
                     itemHeight: 8,
                     itemGap: 20,
                     textStyle: {
@@ -961,7 +961,7 @@ var EchartsBarsTornados = function() {
             bars_tornado_negative.setOption({
 
                 // Define colors
-                color: ['#2ec7c9','#5ab1ef','#b6a2de',],
+                color: ['#2ec7c9', '#5ab1ef', '#b6a2de',],
 
                 // Global text styles
                 textStyle: {
@@ -1031,7 +1031,7 @@ var EchartsBarsTornados = function() {
                 // Vertical axis
                 yAxis: [{
                     type: 'category',
-                    data: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+                    data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
                     axisTick: {
                         show: false
                     },
@@ -1171,7 +1171,7 @@ var EchartsBarsTornados = function() {
                             color: 'rgba(0,0,0,0.025)'
                         }
                     },
-                    formatter: function(params) {
+                    formatter: function (params) {
                         return params[0].seriesName + ': ' + params[0].value + ' €';
                     }
                 },
@@ -1261,7 +1261,7 @@ var EchartsBarsTornados = function() {
         //
 
         // Resize function
-        var triggerChartResize = function() {
+        var triggerChartResize = function () {
             bars_basic_element && bars_basic.resize();
             bars_stacked_element && bars_stacked.resize();
             bars_clustered_element && bars_clustered.resize();
@@ -1272,7 +1272,7 @@ var EchartsBarsTornados = function() {
         };
 
         // On sidebar width change
-        $(document).on('click', '.sidebar-control', function() {
+        $(document).on('click', '.sidebar-control', function () {
             setTimeout(function () {
                 triggerChartResize();
             }, 0);
@@ -1294,7 +1294,7 @@ var EchartsBarsTornados = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _barsTornadosExamples();
         }
     }
@@ -1304,6 +1304,6 @@ var EchartsBarsTornados = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     EchartsBarsTornados.init();
 });

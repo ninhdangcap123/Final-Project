@@ -9,13 +9,6 @@ class GetPathHelper
         return 'uploads/';
     }
 
-    public static function formatBytes($size, $precision = 2)
-    {
-        $base = log($size, 1024);
-        $suffixes = array('B', 'KB', 'MB', 'GB', 'TB');
-
-        return round(pow(1024, $base - floor($base)), $precision) .' '. $suffixes[floor($base)];
-    }
     public static function getUserUploadPath()
     {
         return 'uploads/'.date('Y').'/'.date('m').'/'.date('d').'/';
@@ -34,6 +27,15 @@ class GetPathHelper
         $dataFile['size'] = self::formatBytes($file->getSize());
         return $dataFile;
     }
+
+    public static function formatBytes($size, $precision = 2)
+    {
+        $base = log($size, 1024);
+        $suffixes = array( 'B', 'KB', 'MB', 'GB', 'TB' );
+
+        return round(pow(1024, $base - floor($base)), $precision).' '.$suffixes[floor($base)];
+    }
+
     public static function getDefaultUserImage()
     {
         return asset('global_assets/images/user.png');

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GooglePieDiff = function() {
+var GooglePieDiff = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GooglePieDiff = function() {
     //
 
     // Pie with radius factor
-    var _googlePieDiff = function() {
+    var _googlePieDiff = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GooglePieDiff = function() {
 
                 // Resize on window resize
                 var resizePieDiff;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizePieDiff);
                     resizePieDiff = setTimeout(function () {
                         drawPieDiff();
@@ -102,7 +102,7 @@ var GooglePieDiff = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googlePieDiff();
         }
     }

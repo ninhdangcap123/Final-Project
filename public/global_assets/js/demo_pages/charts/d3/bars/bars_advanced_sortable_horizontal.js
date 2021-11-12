@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3BarSortableHorizontal = function() {
+var D3BarSortableHorizontal = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3BarSortableHorizontal = function() {
     //
 
     // Chart
-    var _barSortableHorizontal = function() {
+    var _barSortableHorizontal = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3BarSortableHorizontal = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -43,8 +43,7 @@ var D3BarSortableHorizontal = function() {
 
             // Add data
             var index = d3.range(8),
-            data = index.map(d3.random.normal(40, 10));
-
+                data = index.map(d3.random.normal(40, 10));
 
 
             // Construct scales
@@ -64,7 +63,6 @@ var D3BarSortableHorizontal = function() {
             var colors = d3.scale.category20c();
 
 
-
             // Create axes
             // ------------------------------
 
@@ -80,7 +78,6 @@ var D3BarSortableHorizontal = function() {
                 .ticks(8);
 
 
-
             // Create chart
             // ------------------------------
 
@@ -92,7 +89,7 @@ var D3BarSortableHorizontal = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             //
@@ -122,9 +119,13 @@ var D3BarSortableHorizontal = function() {
                 .data(data)
                 .enter()
                 .append("g")
-                    .attr("class", "d3-bar")
-                    .attr("fill", function(d, i) { return colors(i); })
-                    .attr("transform", function(d, i) { return "translate(0," + y(i) + ")"; });
+                .attr("class", "d3-bar")
+                .attr("fill", function (d, i) {
+                    return colors(i);
+                })
+                .attr("transform", function (d, i) {
+                    return "translate(0," + y(i) + ")";
+                });
 
             // Append bar rectangle
             bar.append("rect")
@@ -133,21 +134,27 @@ var D3BarSortableHorizontal = function() {
 
             // Append text label
             bar.append("text")
-                .attr("x", function(d) { return x(d) - 12 })
+                .attr("x", function (d) {
+                    return x(d) - 12
+                })
                 .attr("y", y.rangeBand() / 2)
                 .attr("dy", ".35em")
                 .style("fill", "#fff")
                 .style("text-anchor", "end")
-                .text(function(d, i) { return i; });
+                .text(function (d, i) {
+                    return i;
+                });
 
 
             // Setup sort
             // ------------------------------
 
             var sort = false;
-            setInterval(function() {
+            setInterval(function () {
                 if (sort = !sort) {
-                    index.sort(function(a, b) { return data[a] - data[b]; });
+                    index.sort(function (a, b) {
+                        return data[a] - data[b];
+                    });
                 } else {
                     index = d3.range(8);
                 }
@@ -156,10 +163,13 @@ var D3BarSortableHorizontal = function() {
 
                 bar.transition()
                     .duration(750)
-                    .delay(function(d, i) { return i * 50; })
-                    .attr("transform", function(d, i) { return "translate(0," + y(i) + ")"; });
+                    .delay(function (d, i) {
+                        return i * 50;
+                    })
+                    .attr("transform", function (d, i) {
+                        return "translate(0," + y(i) + ")";
+                    });
             }, 4000);
-
 
 
             // Resize chart
@@ -172,9 +182,9 @@ var D3BarSortableHorizontal = function() {
             $('.sidebar-control').on('click', resize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resize() {
 
@@ -209,7 +219,9 @@ var D3BarSortableHorizontal = function() {
                 svg.selectAll('.d3-bar rect').attr("width", x);
 
                 // Bar text
-                svg.selectAll('.d3-bar text').attr("x", function(d) { return x(d) - 12; });
+                svg.selectAll('.d3-bar text').attr("x", function (d) {
+                    return x(d) - 12;
+                });
             }
         }
     };
@@ -220,7 +232,7 @@ var D3BarSortableHorizontal = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _barSortableHorizontal();
         }
     }
@@ -230,6 +242,6 @@ var D3BarSortableHorizontal = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3BarSortableHorizontal.init();
 });

@@ -13,7 +13,8 @@
     @include('partials.inc_top')
 </head>
 
-<body class="{{ in_array(Route::currentRouteName(), ['payments.invoice', 'marks.tabulation', 'marks.show', 'ttr.manage', 'ttr.show']) ? 'sidebar-xs' : '' }}">
+<body
+    class="{{ in_array(Route::currentRouteName(), ['payments.invoice', 'marks.tabulation', 'marks.show', 'ttr.manage', 'ttr.show']) ? 'sidebar-xs' : '' }}">
 
 @include('partials.top_menu')
 <div class="page-content">
@@ -27,9 +28,9 @@
                 <div class="alert alert-danger border-0 alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
 
-                        @foreach($errors->all() as $er)
-                            <span><i class="icon-arrow-right5"></i> {{ $er }}</span> <br>
-                        @endforeach
+                    @foreach($errors->all() as $er)
+                        <span><i class="icon-arrow-right5"></i> {{ $er }}</span> <br>
+                    @endforeach
 
                 </div>
             @endif

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var NavbarHideable = function() {
+var NavbarHideable = function () {
 
 
     //
@@ -18,7 +18,7 @@ var NavbarHideable = function() {
     //
 
     // Headroom.js
-    var _componentHeadroom = function() {
+    var _componentHeadroom = function () {
         if (typeof Headroom == 'undefined') {
             console.warn('Warning - headroom.min.js is not loaded.');
             return;
@@ -42,15 +42,14 @@ var NavbarHideable = function() {
                     up: 10,
                     down: 10
                 },
-                onUnpin : function() {
+                onUnpin: function () {
                     $('.headroom').find('.show').removeClass('show');
                 }
             });
 
             // Initialise
-            headroomTop.init(); 
+            headroomTop.init();
         }
-
 
 
         //
@@ -58,7 +57,7 @@ var NavbarHideable = function() {
         //
 
         if (navbarBottom) {
-            
+
             // Construct an instance of Headroom, passing the element
             var headroomBottom = new Headroom(navbarBottom, {
                 offset: navbarBottom.offsetHeight,
@@ -66,7 +65,7 @@ var NavbarHideable = function() {
                     up: 10,
                     down: 10
                 },
-                onUnpin : function() {
+                onUnpin: function () {
                     $('.headroom').find('.show').removeClass('show');
                 }
             });
@@ -82,7 +81,7 @@ var NavbarHideable = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentHeadroom();
         }
     }
@@ -92,6 +91,6 @@ var NavbarHideable = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     NavbarHideable.init();
 });

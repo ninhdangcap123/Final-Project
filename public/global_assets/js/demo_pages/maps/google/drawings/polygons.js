@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleMapDrawingPolygons = function() {
+var GoogleMapDrawingPolygons = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleMapDrawingPolygons = function() {
     //
 
     // Line chart
-    var _googleMapDrawingPolygons = function() {
+    var _googleMapDrawingPolygons = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Maps library is not loaded.');
             return;
@@ -80,7 +80,7 @@ var GoogleMapDrawingPolygons = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleMapDrawingPolygons();
         }
     }
@@ -90,6 +90,6 @@ var GoogleMapDrawingPolygons = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     GoogleMapDrawingPolygons.init();
 });

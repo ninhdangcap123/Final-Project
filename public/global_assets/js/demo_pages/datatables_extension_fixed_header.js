@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DatatableFixedHeader = function() {
+var DatatableFixedHeader = function () {
 
 
     //
@@ -18,25 +18,30 @@ var DatatableFixedHeader = function() {
     //
 
     // Basic Datatable examples
-    var _componentDatatableFixedHeader = function() {
+    var _componentDatatableFixedHeader = function () {
         if (!$().DataTable) {
             console.warn('Warning - datatables.min.js is not loaded.');
             return;
         }
 
         // Setting datatable defaults
-        $.extend( $.fn.dataTable.defaults, {
+        $.extend($.fn.dataTable.defaults, {
             autoWidth: false,
             columnDefs: [{
                 orderable: false,
-                targets: [ 5 ]
+                targets: [5]
             }],
             dom: '<"datatable-header"fl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
             language: {
                 search: '<span>Filter:</span> _INPUT_',
                 searchPlaceholder: 'Type to filter...',
                 lengthMenu: '<span>Show:</span> _MENU_',
-                paginate: { 'first': 'First', 'last': 'Last', 'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;', 'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;' }
+                paginate: {
+                    'first': 'First',
+                    'last': 'Last',
+                    'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;',
+                    'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;'
+                }
             }
         });
 
@@ -66,11 +71,11 @@ var DatatableFixedHeader = function() {
 
         // Init offset toggle
         var toggleType = document.querySelector('.toggle-offset');
-        var toggleTypeInit = new Switchery(toggleType, { secondaryColor: '#FF7043'});
+        var toggleTypeInit = new Switchery(toggleType, {secondaryColor: '#FF7043'});
 
         // Toggle offset and fixed navbar
-        toggleType.onchange = function() {
-            if(toggleType.checked) {
+        toggleType.onchange = function () {
+            if (toggleType.checked) {
 
                 // Toggle necessary body and navbar courses
                 $('body').children('.navbar').first().addClass('fixed-top');
@@ -81,8 +86,7 @@ var DatatableFixedHeader = function() {
                 table_footer.fixedHeader.headerOffset($('.fixed-top').height());
                 table_reorder.fixedHeader.headerOffset($('.fixed-top').height());
                 table_offset.fixedHeader.headerOffset($('.fixed-top').height());
-            }
-            else {
+            } else {
 
                 // Toggle necessary body and navbar courses
                 $('body').children('.navbar').first().removeClass('fixed-top');
@@ -105,7 +109,7 @@ var DatatableFixedHeader = function() {
 
 
         // Adjust table header if sidebar toggler is clicked
-        $('.sidebar-control').on('click', function() {
+        $('.sidebar-control').on('click', function () {
             table_basic.fixedHeader.adjust();
             table_footer.fixedHeader.adjust();
             table_offset.fixedHeader.adjust();
@@ -114,7 +118,7 @@ var DatatableFixedHeader = function() {
     };
 
     // Select2 for length menu styling
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -134,7 +138,7 @@ var DatatableFixedHeader = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentDatatableFixedHeader();
             _componentSelect2();
         }
@@ -145,6 +149,6 @@ var DatatableFixedHeader = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DatatableFixedHeader.init();
 });

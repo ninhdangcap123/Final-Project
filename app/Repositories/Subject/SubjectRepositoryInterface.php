@@ -11,8 +11,11 @@ interface SubjectRepositoryInterface extends RepositoryInterface
 
 
     public function findSubjectByCourse($course_id);
+
     public function findSubjectByTeacher($teacher_id);
+
     public function getSubject($data);
+
     public function getSubjectsByIDs($ids);
 
 

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var HotAdvanced = function() {
+var HotAdvanced = function () {
 
 
     //
@@ -18,7 +18,7 @@ var HotAdvanced = function() {
     //
 
     // HOT advanced examples
-    var _componentHotAdvanced = function() {
+    var _componentHotAdvanced = function () {
         if (typeof Handsontable == 'undefined') {
             console.warn('Warning - handsontable.min.js is not loaded.');
             return;
@@ -54,7 +54,7 @@ var HotAdvanced = function() {
             td.style.color = '#1B5E20';
             td.style.background = '#E8F5E9';
         }
-      
+
         // Negative values renderer
         function negativeValueRenderer(instance, td, row, col, prop, value, cellProperties) {
             Handsontable.renderers.TextRenderer.apply(this, arguments);
@@ -85,8 +85,7 @@ var HotAdvanced = function() {
 
                 if (meta.readOnly) {
                     this.updateSettings({fillHandle: false});
-                }
-                else {
+                } else {
                     this.updateSettings({fillHandle: true});
                 }
             },
@@ -98,15 +97,13 @@ var HotAdvanced = function() {
                 }
                 if (row === 0 || col === 0) {
                     cellProperties.renderer = firstRowRenderer; // uses function directly
-                }
-                else {
+                } else {
                     cellProperties.renderer = "negativeValueRenderer"; // uses lookup map
                 }
 
                 return cellProperties;
             }
         });
-
 
 
         // Sorting data
@@ -141,7 +138,6 @@ var HotAdvanced = function() {
             manualColumnResize: true,
             sortIndicator: true
         });
-
 
 
         // Pagination
@@ -200,24 +196,24 @@ var HotAdvanced = function() {
 
             // Paging setup
             return function () {
-                var page  = parseInt(window.location.hash.replace('#', ''), 10) || 1,
+                var page = parseInt(window.location.hash.replace('#', ''), 10) || 1,
                     limit = 10,
-                    row   = (page - 1) * limit,
+                    row = (page - 1) * limit,
                     count = page * limit,
-                    part  = [];
+                    part = [];
 
-                for (;row < count;row++) {
+                for (; row < count; row++) {
                     part.push(hot_pagination_data[row]);
                 }
 
                 // Toggling active class in pagination
-                if(location.hash != "") {
+                if (location.hash != "") {
 
                     // Remove active class on load from the first item
                     $('#hot_pagination_nav .page-item').removeClass('active');
 
                     // Remove active class from siblings on click
-                    $('#hot_pagination_nav .page-item').on('click', function() {
+                    $('#hot_pagination_nav .page-item').on('click', function () {
                         $(this).siblings('.page-item').removeClass('active');
                     });
 
@@ -243,7 +239,6 @@ var HotAdvanced = function() {
         Handsontable.dom.addEvent(window, 'hashchange', function (event) {
             hot_pagination_init.loadData(getData());
         });
-
 
 
         // Pre-populating new rows
@@ -288,8 +283,7 @@ var HotAdvanced = function() {
             if (args[5] === null && isEmptyRow(instance, row)) {
                 args[5] = tpl[col];
                 td.style.color = '#ccc';
-            }
-            else {
+            } else {
                 td.style.color = '';
             }
             Handsontable.renderers.TextRenderer.apply(this, args);
@@ -316,12 +310,12 @@ var HotAdvanced = function() {
             },
             beforeChange: function (changes) {
                 var instance = hot_populate_init,
-                ilen = changes.length,
-                clen = instance.colCount,
-                rowColumnSeen = {},
-                rowsToFill = {},
-                i,
-                c;
+                    ilen = changes.length,
+                    clen = instance.colCount,
+                    rowColumnSeen = {},
+                    rowsToFill = {},
+                    i,
+                    c;
 
                 for (i = 0; i < ilen; i++) {
 
@@ -351,7 +345,6 @@ var HotAdvanced = function() {
         });
 
 
-
         // Highlighting current
         // ------------------------------
 
@@ -371,7 +364,7 @@ var HotAdvanced = function() {
         });
 
         // Select cell
-        hot_highlight_init.selectCell(2,2);
+        hot_highlight_init.selectCell(2, 2);
     };
 
 
@@ -380,7 +373,7 @@ var HotAdvanced = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentHotAdvanced();
         }
     }
@@ -390,6 +383,6 @@ var HotAdvanced = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     HotAdvanced.init();
 });

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var EchartsPiesDonuts = function() {
+var EchartsPiesDonuts = function () {
 
 
     //
@@ -18,7 +18,7 @@ var EchartsPiesDonuts = function() {
     //
 
     // Pie and donut charts
-    var _piesDonutsExamples = function() {
+    var _piesDonutsExamples = function () {
         if (typeof echarts == 'undefined') {
             console.warn('Warning - echarts.min.js is not loaded.');
             return;
@@ -56,10 +56,10 @@ var EchartsPiesDonuts = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -143,10 +143,10 @@ var EchartsPiesDonuts = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -230,10 +230,10 @@ var EchartsPiesDonuts = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -259,7 +259,7 @@ var EchartsPiesDonuts = function() {
                     orient: 'vertical',
                     top: 'center',
                     left: 0,
-                    data: ['Italy','Spain','Austria','Germany','Poland','Denmark','Hungary','Portugal','France','Netherlands'],
+                    data: ['Italy', 'Spain', 'Austria', 'Germany', 'Poland', 'Denmark', 'Hungary', 'Portugal', 'France', 'Netherlands'],
                     itemHeight: 8,
                     itemWidth: 8
                 },
@@ -350,10 +350,10 @@ var EchartsPiesDonuts = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -388,7 +388,7 @@ var EchartsPiesDonuts = function() {
                         fontFamily: 'Roboto, sans-serif'
                     },
                     formatter: function (params) {
-                        if(params.color == "transparent")return;
+                        if (params.color == "transparent") return;
                         return params.percent + '%' + ' - ' + params.seriesName;
                     }
                 },
@@ -398,7 +398,7 @@ var EchartsPiesDonuts = function() {
                     orient: 'vertical',
                     top: '5%',
                     left: (pie_infographic_element.offsetWidth / 2) + 20,
-                    data: ['60% Definitely yes','30% Could be better','10% Not at the moment'],
+                    data: ['60% Definitely yes', '30% Could be better', '10% Not at the moment'],
                     itemHeight: 8,
                     itemWidth: 8,
                     itemGap: 15
@@ -429,7 +429,7 @@ var EchartsPiesDonuts = function() {
 
                     {
                         name: 'Could be better',
-                        type:'pie',
+                        type: 'pie',
                         cursor: 'default',
                         clockWise: false,
                         radius: ['60%', '75%'],
@@ -437,7 +437,7 @@ var EchartsPiesDonuts = function() {
                         itemStyle: dataStyle,
                         data: [
                             {
-                                value: 30, 
+                                value: 30,
                                 name: '30% Could be better'
                             },
                             {
@@ -459,7 +459,7 @@ var EchartsPiesDonuts = function() {
                         itemStyle: dataStyle,
                         data: [
                             {
-                                value: 10, 
+                                value: 10,
                                 name: '10% Not at the moment'
                             },
                             {
@@ -489,10 +489,10 @@ var EchartsPiesDonuts = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -532,7 +532,7 @@ var EchartsPiesDonuts = function() {
                     orient: 'vertical',
                     top: 'center',
                     left: 0,
-                    data: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                    data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     itemHeight: 8,
                     itemWidth: 8
                 },
@@ -600,10 +600,10 @@ var EchartsPiesDonuts = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -643,7 +643,7 @@ var EchartsPiesDonuts = function() {
                     orient: 'vertical',
                     top: 'center',
                     left: 0,
-                    data: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                    data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                     itemHeight: 8,
                     itemWidth: 8
                 },
@@ -697,10 +697,10 @@ var EchartsPiesDonuts = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -740,7 +740,7 @@ var EchartsPiesDonuts = function() {
                     orient: 'vertical',
                     top: 'center',
                     left: 0,
-                    data: ['Chrome','Firefox','Safari','IE9+','IE8-'],
+                    data: ['Chrome', 'Firefox', 'Safari', 'IE9+', 'IE8-'],
                     itemHeight: 8,
                     itemWidth: 8
                 },
@@ -769,11 +769,11 @@ var EchartsPiesDonuts = function() {
                             radius: [i * 3.6 + 40, i * 3.6 + 43],
                             center: ['50%', '55%'],
                             data: [
-                                {value: i * 128 + 80,  name: 'Chrome'},
-                                {value: i * 64  + 160,  name: 'Firefox'},
-                                {value: i * 32  + 320,  name: 'Safari'},
-                                {value: i * 16  + 640,  name: 'IE9+'},
-                                {value: i * 8  + 1280, name: 'IE8-'}
+                                {value: i * 128 + 80, name: 'Chrome'},
+                                {value: i * 64 + 160, name: 'Firefox'},
+                                {value: i * 32 + 320, name: 'Safari'},
+                                {value: i * 16 + 640, name: 'IE9+'},
+                                {value: i * 8 + 1280, name: 'IE8-'}
                             ]
                         })
                     }
@@ -812,9 +812,9 @@ var EchartsPiesDonuts = function() {
                     },
                     data: [
                         '2014-01-01', '2014-02-01', '2014-03-01', '2014-04-01', '2014-05-01',
-                        { name:'2014-06-01', symbol: 'emptyStar2', symbolSize: 8 },
+                        {name: '2014-06-01', symbol: 'emptyStar2', symbolSize: 8},
                         '2014-07-01', '2014-08-01', '2014-09-01', '2014-10-01', '2014-11-01',
-                        { name:'2014-12-01', symbol: 'star2', symbolSize: 8 }
+                        {name: '2014-12-01', symbol: 'star2', symbolSize: 8}
                     ],
                     autoPlay: true,
                     playInterval: 3000
@@ -825,10 +825,10 @@ var EchartsPiesDonuts = function() {
 
                         // Colors
                         color: [
-                            '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                            '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                            '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                            '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                            '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                            '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                            '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                            '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                         ],
 
                         // Global text styles
@@ -868,7 +868,7 @@ var EchartsPiesDonuts = function() {
                             orient: 'vertical',
                             top: 'center',
                             left: 0,
-                            data: ['Chrome','Firefox','Safari','IE9+','IE8-'],
+                            data: ['Chrome', 'Firefox', 'Safari', 'IE9+', 'IE8-'],
                             itemHeight: 8,
                             itemWidth: 8
                         },
@@ -900,11 +900,11 @@ var EchartsPiesDonuts = function() {
                             name: 'Browser',
                             type: 'pie',
                             data: [
-                                {value: idx * 128 + 80,  name:'Chrome'},
-                                {value: idx * 64  + 160,  name:'Firefox'},
-                                {value: idx * 32  + 320,  name:'Safari'},
-                                {value: idx * 16  + 640,  name:'IE9+'},
-                                {value: idx++ * 8  + 1280, name:'IE8-'}
+                                {value: idx * 128 + 80, name: 'Chrome'},
+                                {value: idx * 64 + 160, name: 'Firefox'},
+                                {value: idx * 32 + 320, name: 'Safari'},
+                                {value: idx * 16 + 640, name: 'IE9+'},
+                                {value: idx++ * 8 + 1280, name: 'IE8-'}
                             ]
                         }]
                     },
@@ -913,11 +913,11 @@ var EchartsPiesDonuts = function() {
                             name: 'Browser',
                             type: 'pie',
                             data: [
-                                {value: idx * 128 + 80,  name:'Chrome'},
-                                {value: idx * 64  + 160,  name:'Firefox'},
-                                {value: idx * 32  + 320,  name:'Safari'},
-                                {value: idx * 16  + 640,  name:'IE9+'},
-                                {value: idx++ * 8  + 1280, name:'IE8-'}
+                                {value: idx * 128 + 80, name: 'Chrome'},
+                                {value: idx * 64 + 160, name: 'Firefox'},
+                                {value: idx * 32 + 320, name: 'Safari'},
+                                {value: idx * 16 + 640, name: 'IE9+'},
+                                {value: idx++ * 8 + 1280, name: 'IE8-'}
                             ]
                         }]
                     },
@@ -926,11 +926,11 @@ var EchartsPiesDonuts = function() {
                             name: 'Browser',
                             type: 'pie',
                             data: [
-                                {value: idx * 128 + 80,  name:'Chrome'},
-                                {value: idx * 64  + 160,  name:'Firefox'},
-                                {value: idx * 32  + 320,  name:'Safari'},
-                                {value: idx * 16  + 640,  name:'IE9+'},
-                                {value: idx++ * 8  + 1280, name:'IE8-'}
+                                {value: idx * 128 + 80, name: 'Chrome'},
+                                {value: idx * 64 + 160, name: 'Firefox'},
+                                {value: idx * 32 + 320, name: 'Safari'},
+                                {value: idx * 16 + 640, name: 'IE9+'},
+                                {value: idx++ * 8 + 1280, name: 'IE8-'}
                             ]
                         }]
                     },
@@ -939,11 +939,11 @@ var EchartsPiesDonuts = function() {
                             name: 'Browser',
                             type: 'pie',
                             data: [
-                                {value: idx * 128 + 80,  name:'Chrome'},
-                                {value: idx * 64  + 160,  name:'Firefox'},
-                                {value: idx * 32  + 320,  name:'Safari'},
-                                {value: idx * 16  + 640,  name:'IE9+'},
-                                {value: idx++ * 8  + 1280, name:'IE8-'}
+                                {value: idx * 128 + 80, name: 'Chrome'},
+                                {value: idx * 64 + 160, name: 'Firefox'},
+                                {value: idx * 32 + 320, name: 'Safari'},
+                                {value: idx * 16 + 640, name: 'IE9+'},
+                                {value: idx++ * 8 + 1280, name: 'IE8-'}
                             ]
                         }]
                     },
@@ -952,11 +952,11 @@ var EchartsPiesDonuts = function() {
                             name: 'Browser',
                             type: 'pie',
                             data: [
-                                {value: idx * 128 + 80,  name:'Chrome'},
-                                {value: idx * 64  + 160,  name:'Firefox'},
-                                {value: idx * 32  + 320,  name:'Safari'},
-                                {value: idx * 16  + 640,  name:'IE9+'},
-                                {value: idx++ * 8  + 1280, name:'IE8-'}
+                                {value: idx * 128 + 80, name: 'Chrome'},
+                                {value: idx * 64 + 160, name: 'Firefox'},
+                                {value: idx * 32 + 320, name: 'Safari'},
+                                {value: idx * 16 + 640, name: 'IE9+'},
+                                {value: idx++ * 8 + 1280, name: 'IE8-'}
                             ]
                         }]
                     },
@@ -965,11 +965,11 @@ var EchartsPiesDonuts = function() {
                             name: 'Browser',
                             type: 'pie',
                             data: [
-                                {value: idx * 128 + 80,  name:'Chrome'},
-                                {value: idx * 64  + 160,  name:'Firefox'},
-                                {value: idx * 32  + 320,  name:'Safari'},
-                                {value: idx * 16  + 640,  name:'IE9+'},
-                                {value: idx++ * 8  + 1280, name:'IE8-'}
+                                {value: idx * 128 + 80, name: 'Chrome'},
+                                {value: idx * 64 + 160, name: 'Firefox'},
+                                {value: idx * 32 + 320, name: 'Safari'},
+                                {value: idx * 16 + 640, name: 'IE9+'},
+                                {value: idx++ * 8 + 1280, name: 'IE8-'}
                             ]
                         }]
                     },
@@ -978,11 +978,11 @@ var EchartsPiesDonuts = function() {
                             name: 'Browser',
                             type: 'pie',
                             data: [
-                                {value: idx * 128 + 80,  name:'Chrome'},
-                                {value: idx * 64  + 160,  name:'Firefox'},
-                                {value: idx * 32  + 320,  name:'Safari'},
-                                {value: idx * 16  + 640,  name:'IE9+'},
-                                {value: idx++ * 8  + 1280, name:'IE8-'}
+                                {value: idx * 128 + 80, name: 'Chrome'},
+                                {value: idx * 64 + 160, name: 'Firefox'},
+                                {value: idx * 32 + 320, name: 'Safari'},
+                                {value: idx * 16 + 640, name: 'IE9+'},
+                                {value: idx++ * 8 + 1280, name: 'IE8-'}
                             ]
                         }]
                     },
@@ -991,11 +991,11 @@ var EchartsPiesDonuts = function() {
                             name: 'Browser',
                             type: 'pie',
                             data: [
-                                {value: idx * 128 + 80,  name:'Chrome'},
-                                {value: idx * 64  + 160,  name:'Firefox'},
-                                {value: idx * 32  + 320,  name:'Safari'},
-                                {value: idx * 16  + 640,  name:'IE9+'},
-                                {value: idx++ * 8  + 1280, name:'IE8-'}
+                                {value: idx * 128 + 80, name: 'Chrome'},
+                                {value: idx * 64 + 160, name: 'Firefox'},
+                                {value: idx * 32 + 320, name: 'Safari'},
+                                {value: idx * 16 + 640, name: 'IE9+'},
+                                {value: idx++ * 8 + 1280, name: 'IE8-'}
                             ]
                         }]
                     },
@@ -1004,11 +1004,11 @@ var EchartsPiesDonuts = function() {
                             name: 'Browser',
                             type: 'pie',
                             data: [
-                                {value: idx * 128 + 80,  name:'Chrome'},
-                                {value: idx * 64  + 160,  name:'Firefox'},
-                                {value: idx * 32  + 320,  name:'Safari'},
-                                {value: idx * 16  + 640,  name:'IE9+'},
-                                {value: idx++ * 8  + 1280, name:'IE8-'}
+                                {value: idx * 128 + 80, name: 'Chrome'},
+                                {value: idx * 64 + 160, name: 'Firefox'},
+                                {value: idx * 32 + 320, name: 'Safari'},
+                                {value: idx * 16 + 640, name: 'IE9+'},
+                                {value: idx++ * 8 + 1280, name: 'IE8-'}
                             ]
                         }]
                     },
@@ -1017,11 +1017,11 @@ var EchartsPiesDonuts = function() {
                             name: 'Browser',
                             type: 'pie',
                             data: [
-                                {value: idx * 128 + 80,  name:'Chrome'},
-                                {value: idx * 64  + 160,  name:'Firefox'},
-                                {value: idx * 32  + 320,  name:'Safari'},
-                                {value: idx * 16  + 640,  name:'IE9+'},
-                                {value: idx++ * 8  + 1280, name:'IE8-'}
+                                {value: idx * 128 + 80, name: 'Chrome'},
+                                {value: idx * 64 + 160, name: 'Firefox'},
+                                {value: idx * 32 + 320, name: 'Safari'},
+                                {value: idx * 16 + 640, name: 'IE9+'},
+                                {value: idx++ * 8 + 1280, name: 'IE8-'}
                             ]
                         }]
                     },
@@ -1030,11 +1030,11 @@ var EchartsPiesDonuts = function() {
                             name: 'Browser',
                             type: 'pie',
                             data: [
-                                {value: idx * 128 + 80,  name:'Chrome'},
-                                {value: idx * 64  + 160,  name:'Firefox'},
-                                {value: idx * 32  + 320,  name:'Safari'},
-                                {value: idx * 16  + 640,  name:'IE9+'},
-                                {value: idx++ * 8  + 1280, name:'IE8-'}
+                                {value: idx * 128 + 80, name: 'Chrome'},
+                                {value: idx * 64 + 160, name: 'Firefox'},
+                                {value: idx * 32 + 320, name: 'Safari'},
+                                {value: idx * 16 + 640, name: 'IE9+'},
+                                {value: idx++ * 8 + 1280, name: 'IE8-'}
                             ]
                         }]
                     }
@@ -1099,10 +1099,10 @@ var EchartsPiesDonuts = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -1247,7 +1247,7 @@ var EchartsPiesDonuts = function() {
         //
 
         // Resize function
-        var triggerChartResize = function() {
+        var triggerChartResize = function () {
             pie_basic_element && pie_basic.resize();
             pie_donut_element && pie_donut.resize();
             pie_nested_element && pie_nested.resize();
@@ -1260,7 +1260,7 @@ var EchartsPiesDonuts = function() {
         };
 
         // On sidebar width change
-        $(document).on('click', '.sidebar-control', function() {
+        $(document).on('click', '.sidebar-control', function () {
             setTimeout(function () {
                 triggerChartResize();
             }, 0);
@@ -1282,7 +1282,7 @@ var EchartsPiesDonuts = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _piesDonutsExamples();
         }
     }
@@ -1292,6 +1292,6 @@ var EchartsPiesDonuts = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     EchartsPiesDonuts.init();
 });

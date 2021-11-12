@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3TreeBasic = function() {
+var D3TreeBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3TreeBasic = function() {
     //
 
     // Chart
-    var _treeBasic = function() {
+    var _treeBasic = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3TreeBasic = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -40,7 +40,6 @@ var D3TreeBasic = function() {
                 margin = {top: 0, right: 0, bottom: 0, left: 40},
                 width = d3Container.node().getBoundingClientRect().width - margin.left - margin.right,
                 height = height - margin.top - margin.bottom - 5;
-
 
 
             // Create chart
@@ -54,8 +53,7 @@ var D3TreeBasic = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             // Construct chart layout
@@ -67,14 +65,15 @@ var D3TreeBasic = function() {
 
             // Diagonal projection
             var diagonal = d3.svg.diagonal()
-                .projection(function(d) { return [d.y, d.x]; });
-
+                .projection(function (d) {
+                    return [d.y, d.x];
+                });
 
 
             // Load data
             // ------------------------------
 
-            d3.json("../../../../global_assets/demo_data/d3/tree/tree_data_basic.json", function(error, json) {
+            d3.json("../../../../global_assets/demo_data/d3/tree/tree_data_basic.json", function (error, json) {
 
                 var nodes = tree.nodes(json),
                     links = tree.links(nodes);
@@ -92,11 +91,11 @@ var D3TreeBasic = function() {
                     .data(links)
                     .enter()
                     .append("path")
-                        .attr("class", "d3-tree-link")
-                        .attr("d", diagonal)
-                        .style("fill", "none")
-                        .style("stroke", "#ddd")
-                        .style("stroke-width", 1.5);
+                    .attr("class", "d3-tree-link")
+                    .attr("d", diagonal)
+                    .style("fill", "none")
+                    .style("stroke", "#ddd")
+                    .style("stroke-width", 1.5);
 
 
                 // Nodes
@@ -111,8 +110,10 @@ var D3TreeBasic = function() {
                     .data(nodes)
                     .enter()
                     .append("g")
-                        .attr("class", "d3-tree-node")
-                        .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+                    .attr("class", "d3-tree-node")
+                    .attr("transform", function (d) {
+                        return "translate(" + d.y + "," + d.x + ")";
+                    });
 
                 // Append node circles
                 node.append("circle")
@@ -124,12 +125,17 @@ var D3TreeBasic = function() {
 
                 // Append node text
                 node.append("text")
-                    .attr("dx", function(d) { return d.children ? -12 : 12; })
+                    .attr("dx", function (d) {
+                        return d.children ? -12 : 12;
+                    })
                     .attr("dy", 4)
-                    .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+                    .style("text-anchor", function (d) {
+                        return d.children ? "end" : "start";
+                    })
                     .style("font-size", 12)
-                    .text(function(d) { return d.name; });
-
+                    .text(function (d) {
+                        return d.name;
+                    });
 
 
                 // Resize chart
@@ -143,16 +149,16 @@ var D3TreeBasic = function() {
 
 
                 // Resize function
-                // 
+                //
                 // Since D3 doesn't support SVG resize by default,
-                // we need to manually specify parts of the graph that need to 
+                // we need to manually specify parts of the graph that need to
                 // be updated on window resize
                 function resize() {
 
                     // Layout variables
                     width = d3Container.node().getBoundingClientRect().width - margin.left - margin.right,
-                    nodes = tree.nodes(json),
-                    links = tree.links(nodes);
+                        nodes = tree.nodes(json),
+                        links = tree.links(nodes);
 
                     // Layout
                     // -------------------------
@@ -175,7 +181,9 @@ var D3TreeBasic = function() {
                     svg.selectAll(".d3-tree-link").attr("d", diagonal)
 
                     // Node paths
-                    svg.selectAll(".d3-tree-node").attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+                    svg.selectAll(".d3-tree-node").attr("transform", function (d) {
+                        return "translate(" + d.y + "," + d.x + ")";
+                    });
                 }
             });
         }
@@ -187,7 +195,7 @@ var D3TreeBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _treeBasic();
         }
     }
@@ -197,6 +205,6 @@ var D3TreeBasic = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3TreeBasic.init();
 });

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\SupportTeam;
 
 use App\Helpers\JsonHelper;
-use App\Helpers\Qs;
 use App\Helpers\RouteHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dorm\DormCreate;
@@ -13,12 +12,12 @@ use App\Repositories\DormRepo;
 
 class DormController extends Controller
 {
-    protected  $dormRepo;
+    protected $dormRepo;
 
     public function __construct(DormRepositoryInterface $dormRepo)
     {
-        $this->middleware('teamSA', ['except' => ['destroy',] ]);
-        $this->middleware('super_admin', ['only' => ['destroy',] ]);
+        $this->middleware('teamSA', [ 'except' => [ 'destroy', ] ]);
+        $this->middleware('super_admin', [ 'only' => [ 'destroy', ] ]);
         $this->dormRepo = $dormRepo;
     }
 
@@ -30,7 +29,7 @@ class DormController extends Controller
 
     public function store(DormCreate $request)
     {
-        $data = $request->only(['name', 'description']);
+        $data = $request->only([ 'name', 'description' ]);
         $this->dormRepo->create($data);
         return JsonHelper::jsonStoreSuccess();
     }
@@ -45,7 +44,7 @@ class DormController extends Controller
 
     public function update(DormUpdate $request, $id)
     {
-        $data = $request->only(['name', 'description']);
+        $data = $request->only([ 'name', 'description' ]);
         $this->dormRepo->update($id, $data);
         return JsonHelper::jsonUpdateSuccess();
     }

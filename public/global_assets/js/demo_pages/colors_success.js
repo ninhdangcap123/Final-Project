@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var SuccessPalette = function() {
+var SuccessPalette = function () {
 
 
     //
@@ -18,7 +18,7 @@ var SuccessPalette = function() {
     //
 
     // Select2
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var SuccessPalette = function() {
     };
 
     // Multiselect
-    var _componentMultiselect = function() {
+    var _componentMultiselect = function () {
         if (!$().multiselect) {
             console.warn('Warning - bootstrap-multiselect.js is not loaded.');
             return;
@@ -48,7 +48,7 @@ var SuccessPalette = function() {
     };
 
     // jGrowl
-    var _componentJgrowl = function() {
+    var _componentJgrowl = function () {
         if (!$().jGrowl) {
             console.warn('Warning - jgrowl.min.js is not loaded.');
             return;
@@ -64,7 +64,7 @@ var SuccessPalette = function() {
     };
 
     // PNotify
-    var _componentPnotify = function() {
+    var _componentPnotify = function () {
         if (typeof PNotify == 'undefined') {
             console.warn('Warning - pnotify.min.js is not loaded.');
             return;
@@ -82,14 +82,14 @@ var SuccessPalette = function() {
     };
 
     // Noty
-    var _componentNoty = function() {
+    var _componentNoty = function () {
         if (typeof Noty == 'undefined') {
             console.warn('Warning - noty.min.js is not loaded.');
             return;
         }
 
         // Initialize
-        $('.noty-launch').on('click', function() {
+        $('.noty-launch').on('click', function () {
             new Noty({
                 layout: 'topRight',
                 theme: ' alert bg-success text-white p-0',
@@ -100,7 +100,7 @@ var SuccessPalette = function() {
     };
 
     // Switchery
-    var _componentSwitchery = function() {
+    var _componentSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
@@ -112,7 +112,7 @@ var SuccessPalette = function() {
     };
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -132,7 +132,7 @@ var SuccessPalette = function() {
     };
 
     // Tooltips and popovers
-    var _componentPopups = function() {
+    var _componentPopups = function () {
 
         // Tooltip
         $('[data-popup=tooltip-custom]').tooltip({
@@ -158,7 +158,7 @@ var SuccessPalette = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentSelect2();
             _componentMultiselect();
             _componentJgrowl();
@@ -175,6 +175,6 @@ var SuccessPalette = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     SuccessPalette.init();
 });

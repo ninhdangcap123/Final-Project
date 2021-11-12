@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var FormWizard = function() {
+var FormWizard = function () {
 
 
     //
@@ -18,7 +18,7 @@ var FormWizard = function() {
     //
 
     // Wizard
-    var _componentWizard = function() {
+    var _componentWizard = function () {
         if (!$().steps) {
             console.warn('Warning - steps.min.js is not loaded.');
             return;
@@ -176,29 +176,29 @@ var FormWizard = function() {
         $('.steps-validation').validate({
             ignore: 'input[type=hidden], .select2-search__field', // ignore hidden fields
             errorClass: 'validation-invalid-label',
-            highlight: function(element, errorClass) {
+            highlight: function (element, errorClass) {
                 $(element).removeClass(errorClass);
             },
-            unhighlight: function(element, errorClass) {
+            unhighlight: function (element, errorClass) {
                 $(element).removeClass(errorClass);
             },
 
             // Different components require proper error label placement
-            errorPlacement: function(error, element) {
+            errorPlacement: function (error, element) {
 
                 // Unstyled checkboxes, radios
                 if (element.parents().hasClass('form-check')) {
-                    error.appendTo( element.parents('.form-check').parent() );
+                    error.appendTo(element.parents('.form-check').parent());
                 }
 
                 // Input with icons and Select2
                 else if (element.parents().hasClass('form-group-feedback') || element.hasClass('select2-hidden-accessible')) {
-                    error.appendTo( element.parent() );
+                    error.appendTo(element.parent());
                 }
 
                 // Input group, styled file input
                 else if (element.parent().is('.uniform-uploader, .uniform-select') || element.parents().hasClass('input-group')) {
-                    error.appendTo( element.parent().parent() );
+                    error.appendTo(element.parent().parent());
                 }
 
                 // Other elements
@@ -215,7 +215,7 @@ var FormWizard = function() {
     };
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -228,7 +228,7 @@ var FormWizard = function() {
     };
 
     // Select2 select
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -241,7 +241,7 @@ var FormWizard = function() {
         });
 
         // Trigger value change when selection is made
-        $select.on('change', function() {
+        $select.on('change', function () {
             $(this).trigger('blur');
         });
     };
@@ -252,7 +252,7 @@ var FormWizard = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentWizard();
             _componentUniform();
             _componentSelect2();
@@ -264,6 +264,6 @@ var FormWizard = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     FormWizard.init();
 });

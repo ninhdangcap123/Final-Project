@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleAreaStepped = function() {
+var GoogleAreaStepped = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleAreaStepped = function() {
     //
 
     // Stepped area chart
-    var _googleAreaStepped = function() {
+    var _googleAreaStepped = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleAreaStepped = function() {
 
                 // Resize on window resize
                 var resizeSteppedAreaChart;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeSteppedAreaChart);
                     resizeSteppedAreaChart = setTimeout(function () {
                         drawSteppedAreaChart();
@@ -54,11 +54,11 @@ var GoogleAreaStepped = function() {
 
             // Data
             var data = google.visualization.arrayToDataTable([
-                ['Director (Year)',  'Rotten Tomatoes', 'IMDB'],
-                ['Alfred Hitchcock (1935)', 8.4,         7.9],
-                ['Ralph Thomas (1959)',     6.9,         6.5],
-                ['Don Sharp (1978)',        6.5,         6.4],
-                ['James Hawes (2008)',      4.4,         6.2]
+                ['Director (Year)', 'Rotten Tomatoes', 'IMDB'],
+                ['Alfred Hitchcock (1935)', 8.4, 7.9],
+                ['Ralph Thomas (1959)', 6.9, 6.5],
+                ['Don Sharp (1978)', 6.5, 6.4],
+                ['James Hawes (2008)', 4.4, 6.2]
             ]);
 
             // Options
@@ -87,7 +87,7 @@ var GoogleAreaStepped = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
@@ -102,7 +102,7 @@ var GoogleAreaStepped = function() {
                 }
             };
 
-            // Draw chart 
+            // Draw chart
             var stepped_area_chart = new google.visualization.SteppedAreaChart(document.getElementById('google-area-stepped'));
             stepped_area_chart.draw(data, options);
         }
@@ -114,7 +114,7 @@ var GoogleAreaStepped = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleAreaStepped();
         }
     }

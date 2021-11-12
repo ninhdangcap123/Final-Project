@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleMapDrawingRectangles = function() {
+var GoogleMapDrawingRectangles = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleMapDrawingRectangles = function() {
     //
 
     // Line chart
-    var _googleMapDrawingRectangles = function() {
+    var _googleMapDrawingRectangles = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Maps library is not loaded.');
             return;
@@ -65,7 +65,7 @@ var GoogleMapDrawingRectangles = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleMapDrawingRectangles();
         }
     }
@@ -75,6 +75,6 @@ var GoogleMapDrawingRectangles = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     GoogleMapDrawingRectangles.init();
 });

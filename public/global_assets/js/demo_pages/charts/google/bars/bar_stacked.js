@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleBarStacked = function() {
+var GoogleBarStacked = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleBarStacked = function() {
     //
 
     // Stacked bar chart
-    var _googleBarStacked = function() {
+    var _googleBarStacked = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleBarStacked = function() {
 
                 // Resize on window resize
                 var resizeBarStacked;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeBarStacked);
                     resizeBarStacked = setTimeout(function () {
                         drawBarStacked();
@@ -54,7 +54,7 @@ var GoogleBarStacked = function() {
 
             // Data
             var data = google.visualization.arrayToDataTable([
-                ['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General', 'Western', 'Literature', { role: 'annotation' } ],
+                ['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General', 'Western', 'Literature', {role: 'annotation'}],
                 ['2000', 20, 30, 35, 40, 45, 30, ''],
                 ['2005', 14, 20, 25, 30, 48, 30, ''],
                 ['2010', 10, 24, 20, 32, 18, 5, ''],
@@ -83,7 +83,7 @@ var GoogleBarStacked = function() {
                     }
                 },
                 hAxis: {
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
@@ -111,7 +111,7 @@ var GoogleBarStacked = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleBarStacked();
         }
     }

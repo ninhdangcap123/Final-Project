@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var HotBasic = function() {
+var HotBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var HotBasic = function() {
     //
 
     // Basic HOT examples
-    var _componentHotBasic = function() {
+    var _componentHotBasic = function () {
         if (typeof Handsontable == 'undefined') {
             console.warn('Warning - handsontable.min.js is not loaded.');
             return;
@@ -53,10 +53,9 @@ var HotBasic = function() {
             stretchH: 'all'
         });
 
-        $('.sidebar-control').on('click', function() {
+        $('.sidebar-control').on('click', function () {
             hot_basic_init.render();
         })
-
 
 
         // Column headers
@@ -73,7 +72,6 @@ var HotBasic = function() {
         });
 
 
-
         // Row headers
         // ------------------------------
 
@@ -87,7 +85,6 @@ var HotBasic = function() {
             rowHeaders: true,
             stretchH: 'all'
         });
-
 
 
         // Custom headers text
@@ -123,7 +120,6 @@ var HotBasic = function() {
                 {row: 2, col: 2, comment: {value: 'Another comment'}}
             ]
         });
-
 
 
         // Custom borders
@@ -194,7 +190,7 @@ var HotBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentHotBasic();
         }
     }
@@ -204,6 +200,6 @@ var HotBasic = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     HotBasic.init();
 });

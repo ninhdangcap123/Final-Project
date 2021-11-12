@@ -29,7 +29,7 @@ class MarkSelector extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
             'exam_id' => 'Exam',
             'my_course_id' => 'Courses',
             'class_id' => 'Classes',

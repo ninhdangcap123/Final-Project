@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var UserProfileTabbed = function() {
+var UserProfileTabbed = function () {
 
 
     //
@@ -18,7 +18,7 @@ var UserProfileTabbed = function() {
     //
 
     // Charts
-    var _componentEcharts = function() {
+    var _componentEcharts = function () {
         if (typeof echarts == 'undefined') {
             console.warn('Warning - echarts.min.js is not loaded.');
             return;
@@ -44,7 +44,7 @@ var UserProfileTabbed = function() {
             weekly_statistics.setOption({
 
                 // Define colors
-                color: ['#2ec7c9','#5ab1ef','#b6a2de',],
+                color: ['#2ec7c9', '#5ab1ef', '#b6a2de',],
 
                 // Global text styles
                 textStyle: {
@@ -114,7 +114,7 @@ var UserProfileTabbed = function() {
                 // Vertical axis
                 yAxis: [{
                     type: 'category',
-                    data: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+                    data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
                     axisTick: {
                         show: false
                     },
@@ -371,7 +371,7 @@ var UserProfileTabbed = function() {
             available_hours.setOption({
 
                 // Define colors
-                color: ['#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80'],
+                color: ['#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80'],
 
                 // Global text styles
                 textStyle: {
@@ -421,7 +421,7 @@ var UserProfileTabbed = function() {
                 // Horizontal axis
                 xAxis: [{
                     type: 'category',
-                    data : ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                    data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
                     axisLabel: {
                         color: '#333'
                     },
@@ -509,14 +509,14 @@ var UserProfileTabbed = function() {
         //
 
         // Resize function
-        var triggerChartResize = function() {
+        var triggerChartResize = function () {
             weekly_statistics_element && weekly_statistics.resize();
             balance_statistics_element && balance_statistics.resize();
             available_hours_element && available_hours.resize();
         };
 
         // On sidebar width change
-        $(document).on('click', '.sidebar-control, .navbar-toggler', function() {
+        $(document).on('click', '.sidebar-control, .navbar-toggler', function () {
             setTimeout(function () {
                 triggerChartResize();
             }, 0);
@@ -538,7 +538,7 @@ var UserProfileTabbed = function() {
     };
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -551,7 +551,7 @@ var UserProfileTabbed = function() {
     };
 
     // Select2
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -564,7 +564,7 @@ var UserProfileTabbed = function() {
     };
 
     // Schedule
-    var _componentFullCalendar = function() {
+    var _componentFullCalendar = function () {
         if (!$().fullCalendar) {
             console.warn('Warning - fullcalendar.min.js is not loaded.');
             return;
@@ -653,7 +653,7 @@ var UserProfileTabbed = function() {
     };
 
     // Row link
-    var _componentRowLink = function() {
+    var _componentRowLink = function () {
         if (!$().rowlink) {
             console.warn('Warning - rowlink.js is not loaded.');
             return;
@@ -664,17 +664,16 @@ var UserProfileTabbed = function() {
     };
 
     // Inbox table
-    var _componentTableInbox = function() {
+    var _componentTableInbox = function () {
 
         // Define variables
         var highlightColorClass = 'alpha-slate';
 
         // Highlight row when checkbox is checked
-        $('.table-inbox').find('tr > td:first-child').find('input[type=checkbox]').on('change', function() {
-            if($(this).is(':checked')) {
+        $('.table-inbox').find('tr > td:first-child').find('input[type=checkbox]').on('change', function () {
+            if ($(this).is(':checked')) {
                 $(this).parents('tr').addClass(highlightColorClass);
-            }
-            else {
+            } else {
                 $(this).parents('tr').removeClass(highlightColorClass);
             }
         });
@@ -688,7 +687,7 @@ var UserProfileTabbed = function() {
 
             // Icon
             var $icon = $(this).find('.letter-icon');
-                $icon.eq(0).text(letter);
+            $icon.eq(0).text(letter);
         });
     };
 
@@ -698,7 +697,7 @@ var UserProfileTabbed = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentEcharts();
             _componentUniform();
             _componentSelect2();
@@ -713,6 +712,6 @@ var UserProfileTabbed = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     UserProfileTabbed.init();
 });

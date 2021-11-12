@@ -1,11 +1,11 @@
 <?php
+
 namespace Database\Seeders;
 
 use App\Helpers\GetUserTypeHelper;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Helpers\Qs;
 use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->delete();
 
         $this->createNewUsers();
-        $this->createManyUsers( 3);
+        $this->createManyUsers(3);
     }
 
     protected function createNewUsers()
@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
 
         $d = [
 
-            ['name' => 'TGMA Ninh',
+            [ 'name' => 'TGMA Ninh',
                 'email' => 'tgma@tgma.com',
                 'username' => 'tgma',
                 'password' => Hash::make('123'),
@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ],
 
-            ['name' => 'Admin Ninh',
+            [ 'name' => 'Admin Ninh',
                 'email' => 'admin@admin.com',
                 'password' => Hash::make('123'),
                 'user_type' => 'admin',
@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ],
 
-            ['name' => 'Teacher Ninh',
+            [ 'name' => 'Teacher Ninh',
                 'email' => 'teacher@teacher.com',
                 'user_type' => 'teacher',
                 'username' => 'teacher',
@@ -56,7 +56,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ],
 
-            ['name' => 'Parent Ninh',
+            [ 'name' => 'Parent Ninh',
                 'email' => 'parent@parent.com',
                 'user_type' => 'parent',
                 'username' => 'parent',
@@ -65,7 +65,7 @@ class UsersTableSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ],
 
-            ['name' => 'Accountant Ninh',
+            [ 'name' => 'Accountant Ninh',
                 'email' => 'accountant@accountant.com',
                 'user_type' => 'accountant',
                 'username' => 'accountant',
@@ -80,13 +80,13 @@ class UsersTableSeeder extends Seeder
     protected function createManyUsers(int $count)
     {
         $data = [];
-        $user_type = GetUserTypeHelper::getAllUserTypes(['super_admin', 'librarian', 'student']);
+        $user_type = GetUserTypeHelper::getAllUserTypes([ 'super_admin', 'librarian', 'student' ]);
 
-        for($i = 1; $i <= $count; $i++){
+        for( $i = 1; $i <= $count; $i++ ) {
 
-            foreach ($user_type as $k => $ut){
+            foreach( $user_type as $k => $ut ) {
 
-                $data[] = ['name' => ucfirst($user_type[$k]).' '.$i,
+                $data[] = [ 'name' => ucfirst($user_type[$k]).' '.$i,
                     'email' => $user_type[$k].$i.'@'.$user_type[$k].'.com',
                     'user_type' => $user_type[$k],
                     'username' => $user_type[$k].$i,

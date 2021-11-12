@@ -45,7 +45,8 @@
 
             @include transition(all linear 0.3s);
         }
-        &[data-loading] .ladda-progress{
+
+        &[data-loading] .ladda-progress {
             visibility: visible;
             opacity: 1;
         }
@@ -189,6 +190,7 @@
                 top: 44px;
                 left: 50%;
             }
+
             &[data-loading] {
                 padding-bottom: 40px;
 
@@ -242,7 +244,7 @@
             }
 
             .ladda-spinner {
-            left: 0;
+                left: 0;
             }
 
             &[data-loading] {

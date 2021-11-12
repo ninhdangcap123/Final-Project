@@ -23,12 +23,12 @@ class SubjectsTableSeeder extends Seeder
 
     protected function createSubjects()
     {
-        $subjects = ['Giới Thiệu Môn', 'Chuyên Ngành', 'Kết Thúc Môn'];
-        $sub_slug = ['GT', 'CN', 'KT'];
-        $teacher_id = User::where(['user_type' => 'teacher'])->first()->id;
+        $subjects = [ 'Giới Thiệu Môn', 'Chuyên Ngành', 'Kết Thúc Môn' ];
+        $sub_slug = [ 'GT', 'CN', 'KT' ];
+        $teacher_id = User::where([ 'user_type' => 'teacher' ])->first()->id;
         $my_courses = MyCourse::all();
 
-        foreach ($my_courses as $my_course) {
+        foreach( $my_courses as $my_course ) {
 
             $data = [
 

@@ -11,38 +11,43 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
-                    <form class="ajax-update" data-reload="#page-header" method="post" action="{{ route('courses.update', $course->id) }}">
+                    <form class="ajax-update" data-reload="#page-header" method="post"
+                          action="{{ route('courses.update', $course->id) }}">
                         @csrf @method('PUT')
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label font-weight-semibold">Name <span class="text-danger">*</span></label>
+                            <label class="col-lg-3 col-form-label font-weight-semibold">Name <span
+                                    class="text-danger">*</span></label>
                             <div class="col-lg-9">
-                                <input name="name" value="{{ $course->name }}" required type="text" class="form-control" placeholder="Name of Class">
+                                <input name="name" value="{{ $course->name }}" required type="text" class="form-control"
+                                       placeholder="Name of Class">
                             </div>
                         </div>
 
-                      {{--
-                      <div class="form-group row">
-                            <label for="teacher_id" class="col-lg-3 col-form-label font-weight-semibold">Teacher</label>
-                            <div class="col-lg-9">
-                                <select data-placeholder="Select Teacher" class="form-control select-search" name="teacher_id" id="teacher_id">
-                                    <option value=""></option>
-                                    @foreach($teachers as $t)
-                                        <option {{ $c->teacher_id == $t->id ? 'selected' : '' }} value="{{ Qs::hash($t->id) }}">{{ $t->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                      --}}
+                        {{--
+                        <div class="form-group row">
+                              <label for="teacher_id" class="col-lg-3 col-form-label font-weight-semibold">Teacher</label>
+                              <div class="col-lg-9">
+                                  <select data-placeholder="Select Teacher" class="form-control select-search" name="teacher_id" id="teacher_id">
+                                      <option value=""></option>
+                                      @foreach($teachers as $t)
+                                          <option {{ $c->teacher_id == $t->id ? 'selected' : '' }} value="{{ Qs::hash($t->id) }}">{{ $t->name }}</option>
+                                      @endforeach
+                                  </select>
+                              </div>
+                          </div>
+                        --}}
 
                         <div class="form-group row">
                             <label for="major_id" class="col-lg-3 col-form-label font-weight-semibold">Major</label>
                             <div class="col-lg-9">
-                                <input class="form-control" disabled="disabled" value="{{ $course->major->name }}" title="Major" type="text">
+                                <input class="form-control" disabled="disabled" value="{{ $course->major->name }}"
+                                       title="Major" type="text">
                             </div>
                         </div>
 
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary">Submit form <i class="icon-paperplane ml-2"></i></button>
+                            <button type="submit" class="btn btn-primary">Submit form <i
+                                    class="icon-paperplane ml-2"></i></button>
                         </div>
                     </form>
                 </div>

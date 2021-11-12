@@ -12,6 +12,7 @@ class ExamRepository extends BaseRepository implements ExamRepositoryInterface
         // TODO: Implement getModel() method.
         return Exam::class;
     }
+
     public function getAll()
     {
         // TODO: Implement getAll() method.

@@ -18,7 +18,7 @@ var InputsCheckboxesRadios = function () {
     //
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -64,7 +64,7 @@ var InputsCheckboxesRadios = function () {
     };
 
     // Switchery
-    var _componentSwitchery = function() {
+    var _componentSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
@@ -72,26 +72,26 @@ var InputsCheckboxesRadios = function () {
 
         // Initialize multiple switches
         var elems = Array.prototype.slice.call(document.querySelectorAll('.form-check-input-switchery'));
-        elems.forEach(function(html) {
-          var switchery = new Switchery(html);
+        elems.forEach(function (html) {
+            var switchery = new Switchery(html);
         });
 
         // Colored switches
         var primary = document.querySelector('.form-check-input-switchery-primary');
-        var switchery = new Switchery(primary, { color: '#2196F3' });
+        var switchery = new Switchery(primary, {color: '#2196F3'});
 
         var danger = document.querySelector('.form-check-input-switchery-danger');
-        var switchery = new Switchery(danger, { color: '#EF5350' });
+        var switchery = new Switchery(danger, {color: '#EF5350'});
 
         var warning = document.querySelector('.form-check-input-switchery-warning');
-        var switchery = new Switchery(warning, { color: '#FF7043' });
+        var switchery = new Switchery(warning, {color: '#FF7043'});
 
         var info = document.querySelector('.form-check-input-switchery-info');
-        var switchery = new Switchery(info, { color: '#00BCD4'});
+        var switchery = new Switchery(info, {color: '#00BCD4'});
     };
 
     // Bootstrap switch
-    var _componentBootstrapSwitch = function() {
+    var _componentBootstrapSwitch = function () {
         if (!$().bootstrapSwitch) {
             console.warn('Warning - switch.min.js is not loaded.');
             return;
@@ -107,7 +107,7 @@ var InputsCheckboxesRadios = function () {
     //
 
     return {
-        initComponents: function() {
+        initComponents: function () {
             _componentUniform();
             _componentSwitchery();
             _componentBootstrapSwitch();
@@ -119,6 +119,6 @@ var InputsCheckboxesRadios = function () {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     InputsCheckboxesRadios.initComponents();
 });

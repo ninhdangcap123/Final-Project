@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GooglePieDiffOpacity = function() {
+var GooglePieDiffOpacity = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GooglePieDiffOpacity = function() {
     //
 
     // Pie with opacity
-    var _googlePieDiffOpacity = function() {
+    var _googlePieDiffOpacity = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GooglePieDiffOpacity = function() {
 
                 // Resize on window resize
                 var resizePieDiffOpacity;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizePieDiffOpacity);
                     resizePieDiffOpacity = setTimeout(function () {
                         drawPieDiffOpacity();
@@ -102,7 +102,7 @@ var GooglePieDiffOpacity = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googlePieDiffOpacity();
         }
     }

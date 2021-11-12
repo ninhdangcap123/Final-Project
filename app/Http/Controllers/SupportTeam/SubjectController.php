@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\SupportTeam;
 
 use App\Helpers\JsonHelper;
-use App\Helpers\Qs;
 use App\Helpers\RouteHelper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Subject\SubjectCreate;
 use App\Http\Requests\Subject\SubjectUpdate;
 use App\Repositories\MyCourse\MyCourseRepositoryInterface;
@@ -12,7 +12,6 @@ use App\Repositories\MyCourseRepo;
 use App\Repositories\Subject\SubjectRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
-use App\Http\Controllers\Controller;
 
 class SubjectController extends Controller
 {
@@ -24,8 +23,8 @@ class SubjectController extends Controller
                                 UserRepositoryInterface     $userRepo,
                                 SubjectRepositoryInterface  $subjectRepo)
     {
-        $this->middleware('teamSA', ['except' => ['destroy',] ]);
-        $this->middleware('super_admin', ['only' => ['destroy',] ]);
+        $this->middleware('teamSA', [ 'except' => [ 'destroy', ] ]);
+        $this->middleware('super_admin', [ 'only' => [ 'destroy', ] ]);
         $this->myCourseRepo = $myCourseRepo;
         $this->userRepo = $userRepo;
         $this->subjectRepo = $subjectRepo;

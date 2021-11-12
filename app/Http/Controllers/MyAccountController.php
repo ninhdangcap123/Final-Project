@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 
 use App\Helpers\GetPathHelper;
-use App\Helpers\Qs;
 use App\Http\Requests\UserChangePass;
 use App\Http\Requests\UserUpdate;
 use App\Repositories\User\UserRepositoryInterface;
@@ -31,21 +30,21 @@ class MyAccountController extends Controller
     {
         $user = Auth::user();
 
-        $data = $user->username ? $request->only(['email', 'phone', 'address']) : $request->only(['email', 'phone', 'address', 'username']);
+        $data = $user->username ? $request->only([ 'email', 'phone', 'address' ]) : $request->only([ 'email', 'phone', 'address', 'username' ]);
 
-        if(!$user->username && !$request->username && !$request->email){
+        if( !$user->username && !$request->username && !$request->email ) {
             return back()->with('pop_error', __('msg.user_invalid'));
         }
 
         $userType = $user->user_type;
         $code = $user->code;
 
-        if($request->hasFile('photo')) {
+        if( $request->hasFile('photo') ) {
             $photo = $request->file('photo');
             $file = GetPathHelper::getFileMetaData($photo);
-            $file['name'] = 'photo.' . $file['ext'];
+            $file['name'] = 'photo.'.$file['ext'];
             $file['path'] = $photo->storeAs(GetPathHelper::getUploadPath($userType).$code, $file['name']);
-            $data['photo'] = asset('storage/' . $file['path']);
+            $data['photo'] = asset('storage/'.$file['path']);
         }
 
         $this->userRepo->update($user->id, $data);
@@ -59,7 +58,7 @@ class MyAccountController extends Controller
         $oldPassword = $request->current_password;
         $newPassword = $request->password;
 
-        if(password_verify($oldPassword, $myPassword)){
+        if( password_verify($oldPassword, $myPassword) ) {
             $data['password'] = Hash::make($newPassword);
             $this->userRepo->update($userId, $data);
             return back()->with('flash_success', __('msg.p_reset'));

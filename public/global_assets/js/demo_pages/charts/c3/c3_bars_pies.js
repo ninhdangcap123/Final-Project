@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var С3BarsPies = function() {
+var С3BarsPies = function () {
 
 
     //
@@ -18,7 +18,7 @@ var С3BarsPies = function() {
     //
 
     // Chart
-    var _barsPiesExamples = function() {
+    var _barsPiesExamples = function () {
         if (typeof c3 == 'undefined') {
             console.warn('Warning - c3.min.js is not loaded.');
             return;
@@ -34,12 +34,12 @@ var С3BarsPies = function() {
 
 
         // Pie chart
-        if(pie_chart_element) {
+        if (pie_chart_element) {
 
             // Generate chart
             var pie_chart = c3.generate({
                 bindto: pie_chart_element,
-                size: { width: 350 },
+                size: {width: 350},
                 color: {
                     pattern: ['#3F51B5', '#FF9800', '#4CAF50', '#00BCD4', '#F44336']
                 },
@@ -48,7 +48,7 @@ var С3BarsPies = function() {
                         ['data1', 30],
                         ['data2', 120],
                     ],
-                    type : 'pie'
+                    type: 'pie'
                 }
             });
 
@@ -72,18 +72,18 @@ var С3BarsPies = function() {
             }, 8000);
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 pie_chart.resize();
             });
         }
 
         // Donut chart
-        if(donut_chart_element) {
+        if (donut_chart_element) {
 
             // Generate chart
             var donut_chart = c3.generate({
                 bindto: donut_chart_element,
-                size: { width: 350 },
+                size: {width: 350},
                 color: {
                     pattern: ['#3F51B5', '#FF9800', '#4CAF50', '#00BCD4', '#F44336']
                 },
@@ -92,7 +92,7 @@ var С3BarsPies = function() {
                         ['data1', 30],
                         ['data2', 120],
                     ],
-                    type : 'donut'
+                    type: 'donut'
                 },
                 donut: {
                     title: "Iris Petal Width"
@@ -119,18 +119,18 @@ var С3BarsPies = function() {
             }, 8000);
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 donut_chart.resize();
             });
         }
 
         // Bar chart
-        if(bar_chart_element) {
+        if (bar_chart_element) {
 
             // Generate chart
             var bar_chart = c3.generate({
                 bindto: bar_chart_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
                     columns: [
                         ['data1', 30, 200, 100, 400, 150, 250],
@@ -163,18 +163,18 @@ var С3BarsPies = function() {
             }, 6000);
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 bar_chart.resize();
             });
         }
 
         // Stacked bar chart
-        if(bar_stacked_chart_element) {
+        if (bar_stacked_chart_element) {
 
             // Generate chart
             var bar_stacked_chart = c3.generate({
                 bindto: bar_stacked_chart_element,
-                size: { height: 400 },
+                size: {height: 400},
                 color: {
                     pattern: ['#FF9800', '#F44336', '#009688', '#4CAF50']
                 },
@@ -194,7 +194,7 @@ var С3BarsPies = function() {
                         show: true
                     },
                     y: {
-                        lines: [{value:0}]
+                        lines: [{value: 0}]
                     }
                 }
             });
@@ -213,18 +213,18 @@ var С3BarsPies = function() {
             }, 10000);
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 bar_stacked_chart.resize();
             });
         }
 
         // Combined chart
-        if(combined_chart_element) {
+        if (combined_chart_element) {
 
             // Generate chart
             var combined_chart = c3.generate({
                 bindto: combined_chart_element,
-                size: { height: 400 },
+                size: {height: 400},
                 color: {
                     pattern: ['#FF9800', '#F44336', '#009688', '#4CAF50', '#03A9F4', '#8BC34A']
                 },
@@ -244,23 +244,23 @@ var С3BarsPies = function() {
                         data6: 'area',
                     },
                     groups: [
-                        ['data1','data2']
+                        ['data1', 'data2']
                     ]
                 }
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 combined_chart.resize();
             });
         }
 
         // Scatter chart
-        if(scatter_chart_element) {
+        if (scatter_chart_element) {
 
             // Generate chart
             var scatter_chart = c3.generate({
-                size: { height: 400 },
+                size: {height: 400},
                 bindto: scatter_chart_element,
                 data: {
                     xs: {
@@ -283,7 +283,7 @@ var С3BarsPies = function() {
                         show: true
                     }
                 },
-                point: { r: 5 },
+                point: {r: 5},
                 axis: {
                     x: {
                         label: 'Sepal.Width',
@@ -323,7 +323,7 @@ var С3BarsPies = function() {
             }, 10000);
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 scatter_chart.resize();
             });
         }
@@ -335,7 +335,7 @@ var С3BarsPies = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _barsPiesExamples();
         }
     }
@@ -345,6 +345,6 @@ var С3BarsPies = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     С3BarsPies.init();
 });

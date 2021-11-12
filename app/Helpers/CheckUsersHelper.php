@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckUsersHelper
 {
-    public static function userIsTeamSAS(){
+    public static function userIsTeamSAS()
+    {
         return in_array(Auth::user()->user_type, GetUsersHelper::getTeamSAS());
     }
 
@@ -15,6 +16,7 @@ class CheckUsersHelper
     {
         return in_array(Auth::user()->user_type, GetUsersHelper::getTeamSAT());
     }
+
     public static function userIsTeamSA()
     {
         return in_array(Auth::user()->user_type, GetUsersHelper::getTeamSA());
@@ -24,6 +26,7 @@ class CheckUsersHelper
     {
         return in_array(Auth::user()->user_type, GetUsersHelper::getTeamAccount());
     }
+
     public static function userIsAcademic()
     {
         return in_array(Auth::user()->user_type, GetUsersHelper::getTeamAcademic());
@@ -33,11 +36,13 @@ class CheckUsersHelper
     {
         return in_array(Auth::user()->user_type, GetUsersHelper::getTeamAdministrative());
     }
+
     public static function userIsMyChild($student_id, $parent_id)
     {
-        $data = ['user_id' => $student_id, 'my_parent_id' =>$parent_id];
+        $data = [ 'user_id' => $student_id, 'my_parent_id' => $parent_id ];
         return StudentRecord::where($data)->exists();
     }
+
     public static function userIsPTA()
     {
         return in_array(Auth::user()->user_type, GetUsersHelper::getPTA());

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DatatableButtons = function() {
+var DatatableButtons = function () {
 
 
     //
@@ -18,21 +18,26 @@ var DatatableButtons = function() {
     //
 
     // Basic Datatable examples
-    var _componentDatatableButtons = function() {
+    var _componentDatatableButtons = function () {
         if (!$().DataTable) {
             console.warn('Warning - datatables.min.js is not loaded.');
             return;
         }
 
         // Setting datatable defaults
-        $.extend( $.fn.dataTable.defaults, {
+        $.extend($.fn.dataTable.defaults, {
             autoWidth: false,
             dom: '<"datatable-header"fBl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
             language: {
                 search: '<span>Filter:</span> _INPUT_',
                 searchPlaceholder: 'Type to filter...',
                 lengthMenu: '<span>Show:</span> _MENU_',
-                paginate: { 'first': 'First', 'last': 'Last', 'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;', 'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;' }
+                paginate: {
+                    'first': 'First',
+                    'last': 'Last',
+                    'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;',
+                    'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;'
+                }
             }
         });
 
@@ -62,7 +67,7 @@ var DatatableButtons = function() {
                 {
                     text: 'Custom button',
                     className: 'btn bg-teal-400',
-                    action: function(e, dt, node, config) {
+                    action: function (e, dt, node, config) {
                         swal({
                             title: "Good job!",
                             text: "Custom button activated",
@@ -85,14 +90,14 @@ var DatatableButtons = function() {
                     buttons: [
                         {
                             text: 'Toggle first name',
-                            action: function ( e, dt, node, config ) {
-                                dt.column( 0 ).visible( ! dt.column( 0 ).visible() );
+                            action: function (e, dt, node, config) {
+                                dt.column(0).visible(!dt.column(0).visible());
                             }
                         },
                         {
                             text: 'Toggle status',
-                            action: function ( e, dt, node, config ) {
-                                dt.column( -2 ).visible( ! dt.column( -2 ).visible() );
+                            action: function (e, dt, node, config) {
+                                dt.column(-2).visible(!dt.column(-2).visible());
                             }
                         }
                     ]
@@ -105,8 +110,8 @@ var DatatableButtons = function() {
         $('.datatable-button-init-length').DataTable({
             dom: '<"datatable-header"fB><"datatable-scroll-wrap"t><"datatable-footer"ip>',
             lengthMenu: [
-                [ 10, 25, 50, -1 ],
-                [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+                [10, 25, 50, -1],
+                ['10 rows', '25 rows', '50 rows', 'Show all']
             ],
             buttons: [
                 {
@@ -118,7 +123,7 @@ var DatatableButtons = function() {
     };
 
     // Select2 for length menu styling
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -138,7 +143,7 @@ var DatatableButtons = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentDatatableButtons();
             _componentSelect2();
         }
@@ -149,6 +154,6 @@ var DatatableButtons = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DatatableButtons.init();
 });

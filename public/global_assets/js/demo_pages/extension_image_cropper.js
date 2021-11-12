@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var ImageCropper = function() {
+var ImageCropper = function () {
 
 
     //
@@ -18,7 +18,7 @@ var ImageCropper = function() {
     //
 
     // Image cropper
-    var _componentImageCropper = function() {
+    var _componentImageCropper = function () {
         if (!$().cropper) {
             console.warn('Warning - cropper.min.js is not loaded.');
             return;
@@ -56,22 +56,22 @@ var ImageCropper = function() {
 
         // Disabled autocrop
         $('.crop-auto').cropper({
-            autoCrop: false 
+            autoCrop: false
         });
 
         // Disabled drag
         $('.crop-drag').cropper({
-            movable: false 
+            movable: false
         });
 
         // 16:9 ratio
         $('.crop-16-9').cropper({
-            aspectRatio: 16/9
+            aspectRatio: 16 / 9
         });
 
         // 4:3 ratio
         $('.crop-4-3').cropper({
-            aspectRatio: 4/3
+            aspectRatio: 4 / 3
         });
 
         // Minimum zone size
@@ -143,7 +143,7 @@ var ImageCropper = function() {
                     case 'scaleX':
                     case 'scaleY':
                         $(this).data('option', -data.option);
-                    break;
+                        break;
 
                     case 'getCroppedCanvas':
                         if (result) {
@@ -154,7 +154,7 @@ var ImageCropper = function() {
                             // Download image
                             $download.attr('href', result.toDataURL('image/jpeg'));
                         }
-                    break;
+                        break;
                 }
             }
         });
@@ -177,8 +177,8 @@ var ImageCropper = function() {
         // Crop and clear
         var cropClear = document.querySelector('.clear-crop-switch');
         var cropClearInit = new Switchery(cropClear);
-        cropClear.onchange = function() {
-            if(cropClear.checked) {
+        cropClear.onchange = function () {
+            if (cropClear.checked) {
 
                 // Crop mode
                 $cropper.cropper('crop');
@@ -186,8 +186,7 @@ var ImageCropper = function() {
                 // Enable other options
                 enableDisableInit.enable();
                 destroyCreateInit.enable();
-            }
-            else {
+            } else {
 
                 // Clear move
                 $cropper.cropper('clear');
@@ -201,8 +200,8 @@ var ImageCropper = function() {
         // Enable and disable
         var enableDisable = document.querySelector('.enable-disable-switch');
         var enableDisableInit = new Switchery(enableDisable);
-        enableDisable.onchange = function() {
-            if(enableDisable.checked) {
+        enableDisable.onchange = function () {
+            if (enableDisable.checked) {
 
                 // Enable cropper
                 $cropper.cropper('enable');
@@ -210,8 +209,7 @@ var ImageCropper = function() {
                 // Enable other options
                 cropClearInit.enable();
                 destroyCreateInit.enable();
-            }
-            else {
+            } else {
 
                 // Disable cropper
                 $cropper.cropper('disable');
@@ -225,8 +223,8 @@ var ImageCropper = function() {
         // Destroy and create
         var destroyCreate = document.querySelector('.destroy-create-switch');
         var destroyCreateInit = new Switchery(destroyCreate);
-        destroyCreate.onchange = function() {
-            if(destroyCreate.checked) {
+        destroyCreate.onchange = function () {
+            if (destroyCreate.checked) {
 
                 // Initialize again
                 $cropper.cropper({
@@ -241,12 +239,11 @@ var ImageCropper = function() {
                 // Enable other options
                 cropClearInit.enable();
                 enableDisableInit.enable();
-            }
-            else {
+            } else {
 
                 // Destroy cropper
                 $cropper.cropper('destroy');
-                
+
                 // Disable other options
                 cropClearInit.disable();
                 enableDisableInit.disable();
@@ -259,12 +256,12 @@ var ImageCropper = function() {
         //
 
         // Get data
-        $('#getData').on('click', function() {
+        $('#getData').on('click', function () {
             $('#showData1').val(JSON.stringify($cropper.cropper('getData')));
         });
 
         // Set data
-        $('#setData').on('click', function() {
+        $('#setData').on('click', function () {
             $cropper.cropper('setData', {
                 x: 291,
                 y: 86,
@@ -277,23 +274,23 @@ var ImageCropper = function() {
 
 
         // Get container data
-        $('#getContainerData').on('click', function() {
+        $('#getContainerData').on('click', function () {
             $('#showData2').val(JSON.stringify($cropper.cropper('getContainerData')));
         });
 
         // Get image data
-        $('#getImageData').on('click', function() {
+        $('#getImageData').on('click', function () {
             $('#showData2').val(JSON.stringify($cropper.cropper('getImageData')));
         });
 
 
         // Get canvas data
-        $('#getCanvasData').on('click', function() {
+        $('#getCanvasData').on('click', function () {
             $('#showData3').val(JSON.stringify($cropper.cropper('getCanvasData')));
         });
 
         // Set canvas data
-        $('#setCanvasData').on('click', function() {
+        $('#setCanvasData').on('click', function () {
             $cropper.cropper('setCanvasData', {
                 left: -50,
                 top: 0,
@@ -306,12 +303,12 @@ var ImageCropper = function() {
 
 
         // Get crop box data
-        $('#getCropBoxData').on('click', function() {
+        $('#getCropBoxData').on('click', function () {
             $('#showData4').val(JSON.stringify($cropper.cropper('getCropBoxData')));
         });
 
         // Set crop box data
-        $('#setCropBoxData').on('click', function() {
+        $('#setCropBoxData').on('click', function () {
             $cropper.cropper('setCropBoxData', {
                 left: 395,
                 top: 68,
@@ -329,7 +326,7 @@ var ImageCropper = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentImageCropper();
         }
     }
@@ -339,6 +336,6 @@ var ImageCropper = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     ImageCropper.init();
 });

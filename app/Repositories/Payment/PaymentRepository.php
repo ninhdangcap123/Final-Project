@@ -14,21 +14,24 @@ class PaymentRepository extends BaseRepository implements PaymentRepositoryInter
         return Payment::class;
     }
 
-    public function getPayment($data)
-    {
-        // TODO: Implement getPayment() method.
-        return $this->model->where($data)->with('myCourse');
-    }
     public function getGeneralPayment($data)
     {
         // TODO: Implement getGeneralPayment() method.
         return $this->model->whereNull('my_course_id')->where($data)->with('myCourse');
     }
+
     public function getActivePayments()
     {
         // TODO: Implement getActivePayments() method.
-        return $this->getPayment(['year' => GetSystemInfoHelper::getCurrentSession()]);
+        return $this->getPayment([ 'year' => GetSystemInfoHelper::getCurrentSession() ]);
     }
+
+    public function getPayment($data)
+    {
+        // TODO: Implement getPayment() method.
+        return $this->model->where($data)->with('myCourse');
+    }
+
     public function getPaymentYears()
     {
         // TODO: Implement getPaymentYears() method.

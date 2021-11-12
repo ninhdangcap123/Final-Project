@@ -8,7 +8,9 @@ interface ClassesRepositoryInterface extends RepositoryInterface
 {
 
     public function getAll();
+
     public function isActiveClass($class_id);
+
     public function getCourseClasses($course_id);
 
 }

@@ -12,7 +12,7 @@
 
     // The movable row
     .dt-rowReorder-float {
-        position: absolute!important;
+        position: absolute !important;
         table-layout: static;
         outline: $table-border-width dashed $color-grey-500;
         outline-offset: -($table-border-width);

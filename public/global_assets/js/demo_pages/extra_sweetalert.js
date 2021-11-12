@@ -18,14 +18,14 @@ var SweetAlert = function () {
     //
 
     // Sweet Alerts
-    var _componentSweetAlert = function() {
+    var _componentSweetAlert = function () {
         if (typeof swal == 'undefined') {
             console.warn('Warning - sweet_alert.min.js is not loaded.');
             return;
         }
 
         // Defaults
-        var setCustomDefaults = function() {
+        var setCustomDefaults = function () {
             swal.setDefaults({
                 buttonsStyling: false,
                 confirmButtonClass: 'btn btn-primary',
@@ -40,14 +40,14 @@ var SweetAlert = function () {
         //
 
         // Basic
-        $('#sweet_basic').on('click', function() {
+        $('#sweet_basic').on('click', function () {
             swal({
                 title: 'Here is a message!'
             });
         });
 
         // With title
-        $('#sweet_title_text').on('click', function() {
+        $('#sweet_title_text').on('click', function () {
             swal({
                 title: 'Here\'s a message!',
                 text: 'It\'s pretty, isn\'t it?'
@@ -55,7 +55,7 @@ var SweetAlert = function () {
         });
 
         // Close button
-        $('#sweet_close').on('click', function() {
+        $('#sweet_close').on('click', function () {
             swal({
                 title: 'Good job!',
                 text: 'You clicked the button!',
@@ -65,7 +65,7 @@ var SweetAlert = function () {
         });
 
         // Custom padding
-        $('#sweet_padding').on('click', function() {
+        $('#sweet_padding').on('click', function () {
             swal({
                 title: 'Oops...',
                 text: 'Something went wrong!',
@@ -75,7 +75,7 @@ var SweetAlert = function () {
         });
 
         // Custom width
-        $('#sweet_width').on('click', function() {
+        $('#sweet_width').on('click', function () {
             swal({
                 title: 'Got question?',
                 text: 'If you have any questions, don\t hesitate to let us know!',
@@ -85,7 +85,7 @@ var SweetAlert = function () {
         });
 
         // Auto closing
-        $('#sweet_auto_closer').on('click', function() {
+        $('#sweet_auto_closer').on('click', function () {
             swal({
                 title: 'Auto close alert!',
                 text: 'I will close in 2 seconds.',
@@ -94,7 +94,7 @@ var SweetAlert = function () {
         });
 
         // Dynamic queue
-        $('#sweet_queue').on('click', function() {
+        $('#sweet_queue').on('click', function () {
             swal.queue([{
                 title: 'Your public IP',
                 confirmButtonText: 'Show my public IP',
@@ -103,17 +103,17 @@ var SweetAlert = function () {
                 preConfirm: function () {
                     return new Promise(function (resolve) {
                         $.get('https://api.ipify.org?format=json')
-                        .done(function (data) {
-                            swal.insertQueueStep(data.ip);
-                            resolve();
-                        });
+                            .done(function (data) {
+                                swal.insertQueueStep(data.ip);
+                                resolve();
+                            });
                     });
                 }
             }]);
         });
 
         // AJAX requests
-        $('#sweet_ajax').on('click', function() {
+        $('#sweet_ajax').on('click', function () {
             swal({
                 title: 'Submit email to run ajax request',
                 input: 'email',
@@ -145,7 +145,7 @@ var SweetAlert = function () {
         });
 
         // HTML message
-        $('#sweet_html').on('click', function() {
+        $('#sweet_html').on('click', function () {
             swal({
                 title: '<i>HTML</i> <u>example</u>',
                 html: 'You can use <strong>bold text</strong>, ' + '<a href="http://demo.interface.club">links</a> ' + 'and other <span class="text-warning">HTML tags</span>'
@@ -153,7 +153,7 @@ var SweetAlert = function () {
         });
 
         // Image
-        $('#sweet_image').on('click', function() {
+        $('#sweet_image').on('click', function () {
             swal({
                 title: 'Sweet!',
                 text: 'Bootstrap is awesome.',
@@ -163,7 +163,7 @@ var SweetAlert = function () {
         });
 
         // Background image
-        $('#sweet_bg').on('click', function() {
+        $('#sweet_bg').on('click', function () {
             swal({
                 title: 'Sweet!',
                 type: 'success',
@@ -173,7 +173,7 @@ var SweetAlert = function () {
         });
 
         // Chaining notifications
-        $('#sweet_chain').on('click', function() {
+        $('#sweet_chain').on('click', function () {
 
             // Defaults
             swal.setDefaults({
@@ -224,7 +224,7 @@ var SweetAlert = function () {
         });
 
         // Reversed buttons
-        $('#sweet_reverse_buttons').on('click', function() {
+        $('#sweet_reverse_buttons').on('click', function () {
             swal({
                 title: 'What is your name?',
                 input: 'text',
@@ -237,7 +237,7 @@ var SweetAlert = function () {
         });
 
         // Fullscreen
-        $('#sweet_fullscreen').on('click', function() {
+        $('#sweet_fullscreen').on('click', function () {
             swal({
                 title: 'Here\'s a message!',
                 text: 'It\'s pretty, isn\'t it?',
@@ -249,7 +249,7 @@ var SweetAlert = function () {
         });
 
         // Column grow
-        $('#sweet_column').on('click', function() {
+        $('#sweet_column').on('click', function () {
             swal({
                 title: 'Here\'s a message!',
                 text: 'It\'s pretty, isn\'t it?',
@@ -261,7 +261,7 @@ var SweetAlert = function () {
         });
 
         // Row grow
-        $('#sweet_row').on('click', function() {
+        $('#sweet_row').on('click', function () {
             swal({
                 title: 'Here\'s a message!',
                 text: 'It\'s pretty, isn\'t it?',
@@ -271,7 +271,7 @@ var SweetAlert = function () {
         });
 
         // Disabled keyboard interactions
-        $('#sweet_disabled_keyboard').on('click', function() {
+        $('#sweet_disabled_keyboard').on('click', function () {
             swal({
                 title: 'Oops...',
                 text: 'Something went wrong!',
@@ -282,7 +282,7 @@ var SweetAlert = function () {
         });
 
         // Disabled animation
-        $('#sweet_disabled_animation').on('click', function() {
+        $('#sweet_disabled_animation').on('click', function () {
             swal({
                 title: 'For your information',
                 text: 'This is some sort of a custom alert',
@@ -292,7 +292,7 @@ var SweetAlert = function () {
         });
 
         // Disabled backdrop
-        $('#sweet_disabled_backdrop').on('click', function() {
+        $('#sweet_disabled_backdrop').on('click', function () {
             swal({
                 title: 'Got question?',
                 text: 'You will get the answer soon!',
@@ -302,7 +302,7 @@ var SweetAlert = function () {
         });
 
         // Disabled backdrop
-        $('#sweet_disabled_outside_click').on('click', function() {
+        $('#sweet_disabled_outside_click').on('click', function () {
             swal({
                 title: 'Oops...',
                 text: 'Something went wrong!',
@@ -317,7 +317,7 @@ var SweetAlert = function () {
         //
 
         // Text type
-        $('#sweet_text').on('click', function() {
+        $('#sweet_text').on('click', function () {
             swal({
                 title: 'What is your name?',
                 input: 'text',
@@ -338,7 +338,7 @@ var SweetAlert = function () {
         });
 
         // Email type
-        $('#sweet_email').on('click', function() {
+        $('#sweet_email').on('click', function () {
             swal({
                 title: 'Input email address',
                 input: 'email',
@@ -355,7 +355,7 @@ var SweetAlert = function () {
         });
 
         // URL type
-        $('#sweet_url').on('click', function() {
+        $('#sweet_url').on('click', function () {
             swal({
                 title: 'Input URL',
                 input: 'url',
@@ -372,7 +372,7 @@ var SweetAlert = function () {
         });
 
         // Password type
-        $('#sweet_password').on('click', function() {
+        $('#sweet_password').on('click', function () {
             swal({
                 title: 'Enter your password',
                 input: 'password',
@@ -394,7 +394,7 @@ var SweetAlert = function () {
         });
 
         // Textarea type
-        $('#sweet_textarea').on('click', function() {
+        $('#sweet_textarea').on('click', function () {
             swal({
                 title: 'Enter your comment',
                 input: 'textarea',
@@ -412,7 +412,7 @@ var SweetAlert = function () {
         });
 
         // Select type
-        $('#sweet_select').on('click', function() {
+        $('#sweet_select').on('click', function () {
             swal({
                 title: 'Select Netherlands',
                 input: 'select',
@@ -445,7 +445,7 @@ var SweetAlert = function () {
         });
 
         // Radio type
-        $('#sweet_radio').on('click', function() {
+        $('#sweet_radio').on('click', function () {
 
             // inputOptions can be an object or Promise
             var inputOptions = new Promise(function (resolve) {
@@ -477,7 +477,7 @@ var SweetAlert = function () {
         });
 
         // Checkbox type
-        $('#sweet_checkbox').on('click', function() {
+        $('#sweet_checkbox').on('click', function () {
             swal({
                 title: 'Terms and conditions',
                 input: 'checkbox',
@@ -499,7 +499,7 @@ var SweetAlert = function () {
 
 
         // Range type
-        $('#sweet_range').on('click', function() {
+        $('#sweet_range').on('click', function () {
             swal({
                 title: 'How old are you?',
                 type: 'question',
@@ -524,9 +524,9 @@ var SweetAlert = function () {
         //
         // Contextual alerts
         //
-        
+
         // Success alert
-        $('#sweet_success').on('click', function() {
+        $('#sweet_success').on('click', function () {
             swal({
                 title: 'Good job!',
                 text: 'You clicked the button!',
@@ -535,7 +535,7 @@ var SweetAlert = function () {
         });
 
         // Error alert
-        $('#sweet_error').on('click', function() {
+        $('#sweet_error').on('click', function () {
             swal({
                 title: 'Oops...',
                 text: 'Something went wrong!',
@@ -544,7 +544,7 @@ var SweetAlert = function () {
         });
 
         // Warning alert
-        $('#sweet_warning').on('click', function() {
+        $('#sweet_warning').on('click', function () {
             swal({
                 title: 'Are you sure?',
                 text: 'You will not be able to recover this imaginary file!',
@@ -555,7 +555,7 @@ var SweetAlert = function () {
         });
 
         // Info alert
-        $('#sweet_info').on('click', function() {
+        $('#sweet_info').on('click', function () {
             swal({
                 title: 'For your information',
                 text: 'This is some sort of a custom alert',
@@ -564,7 +564,7 @@ var SweetAlert = function () {
         });
 
         // Question
-        $('#sweet_question').on('click', function() {
+        $('#sweet_question').on('click', function () {
             swal({
                 title: 'Got question?',
                 text: 'You will get the answer soon!',
@@ -573,7 +573,7 @@ var SweetAlert = function () {
         });
 
         // Alert combination
-        $('#sweet_combine').on('click', function() {
+        $('#sweet_combine').on('click', function () {
             swal({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -609,7 +609,7 @@ var SweetAlert = function () {
         //
 
         // Top
-        $('#sweet_top').on('click', function() {
+        $('#sweet_top').on('click', function () {
             swal({
                 title: 'Good job!',
                 text: 'You clicked the button!',
@@ -619,7 +619,7 @@ var SweetAlert = function () {
         });
 
         // Top left
-        $('#sweet_top_left').on('click', function() {
+        $('#sweet_top_left').on('click', function () {
             swal({
                 title: 'Good job!',
                 text: 'You clicked the button!',
@@ -629,7 +629,7 @@ var SweetAlert = function () {
         });
 
         // Top right
-        $('#sweet_top_right').on('click', function() {
+        $('#sweet_top_right').on('click', function () {
             swal({
                 title: 'Good job!',
                 text: 'You clicked the button!',
@@ -640,7 +640,7 @@ var SweetAlert = function () {
 
 
         // Center left
-        $('#sweet_center_left').on('click', function() {
+        $('#sweet_center_left').on('click', function () {
             swal({
                 title: 'Good job!',
                 text: 'You clicked the button!',
@@ -650,7 +650,7 @@ var SweetAlert = function () {
         });
 
         // Center right
-        $('#sweet_center_right').on('click', function() {
+        $('#sweet_center_right').on('click', function () {
             swal({
                 title: 'Good job!',
                 text: 'You clicked the button!',
@@ -661,7 +661,7 @@ var SweetAlert = function () {
 
 
         // Bottom
-        $('#sweet_bottom').on('click', function() {
+        $('#sweet_bottom').on('click', function () {
             swal({
                 title: 'Good job!',
                 text: 'You clicked the button!',
@@ -671,7 +671,7 @@ var SweetAlert = function () {
         });
 
         // Bottom left
-        $('#sweet_bottom_left').on('click', function() {
+        $('#sweet_bottom_left').on('click', function () {
             swal({
                 title: 'Good job!',
                 text: 'You clicked the button!',
@@ -681,7 +681,7 @@ var SweetAlert = function () {
         });
 
         // Bottom right
-        $('#sweet_bottom_right').on('click', function() {
+        $('#sweet_bottom_right').on('click', function () {
             swal({
                 title: 'Good job!',
                 text: 'You clicked the button!',
@@ -696,7 +696,7 @@ var SweetAlert = function () {
         //
 
         // onOpen event
-        $('#sweet_onopen').on('click', function() {
+        $('#sweet_onopen').on('click', function () {
             swal({
                 title: 'Here\'s a message!',
                 text: 'It\'s pretty, isn\'t it?',
@@ -707,7 +707,7 @@ var SweetAlert = function () {
         });
 
         // onClose event
-        $('#sweet_onclose').on('click', function() {
+        $('#sweet_onclose').on('click', function () {
             swal({
                 title: 'Here\'s a message!',
                 text: 'It\'s pretty, isn\'t it?',
@@ -719,14 +719,14 @@ var SweetAlert = function () {
     };
 
     // SweetAlert with Select2 selects
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
         }
 
         // Select2 single
-        $('#sweet_select2_single').on('click', function() {
+        $('#sweet_select2_single').on('click', function () {
             swal({
                 title: 'Select Netherlands',
                 input: 'select',
@@ -751,7 +751,7 @@ var SweetAlert = function () {
                 inputAttributes: {
                     'data-placeholder': 'Select Netherlands'
                 },
-                onOpen: function() {
+                onOpen: function () {
 
                     // Initialize Select2
                     $('.swal2-select.select-single').select2({
@@ -769,7 +769,7 @@ var SweetAlert = function () {
         });
 
         // Select2 multiple
-        $('#sweet_select2_multiple').on('click', function() {
+        $('#sweet_select2_multiple').on('click', function () {
             swal({
                 title: 'Select country',
                 input: 'select',
@@ -789,31 +789,31 @@ var SweetAlert = function () {
                     'data-placeholder': 'Select country',
                     'multiple': 'multiple'
                 },
-                onOpen: function() {
+                onOpen: function () {
 
                     // Initialize Select2
                     $('.swal2-select.select-multiple').select2();
                 }
             }).then(function (result) {
                 if (result.value) {
-                swal({
-                    type: 'success',
-                    html: 'You selected: ' + JSON.stringify($('.swal2-select.select-multiple').val())
-                });
-            }
+                    swal({
+                        type: 'success',
+                        html: 'You selected: ' + JSON.stringify($('.swal2-select.select-multiple').val())
+                    });
+                }
             });
         });
     };
 
     // SweetAlert with Bootstrap Multiselect
-    var _componentMultiselect = function() {
+    var _componentMultiselect = function () {
         if (!$().multiselect) {
             console.warn('Warning - bootstrap-multiselect.js is not loaded.');
             return;
         }
 
         // SweetAlert with Multiselect
-        $('#sweet_multiselect').on('click', function() {
+        $('#sweet_multiselect').on('click', function () {
             swal({
                 title: 'Select countries',
                 input: 'select',
@@ -831,7 +831,7 @@ var SweetAlert = function () {
                 inputAttributes: {
                     'multiple': 'multiple'
                 },
-                onOpen: function() {
+                onOpen: function () {
 
                     // Initialize Multiselect when dialog is opened
                     $('.swal2-select.select-multiselect').multiselect();
@@ -856,18 +856,18 @@ var SweetAlert = function () {
                     });
                 }
             });
-        });        
+        });
     };
 
     // SweetAlert with custom checkboxes, radios and file input
-    var _componentControlsCustom = function() {
+    var _componentControlsCustom = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
         }
 
         // Modal with custom checkboxes
-        $('#sweet_checkbox_custom').on('click', function() {
+        $('#sweet_checkbox_custom').on('click', function () {
             swal({
                 title: 'Terms and conditions',
                 input: 'checkbox',
@@ -878,7 +878,7 @@ var SweetAlert = function () {
                 inputValidator: function (value) {
                     return !value && 'You need to agree with T&C'
                 },
-                onOpen: function() {
+                onOpen: function () {
 
                     // Initialize Uniform for custom checkboxes
                     $('.swal2-checkbox.form-check-styled input[type=checkbox]').uniform();
@@ -894,7 +894,7 @@ var SweetAlert = function () {
         });
 
         // Modal with custom radios
-        $('#sweet_radio_custom').on('click', function() {
+        $('#sweet_radio_custom').on('click', function () {
 
             // inputOptions can be an object or Promise
             var inputOptions = new Promise(function (resolve) {
@@ -914,7 +914,7 @@ var SweetAlert = function () {
                 inputValidator: function (value) {
                     return !value && 'You need to choose something!'
                 },
-                onOpen: function() {
+                onOpen: function () {
 
                     // Initialize Uniform for custom radios
                     $('.swal2-radio.form-check-styled input[type=radio]').uniform();
@@ -930,7 +930,7 @@ var SweetAlert = function () {
         });
 
         // File type
-        $('#sweet_file').on('click', function() {
+        $('#sweet_file').on('click', function () {
             swal({
                 title: 'Select image',
                 input: 'file',
@@ -938,7 +938,7 @@ var SweetAlert = function () {
                 inputAttributes: {
                     accept: 'image/*'
                 },
-                onOpen: function() {
+                onOpen: function () {
 
                     // Initialize Uniform for custom radios
                     $('.swal2-file').uniform();
@@ -960,14 +960,14 @@ var SweetAlert = function () {
     };
 
     // SweetAlert with custom checkboxes, radios and file input
-    var _componentControlSwitchery = function() {
+    var _componentControlSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
         }
 
         // Modal with custom checkboxes
-        $('#sweet_switchery').on('click', function() {
+        $('#sweet_switchery').on('click', function () {
             swal({
                 title: 'Terms and conditions',
                 input: 'checkbox',
@@ -978,7 +978,7 @@ var SweetAlert = function () {
                 inputValidator: function (value) {
                     return !value && 'You need to agree with T&C'
                 },
-                onOpen: function() {
+                onOpen: function () {
 
                     // Initialize Switchery
                     var elem = document.querySelector('.swal2-checkbox.form-check-styled input[type=checkbox]');
@@ -1001,7 +1001,7 @@ var SweetAlert = function () {
     //
 
     return {
-        initComponents: function() {
+        initComponents: function () {
             _componentSweetAlert();
             _componentSelect2();
             _componentMultiselect();
@@ -1015,6 +1015,6 @@ var SweetAlert = function () {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     SweetAlert.initComponents();
 });

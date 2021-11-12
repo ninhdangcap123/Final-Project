@@ -85,12 +85,15 @@
                         background-color: $wizard-step-number-active-bg;
                         z-index: 9;
                     }
+
                     &:before {
                         left: 0;
                     }
+
                     &:after {
                         right: 0;
                     }
+
                     &:first-child:before,
                     &:last-child:after {
                         content: none;

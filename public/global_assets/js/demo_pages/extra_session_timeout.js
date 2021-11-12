@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var SessionTimeout = function() {
+var SessionTimeout = function () {
 
 
     //
@@ -18,7 +18,7 @@ var SessionTimeout = function() {
     //
 
     // Session timeout
-    var _componentSessionTimeout = function() {
+    var _componentSessionTimeout = function () {
         if (!$.sessionTimeout) {
             console.warn('Warning - session_timeout.min.js is not loaded.');
             return;
@@ -44,7 +44,7 @@ var SessionTimeout = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentSessionTimeout();
         }
     }
@@ -54,6 +54,6 @@ var SessionTimeout = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     SessionTimeout.init();
 });

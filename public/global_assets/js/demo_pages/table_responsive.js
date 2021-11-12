@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var TableFootable = function() {
+var TableFootable = function () {
 
 
     //
@@ -18,14 +18,14 @@ var TableFootable = function() {
     //
 
     // Default file input style
-    var _componentFootable = function() {
+    var _componentFootable = function () {
         if (!$().footable) {
             console.warn('Warning - footable.min.js is not loaded.');
             return;
         }
 
-		// Initialize responsive functionality
-	    $('.table-togglable').footable();
+        // Initialize responsive functionality
+        $('.table-togglable').footable();
     };
 
 
@@ -34,7 +34,7 @@ var TableFootable = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentFootable();
         }
     }
@@ -44,6 +44,6 @@ var TableFootable = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     TableFootable.init();
 });

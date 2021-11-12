@@ -18,7 +18,7 @@ var InvoiceGrid = function () {
     //
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -34,7 +34,7 @@ var InvoiceGrid = function () {
     //
 
     return {
-        initComponents: function() {
+        initComponents: function () {
             _componentUniform();
         }
     }
@@ -44,6 +44,6 @@ var InvoiceGrid = function () {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     InvoiceGrid.initComponents();
 });

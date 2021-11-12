@@ -9,7 +9,7 @@ use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\GetUsersHelper;
 use App\Helpers\GetUserTypeHelper;
 use App\Helpers\JsonHelper;
-use App\Helpers\Qs;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Repositories\BloodGroup\BloodGroupRepositoryInterface;
 use App\Repositories\LocationRepo;
@@ -21,7 +21,6 @@ use App\Repositories\State\StateRepositoryInterface;
 use App\Repositories\Subject\SubjectRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
-use App\Http\Controllers\Controller;
 use App\Repositories\UserType\UserTypeRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -49,8 +48,8 @@ class UserController extends Controller
                                 StateRepositoryInterface       $stateRepo,
                                 NationalRepositoryInterface    $nationalityRepo)
     {
-        $this->middleware('teamSA', ['only' => ['index', 'store', 'edit', 'update'] ]);
-        $this->middleware('super_admin', ['only' => ['reset_pass','destroy'] ]);
+        $this->middleware('teamSA', [ 'only' => [ 'index', 'store', 'edit', 'update' ] ]);
+        $this->middleware('super_admin', [ 'only' => [ 'reset_pass', 'destroy' ] ]);
         $this->userRepo = $userRepo;
         $this->myCourseRepo = $myCourseRepo;
         $this->stateRepo = $stateRepo;
@@ -87,7 +86,7 @@ class UserController extends Controller
     public function resetPass($id)
     {
         // Redirect if Making Changes to Head of Super Admins
-        if(CheckUsersHelper::headSA($id)){
+        if( CheckUsersHelper::headSA($id) ) {
             return back()->with('flash_danger', __('msg.denied'));
         }
 
@@ -110,28 +109,28 @@ class UserController extends Controller
         $userIsTeamSA = in_array($userType, GetUsersHelper::getTeamSA());
 
         $staffId = GetSystemInfoHelper::getAppCode().'/STAFF/'.date('Y/m', strtotime($request->emp_date)).'/'.mt_rand(1000, 9999);
-        $data['username'] = $userName = ($userIsTeamSA) ? $request->username : $staffId;
+        $data['username'] = $userName = ( $userIsTeamSA ) ? $request->username : $staffId;
 
         $password = $request->password ?: $userType;
         $data['password'] = Hash::make($password);
 
-        if($request->hasFile('photo')) {
+        if( $request->hasFile('photo') ) {
             $photo = $request->file('photo');
             $file = GetPathHelper::getFileMetaData($photo);
-            $file['name'] = 'photo.' . $file['ext'];
+            $file['name'] = 'photo.'.$file['ext'];
             $file['path'] = $photo->storeAs(GetPathHelper::getUploadPath($userType).$data['code'], $file['name']);
-            $data['photo'] = asset('storage/' . $file['path']);
+            $data['photo'] = asset('storage/'.$file['path']);
         }
 
         /* Ensure that both username and Email are not blank*/
-        if(!$userName && !$request->email){
+        if( !$userName && !$request->email ) {
             return back()->with('pop_error', __('msg.user_invalid'));
         }
 
         $user = $this->userRepo->create($data); // Create User
 
         /* CREATE STAFF RECORD */
-        if($userIsStaff){
+        if( $userIsStaff ) {
             $data2 = $request->only(GetUsersHelper::getStaffRecord());
             $data2['user_id'] = $user->id;
             $data2['code'] = $staffId;
@@ -146,7 +145,7 @@ class UserController extends Controller
         $id = DisplayMessageHelper::decodeHash($id);
 
         // Redirect if Making Changes to Head of Super Admins
-        if(CheckUsersHelper::headSA($id)){
+        if( CheckUsersHelper::headSA($id) ) {
             return JsonHelper::json(__('msg.denied'), FALSE);
         }
 
@@ -159,28 +158,27 @@ class UserController extends Controller
         $data = $request->except(GetUsersHelper::getStaffRecord());
         $data['name'] = ucwords($request->name);
 
-        if($userIsStaff && !$userIsTeamSA){
+        if( $userIsStaff && !$userIsTeamSA ) {
             $data['username'] = GetSystemInfoHelper::getAppCode().'/STAFF/'.date('Y/m', strtotime($request->emp_date)).'/'.mt_rand(1000, 9999);
-        }
-        else {
+        } else {
             $data['username'] = $user->username;
         }
 
-        if($request->hasFile('photo')) {
+        if( $request->hasFile('photo') ) {
             $photo = $request->file('photo');
             $file = GetPathHelper::getFileMetaData($photo);
-            $file['name'] = 'photo.' . $file['ext'];
+            $file['name'] = 'photo.'.$file['ext'];
             $file['path'] = $photo->storeAs(GetPathHelper::getUploadPath($userType).$data['code'], $file['name']);
-            $data['photo'] = asset('storage/' . $file['path']);
+            $data['photo'] = asset('storage/'.$file['path']);
         }
 
         $this->userRepo->update($id, $data);   /* UPDATE USER RECORD */
 
         /* UPDATE STAFF RECORD */
-        if($userIsStaff){
+        if( $userIsStaff ) {
             $data2 = $request->only(GetUsersHelper::getStaffRecord());
             $data2['code'] = $data['username'];
-            $this->staffRepo->update(['user_id' => $id], $data2);
+            $this->staffRepo->update([ 'user_id' => $id ], $data2);
         }
 
         return JsonHelper::jsonUpdateSuccess();
@@ -189,12 +187,14 @@ class UserController extends Controller
     public function show($user_id)
     {
         $user_id = DisplayMessageHelper::decodeHash($user_id);
-        if(!$user_id){return back();}
+        if( !$user_id ) {
+            return back();
+        }
 
         $data['user'] = $this->userRepo->find($user_id);
 
         /* Prevent Other Students from viewing Profile of others*/
-        if(Auth::user()->id != $user_id && !CheckUsersHelper::userIsTeamSAT() && !CheckUsersHelper::userIsMyChild(Auth::user()->id, $user_id)){
+        if( Auth::user()->id != $user_id && !CheckUsersHelper::userIsTeamSAT() && !CheckUsersHelper::userIsMyChild(Auth::user()->id, $user_id) ) {
             return redirect(route('dashboard'))->with('pop_error', __('msg.denied'));
         }
 
@@ -206,13 +206,13 @@ class UserController extends Controller
         $id = DisplayMessageHelper::decodeHash($id);
 
         // Redirect if Making Changes to Head of Super Admins
-        if(CheckUsersHelper::headSA($id)){
+        if( CheckUsersHelper::headSA($id) ) {
             return back()->with('pop_error', __('msg.denied'));
         }
 
         $user = $this->userRepo->find($id);
 
-        if($user->user_type == 'teacher' && $this->userTeachesSubject($user)) {
+        if( $user->user_type == 'teacher' && $this->userTeachesSubject($user) ) {
             return back()->with('pop_error', __('msg.del_teacher'));
         }
 

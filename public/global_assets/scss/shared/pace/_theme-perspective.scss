@@ -88,20 +88,38 @@
 
     // Animations
     @keyframes perspective {
-        0% { transform: perspective(7.5rem); }
-        50% { transform: perspective(7.5rem) rotateY(180deg); }
-        100% { transform: perspective(7.5rem) rotateY(180deg) rotateX(180deg); }
+        0% {
+            transform: perspective(7.5rem);
+        }
+        50% {
+            transform: perspective(7.5rem) rotateY(180deg);
+        }
+        100% {
+            transform: perspective(7.5rem) rotateY(180deg) rotateX(180deg);
+        }
     }
 
     @-webkit-keyframes perspective {
-        0% { -webkit-transform: perspective(7.5rem); }
-        50% { -webkit-transform: perspective(7.5rem) rotateY(180deg); }
-        100% { -webkit-transform: perspective(7.5rem) rotateY(180deg) rotateX(180deg); }
+        0% {
+            -webkit-transform: perspective(7.5rem);
+        }
+        50% {
+            -webkit-transform: perspective(7.5rem) rotateY(180deg);
+        }
+        100% {
+            -webkit-transform: perspective(7.5rem) rotateY(180deg) rotateX(180deg);
+        }
     }
 
     @-moz-keyframes perspective {
-        0% { -moz-transform: perspective(7.5rem); }
-        50% { -moz-transform: perspective(7.5rem) rotateY(180deg); }
-        100% { -moz-transform: perspective(7.5rem) rotateY(180deg) rotateX(180deg); }
+        0% {
+            -moz-transform: perspective(7.5rem);
+        }
+        50% {
+            -moz-transform: perspective(7.5rem) rotateY(180deg);
+        }
+        100% {
+            -moz-transform: perspective(7.5rem) rotateY(180deg) rotateX(180deg);
+        }
     }
 }

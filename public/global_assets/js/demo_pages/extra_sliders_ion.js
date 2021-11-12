@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var IonSlider = function() {
+var IonSlider = function () {
 
 
     //
@@ -18,7 +18,7 @@ var IonSlider = function() {
     //
 
     // ION range slider examples
-    var _componentIonSlider = function() {
+    var _componentIonSlider = function () {
         if (!$().ionRangeSlider) {
             console.warn('Warning - ion_rangeslider.min.js is not loaded.');
             return;
@@ -458,7 +458,7 @@ var IonSlider = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentIonSlider();
         }
     }
@@ -468,6 +468,6 @@ var IonSlider = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     IonSlider.init();
 });

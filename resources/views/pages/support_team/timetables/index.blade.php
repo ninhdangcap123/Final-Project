@@ -11,7 +11,8 @@
         <div class="card-body">
             <ul class="nav nav-tabs nav-tabs-highlight">
                 @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
-                <li class="nav-item"><a href="#add-tt" class="nav-link active" data-toggle="tab">Create Timetable</a></li>
+                    <li class="nav-item"><a href="#add-tt" class="nav-link active" data-toggle="tab">Create
+                                                                                                     Timetable</a></li>
                 @endif
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Show TimeTables</a>
@@ -27,48 +28,57 @@
             <div class="tab-content">
 
                 @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
-                <div class="tab-pane fade show active" id="add-tt">
-                   <div class="col-md-8">
-                       <form class="ajax-store" method="post" action="{{ route('ttr.store') }}">
-                           @csrf
-                           <div class="form-group row">
-                               <label class="col-lg-3 col-form-label font-weight-semibold">Name <span class="text-danger">*</span></label>
-                               <div class="col-lg-9">
-                                   <input name="name" value="{{ old('name') }}" required type="text" class="form-control" placeholder="Name of TimeTable">
-                               </div>
-                           </div>
+                    <div class="tab-pane fade show active" id="add-tt">
+                        <div class="col-md-8">
+                            <form class="ajax-store" method="post" action="{{ route('ttr.store') }}">
+                                @csrf
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label font-weight-semibold">Name <span
+                                            class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <input name="name" value="{{ old('name') }}" required type="text"
+                                               class="form-control" placeholder="Name of TimeTable">
+                                    </div>
+                                </div>
 
-                           <div class="form-group row">
-                               <label for="my_course_id" class="col-lg-3 col-form-label font-weight-semibold">Class <span class="text-danger">*</span></label>
-                               <div class="col-lg-9">
-                                   <select required data-placeholder="Select Class" class="form-control select" name="my_course_id" id="my_course_id">
-                                       @foreach($my_courses as $mc)
-                                           <option {{ old('my_course_id') == $mc->id ? 'selected' : '' }} value="{{ $mc->id }}">{{ $mc->name }}</option>
-                                       @endforeach
-                                   </select>
-                               </div>
-                           </div>
+                                <div class="form-group row">
+                                    <label for="my_course_id" class="col-lg-3 col-form-label font-weight-semibold">Class
+                                        <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <select required data-placeholder="Select Class" class="form-control select"
+                                                name="my_course_id" id="my_course_id">
+                                            @foreach($my_courses as $mc)
+                                                <option
+                                                    {{ old('my_course_id') == $mc->id ? 'selected' : '' }} value="{{ $mc->id }}">{{ $mc->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
 
-                           <div class="form-group row">
-                               <label for="exam_id" class="col-lg-3 col-form-label font-weight-semibold">Type (Course or Exam)</label>
-                               <div class="col-lg-9">
-                                   <select class="select form-control" name="exam_id" id="exam_id">
-                                       <option value="">Course Timetable</option>
-                                       @foreach($exams as $ex)
-                                           <option {{ old('exam_id') == $ex->id ? 'selected' : '' }} value="{{ $ex->id }}">{{ $ex->name }}</option>
-                                       @endforeach
-                                   </select>
-                               </div>
-                           </div>
+                                <div class="form-group row">
+                                    <label for="exam_id" class="col-lg-3 col-form-label font-weight-semibold">Type
+                                                                                                              (Course or
+                                                                                                              Exam)</label>
+                                    <div class="col-lg-9">
+                                        <select class="select form-control" name="exam_id" id="exam_id">
+                                            <option value="">Course Timetable</option>
+                                            @foreach($exams as $ex)
+                                                <option
+                                                    {{ old('exam_id') == $ex->id ? 'selected' : '' }} value="{{ $ex->id }}">{{ $ex->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
 
 
-                           <div class="text-right">
-                               <button id="ajax-btn" type="submit" class="btn btn-primary">Submit form <i class="icon-paperplane ml-2"></i></button>
-                           </div>
-                       </form>
-                   </div>
+                                <div class="text-right">
+                                    <button id="ajax-btn" type="submit" class="btn btn-primary">Submit form <i
+                                            class="icon-paperplane ml-2"></i></button>
+                                </div>
+                            </form>
+                        </div>
 
-                </div>
+                    </div>
                 @endif
 
 
@@ -104,19 +114,26 @@
 
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     {{--View--}}
-                                                    <a href="{{ route('ttr.show', $ttr->id) }}" class="dropdown-item"><i class="icon-eye"></i> View</a>
+                                                    <a href="{{ route('ttr.show', $ttr->id) }}" class="dropdown-item"><i
+                                                            class="icon-eye"></i> View</a>
 
                                                     @if(\App\Helpers\CheckUsersHelper::userIsTeamSA())
-                                                    {{--Manage--}}
-                                                    <a href="{{ route('ttr.manage', $ttr->id) }}" class="dropdown-item"><i class="icon-plus-circle2"></i> Manage</a>
-                                                    {{--Edit--}}
-                                                    <a href="{{ route('ttr.edit', $ttr->id) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
+                                                        {{--Manage--}}
+                                                        <a href="{{ route('ttr.manage', $ttr->id) }}"
+                                                           class="dropdown-item"><i class="icon-plus-circle2"></i>
+                                                            Manage</a>
+                                                        {{--Edit--}}
+                                                        <a href="{{ route('ttr.edit', $ttr->id) }}"
+                                                           class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
                                                     @endif
 
                                                     {{--Delete--}}
                                                     @if(\App\Helpers\GetUserTypeHelper::userIsSuperAdmin())
-                                                        <a id="{{ $ttr->id }}" onclick="confirmDelete(this.id)" href="#" class="dropdown-item"><i class="icon-trash"></i> Delete</a>
-                                                        <form method="post" id="item-delete-{{ $ttr->id }}" action="{{ route('ttr.destroy', $ttr->id) }}" class="hidden">@csrf @method('delete')</form>
+                                                        <a id="{{ $ttr->id }}" onclick="confirmDelete(this.id)" href="#"
+                                                           class="dropdown-item"><i class="icon-trash"></i> Delete</a>
+                                                        <form method="post" id="item-delete-{{ $ttr->id }}"
+                                                              action="{{ route('ttr.destroy', $ttr->id) }}"
+                                                              class="hidden">@csrf @method('delete')</form>
                                                     @endif
 
                                                 </div>

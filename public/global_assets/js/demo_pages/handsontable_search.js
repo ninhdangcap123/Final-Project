@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var HotSearch = function() {
+var HotSearch = function () {
 
 
     //
@@ -18,7 +18,7 @@ var HotSearch = function() {
     //
 
     // HOT search examples
-    var _componentHotSearch = function() {
+    var _componentHotSearch = function () {
         if (typeof Handsontable == 'undefined') {
             console.warn('Warning - handsontable.min.js is not loaded.');
             return;
@@ -104,7 +104,6 @@ var HotSearch = function() {
         });
 
 
-
         // Custom search result class
         // ------------------------------
 
@@ -155,13 +154,12 @@ var HotSearch = function() {
         var hot_search_class_input = document.getElementById('hot_search_class_input');
 
         // Add event
-        Handsontable.dom.addEvent(hot_search_class_input,'keyup', function (event) {
+        Handsontable.dom.addEvent(hot_search_class_input, 'keyup', function (event) {
             var queryResult = hot_search_class_init.search.query(this.value);
 
             console.log(queryResult);
             hot_search_class_init.render();
         });
-
 
 
         // Custom query method
@@ -219,13 +217,12 @@ var HotSearch = function() {
         };
 
         // Add event
-        Handsontable.dom.addEvent(hot_search_query_input,'keyup', function(event) {
+        Handsontable.dom.addEvent(hot_search_query_input, 'keyup', function (event) {
             var queryResult = hot_search_query_init.search.query(this.value);
 
             console.log(queryResult);
             hot_search_query_init.render();
         });
-
 
 
         // Custom callback
@@ -278,6 +275,7 @@ var HotSearch = function() {
 
         // Search result count
         var searchResultCount = 0;
+
         function searchResultCounter(instance, row, col, value, result) {
             Handsontable.plugins.Search.DEFAULT_CALLBACK.apply(this, arguments);
 
@@ -291,7 +289,7 @@ var HotSearch = function() {
         var hot_search_callback_input = document.getElementById('hot_search_callback_input');
 
         // Add event
-        Handsontable.dom.addEvent(hot_search_callback_input, 'keyup', function(event) {
+        Handsontable.dom.addEvent(hot_search_callback_input, 'keyup', function (event) {
             var queryResult;
 
             searchResultCount = 0;
@@ -308,7 +306,7 @@ var HotSearch = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentHotSearch();
         }
     }
@@ -318,6 +316,6 @@ var HotSearch = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     HotSearch.init();
 });

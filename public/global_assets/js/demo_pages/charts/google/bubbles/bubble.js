@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleBubbleChart = function() {
+var GoogleBubbleChart = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleBubbleChart = function() {
     //
 
     // Bubble chart
-    var _googleBubbleChart = function() {
+    var _googleBubbleChart = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleBubbleChart = function() {
 
                 // Resize on window resize
                 var resizeBubbleChart;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeBubbleChart);
                     resizeBubbleChart = setTimeout(function () {
                         drawBubbleChart();
@@ -55,16 +55,16 @@ var GoogleBubbleChart = function() {
             // Data
             var data = google.visualization.arrayToDataTable([
                 ['ID', 'Life Expectancy', 'Fertility Rate', 'Region'],
-                ['CAN',    82.66,              1.67,      'North America'],
-                ['DEU',    79.84,              1.36,      'Europe'],
-                ['DNK',    70.6,               1.84,      'Europe'],
-                ['EGY',    72.73,              2.78,      'Middle East'],
-                ['GBR',    75.05,              2,         'Europe'],
-                ['IRN',    72.49,              0.7,       'Middle East'],
-                ['IRQ',    68.09,              4.77,      'Middle East'],
-                ['ISR',    81.55,              3.96,      'Middle East'],
-                ['RUS',    68.6,               1.54,      'Europe'],
-                ['USA',    78.09,              3.05,      'North America']
+                ['CAN', 82.66, 1.67, 'North America'],
+                ['DEU', 79.84, 1.36, 'Europe'],
+                ['DNK', 70.6, 1.84, 'Europe'],
+                ['EGY', 72.73, 2.78, 'Middle East'],
+                ['GBR', 75.05, 2, 'Europe'],
+                ['IRN', 72.49, 0.7, 'Middle East'],
+                ['IRQ', 68.09, 4.77, 'Middle East'],
+                ['ISR', 81.55, 3.96, 'Middle East'],
+                ['RUS', 68.6, 1.54, 'Europe'],
+                ['USA', 78.09, 3.05, 'North America']
             ]);
 
             // Options
@@ -89,18 +89,18 @@ var GoogleBubbleChart = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
                     minValue: 0
                 },
                 bubble: {
-                  textStyle: {
-                    auraColor: 'none',
-                    color: '#fff'
-                  },
-                  stroke: '#fff'
+                    textStyle: {
+                        auraColor: 'none',
+                        color: '#fff'
+                    },
+                    stroke: '#fff'
                 },
                 legend: {
                     position: 'top',
@@ -123,7 +123,7 @@ var GoogleBubbleChart = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleBubbleChart();
         }
     }

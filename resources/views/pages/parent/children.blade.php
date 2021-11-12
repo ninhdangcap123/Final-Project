@@ -25,7 +25,8 @@
                 @foreach($students as $s)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}" alt="photo"></td>
+                        <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}"
+                                 alt="photo"></td>
                         <td>{{ $s->user->name }}</td>
                         <td>{{ $s->adm_no }}</td>
                         <td>{{ $s->myCourse->name.' '.$s->classes->name }}</td>
@@ -38,8 +39,11 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-left">
-                                        <a href="{{ route('students.show', \App\Helpers\DisplayMessageHelper::hash($s->id)) }}" class="dropdown-item"><i class="icon-eye"></i> View Profile</a>
-                                        <a target="_blank" href="{{ route('marks.year_selector', \App\Helpers\DisplayMessageHelper::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-check"></i> Marksheet</a>
+                                        <a href="{{ route('students.show', \App\Helpers\DisplayMessageHelper::hash($s->id)) }}"
+                                           class="dropdown-item"><i class="icon-eye"></i> View Profile</a>
+                                        <a target="_blank"
+                                           href="{{ route('marks.year_selector', \App\Helpers\DisplayMessageHelper::hash($s->user->id)) }}"
+                                           class="dropdown-item"><i class="icon-check"></i> Marksheet</a>
 
                                     </div>
                                 </div>

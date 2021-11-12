@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var EcommerceProducts = function() {
+var EcommerceProducts = function () {
 
 
     //
@@ -18,7 +18,7 @@ var EcommerceProducts = function() {
     //
 
     // Lightbox
-    var _componentFancybox = function() {
+    var _componentFancybox = function () {
         if (!$().fancybox) {
             console.warn('Warning - fancybox.min.js is not loaded.');
             return;
@@ -31,7 +31,7 @@ var EcommerceProducts = function() {
     };
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -49,7 +49,7 @@ var EcommerceProducts = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentFancybox();
             _componentUniform();
         }
@@ -60,6 +60,6 @@ var EcommerceProducts = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     EcommerceProducts.init();
 });

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var JqueryUiComponents = function() {
+var JqueryUiComponents = function () {
 
 
     //
@@ -18,7 +18,7 @@ var JqueryUiComponents = function() {
     //
 
     // Button
-    var _componentUiButton = function() {
+    var _componentUiButton = function () {
         if (!$().button) {
             console.warn('Warning - jQuery UI components are not loaded.');
             return;
@@ -51,7 +51,7 @@ var JqueryUiComponents = function() {
     };
 
     // Button set
-    var _componentUiButtonset = function() {
+    var _componentUiButtonset = function () {
         if (!$().buttonset) {
             console.warn('Warning - jQuery UI components are not loaded.');
             return;
@@ -62,7 +62,7 @@ var JqueryUiComponents = function() {
     };
 
     // Control group
-    var _componentUiControlgroup = function() {
+    var _componentUiControlgroup = function () {
         if (!$().controlgroup || !$().selectmenu) {
             console.warn('Warning - jQuery UI components are not loaded.');
             return;
@@ -86,7 +86,7 @@ var JqueryUiComponents = function() {
     };
 
     // Progress bar
-    var _componentUiProgress = function() {
+    var _componentUiProgress = function () {
         if (!$().progressbar) {
             console.warn('Warning - jQuery UI components are not loaded.');
             return;
@@ -108,8 +108,8 @@ var JqueryUiComponents = function() {
             value: false
         }).on('create', function (event) {
             var target = $(event.target),
-            progressbar = $('.jui-progressbar-indeterminate'),
-            progressbarValue = progressbar.find('.ui-progressbar-value');
+                progressbar = $('.jui-progressbar-indeterminate'),
+                progressbarValue = progressbar.find('.ui-progressbar-value');
             progressbar.progressbar('option', 'value', false);
         });
 
@@ -119,16 +119,16 @@ var JqueryUiComponents = function() {
         //
 
         // Define elements
-        var progressbar = $( '.jui-progressbar-custom' ),
+        var progressbar = $('.jui-progressbar-custom'),
             progressLabel = $('.ui-progress-label');
 
         // Initialize progress bar
         progressbar.progressbar({
             value: false,
-            change: function() {
+            change: function () {
                 progressLabel.text(progressbar.progressbar('value') + '%');
             },
-            complete: function() {
+            complete: function () {
                 progressLabel.text('Complete!');
             }
         });
@@ -148,7 +148,7 @@ var JqueryUiComponents = function() {
     };
 
     // Dialog
-    var _componentUiDialog = function() {
+    var _componentUiDialog = function () {
         if (!$().dialog) {
             console.warn('Warning - jQuery UI components are not loaded.');
             return;
@@ -188,10 +188,10 @@ var JqueryUiComponents = function() {
             modal: true,
             width: 400,
             buttons: {
-                Save: function() {
+                Save: function () {
                     $(this).dialog('close');
                 },
-                Cancel: function() {
+                Cancel: function () {
                     $(this).dialog('close');
                 }
             }
@@ -208,7 +208,7 @@ var JqueryUiComponents = function() {
                     icons: {
                         primary: 'icon-checkmark5'
                     },
-                    click: function() {
+                    click: function () {
                         $(this).dialog('close');
                     }
                 },
@@ -217,7 +217,7 @@ var JqueryUiComponents = function() {
                     icons: {
                         primary: 'icon-cross3'
                     },
-                    click: function() {
+                    click: function () {
                         $(this).dialog('close');
                     }
                 }
@@ -267,10 +267,10 @@ var JqueryUiComponents = function() {
             modal: true,
             width: 500,
             buttons: {
-                Submit: function() {
+                Submit: function () {
                     $(this).dialog('close');
                 },
-                Cancel: function() {
+                Cancel: function () {
                     $(this).dialog('close');
                 }
             }
@@ -282,10 +282,10 @@ var JqueryUiComponents = function() {
             modal: true,
             width: 500,
             buttons: {
-                Submit: function() {
+                Submit: function () {
                     $(this).dialog('close');
                 },
-                Cancel: function() {
+                Cancel: function () {
                     $(this).dialog('close');
                 }
             }
@@ -297,10 +297,10 @@ var JqueryUiComponents = function() {
             modal: true,
             width: 555,
             buttons: {
-                Submit: function() {
+                Submit: function () {
                     $(this).dialog('close');
                 },
-                Cancel: function() {
+                Cancel: function () {
                     $(this).dialog('close');
                 }
             }
@@ -344,69 +344,69 @@ var JqueryUiComponents = function() {
         //
 
 
-        $('#jui-dialog-basic-opener').on('click', function() {
+        $('#jui-dialog-basic-opener').on('click', function () {
             $('#jui-dialog-basic').dialog('open');
         });
 
-        $('#jui-dialog-overlay-opener').on('click', function() {
+        $('#jui-dialog-overlay-opener').on('click', function () {
             $('#jui-dialog-overlay').dialog('open');
         });
 
-        $('#jui-dialog-animated-opener').on('click', function() {
+        $('#jui-dialog-animated-opener').on('click', function () {
             $('#jui-dialog-animated').dialog('open');
         });
 
-        $('#jui-dialog-buttons-opener').on('click', function() {
+        $('#jui-dialog-buttons-opener').on('click', function () {
             $('#jui-dialog-buttons').dialog('open');
         });
 
-        $('#jui-dialog-buttons-icons-opener').on('click', function() {
+        $('#jui-dialog-buttons-icons-opener').on('click', function () {
             $('#jui-dialog-buttons-icons').dialog('open');
         });
 
-        $('#jui-dialog-resize-opener').on('click', function() {
+        $('#jui-dialog-resize-opener').on('click', function () {
             $('#jui-dialog-resize').dialog('open');
         });
 
-        $('#jui-dialog-close-escape-opener').on('click', function() {
+        $('#jui-dialog-close-escape-opener').on('click', function () {
             $('#jui-dialog-close-escape').dialog('open');
         });
 
-        $('#jui-dialog-drag-disabled-opener').on('click', function() {
+        $('#jui-dialog-drag-disabled-opener').on('click', function () {
             $('#jui-dialog-drag-disabled').dialog('open');
         });
 
-        $('#jui-dialog-append-opener').on('click', function() {
+        $('#jui-dialog-append-opener').on('click', function () {
             $('#jui-dialog-append').dialog('open');
         });
 
 
-        $('#jui-dialog-form-vertical-opener').on('click', function() {
+        $('#jui-dialog-form-vertical-opener').on('click', function () {
             $('#jui-dialog-form-vertical').dialog('open');
         });
 
-        $('#jui-dialog-form-horizontal-opener').on('click', function() {
+        $('#jui-dialog-form-horizontal-opener').on('click', function () {
             $('#jui-dialog-form-horizontal').dialog('open');
         });
 
-        $('#jui-dialog-form-inline-opener').on('click', function() {
+        $('#jui-dialog-form-inline-opener').on('click', function () {
             $('#jui-dialog-form-inline').dialog('open');
         });
 
 
-        $('#jui-dialog-width-default-opener').on('click', function() {
+        $('#jui-dialog-width-default-opener').on('click', function () {
             $('#jui-dialog-width-default').dialog('open');
         });
 
-        $('#jui-dialog-width-pixel-opener').on('click', function() {
+        $('#jui-dialog-width-pixel-opener').on('click', function () {
             $('#jui-dialog-width-pixel').dialog('open');
         });
 
-        $('#jui-dialog-width-percentage-opener').on('click', function() {
+        $('#jui-dialog-width-percentage-opener').on('click', function () {
             $('#jui-dialog-width-percentage').dialog('open');
         });
 
-        $('#jui-dialog-width-full-opener').on('click', function() {
+        $('#jui-dialog-width-full-opener').on('click', function () {
             $('#jui-dialog-width-full').dialog('open');
         });
     };
@@ -417,7 +417,7 @@ var JqueryUiComponents = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentUiButton();
             _componentUiButtonset();
             _componentUiControlgroup();
@@ -431,6 +431,6 @@ var JqueryUiComponents = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     JqueryUiComponents.init();
 });

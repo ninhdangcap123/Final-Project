@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleBubbleBasic = function() {
+var DimpleBubbleBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleBubbleBasic = function() {
     //
 
     // Chart
-    var _bubbleBasic = function() {
+    var _bubbleBasic = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleBubbleBasic = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -136,7 +136,7 @@ var DimpleBubbleBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _bubbleBasic();
         }
     }
@@ -146,6 +146,6 @@ var DimpleBubbleBasic = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleBubbleBasic.init();
 });

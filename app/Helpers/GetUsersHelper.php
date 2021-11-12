@@ -10,21 +10,21 @@ class GetUsersHelper
 
     public static function getUserRecord($remove = [])
     {
-        $data = ['name', 'email', 'phone', 'phone2', 'dob', 'gender', 'address', 'bg_id', 'nal_id', 'state_id', 'lga_id'];
+        $data = [ 'name', 'email', 'phone', 'phone2', 'dob', 'gender', 'address', 'bg_id', 'nal_id', 'state_id', 'lga_id' ];
 
         return $remove ? array_values(array_diff($data, $remove)) : $data;
     }
 
     public static function getStaffRecord($remove = [])
     {
-        $data = ['emp_date',];
+        $data = [ 'emp_date', ];
 
         return $remove ? array_values(array_diff($data, $remove)) : $data;
     }
 
     public static function getStudentData($remove = [])
     {
-        $data = ['my_course_id', 'class_id', 'my_parent_id', 'dorm_id', 'dorm_room_no', 'year_admitted', 'house', 'age'];
+        $data = [ 'my_course_id', 'class_id', 'my_parent_id', 'dorm_id', 'dorm_room_no', 'year_admitted', 'house', 'age' ];
 
         return $remove ? array_values(array_diff($data, $remove)) : $data;
 
@@ -32,34 +32,37 @@ class GetUsersHelper
 
     public static function getTeamAdministrative()
     {
-        return ['admin', 'super_admin', 'accountant'];
+        return [ 'admin', 'super_admin', 'accountant' ];
     }
 
     public static function getTeamAcademic()
     {
-        return ['admin', 'super_admin', 'teacher', 'student'];
+        return [ 'admin', 'super_admin', 'teacher', 'student' ];
     }
 
-    public static function getTeamSAS(){
-        return ['admin', 'super_admin', 'student'];
+    public static function getTeamSAS()
+    {
+        return [ 'admin', 'super_admin', 'student' ];
     }
 
     public static function getTeamSAT()
     {
-        return ['admin', 'super_admin', 'teacher'];
+        return [ 'admin', 'super_admin', 'teacher' ];
     }
+
     public static function getTeamAccount()
     {
-        return ['admin', 'super_admin', 'accountant'];
+        return [ 'admin', 'super_admin', 'accountant' ];
     }
 
     public static function getTeamSA()
     {
-        return ['admin', 'super_admin'];
+        return [ 'admin', 'super_admin' ];
     }
+
     public static function findMyChildren($parent_id)
     {
-        return StudentRecord::where('my_parent_id', $parent_id)->with(['user', 'my_course'])->get();
+        return StudentRecord::where('my_parent_id', $parent_id)->with([ 'user', 'my_course' ])->get();
     }
 
     public static function findTeacherSubjects($teacher_id)
@@ -71,21 +74,22 @@ class GetUsersHelper
     {
         return StudentRecord::where('user_id', $user_id)->first();
     }
+
     public static function getSRByUserID($user_id)
     {
         return StudentRecord::where('user_id', $user_id)->first();
     }
+
     public static function getPTA()
     {
-        return ['super_admin', 'admin', 'teacher', 'parent'];
+        return [ 'super_admin', 'admin', 'teacher', 'parent' ];
     }
 
-    public static function getStaff($remove=[])
+    public static function getStaff($remove = [])
     {
-        $data =  ['super_admin', 'admin', 'teacher', 'accountant', 'librarian'];
+        $data = [ 'super_admin', 'admin', 'teacher', 'accountant', 'librarian' ];
         return $remove ? array_values(array_diff($data, $remove)) : $data;
     }
-
 
 
 }

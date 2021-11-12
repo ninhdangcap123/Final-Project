@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleScatterMatrix = function() {
+var DimpleScatterMatrix = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleScatterMatrix = function() {
     //
 
     // Chart
-    var _scatterMatrix = function() {
+    var _scatterMatrix = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleScatterMatrix = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -134,7 +134,7 @@ var DimpleScatterMatrix = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _scatterMatrix();
         }
     }
@@ -144,6 +144,6 @@ var DimpleScatterMatrix = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleScatterMatrix.init();
 });

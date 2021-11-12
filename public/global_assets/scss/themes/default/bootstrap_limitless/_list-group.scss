@@ -44,19 +44,19 @@
 
             // All badges except badge mark
             .badge:not(.badge-mark) {
-                background-color: $white!important;
-                color: $body-color!important;
+                background-color: $white !important;
+                color: $body-color !important;
             }
 
             // Badge mark with custom bg
             .badge-mark[class*=bg-] {
-                background-color: $white!important;
-                border-color: $white!important;
+                background-color: $white !important;
+                border-color: $white !important;
             }
 
             // Badge mark with custom border
             .badge-mark[class*=border-] {
-                border-color: $white!important;
+                border-color: $white !important;
             }
         }
     }

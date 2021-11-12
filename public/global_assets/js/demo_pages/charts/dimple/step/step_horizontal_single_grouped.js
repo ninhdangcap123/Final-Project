@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleStepHorizontalSingleGrouped = function() {
+var DimpleStepHorizontalSingleGrouped = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleStepHorizontalSingleGrouped = function() {
     //
 
     // Chart
-    var _stepHorizontalSingleGrouped = function() {
+    var _stepHorizontalSingleGrouped = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleStepHorizontalSingleGrouped = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -62,7 +62,7 @@ var DimpleStepHorizontalSingleGrouped = function() {
 
                 // Horizontal
                 var x = myChart.addCategoryAxis("x", ["Owner", "Month"]);
-                    x.addGroupOrderRule("Date");
+                x.addGroupOrderRule("Date");
 
                 // Vertical
                 var y = myChart.addMeasureAxis("y", "Unit Sales");
@@ -79,7 +79,7 @@ var DimpleStepHorizontalSingleGrouped = function() {
                 // Line space
                 s.barGap = 0.05;
 
-                
+
                 // Add styles
                 // ------------------------------
 
@@ -123,7 +123,7 @@ var DimpleStepHorizontalSingleGrouped = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _stepHorizontalSingleGrouped();
         }
     }
@@ -133,6 +133,6 @@ var DimpleStepHorizontalSingleGrouped = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleStepHorizontalSingleGrouped.init();
 });

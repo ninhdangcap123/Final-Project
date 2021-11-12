@@ -12,10 +12,11 @@ class TimeTableRepository extends BaseRepository implements TimeTableRepositoryI
         // TODO: Implement getModel() method.
         return TimeTable::class;
     }
+
     public function getTimeTable($where)
     {
         // TODO: Implement getTimeTable() method.
-        return $this->model->with(['subject', 'timeSlot'])->orderBy('timestamp_from')->where($where)->get();
+        return $this->model->with([ 'subject', 'timeSlot' ])->orderBy('timestamp_from')->where($where)->get();
     }
 
 

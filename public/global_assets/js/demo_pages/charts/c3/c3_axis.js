@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var С3Axis = function() {
+var С3Axis = function () {
 
 
     //
@@ -18,7 +18,7 @@ var С3Axis = function() {
     //
 
     // Chart
-    var _axisExamples = function() {
+    var _axisExamples = function () {
         if (typeof c3 == 'undefined') {
             console.warn('Warning - c3.min.js is not loaded.');
             return;
@@ -33,12 +33,12 @@ var С3Axis = function() {
 
 
         // Categorized axis
-        if(axis_categorized_element) {
+        if (axis_categorized_element) {
 
             // Generate chart
             var axis_categorized = c3.generate({
                 bindto: axis_categorized_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
                     columns: [
                         ['data1', 30, 200, 100, 400, 150, 250, 50, 100, 250]
@@ -61,18 +61,18 @@ var С3Axis = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 axis_categorized.resize();
             });
         }
 
         // Additional axis
-        if(axis_additional_element) {
+        if (axis_additional_element) {
 
             // Generate chart
             var axis_additional = c3.generate({
                 bindto: axis_additional_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
                     columns: [
                         ['data1', 30, 200, 100, 400, 150, 250],
@@ -99,18 +99,18 @@ var С3Axis = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 axis_additional.resize();
             });
         }
 
         // Axis tick culling
-        if(axis_tick_culling_element) {
+        if (axis_tick_culling_element) {
 
             // Generate chart
             var axis_tick_culling = c3.generate({
                 bindto: axis_tick_culling_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
                     columns: [
                         ['sample', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250, 200, 100, 400, 150, 250]
@@ -132,20 +132,20 @@ var С3Axis = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 axis_tick_culling.resize();
             });
         }
 
         // Text label rotation
-        if(axis_tick_rotation_element) {
+        if (axis_tick_rotation_element) {
 
             // Generate chart
             var axis_tick_rotation = c3.generate({
                 bindto: axis_tick_rotation_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
-                    x : 'x',
+                    x: 'x',
                     columns: [
                         ['x', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                         ['pv', 90, 100, 140, 200, 100, 400, 90, 100, 140, 200, 100, 400],
@@ -172,18 +172,18 @@ var С3Axis = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 axis_tick_rotation.resize();
             });
         }
 
         // Axis labels
-        if(axis_labels_element) {
+        if (axis_labels_element) {
 
             // Generate chart
             var axis_labels = c3.generate({
                 bindto: axis_labels_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
                     columns: [
                         ['sample', 30, 200, 100, 400, 150, 250],
@@ -211,7 +211,7 @@ var С3Axis = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 axis_labels.resize();
             });
         }
@@ -223,7 +223,7 @@ var С3Axis = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _axisExamples();
         }
     }
@@ -233,6 +233,6 @@ var С3Axis = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     С3Axis.init();
 });

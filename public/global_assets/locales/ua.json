@@ -2,11 +2,10 @@
     "app": {
         "name": "Limitless - Responsive Web Application Kit"
     },
-
     "nav_inline": {
         "user": {
-        	"name": "Богдана Загорулько",
-        	"location": "Луцьк, УА"
+            "name": "Богдана Загорулько",
+            "location": "Луцьк, УА"
         },
         "nav": {
             "header": "Заголовок навігації",
@@ -29,7 +28,6 @@
             }
         }
     },
-
     "nav_advanced": {
         "user": {
             "name": "Богдана Загорулько",

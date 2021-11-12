@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GooglePieExploded = function() {
+var GooglePieExploded = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GooglePieExploded = function() {
     //
 
     // Exploded pie
-    var _googlePieExploded = function() {
+    var _googlePieExploded = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GooglePieExploded = function() {
 
                 // Resize on window resize
                 var resizePieExploded;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizePieExploded);
                     resizePieExploded = setTimeout(function () {
                         drawExplodedPie();
@@ -101,7 +101,7 @@ var GooglePieExploded = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googlePieExploded();
         }
     }

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleMapBasic = function() {
+var GoogleMapBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleMapBasic = function() {
     //
 
     // Line chart
-    var _googleMapBasic = function() {
+    var _googleMapBasic = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Maps library is not loaded.');
             return;
@@ -50,7 +50,7 @@ var GoogleMapBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleMapBasic();
         }
     }
@@ -60,6 +60,6 @@ var GoogleMapBasic = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     GoogleMapBasic.init();
 });

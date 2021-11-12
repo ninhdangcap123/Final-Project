@@ -24,7 +24,7 @@
 
                             <div class="card-body collapse">
                                 <div class="col-md-12">
-                                    <form  method="post" action="{{ route('tt.update', $tt->id) }}">
+                                    <form method="post" action="{{ route('tt.update', $tt->id) }}">
                                         @csrf @method('PUT')
 
                                         <input name="ttr_id" value="{{ $ttr->id }}" type="hidden">
@@ -33,7 +33,8 @@
                                             {{--EXAM DATE--}}
                                             <div class="form-group row">
                                                 <label class="col-lg-3 col-form-label font-weight-semibold">Exam
-                                                    Date <span class="text-danger">*</span></label>
+                                                                                                            Date <span
+                                                        class="text-danger">*</span></label>
                                                 <div class="col-lg-9">
                                                     <input autocomplete="off" name="exam_date"
                                                            value="{{ $tt->exam_date }}" required
@@ -53,7 +54,8 @@
                                                             class="form-control select"
                                                             data-placeholder="Select Day...">
                                                         @foreach(\App\Helpers\RouteHelper::getDaysOfTheWeek() as $dw)
-                                                            <option {{ $tt->day == $dw ? 'selected' : '' }} value="{{ $dw }}">{{ $dw }}</option>
+                                                            <option
+                                                                {{ $tt->day == $dw ? 'selected' : '' }} value="{{ $dw }}">{{ $dw }}</option>
                                                         @endforeach
 
                                                     </select>
@@ -71,32 +73,38 @@
                                                         class="form-control select-search"
                                                         name="subject_id" id="subject_id">
                                                     @foreach($subjects as $sub)
-                                                        <option {{ $tt->subject_id == $sub->id ? 'selected' : '' }} value="{{ $sub->id }}">{{ $sub->name }}</option>
+                                                        <option
+                                                            {{ $tt->subject_id == $sub->id ? 'selected' : '' }} value="{{ $sub->id }}">{{ $sub->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
 
                                         {{--TIME SLOT--}}
-        <div class="form-group row">
+                                        <div class="form-group row">
 
-                <label for="ts_id" class="col-lg-3 col-form-label font-weight-semibold">Time Slot <span
-                            class="text-danger">*</span></label>
+                                            <label for="ts_id" class="col-lg-3 col-form-label font-weight-semibold">Time
+                                                                                                                    Slot
+                                                <span
+                                                    class="text-danger">*</span></label>
 
-                <div class="col-lg-9">
-                    <select data-placeholder="Select Time..." required class="select form-control" name="ts_id" id="ts_id">
+                                            <div class="col-lg-9">
+                                                <select data-placeholder="Select Time..." required
+                                                        class="select form-control" name="ts_id" id="ts_id">
 
-                        <option value=""></option>
-                        @foreach($time_slots as $tms)
-                            <option {{ $tt->ts_id == $tms->id ? 'selected' : '' }} value="{{ $tms->id }}">{{ $tms->full }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
+                                                    <option value=""></option>
+                                                    @foreach($time_slots as $tms)
+                                                        <option
+                                                            {{ $tt->ts_id == $tms->id ? 'selected' : '' }} value="{{ $tms->id }}">{{ $tms->full }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
 
                                         {{--SUBMIT--}}
                                         <div class="text-right">
-                                            <button type="submit" class="btn btn-primary">Submit Form <i class="icon-paperplane ml-2"></i>
+                                            <button type="submit" class="btn btn-primary">Submit Form <i
+                                                    class="icon-paperplane ml-2"></i>
                                             </button>
                                         </div>
                                     </form>
@@ -109,7 +117,7 @@
         @endforeach
     @else
         <div class="alert alert-info text-center">There are NO Records to Display. Add Subjects To The TimeTable Record
-            & Refresh the page
+                                                  & Refresh the page
         </div>
     @endif
 </div>

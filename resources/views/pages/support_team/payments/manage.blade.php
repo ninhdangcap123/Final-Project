@@ -10,30 +10,32 @@
         <div class="card-body">
             <form method="post" action="{{ route('payments.select_class') }}">
                 @csrf
-              <div class="row">
-                  <div class="col-md-6 offset-md-3">
-                      <div class="row">
-                          <div class="col-md-10">
-                              <div class="form-group">
-                                  <label for="my_course_id" class="col-form-label font-weight-bold">Class:</label>
-                                  <select required id="my_course_id" name="my_course_id" class="form-control select">
-                                      <option value="">Select Class</option>
-                                      @foreach($my_courses as $c)
-                                          <option {{ ($selected && $my_course_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
-                                      @endforeach
-                                  </select>
-                              </div>
-                          </div>
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="my_course_id" class="col-form-label font-weight-bold">Class:</label>
+                                    <select required id="my_course_id" name="my_course_id" class="form-control select">
+                                        <option value="">Select Class</option>
+                                        @foreach($my_courses as $c)
+                                            <option
+                                                {{ ($selected && $my_course_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
 
-                          <div class="col-md-2 mt-4">
-                              <div class="text-right mt-1">
-                                  <button type="submit" class="btn btn-primary">Submit <i class="icon-paperplane ml-2"></i></button>
-                              </div>
-                          </div>
+                            <div class="col-md-2 mt-4">
+                                <div class="text-right mt-1">
+                                    <button type="submit" class="btn btn-primary">Submit <i
+                                            class="icon-paperplane ml-2"></i></button>
+                                </div>
+                            </div>
 
-                      </div>
-                  </div>
-              </div>
+                        </div>
+                    </div>
+                </div>
 
             </form>
         </div>
@@ -55,21 +57,25 @@
                     @foreach($students as $s)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}" alt="photo"></td>
+                            <td><img class="rounded-circle" style="height: 40px; width: 40px;"
+                                     src="{{ $s->user->photo }}" alt="photo"></td>
                             <td>{{ $s->user->name }}</td>
                             <td>{{ $s->adm_no }}</td>
                             <td>
                                 <div class="dropdown">
-                                    <a href="#" class=" btn btn-danger" data-toggle="dropdown"> Manage Payments <i class="icon-arrow-down5"></i>
+                                    <a href="#" class=" btn btn-danger" data-toggle="dropdown"> Manage Payments <i
+                                            class="icon-arrow-down5"></i>
                                     </a>
-                            <div class="dropdown-menu dropdown-menu-left">
-                                <a href="{{ route('payments.invoice', [\App\Helpers\DisplayMessageHelper::hash($s->user_id)]) }}" class="dropdown-item">All Payments</a>
-                                @foreach(\App\Helpers\GetPaymentHelper::getYears($s->user_id) as $py)
-                                @if($py)
-                                    <a href="{{ route('payments.invoice', [\App\Helpers\DisplayMessageHelper::hash($s->user_id), $py]) }}" class="dropdown-item">{{ $py }}</a>
-                                @endif
-                                @endforeach
-                            </div>
+                                    <div class="dropdown-menu dropdown-menu-left">
+                                        <a href="{{ route('payments.invoice', [\App\Helpers\DisplayMessageHelper::hash($s->user_id)]) }}"
+                                           class="dropdown-item">All Payments</a>
+                                        @foreach(\App\Helpers\GetPaymentHelper::getYears($s->user_id) as $py)
+                                            @if($py)
+                                                <a href="{{ route('payments.invoice', [\App\Helpers\DisplayMessageHelper::hash($s->user_id), $py]) }}"
+                                                   class="dropdown-item">{{ $py }}</a>
+                                            @endif
+                                        @endforeach
+                                    </div>
                                 </div>
                             </td>
 

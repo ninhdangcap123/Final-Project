@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleBubbleLollipopGrouped = function() {
+var DimpleBubbleLollipopGrouped = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleBubbleLollipopGrouped = function() {
     //
 
     // Chart
-    var _bubbleLollipopGrouped = function() {
+    var _bubbleLollipopGrouped = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleBubbleLollipopGrouped = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -133,7 +133,7 @@ var DimpleBubbleLollipopGrouped = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _bubbleLollipopGrouped();
         }
     }
@@ -143,6 +143,6 @@ var DimpleBubbleLollipopGrouped = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleBubbleLollipopGrouped.init();
 });

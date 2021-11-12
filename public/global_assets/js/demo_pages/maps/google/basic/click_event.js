@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleMapClickEvent = function() {
+var GoogleMapClickEvent = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleMapClickEvent = function() {
     //
 
     // Line chart
-    var _googleMapClickEvent = function() {
+    var _googleMapClickEvent = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Maps library is not loaded.');
             return;
@@ -47,16 +47,16 @@ var GoogleMapClickEvent = function() {
             });
 
             // "Change" event
-            google.maps.event.addListener(map, 'center_changed', function() {
+            google.maps.event.addListener(map, 'center_changed', function () {
 
                 // 3 seconds after the center of the map has changed, pan back to the marker
-                window.setTimeout(function() {
+                window.setTimeout(function () {
                     map.panTo(marker.getPosition());
                 }, 3000);
             });
 
             // "Click" event
-            google.maps.event.addListener(marker, 'click', function() {
+            google.maps.event.addListener(marker, 'click', function () {
                 map.setZoom(14);
                 map.setCenter(marker.getPosition());
             });
@@ -72,7 +72,7 @@ var GoogleMapClickEvent = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleMapClickEvent();
         }
     }
@@ -82,6 +82,6 @@ var GoogleMapClickEvent = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     GoogleMapClickEvent.init();
 });

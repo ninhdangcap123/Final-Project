@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var NouiSlider = function() {
+var NouiSlider = function () {
 
 
     //
@@ -18,7 +18,7 @@ var NouiSlider = function() {
     //
 
     // NoUI slider examples
-    var _componentNouiSlider = function() {
+    var _componentNouiSlider = function () {
         if (typeof noUiSlider == 'undefined') {
             console.warn('Warning - nouislider.min.js is not loaded.');
             return;
@@ -44,7 +44,7 @@ var NouiSlider = function() {
             document.getElementById('noui-handles-lower-val'),
             document.getElementById('noui-handles-upper-val')
         ];
-        slider_handles.noUiSlider.on('update', function( values, handle ) {
+        slider_handles.noUiSlider.on('update', function (values, handle) {
             slider_handles_vals[handle].innerHTML = values[handle];
         });
 
@@ -65,7 +65,7 @@ var NouiSlider = function() {
 
         // Display values
         var slider_range_val = document.getElementById('noui-range-val');
-        slider_range.noUiSlider.on('update', function( values, handle ) {
+        slider_range.noUiSlider.on('update', function (values, handle) {
             slider_range_val.innerHTML = values[handle];
         });
 
@@ -87,7 +87,7 @@ var NouiSlider = function() {
 
         // Display values
         var slider_stepping_val = document.getElementById('noui-stepping-val');
-        slider_stepping.noUiSlider.on('update', function( values, handle ) {
+        slider_stepping.noUiSlider.on('update', function (values, handle) {
             slider_stepping_val.innerHTML = values[handle];
         });
 
@@ -100,12 +100,12 @@ var NouiSlider = function() {
 
         // Create slider
         noUiSlider.create(slider_nonlinear, {
-            start: [ 40 ],
+            start: [40],
             range: {
-                'min': [  20 ],
-                '30%': [  40 ],
-                '70%': [  80 ],
-                'max': [ 100 ]
+                'min': [20],
+                '30%': [40],
+                '70%': [80],
+                'max': [100]
             },
             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
         });
@@ -114,7 +114,7 @@ var NouiSlider = function() {
         var slider_nonlinear_val = document.getElementById('noui-nonlinear-val');
 
         // Show the value for the *last* moved handle.
-        slider_nonlinear.noUiSlider.on('update', function( values, handle ) {
+        slider_nonlinear.noUiSlider.on('update', function (values, handle) {
             slider_nonlinear_val.innerHTML = values[handle];
         });
 
@@ -127,12 +127,12 @@ var NouiSlider = function() {
 
         // Create slider
         noUiSlider.create(slider_nonlinear_step, {
-            start: [ 5, 40 ],
+            start: [5, 40],
             range: {
-                'min': [     0 ],
-                '10%': [   5,  5 ],
-                '50%': [  40, 10 ],
-                'max': [ 100 ]
+                'min': [0],
+                '10%': [5, 5],
+                '50%': [40, 10],
+                'max': [100]
             },
             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
         });
@@ -144,7 +144,7 @@ var NouiSlider = function() {
         ];
 
         // Show the values
-        slider_nonlinear_step.noUiSlider.on('update', function( values, handle ) {
+        slider_nonlinear_step.noUiSlider.on('update', function (values, handle) {
             slider_nonlinear_step_vals[handle].innerHTML = values[handle];
         });
 
@@ -179,10 +179,9 @@ var NouiSlider = function() {
         ];
 
         // Show the values
-        slider_nonlinear_snap.noUiSlider.on('update', function( values, handle ) {
+        slider_nonlinear_snap.noUiSlider.on('update', function (values, handle) {
             slider_nonlinear_snap_vals[handle].innerHTML = values[handle];
         });
-
 
 
         // Behaviours
@@ -197,13 +196,13 @@ var NouiSlider = function() {
 
         // Create slider
         noUiSlider.create(slider_behaviour, {
-            start: [ 40, 60 ],
+            start: [40, 60],
             step: 10,
             behaviour: 'drag',
             connect: true,
             range: {
-                'min':  20,
-                'max':  80
+                'min': 20,
+                'max': 80
             },
             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
         });
@@ -215,7 +214,7 @@ var NouiSlider = function() {
         ];
 
         // Show the values
-        slider_behaviour.noUiSlider.on('update', function( values, handle ) {
+        slider_behaviour.noUiSlider.on('update', function (values, handle) {
             slider_behaviour_vals[handle].innerHTML = values[handle];
         });
 
@@ -233,8 +232,8 @@ var NouiSlider = function() {
             behaviour: 'tap',
             connect: 'upper',
             range: {
-                'min':  20,
-                'max':  80
+                'min': 20,
+                'max': 80
             },
             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
         });
@@ -243,7 +242,7 @@ var NouiSlider = function() {
         var slider_tap_behaviour_val = document.getElementById('noui-slider-tap-val');
 
         // Show the values
-        slider_tap_behaviour.noUiSlider.on('update', function( values, handle ) {
+        slider_tap_behaviour.noUiSlider.on('update', function (values, handle) {
             slider_tap_behaviour_val.innerHTML = values[handle];
         });
 
@@ -257,12 +256,12 @@ var NouiSlider = function() {
 
         // Create slider
         noUiSlider.create(slider_drag_behaviour, {
-            start: [ 40, 60 ],
+            start: [40, 60],
             behaviour: 'drag',
             connect: true,
             range: {
-                'min':  20,
-                'max':  80
+                'min': 20,
+                'max': 80
             },
             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
         });
@@ -274,7 +273,7 @@ var NouiSlider = function() {
         ];
 
         // Show the values
-        slider_drag_behaviour.noUiSlider.on('update', function( values, handle ) {
+        slider_drag_behaviour.noUiSlider.on('update', function (values, handle) {
             slider_drag_behaviour_vals[handle].innerHTML = values[handle];
         });
 
@@ -288,12 +287,12 @@ var NouiSlider = function() {
 
         // Create slider
         noUiSlider.create(slider_drag_fixed, {
-            start: [ 40, 60 ],
+            start: [40, 60],
             behaviour: 'drag-fixed',
             connect: true,
             range: {
-                'min':  20,
-                'max':  80
+                'min': 20,
+                'max': 80
             },
             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
         });
@@ -305,7 +304,7 @@ var NouiSlider = function() {
         ];
 
         // Show the values
-        slider_drag_fixed.noUiSlider.on('update', function( values, handle ) {
+        slider_drag_fixed.noUiSlider.on('update', function (values, handle) {
             slider_drag_fixed_vals[handle].innerHTML = values[handle];
         });
 
@@ -323,8 +322,8 @@ var NouiSlider = function() {
             behaviour: 'snap',
             connect: 'lower',
             range: {
-                'min':  20,
-                'max':  80
+                'min': 20,
+                'max': 80
             },
             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
         });
@@ -333,7 +332,7 @@ var NouiSlider = function() {
         var slider_snap_behaviour_val = document.getElementById('noui-slider-snap-val');
 
         // Show the values
-        slider_snap_behaviour.noUiSlider.on('update', function( values, handle ) {
+        slider_snap_behaviour.noUiSlider.on('update', function (values, handle) {
             slider_snap_behaviour_val.innerHTML = values[handle];
         });
 
@@ -347,12 +346,12 @@ var NouiSlider = function() {
 
         // Create slider
         noUiSlider.create(slider_combined, {
-            start: [ 40, 60 ],
+            start: [40, 60],
             behaviour: 'drag-tap',
             connect: true,
             range: {
-                'min':  20,
-                'max':  80
+                'min': 20,
+                'max': 80
             },
             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
         });
@@ -364,10 +363,9 @@ var NouiSlider = function() {
         ];
 
         // Show the values
-        slider_combined.noUiSlider.on('update', function( values, handle ) {
+        slider_combined.noUiSlider.on('update', function (values, handle) {
             slider_combined_vals[handle].innerHTML = values[handle];
         });
-
 
 
         // Other examples
@@ -399,7 +397,7 @@ var NouiSlider = function() {
         ];
 
         // Show the values
-        slider_tooltip.noUiSlider.on('update', function( values, handle ) {
+        slider_tooltip.noUiSlider.on('update', function (values, handle) {
             slider_tooltip_vals[handle].innerHTML = values[handle];
         });
 
@@ -413,7 +411,7 @@ var NouiSlider = function() {
 
         // Create slider
         noUiSlider.create(slider_margin, {
-            start: [ 20, 80 ],
+            start: [20, 80],
             connect: true,
             margin: 30,
             range: {
@@ -430,7 +428,7 @@ var NouiSlider = function() {
         ];
 
         // Show the values
-        slider_margin.noUiSlider.on('update', function( values, handle ) {
+        slider_margin.noUiSlider.on('update', function (values, handle) {
             slider_margin_vals[handle].innerHTML = values[handle];
         });
 
@@ -457,7 +455,7 @@ var NouiSlider = function() {
         var slider_direction_val = document.getElementById('noui-slider-direction-val');
 
         // Show the values
-        slider_direction.noUiSlider.on('update', function( values, handle ) {
+        slider_direction.noUiSlider.on('update', function (values, handle) {
             slider_direction_val.innerHTML = values[handle];
         });
 
@@ -474,8 +472,8 @@ var NouiSlider = function() {
             start: 40,
             connect: 'lower',
             range: {
-              'min': 0,
-              'max': 100
+                'min': 0,
+                'max': 100
             },
             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
         });
@@ -484,7 +482,7 @@ var NouiSlider = function() {
         var slider_connect_lower_val = document.getElementById('noui-slider-connect-lower-val');
 
         // Show the values
-        slider_connect_lower.noUiSlider.on('update', function( values, handle ) {
+        slider_connect_lower.noUiSlider.on('update', function (values, handle) {
             slider_connect_lower_val.innerHTML = values[handle];
         });
 
@@ -524,7 +522,7 @@ var NouiSlider = function() {
         ];
 
         // Show the values
-        slider_skip.noUiSlider.on('update', function( values, handle ) {
+        slider_skip.noUiSlider.on('update', function (values, handle) {
             slider_skip_vals[handle].innerHTML = values[handle];
         });
 
@@ -541,8 +539,8 @@ var NouiSlider = function() {
             start: 40,
             connect: 'upper',
             range: {
-              'min': 0,
-              'max': 100
+                'min': 0,
+                'max': 100
             },
             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
         });
@@ -551,7 +549,7 @@ var NouiSlider = function() {
         var slider_connect_upper_val = document.getElementById('noui-slider-connect-upper-val');
 
         // Show the values
-        slider_connect_upper.noUiSlider.on('update', function( values, handle ) {
+        slider_connect_upper.noUiSlider.on('update', function (values, handle) {
             slider_connect_upper_val.innerHTML = values[handle];
         });
 
@@ -561,10 +559,10 @@ var NouiSlider = function() {
 
         // Demo data for ranges
         var range_all_sliders = {
-            'min': [     0 ],
-            '10%': [   5,  5 ],
-            '50%': [  40, 10 ],
-            'max': [ 100 ]
+            'min': [0],
+            '10%': [5, 5],
+            '50%': [40, 10],
+            'max': [100]
         };
 
 
@@ -648,7 +646,7 @@ var NouiSlider = function() {
             connect: 'upper',
             pips: {
                 mode: 'positions',
-                values: [0,25,50,75,100],
+                values: [0, 25, 50, 75, 100],
                 density: 4
             },
             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
@@ -695,7 +693,6 @@ var NouiSlider = function() {
             },
             direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
         });
-
 
 
         // Vertical sliders
@@ -875,7 +872,7 @@ var NouiSlider = function() {
         // First
         var slider_range_1 = document.getElementById('noui-slider-range1');
         noUiSlider.create(slider_range_1, {
-            start: [ 15, 85 ],
+            start: [15, 85],
             orientation: 'vertical',
             connect: true,
             range: {
@@ -888,7 +885,7 @@ var NouiSlider = function() {
         // Second
         var slider_range_2 = document.getElementById('noui-slider-range2');
         noUiSlider.create(slider_range_2, {
-            start: [ 30, 70 ],
+            start: [30, 70],
             orientation: 'vertical',
             connect: true,
             range: {
@@ -965,7 +962,6 @@ var NouiSlider = function() {
         });
 
 
-
         // Optional styling
         // ------------------------------
 
@@ -1038,7 +1034,7 @@ var NouiSlider = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentNouiSlider();
         }
     }
@@ -1048,6 +1044,6 @@ var NouiSlider = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     NouiSlider.init();
 });

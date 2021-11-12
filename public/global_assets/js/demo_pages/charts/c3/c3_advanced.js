@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var С3Advanced = function() {
+var С3Advanced = function () {
 
 
     //
@@ -18,7 +18,7 @@ var С3Advanced = function() {
     //
 
     // Chart
-    var _advancedExamples = function() {
+    var _advancedExamples = function () {
         if (typeof c3 == 'undefined') {
             console.warn('Warning - c3.min.js is not loaded.');
             return;
@@ -33,12 +33,12 @@ var С3Advanced = function() {
 
 
         // Chart transforms
-        if(transform_element) {
+        if (transform_element) {
 
             // Generate chart
             var transform = c3.generate({
                 bindto: transform_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
                     columns: [
                         ['data1', 30, 200, 100, 400, 150, 250],
@@ -83,18 +83,18 @@ var С3Advanced = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 transform.resize();
             });
         }
 
         // Zoomable chart
-        if(zoomable_element) {
+        if (zoomable_element) {
 
             // Generate chart
             var zoomable_chart = c3.generate({
                 bindto: zoomable_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
                     columns: [
                         ['sample', 30, 120, 320, 180, 50, 250, 167, 279, 290, 400, 214, 190, 40, 400, 162, 289, 300, 200, 120, 320, 390, 110, 130, 400, 240, 189, 250, 30, 100, 200, 300, 250, 50, 100, 50, 300, 250, 20, 90, 150, 400, 320, 220, 150, 190, 270, 190, 350, 90, 300, 150, 220, 170, 40]
@@ -117,18 +117,18 @@ var С3Advanced = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 zoomable_chart.resize();
             });
         }
 
         // Subchart
-        if(subchart_element) {
+        if (subchart_element) {
 
             // Generate chart
             var subchart = c3.generate({
                 bindto: subchart_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
                     columns: [
                         ['sample', 30, 200, 100, 400, 150, 250, 150, 200, 170, 240, 350, 150, 100, 400, 150, 250, 150, 200, 170, 240, 100, 150, 250, 150, 200, 170, 240, 30, 200, 100, 400, 150, 250, 150, 200, 170, 240, 350, 150, 100, 400, 350, 220, 250, 300, 270, 140, 150, 90, 150, 50, 120, 70, 40]
@@ -148,18 +148,18 @@ var С3Advanced = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 subchart.resize();
             });
         }
 
         // Label format
-        if(label_format_element) {
+        if (label_format_element) {
 
             // Generate chart
             var label_format = c3.generate({
                 bindto: label_format_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
                     columns: [
                         ['data1', 30, -200, -100, 400, 150, 250, 100, 120, 150],
@@ -192,18 +192,18 @@ var С3Advanced = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 label_format.resize();
             });
         }
 
         // Data color
-        if(data_color_element) {
+        if (data_color_element) {
 
             // Generate chart
             var data_color = c3.generate({
                 bindto: data_color_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
                     columns: [
                         ['data1', 30, 20, 50, 40, 60, 50],
@@ -225,7 +225,7 @@ var С3Advanced = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 data_color.resize();
             });
         }
@@ -237,7 +237,7 @@ var С3Advanced = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _advancedExamples();
         }
     }
@@ -247,6 +247,6 @@ var С3Advanced = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     С3Advanced.init();
 });

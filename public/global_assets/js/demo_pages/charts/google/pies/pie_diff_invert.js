@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GooglePieDiffInvert = function() {
+var GooglePieDiffInvert = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GooglePieDiffInvert = function() {
     //
 
     // Pie with inverted behaviour
-    var _googlePieDiffInvert = function() {
+    var _googlePieDiffInvert = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GooglePieDiffInvert = function() {
 
                 // Resize on window resize
                 var resizePieDiffInvert;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizePieDiffInvert);
                     resizePieDiffInvert = setTimeout(function () {
                         drawPieDiffInvert();
@@ -102,7 +102,7 @@ var GooglePieDiffInvert = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googlePieDiffInvert();
         }
     }

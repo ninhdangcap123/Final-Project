@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleLineBasic = function() {
+var GoogleLineBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleLineBasic = function() {
     //
 
     // Line chart
-    var _googleLineBasic = function() {
+    var _googleLineBasic = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleLineBasic = function() {
 
                 // Resize on window resize
                 var resizeLineBasic;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeLineBasic);
                     resizeLineBasic = setTimeout(function () {
                         drawLineChart();
@@ -55,10 +55,10 @@ var GoogleLineBasic = function() {
             // Data
             var data = google.visualization.arrayToDataTable([
                 ['Year', 'Sales', 'Expenses'],
-                ['2004',  1000,      400],
-                ['2005',  1170,      460],
-                ['2006',  660,       1120],
-                ['2007',  1030,      540]
+                ['2004', 1000, 400],
+                ['2005', 1170, 460],
+                ['2006', 660, 1120],
+                ['2007', 1030, 540]
             ]);
 
             // Options
@@ -85,7 +85,7 @@ var GoogleLineBasic = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
@@ -112,7 +112,7 @@ var GoogleLineBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleLineBasic();
         }
     }

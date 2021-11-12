@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var InputGroups = function() {
+var InputGroups = function () {
 
 
     //
@@ -18,7 +18,7 @@ var InputGroups = function() {
     //
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -28,13 +28,13 @@ var InputGroups = function() {
         $('.form-control-styled').uniform();
 
         // Update uniform when select between styled and unstyled
-        $('.input-group-prepend input[type=radio]').on('change', function() {
+        $('.input-group-prepend input[type=radio]').on('change', function () {
             $.uniform.update('[name=addon-radio]');
         });
     };
 
     // Switchery
-    var _componentSwitchery = function() {
+    var _componentSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
@@ -42,13 +42,13 @@ var InputGroups = function() {
 
         // Initialize
         var elems = Array.prototype.slice.call(document.querySelectorAll('.form-control-switchery'));
-        elems.forEach(function(html) {
+        elems.forEach(function (html) {
             var switchery = new Switchery(html);
         });
     };
 
     // Touchspin
-    var _componentTouchspin = function() {
+    var _componentTouchspin = function () {
         if (!$().TouchSpin) {
             console.warn('Warning - touchspin.min.js is not loaded.');
             return;
@@ -115,7 +115,7 @@ var InputGroups = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentUniform();
             _componentSwitchery();
             _componentTouchspin();
@@ -127,6 +127,6 @@ var InputGroups = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     InputGroups.init();
 });

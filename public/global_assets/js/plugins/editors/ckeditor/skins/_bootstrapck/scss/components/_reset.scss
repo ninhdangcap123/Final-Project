@@ -66,7 +66,7 @@ http://docs.cksource.com/CKEditor_4.x/Skin_SDK/Reset
 
     /* These are rule inherited by all children elements. */
     border-collapse: collapse;
-    font: normal normal normal 12px Arial,Helvetica,Tahoma,Verdana,Sans-Serif;
+    font: normal normal normal 12px Arial, Helvetica, Tahoma, Verdana, Sans-Serif;
     color: $gray-darker;
     text-align: left;
     white-space: nowrap;
@@ -78,27 +78,34 @@ http://docs.cksource.com/CKEditor_4.x/Skin_SDK/Reset
     .cke_rtl * {
         text-align: right;
     }
+
     /* Defaults for some elements. */
     iframe {
-        vertical-align: inherit;    /** For IE */
+        vertical-align: inherit; /** For IE */
     }
+
     textarea {
         white-space: pre;
     }
+
     textarea, input[type="text"], input[type="password"] {
         cursor: text;
     }
+
     textarea[disabled], input[type="text"][disabled], input[type="password"][disabled] {
         cursor: default;
     }
+
     fieldset {
         padding: 10px;
         margin-top: 10px;
         border: 1px solid $hr-border;
+
         legend {
             padding: 0 5px;
         }
     }
+
     select {
         box-sizing: border-box;
         -moz-box-sizing: border-box;

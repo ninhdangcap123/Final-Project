@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Classes;
 
 use App\Helpers\DisplayMessageHelper;
-use App\Helpers\Qs;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ClassUpdate extends FormRequest
@@ -29,7 +28,7 @@ class ClassUpdate extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
             'teacher_id' => 'Teacher',
         ];
     }

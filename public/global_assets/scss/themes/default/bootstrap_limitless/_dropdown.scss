@@ -36,6 +36,7 @@
         color: $dropdown-link-hover-color;
         @include gradient-bg($dropdown-link-hover-bg);
     }
+
     &.active {
         color: $dropdown-link-active-color;
         @include gradient-bg($dropdown-link-active-bg);
@@ -46,19 +47,19 @@
 
             // All badges except badge mark
             .badge:not(.badge-mark) {
-                background-color: $white!important;
-                color: $body-color!important;
+                background-color: $white !important;
+                color: $body-color !important;
             }
 
             // Badge mark with custom bg
             .badge-mark[class*=bg-] {
-                background-color: $white!important;
-                border-color: $white!important;
+                background-color: $white !important;
+                border-color: $white !important;
             }
 
             // Badge mark with custom border
             .badge-mark[class*=border-] {
-                border-color: $white!important;
+                border-color: $white !important;
             }
         }
     }
@@ -67,7 +68,7 @@
     &.disabled,
     &:disabled {
         color: $dropdown-link-disabled-color;
-        background-color: transparent; 
+        background-color: transparent;
         cursor: $cursor-disabled;
 
         // Mute badges and images
@@ -180,8 +181,7 @@
             &:after {
                 @if $direction == 'LTR' {
                     content: '\e9c7';
-                }
-                @else {
+                } @else {
                     content: '\e9c4';
                 }
                 font-family: $icon-font-family;
@@ -238,7 +238,7 @@
 
         // Make submenu levels stacked on mobile
         @include media-breakpoint-down(md) {
-            
+
             // Change arrow icon direction
             .dropdown-toggle:after {
                 content: '\e9c5';
@@ -249,7 +249,7 @@
             &.dropdown-submenu-left {
                 .dropdown-menu {
                     position: static;
-                    margin: 0!important;
+                    margin: 0 !important;
                     border-width: 0;
                     box-shadow: none;
                     @include border-radius(0);

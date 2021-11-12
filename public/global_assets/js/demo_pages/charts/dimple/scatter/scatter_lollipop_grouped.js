@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleScatterLollipopGrouped = function() {
+var DimpleScatterLollipopGrouped = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleScatterLollipopGrouped = function() {
     //
 
     // Chart
-    var _scatterLollipopGrouped = function() {
+    var _scatterLollipopGrouped = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleScatterLollipopGrouped = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -62,7 +62,7 @@ var DimpleScatterLollipopGrouped = function() {
 
                 // Vertical
                 var y = myChart.addCategoryAxis("y", ["Price Tier", "Channel"]);
-                    y.showGridlines = true;
+                y.showGridlines = true;
 
 
                 // Construct layout
@@ -131,7 +131,7 @@ var DimpleScatterLollipopGrouped = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _scatterLollipopGrouped();
         }
     }
@@ -141,6 +141,6 @@ var DimpleScatterLollipopGrouped = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleScatterLollipopGrouped.init();
 });

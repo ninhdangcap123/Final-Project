@@ -57,8 +57,7 @@
         @if (lightness($pace-overlay-color) < 75) {
             background-color: rgba($black, 0.4);
             color: $white;
-        }
-        @else {
+        } @else {
             background-color: rgba($black, 0.8);
         }
     }

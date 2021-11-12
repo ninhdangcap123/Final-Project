@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3LineGradient = function() {
+var D3LineGradient = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3LineGradient = function() {
     //
 
     // Chart
-    var _lineGradient = function() {
+    var _lineGradient = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3LineGradient = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -45,7 +45,6 @@ var D3LineGradient = function() {
             var parseDate = d3.time.format("%Y%m%d").parse;
 
 
-
             // Construct scales
             // ------------------------------
 
@@ -56,7 +55,6 @@ var D3LineGradient = function() {
             // Vertical
             var y = d3.scale.linear()
                 .range([height, 0]);
-
 
 
             // Create axes
@@ -75,7 +73,6 @@ var D3LineGradient = function() {
                 .orient("left");
 
 
-
             // Create chart
             // ------------------------------
 
@@ -87,7 +84,7 @@ var D3LineGradient = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             // Construct chart layout
@@ -96,17 +93,21 @@ var D3LineGradient = function() {
             // Line
             var line = d3.svg.line()
                 .interpolate("basis")
-                .x(function(d) { return x(d.date); })
-                .y(function(d) { return y(d.temperature); });
+                .x(function (d) {
+                    return x(d.date);
+                })
+                .y(function (d) {
+                    return y(d.temperature);
+                });
 
 
             // Load data
             // ------------------------------
 
-            d3.tsv("../../../../global_assets/demo_data/d3/lines/lines_gradient.tsv", function(error, data) {
+            d3.tsv("../../../../global_assets/demo_data/d3/lines/lines_gradient.tsv", function (error, data) {
 
                 // Pull out values
-                data.forEach(function(d) {
+                data.forEach(function (d) {
                     d.date = parseDate(d.date);
                     d.temperature = +d.temperature;
                 });
@@ -119,7 +120,9 @@ var D3LineGradient = function() {
                 x.domain([data[0].date, data[data.length - 1].date]);
 
                 // Vertical
-                y.domain(d3.extent(data, function(d) { return d.temperature; }));
+                y.domain(d3.extent(data, function (d) {
+                    return d.temperature;
+                }));
 
 
                 //
@@ -142,8 +145,12 @@ var D3LineGradient = function() {
                     ])
                     .enter()
                     .append("stop")
-                        .attr("offset", function(d) { return d.offset; })
-                        .attr("stop-color", function(d) { return d.color; });
+                    .attr("offset", function (d) {
+                        return d.offset;
+                    })
+                    .attr("stop-color", function (d) {
+                        return d.color;
+                    });
 
                 // Add line
                 svg.append("path")
@@ -153,7 +160,6 @@ var D3LineGradient = function() {
                     .attr("stroke", "url(#temperature-gradient)")
                     .attr("stroke-width", 2)
                     .attr("d", line);
-
 
 
                 // Append axes
@@ -182,7 +188,6 @@ var D3LineGradient = function() {
             });
 
 
-
             // Resize chart
             // ------------------------------
 
@@ -193,9 +198,9 @@ var D3LineGradient = function() {
             $('.sidebar-control').on('click', resize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resize() {
 
@@ -238,7 +243,7 @@ var D3LineGradient = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _lineGradient();
         }
     }
@@ -248,6 +253,6 @@ var D3LineGradient = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3LineGradient.init();
 });

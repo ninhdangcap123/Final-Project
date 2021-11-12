@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleLineVerticalMultiple = function() {
+var DimpleLineVerticalMultiple = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleLineVerticalMultiple = function() {
     //
 
     // Chart
-    var _lineVerticalMultiple = function() {
+    var _lineVerticalMultiple = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleLineVerticalMultiple = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -65,7 +65,7 @@ var DimpleLineVerticalMultiple = function() {
 
                 // Vertical
                 var y = myChart.addCategoryAxis("y", "Month");
-                    y.addOrderRule("Date");
+                y.addOrderRule("Date");
 
 
                 // Construct layout
@@ -123,7 +123,7 @@ var DimpleLineVerticalMultiple = function() {
 
                 // Resize function
                 function resize() {
-                    setTimeout(function() {
+                    setTimeout(function () {
 
                         // Redraw chart
                         myChart.draw(0, true);
@@ -146,7 +146,7 @@ var DimpleLineVerticalMultiple = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _lineVerticalMultiple();
         }
     }
@@ -156,6 +156,6 @@ var DimpleLineVerticalMultiple = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleLineVerticalMultiple.init();
 });

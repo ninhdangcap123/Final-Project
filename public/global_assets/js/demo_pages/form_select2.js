@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var Select2Selects = function() {
+var Select2Selects = function () {
 
 
     //
@@ -18,7 +18,7 @@ var Select2Selects = function() {
     //
 
     // Select2 examples
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -117,7 +117,9 @@ var Select2Selects = function() {
         // Format icon
         function iconFormat(icon) {
             var originalOption = icon.element;
-            if (!icon.id) { return icon.text; }
+            if (!icon.id) {
+                return icon.text;
+            }
             var $icon = '<i class="icon-' + $(icon.element).data('icon') + '"></i>' + icon.text;
 
             return $icon;
@@ -128,7 +130,9 @@ var Select2Selects = function() {
             templateResult: iconFormat,
             minimumResultsForSearch: Infinity,
             templateSelection: iconFormat,
-            escapeMarkup: function(m) { return m; }
+            escapeMarkup: function (m) {
+                return m;
+            }
         });
 
 
@@ -137,7 +141,7 @@ var Select2Selects = function() {
         //
 
         // Setup matcher
-        function matchStart (term, text) {
+        function matchStart(term, text) {
             if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
                 return true;
             }
@@ -181,7 +185,7 @@ var Select2Selects = function() {
         //
 
         // Format displayed data
-        function formatRepo (repo) {
+        function formatRepo(repo) {
             if (repo.loading) return repo.text;
 
             var markup = '<div class="select2-result-repository clearfix">' +
@@ -204,7 +208,7 @@ var Select2Selects = function() {
         }
 
         // Format selection
-        function formatRepoSelection (repo) {
+        function formatRepoSelection(repo) {
             return repo.full_name || repo.text;
         }
 
@@ -237,7 +241,9 @@ var Select2Selects = function() {
                 },
                 cache: true
             },
-            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            escapeMarkup: function (markup) {
+                return markup;
+            }, // let our custom formatter work
             minimumInputLength: 1,
             templateResult: formatRepo, // omitted for brevity, see the source of this page
             templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
@@ -253,8 +259,12 @@ var Select2Selects = function() {
             minimumResultsForSearch: Infinity,
             placeholder: 'Select State...'
         });
-        $('.access-get').on('click', function () { alert('Selected value is: '+$('.select-access-value').val()); });
-        $('.access-set').on('click', function () { $('.select-access-value').val('CA').trigger('change'); });
+        $('.access-get').on('click', function () {
+            alert('Selected value is: ' + $('.select-access-value').val());
+        });
+        $('.access-set').on('click', function () {
+            $('.select-access-value').val('CA').trigger('change');
+        });
 
 
         // Open/close menu
@@ -262,8 +272,12 @@ var Select2Selects = function() {
             minimumResultsForSearch: Infinity,
             placeholder: 'Select State...'
         });
-        $('.access-open').on('click', function () { $('.select-access-open').select2('open'); });
-        $('.access-close').on('click', function () { $('.select-access-open').select2('close'); });
+        $('.access-open').on('click', function () {
+            $('.select-access-open').select2('open');
+        });
+        $('.access-close').on('click', function () {
+            $('.select-access-open').select2('close');
+        });
 
 
         // Enable/disable menu
@@ -271,8 +285,12 @@ var Select2Selects = function() {
             minimumResultsForSearch: Infinity,
             placeholder: 'Select State...'
         });
-        $('.access-disable').on('click', function () { $('.select-access-enable').prop('disabled', true); });
-        $('.access-enable').on('click', function () { $('.select-access-enable').prop('disabled', false); });
+        $('.access-disable').on('click', function () {
+            $('.select-access-enable').prop('disabled', true);
+        });
+        $('.access-enable').on('click', function () {
+            $('.select-access-enable').prop('disabled', false);
+        });
 
 
         // Destroy/create menu
@@ -282,9 +300,14 @@ var Select2Selects = function() {
                 placeholder: 'Select State...'
             });
         }
+
         create_menu();
-        $('.access-create').on('click', function () { return create_menu()});
-        $('.access-destroy').on('click', function () { $('.select-access-create').select2('destroy'); });
+        $('.access-create').on('click', function () {
+            return create_menu()
+        });
+        $('.access-destroy').on('click', function () {
+            $('.select-access-create').select2('destroy');
+        });
 
 
         //
@@ -293,24 +316,36 @@ var Select2Selects = function() {
 
         // Reacting to external value changes
         $('.select-access-multiple-value').select2();
-        $('.change-to-ca').on('click', function() { $('.select-access-multiple-value').val('CA').trigger('change'); });
-        $('.change-to-ak-co').on('click', function() { $('.select-access-multiple-value').val(['AK','CO']).trigger('change'); });
+        $('.change-to-ca').on('click', function () {
+            $('.select-access-multiple-value').val('CA').trigger('change');
+        });
+        $('.change-to-ak-co').on('click', function () {
+            $('.select-access-multiple-value').val(['AK', 'CO']).trigger('change');
+        });
 
 
         // Open/close menu
         $('.select-access-multiple-open').select2({
             minimumResultsForSearch: Infinity
         });
-        $('.access-multiple-open').on('click', function () { $('.select-access-multiple-open').select2('open'); });
-        $('.access-multiple-close').on('click', function () { $('.select-access-multiple-open').select2('close'); });
+        $('.access-multiple-open').on('click', function () {
+            $('.select-access-multiple-open').select2('open');
+        });
+        $('.access-multiple-close').on('click', function () {
+            $('.select-access-multiple-open').select2('close');
+        });
 
 
         // Enable/disable menu
         $('.select-access-multiple-enable').select2({
             minimumResultsForSearch: Infinity
         });
-        $('.access-multiple-disable').on('click', function () { $('.select-access-multiple-enable').prop('disabled', true); });
-        $('.access-multiple-enable').on('click', function () { $('.select-access-multiple-enable').prop('disabled', false); });
+        $('.access-multiple-disable').on('click', function () {
+            $('.select-access-multiple-enable').prop('disabled', true);
+        });
+        $('.access-multiple-enable').on('click', function () {
+            $('.select-access-multiple-enable').prop('disabled', false);
+        });
 
 
         // Destroy/create menu
@@ -319,16 +354,23 @@ var Select2Selects = function() {
                 minimumResultsForSearch: Infinity
             });
         }
+
         create_menu_multiple();
-        $('.access-multiple-create').on('click', function () { return create_menu_multiple()});
-        $('.access-multiple-destroy').on('click', function () { $('.select-access-multiple-create').select2('destroy'); });
+        $('.access-multiple-create').on('click', function () {
+            return create_menu_multiple()
+        });
+        $('.access-multiple-destroy').on('click', function () {
+            $('.select-access-multiple-create').select2('destroy');
+        });
 
 
         // Clear selection
         $('.select-access-multiple-clear').select2({
             minimumResultsForSearch: Infinity
         });
-        $('.access-multiple-clear').on('click', function () { $('.select-access-multiple-clear').val(null).trigger('change'); });
+        $('.access-multiple-clear').on('click', function () {
+            $('.select-access-multiple-clear').val(null).trigger('change');
+        });
     };
 
 
@@ -337,7 +379,7 @@ var Select2Selects = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentSelect2();
         }
     }
@@ -347,6 +389,6 @@ var Select2Selects = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     Select2Selects.init();
 });

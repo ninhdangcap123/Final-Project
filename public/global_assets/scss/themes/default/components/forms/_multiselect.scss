@@ -213,8 +213,7 @@
                 input[type=radio] ~ .form-check-control-indicator {
                     border-color: $white;
                 }
-            }
-            @else {
+            } @else {
                 input[type=checkbox] ~ .form-check-control-indicator {
                     border-color: $checkbox-color;
                     color: $checkbox-color;

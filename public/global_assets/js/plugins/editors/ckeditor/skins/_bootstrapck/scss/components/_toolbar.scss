@@ -127,6 +127,7 @@ a.cke_button {
         /* Compensate the border change */
         padding: 1px 3px;
     }
+
     a.cke_button_off, a.cke_button_disabled {
         &:hover, &:focus, &:active {
             border-width: 3px;
@@ -277,17 +278,21 @@ a.cke_button_off, a.cke_button_disabled {
     border-radius: $border-radius;
 
     background: #e4e4e4;
+
     &:hover {
         background: #ccc;
     }
+
     &.cke_toolbox_collapser_min {
         margin: 0 2px 4px;
+
         .cke_arrow {
             margin-top: 4px;
             border-bottom-color: transparent;
             border-top-color: #474747;
         }
     }
+
     /* The CSS arrow, which belongs to the toolbar collapser. */
     .cke_arrow {
         display: inline-block;

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleLineHorizontalMultipleGrouped = function() {
+var DimpleLineHorizontalMultipleGrouped = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleLineHorizontalMultipleGrouped = function() {
     //
 
     // Chart
-    var _lineHorizontalMultipleGrouped = function() {
+    var _lineHorizontalMultipleGrouped = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleLineHorizontalMultipleGrouped = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -62,7 +62,7 @@ var DimpleLineHorizontalMultipleGrouped = function() {
 
                 // Horizontal
                 var x = myChart.addCategoryAxis("x", ["Owner", "Month"]);
-                    x.addGroupOrderRule("Date");
+                x.addGroupOrderRule("Date");
 
                 // Vertical
                 var y = myChart.addMeasureAxis("y", "Unit Sales");
@@ -127,7 +127,7 @@ var DimpleLineHorizontalMultipleGrouped = function() {
 
                 // Resize function
                 function resize() {
-                    setTimeout(function() {
+                    setTimeout(function () {
 
                         // Redraw chart
                         myChart.draw(0, true);
@@ -150,7 +150,7 @@ var DimpleLineHorizontalMultipleGrouped = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _lineHorizontalMultipleGrouped();
         }
     }
@@ -160,6 +160,6 @@ var DimpleLineHorizontalMultipleGrouped = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleLineHorizontalMultipleGrouped.init();
 });

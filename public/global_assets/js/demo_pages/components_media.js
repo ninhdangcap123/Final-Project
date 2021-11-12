@@ -18,7 +18,7 @@ var Media = function () {
     //
 
     // Switchery
-    var _componentSwitchery = function() {
+    var _componentSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
@@ -26,13 +26,13 @@ var Media = function () {
 
         // Initialize
         var elems = Array.prototype.slice.call(document.querySelectorAll('.form-control-switchery'));
-        elems.forEach(function(html) {
+        elems.forEach(function (html) {
             var switchery = new Switchery(html);
         });
     };
 
-	// Uniform
-    var _componentUniform = function() {
+    // Uniform
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -48,7 +48,7 @@ var Media = function () {
     //
 
     return {
-        initComponents: function() {
+        initComponents: function () {
             _componentSwitchery();
             _componentUniform();
         }
@@ -59,6 +59,6 @@ var Media = function () {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     Media.initComponents();
 });

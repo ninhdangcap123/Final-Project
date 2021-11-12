@@ -163,9 +163,11 @@ a.list-icons-item {
 .font-weight-black {
     font-weight: $font-weight-black;
 }
+
 .font-weight-semibold {
     font-weight: $font-weight-semibold;
 }
+
 .font-weight-thin {
     font-weight: $font-weight-thin;
 }
@@ -174,6 +176,7 @@ a.list-icons-item {
 .text-white {
     color: $white;
 }
+
 a.text-white {
     &:not(.btn) {
         @include transition(color ease-in-out $component-transition-timer);
@@ -189,6 +192,7 @@ a.text-white {
 .text-default {
     color: $body-color;
 }
+
 a.text-default {
     &:not(.btn) {
         @include transition(color ease-in-out $component-transition-timer);
@@ -349,6 +353,7 @@ a.text-default {
         .tab-content-bordered & {
             background-color: $card-bg;
         }
+
         .modal & {
             background-color: $modal-content-bg;
         }
@@ -377,6 +382,7 @@ a.text-default {
     .btn-lg & {
         height: $line-height-computed-lg;
     }
+
     .btn-sm & {
         height: $line-height-computed-sm;
     }

@@ -5,8 +5,6 @@ namespace App\Http\Controllers\SupportTeam;
 use App\Helpers\GetPaymentHelper;
 use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\JsonHelper;
-use App\Helpers\Qs;
-use App\Helpers\Pay;
 use App\Helpers\RouteHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\PaymentCreate;
@@ -59,9 +57,9 @@ class PaymentController extends Controller
 
     public function show($year)
     {
-        $data['payments'] = $payment = $this->paymentRepo->getPayment(['year' => $year])->get();
+        $data['payments'] = $payment = $this->paymentRepo->getPayment([ 'year' => $year ])->get();
 
-        if(($payment->count() < 1)){
+        if( ( $payment->count() < 1 ) ) {
             return RouteHelper::goWithDanger('payments.index');
         }
 
@@ -76,7 +74,7 @@ class PaymentController extends Controller
 
     public function selectYear(Request $request)
     {
-        return RouteHelper::goToRoute(['payments.show', $request->year]);
+        return RouteHelper::goToRoute([ 'payments.show', $request->year ]);
     }
 
     public function create()
@@ -87,7 +85,9 @@ class PaymentController extends Controller
 
     public function invoice($student_id, $year = NULL)
     {
-        if(!$student_id) {return RouteHelper::goWithDanger();}
+        if( !$student_id ) {
+            return RouteHelper::goWithDanger();
+        }
 
         $invoice = $year ? $this->paymentRecordRepo->getAllMyPR($student_id, $year) : $this->paymentRecordRepo->getAllMyPR($student_id);
 
@@ -101,18 +101,20 @@ class PaymentController extends Controller
 
     public function receipts($pr_id)
     {
-        if(!$pr_id) {return RouteHelper::goWithDanger();}
+        if( !$pr_id ) {
+            return RouteHelper::goWithDanger();
+        }
 
         try {
-             $data['pr'] = $paymentRecord = $this->paymentRecordRepo->getRecord(['id' => $pr_id])->with('receipt')->first();
-        } catch (ModelNotFoundException $ex) {
+            $data['pr'] = $paymentRecord = $this->paymentRecordRepo->getRecord([ 'id' => $pr_id ])->with('receipt')->first();
+        } catch( ModelNotFoundException $ex ) {
             return back()->with('flash_danger', __('msg.rnf'));
         }
         $data['receipts'] = $paymentRecord->receipt;
         $data['payment'] = $paymentRecord->payment;
         $data['sr'] = $this->studentRepo->findByUserId($paymentRecord->student_id)->first();
-        $data['s'] = Setting::all()->flatMap(function($s){
-            return [$s->type => $s->description];
+        $data['s'] = Setting::all()->flatMap(function ($s) {
+            return [ $s->type => $s->description ];
         });
 
         return view('pages.support_team.payments.receipt', $data);
@@ -120,18 +122,20 @@ class PaymentController extends Controller
 
     public function pdfReceipts($pr_id)
     {
-        if(!$pr_id) {return RouteHelper::goWithDanger();}
+        if( !$pr_id ) {
+            return RouteHelper::goWithDanger();
+        }
 
         try {
-            $data['pr'] = $paymentRecord = $this->paymentRecordRepo->getRecord(['id' => $pr_id])->with('receipt')->first();
-        } catch (ModelNotFoundException $ex) {
+            $data['pr'] = $paymentRecord = $this->paymentRecordRepo->getRecord([ 'id' => $pr_id ])->with('receipt')->first();
+        } catch( ModelNotFoundException $ex ) {
             return back()->with('flash_danger', __('msg.rnf'));
         }
         $data['receipts'] = $paymentRecord->receipt;
         $data['payment'] = $paymentRecord->payment;
-        $data['sr'] = $sr =$this->studentRepo->findByUserId($paymentRecord->student_id)->first();
-        $data['s'] = Setting::all()->flatMap(function($s){
-            return [$s->type => $s->description];
+        $data['sr'] = $sr = $this->studentRepo->findByUserId($paymentRecord->student_id)->first();
+        $data['s'] = Setting::all()->flatMap(function ($s) {
+            return [ $s->type => $s->description ];
         });
 
         $pdfName = 'Receipt_'.$paymentRecord->ref_no;
@@ -141,19 +145,11 @@ class PaymentController extends Controller
         //return $this->downloadReceipt('pages.support_team.payments.receipt', $d, $pdf_name);
     }
 
-    protected function downloadReceipt($page, $data, $name = NULL){
-        $path = 'receipts/file.html';
-        $disk = Storage::disk('local');
-        $disk->put($path, view($page, $data) );
-        $html = $disk->get($path);
-        return PDF::loadHTML($html)->download($name);
-    }
-
     public function payNow(Request $request, $pr_id)
     {
         $this->validate($request, [
             'amt_paid' => 'required|numeric'
-        ], [], ['amt_paid' => 'Amount Paid']);
+        ], [], [ 'amt_paid' => 'Amount Paid' ]);
 
         $paymentRecord = $this->paymentRecordRepo->find($pr_id);
         $payment = $this->paymentRepo->find($paymentRecord->payment_id);
@@ -176,9 +172,9 @@ class PaymentController extends Controller
         $data['my_courses'] = $this->myCourseRepo->getAll();
         $data['selected'] = false;
 
-        if($course_id){
-            $data['students'] = $students = $this->studentRepo->getRecord(['my_course_id' => $course_id])->get()->sortBy('user.name');
-            if($students->count() < 1){
+        if( $course_id ) {
+            $data['students'] = $students = $this->studentRepo->getRecord([ 'my_course_id' => $course_id ])->get()->sortBy('user.name');
+            if( $students->count() < 1 ) {
                 return RouteHelper::goWithDanger('payments.manage');
             }
             $data['selected'] = true;
@@ -192,28 +188,28 @@ class PaymentController extends Controller
     {
         $this->validate($request, [
             'my_course_id' => 'required'
-        ], [], ['my_course_id' => 'Course']);
+        ], [], [ 'my_course_id' => 'Course' ]);
 
         $wh['my_course_id'] = $course_id = $request->my_course_id;
 
-        $payment1 = $this->paymentRepo->getPayment(['my_course_id' => $course_id, 'year' => $this->year])->get();
-        $payment2 = $this->paymentRepo->getGeneralPayment(['year' => $this->year])->get();
+        $payment1 = $this->paymentRepo->getPayment([ 'my_course_id' => $course_id, 'year' => $this->year ])->get();
+        $payment2 = $this->paymentRepo->getGeneralPayment([ 'year' => $this->year ])->get();
         $payments = $payment2->count() ? $payment1->merge($payment2) : $payment1;
         $students = $this->studentRepo->getRecord($wh)->get();
 
-        if($payments->count() && $students->count()){
-            foreach($payments as $payment){
-                foreach($students as $student){
+        if( $payments->count() && $students->count() ) {
+            foreach( $payments as $payment ) {
+                foreach( $students as $student ) {
                     $paymentRecord['student_id'] = $student->user_id;
                     $paymentRecord['payment_id'] = $payment->id;
                     $paymentRecord['year'] = $this->year;
                     $receipt = $this->paymentRecordRepo->create($paymentRecord);
-                    $receipt->ref_no ?: $receipt->update(['ref_no' => mt_rand(100000, 99999999)]);
+                    $receipt->ref_no ?: $receipt->update([ 'ref_no' => mt_rand(100000, 99999999) ]);
 
                 }
             }
         }
-        return RouteHelper::goToRoute(['payments.manage', $course_id]);
+        return RouteHelper::goToRoute([ 'payments.manage', $course_id ]);
     }
 
     public function store(PaymentCreate $request)
@@ -249,7 +245,16 @@ class PaymentController extends Controller
     {
         $paymentRecord['amt_paid'] = $paymentRecord['paid'] = $paymentRecord['balance'] = 0;
         $this->paymentRecordRepo->update($id, $paymentRecord);
-        $this->receiptRepo->delete(['pr_id' => $id]);
+        $this->receiptRepo->delete([ 'pr_id' => $id ]);
         return back()->with('flash_success', __('msg.update_ok'));
+    }
+
+    protected function downloadReceipt($page, $data, $name = NULL)
+    {
+        $path = 'receipts/file.html';
+        $disk = Storage::disk('local');
+        $disk->put($path, view($page, $data));
+        $html = $disk->get($path);
+        return PDF::loadHTML($html)->download($name);
     }
 }

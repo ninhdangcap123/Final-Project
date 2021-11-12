@@ -3,7 +3,6 @@
 namespace App\Repositories\User;
 
 use App\Repositories\BaseRepository;
-use App\Repositories\User\UserRepositoryInterface;
 use App\User;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
@@ -19,8 +18,10 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         // TODO: Implement create() method.
         return $this->model->create($attributes);
     }
-    public function getUserByType($type){
-        return $this->model->where(['user_type' => $type])->orderBy('name', 'asc')->get();
+
+    public function getUserByType($type)
+    {
+        return $this->model->where([ 'user_type' => $type ])->orderBy('name', 'asc')->get();
     }
 
     public function getAll()

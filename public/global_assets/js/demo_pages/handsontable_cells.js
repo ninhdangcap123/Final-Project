@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var HotCells = function() {
+var HotCells = function () {
 
 
     //
@@ -18,7 +18,7 @@ var HotCells = function() {
     //
 
     // HOT cells examples
-    var _componentHotCells = function() {
+    var _componentHotCells = function () {
         if (typeof Handsontable == 'undefined') {
             console.warn('Warning - handsontable.min.js is not loaded.');
             return;
@@ -44,21 +44,19 @@ var HotCells = function() {
         ];
 
 
-
         // Define element
         var hot_validation = document.getElementById('hot_validation'),
 
-        // Define output element
-        hot_validation_console = document.getElementById('hot_validation_console');
+            // Define output element
+            hot_validation_console = document.getElementById('hot_validation_console');
 
         // Email validator
         var ipValidatorRegexp = /^(?:\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b|null)$/;
         var emailValidator = function (value, callback) {
-            setTimeout(function() {
+            setTimeout(function () {
                 if (/.+@.+/.test(value)) {
                     callback(true);
-                }
-                else {
+                } else {
                     callback(false);
                 }
             }, 1000);
@@ -105,7 +103,6 @@ var HotCells = function() {
         });
 
 
-
         // Drag down
         // ------------------------------
 
@@ -137,7 +134,6 @@ var HotCells = function() {
         });
 
 
-
         // Merge cells
         // ------------------------------
 
@@ -160,7 +156,6 @@ var HotCells = function() {
                 {row: 5, col: 6, rowspan: 3, colspan: 3}
             ]
         });
-
 
 
         // Alignment
@@ -190,7 +185,6 @@ var HotCells = function() {
                 {row: 3, col: 4, className: "htLeft htBottom"}
             ]
         });
-
 
 
         // Readonly
@@ -234,7 +228,6 @@ var HotCells = function() {
         });
 
 
-
         // Disable cell editing
         // ------------------------------
 
@@ -256,8 +249,7 @@ var HotCells = function() {
                 if (hot_non_editable_init.getSourceData()[row][prop] === 'Nissan') {
                     cellProperties.editor = false;
                     cellProperties.className = "disabled";
-                }
-                else {
+                } else {
                     cellProperties.editor = 'text';
                 }
 
@@ -272,7 +264,7 @@ var HotCells = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentHotCells();
         }
     }
@@ -282,6 +274,6 @@ var HotCells = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     HotCells.init();
 });

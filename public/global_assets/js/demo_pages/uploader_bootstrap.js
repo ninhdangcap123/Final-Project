@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var FileUpload = function() {
+var FileUpload = function () {
 
 
     //
@@ -18,7 +18,7 @@ var FileUpload = function() {
     //
 
     // Bootstrap file upload
-    var _componentFileUpload = function() {
+    var _componentFileUpload = function () {
         if (!$().fileinput) {
             console.warn('Warning - fileinput.min.js is not loaded.');
             return;
@@ -276,14 +276,13 @@ var FileUpload = function() {
         //
 
         // Disable/enable button
-        $('#btn-modify').on('click', function() {
+        $('#btn-modify').on('click', function () {
             $btn = $(this);
             if ($btn.text() == 'Disable file input') {
                 $('#file-input-methods').fileinput('disable');
                 $btn.html('Enable file input');
                 alert('Hurray! I have disabled the input and hidden the upload button.');
-            }
-            else {
+            } else {
                 $('#file-input-methods').fileinput('enable');
                 $btn.html('Disable file input');
                 alert('Hurray! I have reverted back the input to enabled with the upload button.');
@@ -297,7 +296,7 @@ var FileUpload = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentFileUpload();
         }
     }
@@ -307,6 +306,6 @@ var FileUpload = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     FileUpload.init();
 });

@@ -12,6 +12,7 @@ class BloodGroupRepository extends BaseRepository implements BloodGroupRepositor
         // TODO: Implement getModel() method.
         return BloodGroup::class;
     }
+
     public function getAll()
     {
         // TODO: Implement getAll() method.

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var HotColumns = function() {
+var HotColumns = function () {
 
 
     //
@@ -18,7 +18,7 @@ var HotColumns = function() {
     //
 
     // HOT columns examples
-    var _componentHotColumns = function() {
+    var _componentHotColumns = function () {
         if (typeof Handsontable == 'undefined') {
             console.warn('Warning - handsontable.min.js is not loaded.');
             return;
@@ -45,7 +45,6 @@ var HotColumns = function() {
         });
 
 
-
         // Scrolling
         // ------------------------------
 
@@ -56,13 +55,12 @@ var HotColumns = function() {
         var hot_scroll = document.getElementById('hot_scroll');
 
         // Initialize with options
-        var hot_scroll_init = new Handsontable(hot_scroll,{
+        var hot_scroll_init = new Handsontable(hot_scroll, {
             data: hot_scroll_data,
             stretchH: 'all',
             rowHeaders: true,
             colHeaders: true
         });
-
 
 
         // Columns freezing
@@ -84,7 +82,6 @@ var HotColumns = function() {
             contextMenu: ['row_above', 'row_below', '---------', 'freeze_column'],
             manualColumnFreeze: true
         });
-
 
 
         // Columns and rows moving
@@ -120,7 +117,6 @@ var HotColumns = function() {
         });
 
 
-
         // Columns stretching
         // ------------------------------
 
@@ -135,7 +131,6 @@ var HotColumns = function() {
             colHeaders: ['Brand', 'Model', 'Year', 'Color', 'Price'],
             stretchH: 'last'
         });
-
 
 
         // Resize
@@ -163,7 +158,7 @@ var HotColumns = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentHotColumns();
         }
     }
@@ -173,6 +168,6 @@ var HotColumns = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     HotColumns.init();
 });

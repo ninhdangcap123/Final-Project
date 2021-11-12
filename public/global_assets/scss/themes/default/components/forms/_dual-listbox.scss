@@ -22,6 +22,7 @@
             padding: $input-btn-padding-y;
             @include border-top-radius(0);
         }
+
         option {
             display: block;
             padding: $input-btn-padding-y $input-btn-padding-x;
@@ -80,6 +81,7 @@
                 box-shadow: none;
             }
         }
+
         .box1.filtered .clear1,
         .box2.filtered .clear2 {
             display: inline-block;

@@ -9,5 +9,4 @@ interface DormRepositoryInterface extends RepositoryInterface
     public function getAll();
 
 
-
 }

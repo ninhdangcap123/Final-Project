@@ -40,16 +40,17 @@
             }
         }
     });
+
     function buildDropdown(trumbowyg) {
         var dropdown = [];
         var sizes = ['x-small', 'small', 'medium', 'large', 'x-large'];
 
-        $.each(sizes, function(index, size) {
+        $.each(sizes, function (index, size) {
             trumbowyg.addBtnDef('fontsize_' + size, {
                 text: '<span style="font-size: ' + size + ';">' + trumbowyg.lang.fontsizes[size] + '</span>',
                 hasIcon: false,
-                fn: function(){
-                    trumbowyg.execCmd('fontSize', index+1, true);
+                fn: function () {
+                    trumbowyg.execCmd('fontSize', index + 1, true);
                 }
             });
             dropdown.push('fontsize_' + size);

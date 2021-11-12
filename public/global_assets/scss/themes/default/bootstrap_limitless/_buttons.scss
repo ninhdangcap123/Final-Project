@@ -73,7 +73,7 @@
     &:not(:hover):not(:active):not(.active):not([aria-expanded=true]),
     &.disabled,
     &:disabled {
-        background-color: transparent!important;
+        background-color: transparent !important;
     }
 
     // Hover/focus states
@@ -82,7 +82,7 @@
         &:not([disabled]):not(.disabled):active,
         &:not([disabled]):not(.disabled).active,
         .show > &.dropdown-toggle {
-            color: $white!important;
+            color: $white !important;
         }
     }
 
@@ -92,7 +92,7 @@
         &:not([disabled]):not(.disabled):active,
         &:not([disabled]):not(.disabled).active,
         .show > &.dropdown-toggle {
-            color: $body-color!important;
+            color: $body-color !important;
         }
     }
 }
@@ -122,6 +122,7 @@
         padding-left: $btn-padding-y-sm + (($line-height-computed - $icon-font-size) / 2);
         padding-right: $btn-padding-y-sm + (($line-height-computed - $icon-font-size) / 2);
     }
+
     &.btn-lg {
         padding-left: $btn-padding-y-lg + (($line-height-computed - $icon-font-size) / 2);
         padding-right: $btn-padding-y-lg + (($line-height-computed - $icon-font-size) / 2);
@@ -165,6 +166,7 @@
             padding-top: ($btn-padding-y-lg - rem-calc($border-width));
             padding-bottom: ($btn-padding-y-lg - rem-calc($border-width));
         }
+
         &.btn-sm {
             padding-top: ($btn-padding-y-sm - rem-calc($border-width));
             padding-bottom: ($btn-padding-y-sm - rem-calc($border-width));
@@ -180,6 +182,7 @@
                 padding-left: $btn-padding-y-lg + (($line-height-computed - $icon-font-size) / 2) - rem-calc($border-width);
                 padding-right: $btn-padding-y-lg + (($line-height-computed - $icon-font-size) / 2) - rem-calc($border-width);
             }
+
             &.btn-sm {
                 padding-left: $btn-padding-y-sm + (($line-height-computed - $icon-font-size) / 2) - rem-calc($border-width);
                 padding-right: $btn-padding-y-sm + (($line-height-computed - $icon-font-size) / 2) - rem-calc($border-width);
@@ -198,7 +201,7 @@
 // Labeled buttons
 //
 
- // Base
+// Base
 .btn-labeled {
 
     // Icon
@@ -227,6 +230,7 @@
     &.btn-lg > b {
         padding: ($line-height-computed - $icon-font-size + $btn-padding-y-lg - rem-calc($btn-border-width));
     }
+
     &.btn-sm > b {
         padding: ($line-height-computed - $icon-font-size + $btn-padding-y-sm - rem-calc($btn-border-width));
     }
@@ -250,6 +254,7 @@
             @include border-left-radius($btn-border-radius-lg);
         }
     }
+
     &.btn-sm {
         padding-left: ((($line-height-computed - $icon-font-size + $btn-padding-y-sm - rem-calc($btn-border-width)) * 2) + $icon-font-size) + $btn-padding-x-sm;
 

@@ -7,9 +7,9 @@ use Eloquent;
 
 class Mark extends Eloquent
 {
-    protected $fillable = ['t1', 't2', 't3', 't4', 'tca', 'exm', 'tex1', 'tex2',
+    protected $fillable = [ 't1', 't2', 't3', 't4', 'tca', 'exm', 'tex1', 'tex2',
         'tex3', 'sub_pos', 'cum', 'cum_ave', 'grade_id', 'year', 'exam_id',
-        'subject_id', 'my_course_id', 'student_id', 'class_id'];
+        'subject_id', 'my_course_id', 'student_id', 'class_id' ];
 
     public function exam()
     {
@@ -18,12 +18,12 @@ class Mark extends Eloquent
 
     public function classes()
     {
-        return $this->belongsTo(Classes::class,'class_id');
+        return $this->belongsTo(Classes::class, 'class_id');
     }
 
     public function myCourse()
     {
-        return $this->belongsTo(MyCourse::class,'my_course_id');
+        return $this->belongsTo(MyCourse::class, 'my_course_id');
     }
 
     public function user()

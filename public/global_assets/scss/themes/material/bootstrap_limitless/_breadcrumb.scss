@@ -57,27 +57,26 @@ a.breadcrumb-item {
 //
 
 // Dash
-.breadcrumb-dash > .breadcrumb-item + .breadcrumb-item:before  {
+.breadcrumb-dash > .breadcrumb-item + .breadcrumb-item:before {
     content: '\2013\00a0';
 }
 
 // Arrow
-.breadcrumb-arrow > .breadcrumb-item + .breadcrumb-item:before  {
+.breadcrumb-arrow > .breadcrumb-item + .breadcrumb-item:before {
     @if $direction == "LTR" {
         content: '\2192\00a0';
-    }
-    @else {
+    } @else {
         content: '\2190\00a0';
     }
 }
 
 // Arrows
-.breadcrumb-arrows > .breadcrumb-item + .breadcrumb-item:before  {
+.breadcrumb-arrows > .breadcrumb-item + .breadcrumb-item:before {
     content: '\00bb\00a0';
 }
 
 // Caret
-.breadcrumb-caret > .breadcrumb-item + .breadcrumb-item:before  {
+.breadcrumb-caret > .breadcrumb-item + .breadcrumb-item:before {
     content: '\203A\00a0';
 }
 
@@ -98,11 +97,11 @@ a.breadcrumb-item {
     &:not(.breadcrumb-line-component):first-child {
         border-top-width: 0;
     }
-    
+
     // After page header content
     &:last-child {
         margin-bottom: $spacer;
-        
+
         // Remove bottom margin if inside colored header
         .page-header-light &,
         .page-header-dark & {
@@ -141,7 +140,7 @@ a.breadcrumb-item {
 .breadcrumb-line-component {
     border: 0;
     @include border-radius($border-radius);
-    
+
     // Inside page header
     .page-header & {
         margin-left: $page-header-padding-x;
@@ -168,7 +167,6 @@ a.breadcrumb-item {
 a.breadcrumb-elements-item {
     @extend a.breadcrumb-item;
 }
-
 
 
 // Layout specific additions

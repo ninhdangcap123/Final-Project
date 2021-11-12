@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Helpers\DisplayMessageHelper;
-use App\Helpers\Qs;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -21,7 +20,7 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        $store =  [
+        $store = [
             'name' => 'required|string|min:6|max:150',
             'password' => 'nullable|string|min:3|max:50',
             'user_type' => 'required',
@@ -35,7 +34,7 @@ class UserRequest extends FormRequest
             'lga_id' => 'required',
             'nal_id' => 'required',
         ];
-        $update =  [
+        $update = [
             'name' => 'required|string|min:6|max:150',
             'gender' => 'required|string',
             'phone' => 'sometimes|nullable|string|min:6|max:20',
@@ -47,12 +46,12 @@ class UserRequest extends FormRequest
             'lga_id' => 'required',
             'nal_id' => 'required',
         ];
-        return ($this->method() === 'POST') ? $store : $update;
+        return ( $this->method() === 'POST' ) ? $store : $update;
     }
 
     public function attributes()
     {
-        return  [
+        return [
             'nal_id' => 'Nationality',
             'state_id' => 'State',
             'lga_id' => 'LGA',
@@ -63,7 +62,7 @@ class UserRequest extends FormRequest
 
     protected function getValidatorInstance()
     {
-        if($this->method() === 'POST'){
+        if( $this->method() === 'POST' ) {
             $input = $this->all();
 
             $input['user_type'] = DisplayMessageHelper::decodeHash($input['user_type']);
@@ -72,7 +71,7 @@ class UserRequest extends FormRequest
 
         }
 
-        if($this->method() === 'PUT'){
+        if( $this->method() === 'PUT' ) {
             $this->user = DisplayMessageHelper::decodeHash($this->user);
         }
 

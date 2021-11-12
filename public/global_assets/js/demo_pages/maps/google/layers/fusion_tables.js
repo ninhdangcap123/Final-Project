@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleMapFusionTable = function() {
+var GoogleMapFusionTable = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleMapFusionTable = function() {
     //
 
     // Line chart
-    var _googleMapFusionTable = function() {
+    var _googleMapFusionTable = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Maps library is not loaded.');
             return;
@@ -62,7 +62,7 @@ var GoogleMapFusionTable = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleMapFusionTable();
         }
     }
@@ -72,6 +72,6 @@ var GoogleMapFusionTable = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     GoogleMapFusionTable.init();
 });

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleCandlestickChart = function() {
+var GoogleCandlestickChart = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleCandlestickChart = function() {
     //
 
     // Candlestick chart
-    var _googleCandlestickChart = function() {
+    var _googleCandlestickChart = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleCandlestickChart = function() {
 
                 // Resize on window resize
                 var resizeCandlestickChart;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeCandlestickChart);
                     resizeCandlestickChart = setTimeout(function () {
                         drawCandlestick();
@@ -118,7 +118,7 @@ var GoogleCandlestickChart = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
@@ -139,7 +139,7 @@ var GoogleCandlestickChart = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleCandlestickChart();
         }
     }

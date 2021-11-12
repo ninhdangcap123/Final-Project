@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleLineIntervals = function() {
+var GoogleLineIntervals = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleLineIntervals = function() {
     //
 
     // Line intervals chart
-    var _googleLineIntervals = function() {
+    var _googleLineIntervals = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleLineIntervals = function() {
 
                 // Resize on window resize
                 var resizeLineIntervals;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeLineIntervals);
                     resizeLineIntervals = setTimeout(function () {
                         drawLineIntervals();
@@ -54,14 +54,14 @@ var GoogleLineIntervals = function() {
 
             // Data
             var data = new google.visualization.DataTable();
-                data.addColumn('string', 'x');
-                data.addColumn('number', 'values');
-                data.addColumn({id:'i0', type:'number', role:'interval'});
-                data.addColumn({id:'i1', type:'number', role:'interval'});
-                data.addColumn({id:'i2', type:'number', role:'interval'});
-                data.addColumn({id:'i2', type:'number', role:'interval'});
-                data.addColumn({id:'i2', type:'number', role:'interval'});
-                data.addColumn({id:'i2', type:'number', role:'interval'});
+            data.addColumn('string', 'x');
+            data.addColumn('number', 'values');
+            data.addColumn({id: 'i0', type: 'number', role: 'interval'});
+            data.addColumn({id: 'i1', type: 'number', role: 'interval'});
+            data.addColumn({id: 'i2', type: 'number', role: 'interval'});
+            data.addColumn({id: 'i2', type: 'number', role: 'interval'});
+            data.addColumn({id: 'i2', type: 'number', role: 'interval'});
+            data.addColumn({id: 'i2', type: 'number', role: 'interval'});
 
             data.addRows([
                 ['a', 100, 90, 110, 85, 96, 104, 120],
@@ -101,7 +101,7 @@ var GoogleLineIntervals = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
@@ -123,7 +123,7 @@ var GoogleLineIntervals = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleLineIntervals();
         }
     }

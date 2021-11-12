@@ -55,9 +55,11 @@ select[size] {
     &[readonly] {
         border-bottom-style: dashed;
     }
+
     &:disabled {
         color: $input-disabled-color;
     }
+
     &[readonly] {
         box-shadow: none;
         border-bottom-color: $input-border-color !important;
@@ -67,15 +69,19 @@ select[size] {
     &.border-success:focus {
         box-shadow: 0 $input-border-width 0 theme-color('success');
     }
+
     &.border-danger:focus {
         box-shadow: 0 $input-border-width 0 theme-color('danger');
     }
+
     &.border-warning:focus {
         box-shadow: 0 $input-border-width 0 theme-color('warning');
     }
+
     &.border-primary:focus {
         box-shadow: 0 $input-border-width 0 theme-color('primary');
     }
+
     &.border-info:focus {
         box-shadow: 0 $input-border-width 0 theme-color('info');
     }
@@ -228,7 +234,7 @@ select[size] {
     // Inline list
     &.form-check-inline {
         padding: 0;
-        
+
         // Input
         .form-check-input {
             margin-right: 0;
@@ -262,6 +268,7 @@ select[size] {
             &-lg {
                 padding-left: $input-padding-x-lg + $input-btn-padding-x-lg + $icon-font-size;
             }
+
             &-sm {
                 padding-left: $input-padding-x-sm + $input-btn-padding-x-sm + $icon-font-size;
             }
@@ -284,6 +291,7 @@ select[size] {
             &-lg {
                 padding-right: $input-padding-x-lg + $input-btn-padding-x-lg + $icon-font-size;
             }
+
             &-sm {
                 padding-right: $input-padding-x-sm + $input-btn-padding-x-sm + $icon-font-size;
             }

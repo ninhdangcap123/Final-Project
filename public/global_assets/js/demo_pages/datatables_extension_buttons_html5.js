@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DatatableButtonsHtml5 = function() {
+var DatatableButtonsHtml5 = function () {
 
 
     //
@@ -18,28 +18,33 @@ var DatatableButtonsHtml5 = function() {
     //
 
     // Basic Datatable examples
-    var _componentDatatableButtonsHtml5 = function() {
+    var _componentDatatableButtonsHtml5 = function () {
         if (!$().DataTable) {
             console.warn('Warning - datatables.min.js is not loaded.');
             return;
         }
 
         // Setting datatable defaults
-        $.extend( $.fn.dataTable.defaults, {
+        $.extend($.fn.dataTable.defaults, {
             autoWidth: false,
             dom: '<"datatable-header"fBl><"datatable-scroll"t><"datatable-footer"ip>',
             language: {
                 search: '<span>Filter:</span> _INPUT_',
                 searchPlaceholder: 'Type to filter...',
                 lengthMenu: '<span>Show:</span> _MENU_',
-                paginate: { 'first': 'First', 'last': 'Last', 'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;', 'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;' }
+                paginate: {
+                    'first': 'First',
+                    'last': 'Last',
+                    'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;',
+                    'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;'
+                }
             }
         });
 
 
         // Basic initialization
         $('.datatable-button-html5-basic').DataTable({
-            buttons: {            
+            buttons: {
                 dom: {
                     button: {
                         className: 'btn btn-light'
@@ -82,7 +87,7 @@ var DatatableButtonsHtml5 = function() {
 
         // Column selectors
         $('.datatable-button-html5-columns').DataTable({
-            buttons: {            
+            buttons: {
                 buttons: [
                     {
                         extend: 'copyHtml5',
@@ -108,7 +113,7 @@ var DatatableButtonsHtml5 = function() {
 
         // Tab separated values
         $('.datatable-button-html5-tab').DataTable({
-            buttons: {            
+            buttons: {
                 buttons: [
                     {
                         extend: 'copyHtml5',
@@ -128,7 +133,7 @@ var DatatableButtonsHtml5 = function() {
     };
 
     // Select2 for length menu styling
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -148,7 +153,7 @@ var DatatableButtonsHtml5 = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentDatatableButtonsHtml5();
             _componentSelect2();
         }
@@ -159,6 +164,6 @@ var DatatableButtonsHtml5 = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DatatableButtonsHtml5.init();
 });

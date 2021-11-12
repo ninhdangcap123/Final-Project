@@ -18,7 +18,7 @@ var Dashboard = function () {
     //
 
     // Setup Switchery
-    var _componentSwitchery = function() {
+    var _componentSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
@@ -26,13 +26,13 @@ var Dashboard = function () {
 
         // Initialize multiple switches
         var switches = Array.prototype.slice.call(document.querySelectorAll('.form-input-switchery'));
-        switches.forEach(function(html) {
+        switches.forEach(function (html) {
             var switchery = new Switchery(html);
         });
     };
 
     // Setup Daterangepicker
-    var _componentDaterange = function() {
+    var _componentDaterange = function () {
         if (!$().daterangepicker) {
             console.warn('Warning - daterangepicker.js is not loaded.');
             return;
@@ -45,7 +45,7 @@ var Dashboard = function () {
                 endDate: moment(),
                 minDate: '01/01/2015',
                 maxDate: '12/31/2019',
-                dateLimit: { days: 60 },
+                dateLimit: {days: 60},
                 ranges: {
                     'Today': [moment(), moment()],
                     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -62,7 +62,7 @@ var Dashboard = function () {
                     direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
                 }
             },
-            function(start, end) {
+            function (start, end) {
                 $('.daterange-ranges span').html(start.format('MMMM D') + ' - ' + end.format('MMMM D'));
             }
         );
@@ -70,10 +70,10 @@ var Dashboard = function () {
     };
 
     // Use first letter as an icon
-    var _componentIconLetter = function() {
+    var _componentIconLetter = function () {
 
         // Grab first letter and insert to the icon
-        $('.table tr').each(function() {
+        $('.table tr').each(function () {
 
             // Title
             var $title = $(this).find('.letter-icon-title'),
@@ -81,7 +81,7 @@ var Dashboard = function () {
 
             // Icon
             var $icon = $(this).find('.letter-icon');
-                $icon.eq(0).text(letter);
+            $icon.eq(0).text(letter);
         });
     };
 
@@ -91,14 +91,14 @@ var Dashboard = function () {
     //
 
     // Traffic sources stream chart
-    var _TrafficSourcesStreamChart = function(element, height) {
+    var _TrafficSourcesStreamChart = function (element, height) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if($(element).length > 0) {
+        if ($(element).length > 0) {
 
             // Basic setup
             // ------------------------------
@@ -124,7 +124,6 @@ var Dashboard = function () {
             var colorrange = ['#03A9F4', '#29B6F6', '#4FC3F7', '#81D4FA', '#B3E5FC', '#E1F5FE'];
 
 
-
             // Construct scales
             // ------------------------------
 
@@ -136,7 +135,6 @@ var Dashboard = function () {
 
             // Colors
             var z = d3.scale.ordinal().range(colorrange);
-
 
 
             // Create axes
@@ -158,7 +156,9 @@ var Dashboard = function () {
                 .innerTickSize(4)
                 .outerTickSize(0)
                 .tickPadding(8)
-                .tickFormat(function (d) { return (d/1000) + 'k'; });
+                .tickFormat(function (d) {
+                    return (d / 1000) + 'k';
+                });
 
             // Right vertical
             var yAxis2 = yAxis;
@@ -173,7 +173,6 @@ var Dashboard = function () {
                 .tickSize(-width, 0, 0);
 
 
-
             // Create chart
             // ------------------------------
 
@@ -184,9 +183,8 @@ var Dashboard = function () {
             var svg = container
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)
-                    .append('g')
-                    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
+                .append('g')
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 
             // Construct chart layout
@@ -195,21 +193,34 @@ var Dashboard = function () {
             // Stack
             var stack = d3.layout.stack()
                 .offset('silhouette')
-                .values(function(d) { return d.values; })
-                .x(function(d) { return d.date; })
-                .y(function(d) { return d.value; });
+                .values(function (d) {
+                    return d.values;
+                })
+                .x(function (d) {
+                    return d.date;
+                })
+                .y(function (d) {
+                    return d.value;
+                });
 
             // Nest
             var nest = d3.nest()
-                .key(function(d) { return d.key; });
+                .key(function (d) {
+                    return d.key;
+                });
 
             // Area
             var area = d3.svg.area()
                 .interpolate('cardinal')
-                .x(function(d) { return x(d.date); })
-                .y0(function(d) { return y(d.y0); })
-                .y1(function(d) { return y(d.y0 + d.y); });
-
+                .x(function (d) {
+                    return x(d.date);
+                })
+                .y0(function (d) {
+                    return y(d.y0);
+                })
+                .y1(function (d) {
+                    return y(d.y0 + d.y);
+                });
 
 
             // Load data
@@ -227,16 +238,18 @@ var Dashboard = function () {
                 var layers = stack(nest.entries(data));
 
 
-
                 // Set input domains
                 // ------------------------------
 
                 // Horizontal
-                x.domain(d3.extent(data, function(d, i) { return d.date; }));
+                x.domain(d3.extent(data, function (d, i) {
+                    return d.date;
+                }));
 
                 // Vertical
-                y.domain([0, d3.max(data, function(d) { return d.y0 + d.y; })]);
-
+                y.domain([0, d3.max(data, function (d) {
+                    return d.y0 + d.y;
+                })]);
 
 
                 // Add grid
@@ -246,7 +259,6 @@ var Dashboard = function () {
                 svg.append('g')
                     .attr('class', 'd3-grid-dashed')
                     .call(gridAxis);
-
 
 
                 //
@@ -264,21 +276,26 @@ var Dashboard = function () {
                 var layer = group.selectAll('.streamgraph-layer')
                     .data(layers)
                     .enter()
-                        .append('path')
-                        .attr('class', 'streamgraph-layer')
-                        .attr('d', function(d) { return area(d.values); })                    
-                        .style('stroke', '#fff')
-                        .style('stroke-width', 0.5)
-                        .style('fill', function(d, i) { return z(i); });
+                    .append('path')
+                    .attr('class', 'streamgraph-layer')
+                    .attr('d', function (d) {
+                        return area(d.values);
+                    })
+                    .style('stroke', '#fff')
+                    .style('stroke-width', 0.5)
+                    .style('fill', function (d, i) {
+                        return z(i);
+                    });
 
                 // Add transition
                 var layerTransition = layer
                     .style('opacity', 0)
                     .transition()
-                        .duration(750)
-                        .delay(function(d, i) { return i * 50; })
-                        .style('opacity', 1)
-
+                    .duration(750)
+                    .delay(function (d, i) {
+                        return i * 50;
+                    })
+                    .style('opacity', 1)
 
 
                 // Append axes
@@ -322,7 +339,9 @@ var Dashboard = function () {
 
                 // Add extra subticks for hidden hours
                 xaxisg.selectAll('.d3-axis-subticks')
-                    .data(x.ticks(d3.time.hours), function(d) { return d; })
+                    .data(x.ticks(d3.time.hours), function (d) {
+                        return d;
+                    })
                     .enter()
                     .append('line')
                     .attr('class', 'd3-axis-subticks')
@@ -330,7 +349,6 @@ var Dashboard = function () {
                     .attr('y2', 4)
                     .attr('x1', x)
                     .attr('x2', x);
-
 
 
                 // Add hover line and pointer
@@ -367,11 +385,10 @@ var Dashboard = function () {
                     .style('opacity', 0);
 
 
-
                 // Append events to the layers group
                 // ------------------------------
 
-                layerTransition.each('end', function() {
+                layerTransition.each('end', function () {
                     layer
                         .on('mouseover', function (d, i) {
                             svg.selectAll('.streamgraph-layer')
@@ -416,12 +433,12 @@ var Dashboard = function () {
                             // Tooltip data
                             tooltip.html(
                                 '<ul class="list-unstyled mb-1">' +
-                                    '<li>' + '<div class="font-size-base my-1"><i class="icon-circle-left2 mr-2"></i>' + d.key + '</div>' + '</li>' +
-                                    '<li>' + 'Visits: &nbsp;' + "<span class='font-weight-semibold float-right'>" + pro + '</span>' + '</li>' +
-                                    '<li>' + 'Time: &nbsp; ' + '<span class="font-weight-semibold float-right">' + formatDate(d.values[mousedate].date) + '</span>' + '</li>' + 
+                                '<li>' + '<div class="font-size-base my-1"><i class="icon-circle-left2 mr-2"></i>' + d.key + '</div>' + '</li>' +
+                                '<li>' + 'Visits: &nbsp;' + "<span class='font-weight-semibold float-right'>" + pro + '</span>' + '</li>' +
+                                '<li>' + 'Time: &nbsp; ' + '<span class="font-weight-semibold float-right">' + formatDate(d.values[mousedate].date) + '</span>' + '</li>' +
                                 '</ul>'
                             )
-                            .style('display', 'block');
+                                .style('display', 'block');
 
                             // Tooltip arrow
                             tooltip.append('div').attr('class', 'd3-tip-arrow');
@@ -443,8 +460,7 @@ var Dashboard = function () {
 
                             hoverLine.style('opacity', 0);
                         });
-                    });
-
+                });
 
 
                 // Append events to the chart container
@@ -460,19 +476,17 @@ var Dashboard = function () {
                         tooltip.style('top', (mousey - ($('.d3-tip').outerHeight() / 2)) - 2 + 'px') // Half tooltip height - half arrow width
 
                         // Move tooltip horizontally
-                        if(mousex >= ($(element).outerWidth() - $('.d3-tip').outerWidth() - margin.right - (tooltipOffset * 2))) {
+                        if (mousex >= ($(element).outerWidth() - $('.d3-tip').outerWidth() - margin.right - (tooltipOffset * 2))) {
                             tooltip
                                 .style('left', (mousex - $('.d3-tip').outerWidth() - tooltipOffset) + 'px') // Change tooltip direction from right to left to keep it inside graph area
                                 .attr('class', 'd3-tip w');
-                        }
-                        else {
+                        } else {
                             tooltip
-                                .style('left', (mousex + tooltipOffset) + 'px' )
+                                .style('left', (mousex + tooltipOffset) + 'px')
                                 .attr('class', 'd3-tip e');
                         }
                     });
             });
-
 
 
             // Resize chart
@@ -485,9 +499,9 @@ var Dashboard = function () {
             $(document).on('click', '.sidebar-control', resizeStream);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resizeStream() {
 
@@ -523,20 +537,22 @@ var Dashboard = function () {
                 svg.selectAll('.d3-axis-right').attr('transform', 'translate(' + width + ', 0)');
 
                 // Area paths
-                svg.selectAll('.streamgraph-layer').attr('d', function(d) { return area(d.values); });
+                svg.selectAll('.streamgraph-layer').attr('d', function (d) {
+                    return area(d.values);
+                });
             }
         }
     };
 
     // App sales line chart
-    var _AppSalesLinesChart = function(element, height) {
+    var _AppSalesLinesChart = function (element, height) {
         if (typeof d3 == 'undefined' || typeof d3.tip == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if($(element).length > 0) {
+        if ($(element).length > 0) {
 
 
             // Basic setup
@@ -555,8 +571,8 @@ var Dashboard = function () {
                     return '<ul class="list-unstyled mb-1">' +
                         '<li>' + '<div class="font-size-base my-1"><i class="icon-circle-left2 mr-2"></i>' + d.name + ' app' + '</div>' + '</li>' +
                         '<li>' + 'Sales: &nbsp;' + '<span class="font-weight-semibold float-right">' + d.value + '</span>' + '</li>' +
-                        '<li>' + 'Revenue: &nbsp; ' + '<span class="font-weight-semibold float-right">' + '$' + (d.value * 25).toFixed(2) + '</span>' + '</li>' + 
-                    '</ul>';
+                        '<li>' + 'Revenue: &nbsp; ' + '<span class="font-weight-semibold float-right">' + '$' + (d.value * 25).toFixed(2) + '</span>' + '</li>' +
+                        '</ul>';
                 });
 
             // Format date
@@ -579,9 +595,8 @@ var Dashboard = function () {
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)
                 .append('g')
-                    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-                    .call(tooltip);
-
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+                .call(tooltip);
 
 
             // Add date range switcher
@@ -592,24 +607,23 @@ var Dashboard = function () {
                 buttonClass: 'text-default font-weight-semibold bg-transparent border-0 cursor-pointer outline-0 py-0 pl-0',
                 enableHTML: true,
                 dropRight: $('html').attr('dir') == 'rtl' ? false : true,
-                onChange: function() {
+                onChange: function () {
                     change();
                 },
                 buttonText: function (options, element) {
                     var selected = '';
-                    options.each(function() {
+                    options.each(function () {
                         selected += $(this).html() + ', ';
                     });
-                    return '<span class="badge badge-mark border-warning mr-2"></span>' + selected.substr(0, selected.length -2);
+                    return '<span class="badge badge-mark border-warning mr-2"></span>' + selected.substr(0, selected.length - 2);
                 }
             });
-
 
 
             // Load data
             // ------------------------------
 
-            d3.csv('../../../../global_assets/demo_data/dashboard/app_sales.csv', function(error, data) {
+            d3.csv('../../../../global_assets/demo_data/dashboard/app_sales.csv', function (error, data) {
                 formatted = data;
                 redraw();
             });
@@ -621,16 +635,19 @@ var Dashboard = function () {
             // Add events
             var altKey;
             d3.select(window)
-                .on('keydown', function() { altKey = d3.event.altKey; })
-                .on('keyup', function() { altKey = false; });
-        
-            // Set terms of transition on date change   
-            function change() {
-              d3.transition()
-                  .duration(altKey ? 7500 : 500)
-                  .each(redraw);
-            }
+                .on('keydown', function () {
+                    altKey = d3.event.altKey;
+                })
+                .on('keyup', function () {
+                    altKey = false;
+                });
 
+            // Set terms of transition on date change
+            function change() {
+                d3.transition()
+                    .duration(altKey ? 7500 : 500)
+                    .each(redraw);
+            }
 
 
             // Main chart drawing function
@@ -643,36 +660,43 @@ var Dashboard = function () {
 
                 // Create data nests
                 var nested = d3.nest()
-                    .key(function(d) { return d.type; })
+                    .key(function (d) {
+                        return d.type;
+                    })
                     .map(formatted)
-                
+
                 // Get value from menu selection
                 // the option values correspond
-                //to the [type] value we used to nest the data  
+                //to the [type] value we used to nest the data
                 var series = menu.val();
-                
+
                 // Only retrieve data from the selected series using nest
                 var data = nested[series];
-                
+
                 // For object constancy we will need to set 'keys', one for each type of data (column name) exclude all others.
-                color.domain(d3.keys(data[0]).filter(function(key) { return (key !== 'date' && key !== 'type'); }));
+                color.domain(d3.keys(data[0]).filter(function (key) {
+                    return (key !== 'date' && key !== 'type');
+                }));
 
                 // Setting up color map
-                var linedata = color.domain().map(function(name) {
+                var linedata = color.domain().map(function (name) {
                     return {
-                                name: name,
-                                values: data.map(function(d) {
-                                    return {name: name, date: parseDate(d.date), value: parseFloat(d[name], 10)};
-                                })
-                            };
-                        });
+                        name: name,
+                        values: data.map(function (d) {
+                            return {name: name, date: parseDate(d.date), value: parseFloat(d[name], 10)};
+                        })
+                    };
+                });
 
                 // Draw the line
                 var line = d3.svg.line()
-                    .x(function(d) { return x(d.date); })
-                    .y(function(d) { return y(d.value); })
+                    .x(function (d) {
+                        return x(d.date);
+                    })
+                    .y(function (d) {
+                        return y(d.value);
+                    })
                     .interpolate('cardinal');
-
 
 
                 // Construct scales
@@ -681,19 +705,34 @@ var Dashboard = function () {
                 // Horizontal
                 var x = d3.time.scale()
                     .domain([
-                        d3.min(linedata, function(c) { return d3.min(c.values, function(v) { return v.date; }); }),
-                        d3.max(linedata, function(c) { return d3.max(c.values, function(v) { return v.date; }); })
+                        d3.min(linedata, function (c) {
+                            return d3.min(c.values, function (v) {
+                                return v.date;
+                            });
+                        }),
+                        d3.max(linedata, function (c) {
+                            return d3.max(c.values, function (v) {
+                                return v.date;
+                            });
+                        })
                     ])
                     .range([0, width]);
 
                 // Vertical
                 var y = d3.scale.linear()
                     .domain([
-                        d3.min(linedata, function(c) { return d3.min(c.values, function(v) { return v.value; }); }),
-                        d3.max(linedata, function(c) { return d3.max(c.values, function(v) { return v.value; }); })
+                        d3.min(linedata, function (c) {
+                            return d3.min(c.values, function (v) {
+                                return v.value;
+                            });
+                        }),
+                        d3.max(linedata, function (c) {
+                            return d3.max(c.values, function (v) {
+                                return v.value;
+                            });
+                        })
                     ])
                     .range([height, 0]);
-
 
 
                 // Create axes
@@ -713,9 +752,8 @@ var Dashboard = function () {
                     .scale(y)
                     .orient('left')
                     .ticks(6)
-                    .tickSize(0 -width)
+                    .tickSize(0 - width)
                     .tickPadding(8);
-                
 
 
                 //
@@ -735,56 +773,69 @@ var Dashboard = function () {
                     .attr('class', 'd3-axis d3-axis-vertical d3-axis-transparent');
 
 
-
                 // Append lines
                 // ------------------------------
 
                 // Bind the data
                 var lines = svg.selectAll('.lines')
                     .data(linedata)
-             
+
                 // Append a group tag for each line
                 var lineGroup = lines
                     .enter()
                     .append('g')
-                        .attr('class', 'lines')
-                        .attr('id', function(d){ return d.name + '-line'; });
+                    .attr('class', 'lines')
+                    .attr('id', function (d) {
+                        return d.name + '-line';
+                    });
 
                 // Append the line to the graph
                 lineGroup.append('path')
                     .attr('class', 'd3-line d3-line-medium')
-                    .style('stroke', function(d) { return color(d.name); })
+                    .style('stroke', function (d) {
+                        return color(d.name);
+                    })
                     .style('opacity', 0)
-                    .attr('d', function(d) { return line(d.values[0]); })
+                    .attr('d', function (d) {
+                        return line(d.values[0]);
+                    })
                     .transition()
-                        .duration(500)
-                        .delay(function(d, i) { return i * 200; })
-                        .style('opacity', 1);
-              
+                    .duration(500)
+                    .delay(function (d, i) {
+                        return i * 200;
+                    })
+                    .style('opacity', 1);
 
 
                 // Append circles
                 // ------------------------------
 
                 var circles = lines.selectAll('circle')
-                    .data(function(d) { return d.values; })
+                    .data(function (d) {
+                        return d.values;
+                    })
                     .enter()
                     .append('circle')
-                        .attr('class', 'd3-line-circle d3-line-circle-medium')
-                        .attr('cx', function(d,i){return x(d.date)})
-                        .attr('cy',function(d,i){return y(d.value)})
-                        .attr('r', 3)
-                        .style('fill', '#fff')
-                        .style('stroke', function(d) { return color(d.name); });
+                    .attr('class', 'd3-line-circle d3-line-circle-medium')
+                    .attr('cx', function (d, i) {
+                        return x(d.date)
+                    })
+                    .attr('cy', function (d, i) {
+                        return y(d.value)
+                    })
+                    .attr('r', 3)
+                    .style('fill', '#fff')
+                    .style('stroke', function (d) {
+                        return color(d.name);
+                    });
 
                 // Add transition
                 circles
                     .style('opacity', 0)
                     .transition()
-                        .duration(500)
-                        .delay(500)
-                        .style('opacity', 1);
-
+                    .duration(500)
+                    .delay(500)
+                    .style('opacity', 1);
 
 
                 // Append tooltip
@@ -807,7 +858,7 @@ var Dashboard = function () {
 
                 // Change tooltip direction of first point
                 // to always keep it inside chart, useful on mobiles
-                lines.each(function (d) { 
+                lines.each(function (d) {
                     d3.select(d3.select(this).selectAll('circle')[0][0])
                         .on('mouseover', function (d) {
                             tooltip.offset([0, 15]).direction('e').show(d);
@@ -825,7 +876,7 @@ var Dashboard = function () {
 
                 // Change tooltip direction of last point
                 // to always keep it inside chart, useful on mobiles
-                lines.each(function (d) { 
+                lines.each(function (d) {
                     d3.select(d3.select(this).selectAll('circle')[0][d3.select(this).selectAll('circle').size() - 1])
                         .on('mouseover', function (d) {
                             tooltip.offset([0, -15]).direction('w').show(d);
@@ -842,33 +893,37 @@ var Dashboard = function () {
                 })
 
 
-
                 // Update chart on date change
                 // ------------------------------
 
                 // Set variable for updating visualization
                 var lineUpdate = d3.transition(lines);
-                
+
                 // Update lines
                 lineUpdate.select('path')
-                    .attr('d', function(d, i) { return line(d.values); });
+                    .attr('d', function (d, i) {
+                        return line(d.values);
+                    });
 
                 // Update circles
                 lineUpdate.selectAll('circle')
-                    .attr('cy',function(d,i){return y(d.value)})
-                    .attr('cx', function(d,i){return x(d.date)});
+                    .attr('cy', function (d, i) {
+                        return y(d.value)
+                    })
+                    .attr('cx', function (d, i) {
+                        return x(d.date)
+                    });
 
                 // Update vertical axes
                 d3.transition(svg)
                     .select('.d3-axis-vertical')
-                    .call(yAxis);   
+                    .call(yAxis);
 
                 // Update horizontal axes
                 d3.transition(svg)
                     .select('.d3-axis-horizontal')
                     .attr('transform', 'translate(0,' + height + ')')
                     .call(xAxis);
-
 
 
                 // Resize chart
@@ -881,9 +936,9 @@ var Dashboard = function () {
                 $(document).on('click', '.sidebar-control', appSalesResize);
 
                 // Resize function
-                // 
+                //
                 // Since D3 doesn't support SVG resize by default,
-                // we need to manually specify parts of the graph that need to 
+                // we need to manually specify parts of the graph that need to
                 // be updated on window resize
                 function appSalesResize() {
 
@@ -913,27 +968,31 @@ var Dashboard = function () {
                     svg.select('.d3-axis-horizontal').call(xAxis);
 
                     // Vertical axis
-                    svg.select('.d3-axis-vertical').call(yAxis.tickSize(0-width));
+                    svg.select('.d3-axis-vertical').call(yAxis.tickSize(0 - width));
 
                     // Lines
-                    svg.selectAll('.d3-line').attr('d', function(d, i) { return line(d.values); });
+                    svg.selectAll('.d3-line').attr('d', function (d, i) {
+                        return line(d.values);
+                    });
 
                     // Circles
-                    svg.selectAll('.d3-line-circle').attr('cx', function(d,i){return x(d.date)})
+                    svg.selectAll('.d3-line-circle').attr('cx', function (d, i) {
+                        return x(d.date)
+                    })
                 }
             }
         }
     };
 
     // Monthly sales area chart
-    var _MonthlySalesAreaChart = function(element, height, color) {
+    var _MonthlySalesAreaChart = function (element, height, color) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if($(element).length > 0) {
+        if ($(element).length > 0) {
 
 
             // Basic setup
@@ -947,7 +1006,9 @@ var Dashboard = function () {
 
             // Date and time format
             var parseDate = d3.time.format('%Y-%m-%d').parse,
-                bisectDate = d3.bisector(function(d) { return d.date; }).left,
+                bisectDate = d3.bisector(function (d) {
+                    return d.date;
+                }).left,
                 formatDate = d3.time.format('%b %d');
 
 
@@ -962,8 +1023,7 @@ var Dashboard = function () {
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)
                 .append('g')
-                    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
 
             // Construct chart layout
@@ -971,9 +1031,13 @@ var Dashboard = function () {
 
             // Area
             var area = d3.svg.area()
-                .x(function(d) { return x(d.date); })
+                .x(function (d) {
+                    return x(d.date);
+                })
                 .y0(height)
-                .y1(function(d) { return y(d.value); })
+                .y1(function (d) {
+                    return y(d.value);
+                })
                 .interpolate('monotone')
 
 
@@ -981,7 +1045,7 @@ var Dashboard = function () {
             // ------------------------------
 
             // Horizontal
-            var x = d3.time.scale().range([0, width ]);
+            var x = d3.time.scale().range([0, width]);
 
             // Vertical
             var y = d3.scale.linear().range([height, 0]);
@@ -1015,10 +1079,12 @@ var Dashboard = function () {
                 });
 
                 // Get the maximum value in the given array
-                var maxY = d3.max(data, function(d) { return d.value; });
+                var maxY = d3.max(data, function (d) {
+                    return d.value;
+                });
 
                 // Reset start data for animation
-                var startData = data.map(function(datum) {
+                var startData = data.map(function (datum) {
                     return {
                         date: datum.date,
                         value: 0
@@ -1030,11 +1096,14 @@ var Dashboard = function () {
                 // ------------------------------
 
                 // Horizontal
-                x.domain(d3.extent(data, function(d, i) { return d.date; }));
+                x.domain(d3.extent(data, function (d, i) {
+                    return d.date;
+                }));
 
                 // Vertical
-                y.domain([0, d3.max( data, function(d) { return d.value; })]);
-
+                y.domain([0, d3.max(data, function (d) {
+                    return d.value;
+                })]);
 
 
                 //
@@ -1052,15 +1121,16 @@ var Dashboard = function () {
 
                 // Add extra subticks for hidden hours
                 horizontalAxis.selectAll('.d3-axis-subticks')
-                    .data(x.ticks(d3.time.days), function(d) { return d; })
+                    .data(x.ticks(d3.time.days), function (d) {
+                        return d;
+                    })
                     .enter()
-                        .append('line')
-                        .attr('class', 'd3-axis-subticks')
-                        .attr('y1', 0)
-                        .attr('y2', 4)
-                        .attr('x1', x)
-                        .attr('x2', x);
-
+                    .append('line')
+                    .attr('class', 'd3-axis-subticks')
+                    .attr('y1', 0)
+                    .attr('y2', 4)
+                    .attr('x1', x)
+                    .attr('x2', x);
 
 
                 // Append area
@@ -1073,14 +1143,13 @@ var Dashboard = function () {
                     .attr('d', area)
                     .style('fill', color)
                     .transition() // begin animation
-                        .duration(1000)
-                        .attrTween('d', function() {
-                            var interpolator = d3.interpolateArray(startData, data);
-                            return function (t) {
-                                return area(interpolator (t));
-                            }
-                        });
-
+                    .duration(1000)
+                    .attrTween('d', function () {
+                        var interpolator = d3.interpolateArray(startData, data);
+                        return function (t) {
+                            return area(interpolator(t));
+                        }
+                    });
 
 
                 // Append crosshair and tooltip
@@ -1146,17 +1215,17 @@ var Dashboard = function () {
                     .style('pointer-events', 'all')
                     .attr('width', width)
                     .attr('height', height)
-                        .on('mouseover', function() {
-                            focusPointer.style('display', null);        
-                            focusLine.style('display', null)
-                            focusText.style('display', null);
-                        })
-                        .on('mouseout', function() {
-                            focusPointer.style('display', 'none'); 
-                            focusLine.style('display', 'none');
-                            focusText.style('display', 'none');
-                        })
-                        .on('mousemove', mousemove);
+                    .on('mouseover', function () {
+                        focusPointer.style('display', null);
+                        focusLine.style('display', null)
+                        focusText.style('display', null);
+                    })
+                    .on('mouseout', function () {
+                        focusPointer.style('display', 'none');
+                        focusLine.style('display', 'none');
+                        focusText.style('display', 'none');
+                    })
+                    .on('mousemove', mousemove);
 
 
                 // Display tooltip on mousemove
@@ -1179,14 +1248,16 @@ var Dashboard = function () {
                     focusPointer.attr('transform', 'translate(' + x(d.date) + ',' + y(d.value) + ')');
 
                     // Reverse tooltip at the end point
-                    if(mousex >= (d3Container.node().getBoundingClientRect().width - focusText.select('text').node().getBoundingClientRect().width - margin.right - margin.left)) {
-                        focusText.select('text').attr('text-anchor', 'end').attr('x', function () { return (x(d.date) - 15) + 'px' }).text(formatDate(d.date) + ' - ' + d.value + ' sales');
-                    }
-                    else {
-                        focusText.select('text').attr('text-anchor', 'start').attr('x', function () { return (x(d.date) + 15) + 'px' }).text(formatDate(d.date) + ' - ' + d.value + ' sales');
+                    if (mousex >= (d3Container.node().getBoundingClientRect().width - focusText.select('text').node().getBoundingClientRect().width - margin.right - margin.left)) {
+                        focusText.select('text').attr('text-anchor', 'end').attr('x', function () {
+                            return (x(d.date) - 15) + 'px'
+                        }).text(formatDate(d.date) + ' - ' + d.value + ' sales');
+                    } else {
+                        focusText.select('text').attr('text-anchor', 'start').attr('x', function () {
+                            return (x(d.date) + 15) + 'px'
+                        }).text(formatDate(d.date) + ' - ' + d.value + ' sales');
                     }
                 }
-
 
 
                 // Resize chart
@@ -1199,9 +1270,9 @@ var Dashboard = function () {
                 $(document).on('click', '.sidebar-control', monthlySalesAreaResize);
 
                 // Resize function
-                // 
+                //
                 // Since D3 doesn't support SVG resize by default,
-                // we need to manually specify parts of the graph that need to 
+                // we need to manually specify parts of the graph that need to
                 // be updated on window resize
                 function monthlySalesAreaResize() {
 
@@ -1246,14 +1317,14 @@ var Dashboard = function () {
     };
 
     // Messages area chart
-    var _MessagesAreaChart = function(element, height, color) {
+    var _MessagesAreaChart = function (element, height, color) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if($(element).length > 0) {
+        if ($(element).length > 0) {
 
 
             // Basic setup
@@ -1280,7 +1351,7 @@ var Dashboard = function () {
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)
                 .append('g')
-                    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
 
             // Construct chart layout
@@ -1288,9 +1359,13 @@ var Dashboard = function () {
 
             // Area
             var area = d3.svg.area()
-                .x(function(d) { return x(d.date); })
+                .x(function (d) {
+                    return x(d.date);
+                })
                 .y0(height)
-                .y1(function(d) { return y(d.value); })
+                .y1(function (d) {
+                    return y(d.value);
+                })
                 .interpolate('monotone')
 
 
@@ -1298,7 +1373,7 @@ var Dashboard = function () {
             // ------------------------------
 
             // Horizontal
-            var x = d3.time.scale().range([0, width ]);
+            var x = d3.time.scale().range([0, width]);
 
             // Vertical
             var y = d3.scale.linear().range([height, 0]);
@@ -1319,10 +1394,12 @@ var Dashboard = function () {
                 });
 
                 // Get the maximum value in the given array
-                var maxY = d3.max(data, function(d) { return d.value; });
+                var maxY = d3.max(data, function (d) {
+                    return d.value;
+                });
 
                 // Reset start data for animation
-                var startData = data.map(function(datum) {
+                var startData = data.map(function (datum) {
                     return {
                         date: datum.date,
                         value: 0
@@ -1334,11 +1411,14 @@ var Dashboard = function () {
                 // ------------------------------
 
                 // Horizontal
-                x.domain(d3.extent(data, function(d, i) { return d.date; }));
+                x.domain(d3.extent(data, function (d, i) {
+                    return d.date;
+                }));
 
                 // Vertical
-                y.domain([0, d3.max( data, function(d) { return d.value; })]);
-
+                y.domain([0, d3.max(data, function (d) {
+                    return d.value;
+                })]);
 
 
                 //
@@ -1352,13 +1432,13 @@ var Dashboard = function () {
                     .style('fill', color)
                     .attr('d', area)
                     .transition() // begin animation
-                        .duration(1000)
-                        .attrTween('d', function() {
-                            var interpolator = d3.interpolateArray(startData, data);
-                            return function (t) {
-                                return area(interpolator (t));
-                            }
-                        });
+                    .duration(1000)
+                    .attrTween('d', function () {
+                        var interpolator = d3.interpolateArray(startData, data);
+                        return function (t) {
+                            return area(interpolator(t));
+                        }
+                    });
 
 
                 // Resize chart
@@ -1371,9 +1451,9 @@ var Dashboard = function () {
                 $(document).on('click', '.sidebar-control', messagesAreaResize);
 
                 // Resize function
-                // 
+                //
                 // Since D3 doesn't support SVG resize by default,
-                // we need to manually specify parts of the graph that need to 
+                // we need to manually specify parts of the graph that need to
                 // be updated on window resize
                 function messagesAreaResize() {
 
@@ -1398,21 +1478,21 @@ var Dashboard = function () {
                     // -------------------------
 
                     // Area path
-                    svg.selectAll('.d3-area').datum( data ).attr('d', area);
+                    svg.selectAll('.d3-area').datum(data).attr('d', area);
                 }
             });
         }
     };
 
     // Sparklines chart
-    var _chartSparkline = function(element, chartType, qty, height, interpolation, duration, interval, color) {
+    var _chartSparkline = function (element, chartType, qty, height, interpolation, duration, interval, color) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if($(element).length > 0) {
+        if ($(element).length > 0) {
 
 
             // Basic setup
@@ -1427,7 +1507,7 @@ var Dashboard = function () {
 
             // Generate random data (for demo only)
             var data = [];
-            for (var i=0; i < qty; i++) {
+            for (var i = 0; i < qty; i++) {
                 data.push(Math.floor(Math.random() * qty) + 5)
             }
 
@@ -1450,7 +1530,6 @@ var Dashboard = function () {
 
             // Vertical
             y.domain([0, qty])
-                
 
 
             // Construct chart layout
@@ -1459,20 +1538,23 @@ var Dashboard = function () {
             // Line
             var line = d3.svg.line()
                 .interpolate(interpolation)
-                .x(function(d, i) { return x(i); })
-                .y(function(d, i) { return y(d); });
+                .x(function (d, i) {
+                    return x(i);
+                })
+                .y(function (d, i) {
+                    return y(d);
+                });
 
             // Area
             var area = d3.svg.area()
                 .interpolate(interpolation)
-                .x(function(d, i) { 
-                    return x(i); 
+                .x(function (d, i) {
+                    return x(i);
                 })
                 .y0(height)
-                .y1(function(d) { 
-                    return y(d); 
+                .y1(function (d) {
+                    return y(d);
                 });
-
 
 
             // Create SVG
@@ -1486,8 +1568,7 @@ var Dashboard = function () {
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)
                 .append("g")
-                    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 
             // Add mask for animation
@@ -1496,7 +1577,9 @@ var Dashboard = function () {
             // Add clip path
             var clip = svg.append('defs')
                 .append('clipPath')
-                .attr('id', function(d, i) { return 'load-clip-' + element.substring(1) })
+                .attr('id', function (d, i) {
+                    return 'load-clip-' + element.substring(1)
+                })
 
             // Add clip shape
             var clips = clip.append('rect')
@@ -1507,10 +1590,9 @@ var Dashboard = function () {
             // Animate mask
             clips
                 .transition()
-                    .duration(1000)
-                    .ease('linear')
-                    .attr('width', width);
-
+                .duration(1000)
+                .ease('linear')
+                .attr('width', width);
 
 
             //
@@ -1519,16 +1601,17 @@ var Dashboard = function () {
 
             // Main path
             var path = svg.append('g')
-                .attr('clip-path', function(d, i) { return 'url(#load-clip-' + element.substring(1) + ')'})
+                .attr('clip-path', function (d, i) {
+                    return 'url(#load-clip-' + element.substring(1) + ')'
+                })
                 .append('path')
-                    .datum(data)
-                    .attr('transform', 'translate(' + x(0) + ',0)');
+                .datum(data)
+                .attr('transform', 'translate(' + x(0) + ',0)');
 
             // Add path based on chart type
-            if(chartType == 'area') {
+            if (chartType == 'area') {
                 path.attr('d', area).attr('class', 'd3-area').style('fill', color); // area
-            }
-            else {
+            } else {
                 path.attr('d', line).attr('class', 'd3-line d3-line-medium').style('stroke', color); // line
             }
 
@@ -1536,15 +1619,14 @@ var Dashboard = function () {
             path
                 .style('opacity', 0)
                 .transition()
-                    .duration(750)
-                    .style('opacity', 1);
-
+                .duration(750)
+                .style('opacity', 1);
 
 
             // Set update interval. For demo only
             // ------------------------------
 
-            setInterval(function() {
+            setInterval(function () {
 
                 // push a new data point onto the back
                 data.push(Math.floor(Math.random() * qty) + 5);
@@ -1557,7 +1639,6 @@ var Dashboard = function () {
             }, interval);
 
 
-
             // Update random data. For demo only
             // ------------------------------
 
@@ -1567,19 +1648,17 @@ var Dashboard = function () {
                 path
                     .attr('transform', null)
                     .transition()
-                        .duration(duration)
-                        .ease('linear')
-                        .attr('transform', 'translate(' + x(0) + ',0)');
+                    .duration(duration)
+                    .ease('linear')
+                    .attr('transform', 'translate(' + x(0) + ',0)');
 
                 // Update path type
-                if(chartType == 'area') {
+                if (chartType == 'area') {
                     path.attr('d', area).attr('class', 'd3-area').style('fill', color)
-                }
-                else {
+                } else {
                     path.attr('d', line).attr('class', 'd3-line d3-line-medium').style('stroke', color);
                 }
             }
-
 
 
             // Resize chart
@@ -1592,9 +1671,9 @@ var Dashboard = function () {
             $(document).on('click', '.sidebar-control', resizeSparklines);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resizeSparklines() {
 
@@ -1631,14 +1710,14 @@ var Dashboard = function () {
     };
 
     // Daily revenue line chart
-    var _DailyRevenueLineChart = function(element, height) {
+    var _DailyRevenueLineChart = function (element, height) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if($(element).length > 0) {
+        if ($(element).length > 0) {
 
 
             // Basic setup
@@ -1682,7 +1761,6 @@ var Dashboard = function () {
                 formatDate = d3.time.format('%a, %B %e');
 
 
-
             // Add tooltip
             // ------------------------------
 
@@ -1692,10 +1770,9 @@ var Dashboard = function () {
                     return '<ul class="list-unstyled mb-1">' +
                         '<li>' + '<div class="font-size-base my-1"><i class="icon-check2 mr-2"></i>' + formatDate(d.date) + '</div>' + '</li>' +
                         '<li>' + 'Sales: &nbsp;' + '<span class="font-weight-semibold float-right">' + d.alpha + '</span>' + '</li>' +
-                        '<li>' + 'Revenue: &nbsp; ' + '<span class="font-weight-semibold float-right">' + '$' + (d.alpha * 25).toFixed(2) + '</span>' + '</li>' + 
-                    '</ul>';
+                        '<li>' + 'Revenue: &nbsp; ' + '<span class="font-weight-semibold float-right">' + '$' + (d.alpha * 25).toFixed(2) + '</span>' + '</li>' +
+                        '</ul>';
                 });
-
 
 
             // Create chart
@@ -1706,12 +1783,11 @@ var Dashboard = function () {
 
             // Add SVG group
             var svg = container
-                    .attr('width', width + margin.left + margin.right)
-                    .attr('height', height + margin.top + margin.bottom)
-                    .append('g')
-                        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-                        .call(tooltip);
-
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+                .call(tooltip);
 
 
             // Load data
@@ -1721,7 +1797,6 @@ var Dashboard = function () {
                 d.date = parseDate(d.date);
                 d.alpha = +d.alpha;
             });
-
 
 
             // Construct scales
@@ -1734,7 +1809,6 @@ var Dashboard = function () {
             // Vertical
             var y = d3.scale.linear()
                 .range([height, 5]);
-
 
 
             // Set input domains
@@ -1751,19 +1825,17 @@ var Dashboard = function () {
             })]);
 
 
-
             // Construct chart layout
             // ------------------------------
 
             // Line
             var line = d3.svg.line()
-                .x(function(d) {
+                .x(function (d) {
                     return x(d.date);
                 })
-                .y(function(d) {
+                .y(function (d) {
                     return y(d.alpha)
                 });
-
 
 
             //
@@ -1786,11 +1858,10 @@ var Dashboard = function () {
 
             // Animate mask
             clipRect
-                  .transition()
-                      .duration(1000)
-                      .ease('linear')
-                      .attr('width', width);
-
+                .transition()
+                .duration(1000)
+                .ease('linear')
+                .attr('width', width);
 
 
             // Line
@@ -1808,9 +1879,8 @@ var Dashboard = function () {
             // Animate path
             svg.select('.line-tickets')
                 .transition()
-                    .duration(1000)
-                    .ease('linear');
-
+                .duration(1000)
+                .ease('linear');
 
 
             // Add vertical guide lines
@@ -1825,32 +1895,33 @@ var Dashboard = function () {
             guide
                 .enter()
                 .append('line')
-                    .attr('class', 'd3-line-guides')
-                    .attr('x1', function (d, i) {
-                        return x(d.date);
-                    })
-                    .attr('y1', function (d, i) {
-                        return height;
-                    })
-                    .attr('x2', function (d, i) {
-                        return x(d.date);
-                    })
-                    .attr('y2', function (d, i) {
-                        return height;
-                    })
-                    .style('stroke', 'rgba(255,255,255,0.3)')
-                    .style('stroke-dasharray', '4,2')
-                    .style('shape-rendering', 'crispEdges');
+                .attr('class', 'd3-line-guides')
+                .attr('x1', function (d, i) {
+                    return x(d.date);
+                })
+                .attr('y1', function (d, i) {
+                    return height;
+                })
+                .attr('x2', function (d, i) {
+                    return x(d.date);
+                })
+                .attr('y2', function (d, i) {
+                    return height;
+                })
+                .style('stroke', 'rgba(255,255,255,0.3)')
+                .style('stroke-dasharray', '4,2')
+                .style('shape-rendering', 'crispEdges');
 
             // Animate guide lines
             guide
                 .transition()
-                    .duration(1000)
-                    .delay(function(d, i) { return i * 150; })
-                    .attr('y2', function (d, i) {
-                        return y(d.alpha);
-                    });
-
+                .duration(1000)
+                .delay(function (d, i) {
+                    return i * 150;
+                })
+                .attr('y2', function (d, i) {
+                    return y(d.alpha);
+                });
 
 
             // Alpha app points
@@ -1862,23 +1933,22 @@ var Dashboard = function () {
                 .data(dataset)
                 .enter()
                 .append('circle')
-                    .attr('class', 'd3-line-circle d3-line-circle-medium')
-                    .attr('cx', line.x())
-                    .attr('cy', line.y())
-                    .attr('r', 3)
-                    .style('stroke', '#fff')
-                    .style('fill', '#29B6F6');
-
+                .attr('class', 'd3-line-circle d3-line-circle-medium')
+                .attr('cx', line.x())
+                .attr('cy', line.y())
+                .attr('r', 3)
+                .style('stroke', '#fff')
+                .style('fill', '#29B6F6');
 
 
             // Animate points on page load
             points
                 .style('opacity', 0)
                 .transition()
-                    .duration(250)
-                    .ease('linear')
-                    .delay(1000)
-                    .style('opacity', 1);
+                .duration(250)
+                .ease('linear')
+                .delay(1000)
+                .style('opacity', 1);
 
 
             // Add user interaction
@@ -1929,7 +1999,6 @@ var Dashboard = function () {
                 })
 
 
-
             // Resize chart
             // ------------------------------
 
@@ -1940,9 +2009,9 @@ var Dashboard = function () {
             $(document).on('click', '.sidebar-control', revenueResize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function revenueResize() {
 
@@ -1988,14 +2057,14 @@ var Dashboard = function () {
     };
 
     // Small progress pie chart
-    var _ProgressPieChart = function(element, width, height, color) {
+    var _ProgressPieChart = function (element, width, height, color) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if($(element).length > 0) {
+        if ($(element).length > 0) {
 
 
             // Basic setup
@@ -2010,7 +2079,6 @@ var Dashboard = function () {
                 total = 100;
 
 
-
             // Construct chart layout
             // ------------------------------
 
@@ -2019,10 +2087,9 @@ var Dashboard = function () {
                 .startAngle(0)
                 .innerRadius(0)
                 .outerRadius(radius)
-                .endAngle(function(d) {
-                  return (d.value / d.size) * 2 * Math.PI; 
+                .endAngle(function (d) {
+                    return (d.value / d.size) * 2 * Math.PI;
                 })
-
 
 
             // Create chart
@@ -2036,8 +2103,7 @@ var Dashboard = function () {
                 .attr('width', width)
                 .attr('height', height)
                 .append('g')
-                    .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
-
+                .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
 
             //
@@ -2062,16 +2128,16 @@ var Dashboard = function () {
             // Animate foreground path
             foreground
                 .transition()
-                    .ease('cubic-out')
-                    .duration(2500)
-                    .attrTween('d', arcTween);
+                .ease('cubic-out')
+                .duration(2500)
+                .attrTween('d', arcTween);
 
 
             // Tween arcs
             function arcTween() {
                 var i = d3.interpolate(0, progress);
-                return function(t) {
-                    var currentProgress = progress / (100/t);
+                return function (t) {
+                    var currentProgress = progress / (100 / t);
                     var endAngle = arc.endAngle(twoPi * (currentProgress));
                     return arc(i(endAngle));
                 };
@@ -2080,14 +2146,14 @@ var Dashboard = function () {
     };
 
     // Marketing campaigns donut chart
-    var _MarketingCampaignsDonutChart = function(element, size) {
+    var _MarketingCampaignsDonutChart = function (element, size) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if($(element).length > 0) {
+        if ($(element).length > 0) {
 
 
             // Basic setup
@@ -2099,7 +2165,7 @@ var Dashboard = function () {
                     "browser": "Google Adwords",
                     "icon": "<i class='icon-google mr-2'></i>",
                     "value": 1047,
-                    "color" : "#66BB6A"
+                    "color": "#66BB6A"
                 }, {
                     "browser": "Social media",
                     "icon": "<i class='icon-share4 mr-2'></i>",
@@ -2116,9 +2182,10 @@ var Dashboard = function () {
             // Main variables
             var d3Container = d3.select(element),
                 distance = 2, // reserve 2px space for mouseover arc moving
-                radius = (size/2) - distance,
-                sum = d3.sum(data, function(d) { return d.value; });
-
+                radius = (size / 2) - distance,
+                sum = d3.sum(data, function (d) {
+                    return d.value;
+                });
 
 
             // Tooltip
@@ -2133,7 +2200,7 @@ var Dashboard = function () {
                         '<li>' + '<div class="font-size-base mb-1 mt-1">' + d.data.icon + d.data.browser + '</div>' + '</li>' +
                         '<li>' + 'Visits: &nbsp;' + '<span class="font-weight-semibold float-right">' + d.value + '</span>' + '</li>' +
                         '<li>' + 'Share: &nbsp;' + '<span class="font-weight-semibold float-right">' + (100 / (sum / d.value)).toFixed(2) + '%' + '</span>' + '</li>' +
-                    '</ul>';
+                        '</ul>';
                 });
 
 
@@ -2142,14 +2209,13 @@ var Dashboard = function () {
 
             // Add svg element
             var container = d3Container.append('svg').call(tip);
-            
+
             // Add SVG group
             var svg = container
                 .attr('width', size)
                 .attr('height', size)
                 .append('g')
-                    .attr('transform', 'translate(' + (size / 2) + ',' + (size / 2) + ')');  
-
+                .attr('transform', 'translate(' + (size / 2) + ',' + (size / 2) + ')');
 
 
             // Construct chart layout
@@ -2160,15 +2226,14 @@ var Dashboard = function () {
                 .sort(null)
                 .startAngle(Math.PI)
                 .endAngle(3 * Math.PI)
-                .value(function (d) { 
+                .value(function (d) {
                     return d.value;
-                }); 
+                });
 
             // Arc
             var arc = d3.svg.arc()
                 .outerRadius(radius)
                 .innerRadius(radius / 2);
-
 
 
             //
@@ -2179,15 +2244,17 @@ var Dashboard = function () {
             var arcGroup = svg.selectAll('.d3-arc')
                 .data(pie(data))
                 .enter()
-                .append('g') 
-                    .attr('class', 'd3-arc')
-                    .style('stroke', '#fff')
-                    .style('cursor', 'pointer');
-            
+                .append('g')
+                .attr('class', 'd3-arc')
+                .style('stroke', '#fff')
+                .style('cursor', 'pointer');
+
             // Append path
             var arcPath = arcGroup
                 .append('path')
-                .style('fill', function (d) { return d.data.color; });
+                .style('fill', function (d) {
+                    return d.data.color;
+                });
 
             // Add tooltip
             arcPath
@@ -2195,7 +2262,7 @@ var Dashboard = function () {
 
                     // Transition on mouseover
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('elastic')
                         .attr('transform', function (d) {
@@ -2207,7 +2274,7 @@ var Dashboard = function () {
                 })
 
                 .on('mousemove', function (d) {
-                    
+
                     // Show tooltip on mousemove
                     tip.show(d)
                         .style('top', (d3.event.pageY - 40) + 'px')
@@ -2218,7 +2285,7 @@ var Dashboard = function () {
 
                     // Mouseout transition
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('bounce')
                         .attr('transform', 'translate(0,0)');
@@ -2230,27 +2297,29 @@ var Dashboard = function () {
             // Animate chart on load
             arcPath
                 .transition()
-                    .delay(function(d, i) { return i * 500; })
-                    .duration(500)
-                    .attrTween('d', function(d) {
-                        var interpolate = d3.interpolate(d.startAngle,d.endAngle);
-                        return function(t) {
-                            d.endAngle = interpolate(t);
-                            return arc(d);  
-                        }; 
-                    });
+                .delay(function (d, i) {
+                    return i * 500;
+                })
+                .duration(500)
+                .attrTween('d', function (d) {
+                    var interpolate = d3.interpolate(d.startAngle, d.endAngle);
+                    return function (t) {
+                        d.endAngle = interpolate(t);
+                        return arc(d);
+                    };
+                });
         }
     };
 
     // Campaign status donut chart
-    var _CampaignStatusDonutChart = function(element, size) {
+    var _CampaignStatusDonutChart = function (element, size) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if($(element).length > 0) {
+        if ($(element).length > 0) {
 
 
             // Basic setup
@@ -2284,9 +2353,10 @@ var Dashboard = function () {
             // Main variables
             var d3Container = d3.select(element),
                 distance = 2, // reserve 2px space for mouseover arc moving
-                radius = (size/2) - distance,
-                sum = d3.sum(data, function(d) { return d.value; })
-
+                radius = (size / 2) - distance,
+                sum = d3.sum(data, function (d) {
+                    return d.value;
+                })
 
 
             // Tooltip
@@ -2301,9 +2371,8 @@ var Dashboard = function () {
                         '<li>' + '<div class="font-size-base mb-1 mt-1">' + d.data.icon + d.data.status + '</div>' + '</li>' +
                         '<li>' + 'Total: &nbsp;' + '<span class="font-weight-semibold float-right">' + d.value + '</span>' + '</li>' +
                         '<li>' + 'Share: &nbsp;' + '<span class="font-weight-semibold float-right">' + (100 / (sum / d.value)).toFixed(2) + '%' + '</span>' + '</li>' +
-                    '</ul>';
+                        '</ul>';
                 });
-
 
 
             // Create chart
@@ -2311,14 +2380,13 @@ var Dashboard = function () {
 
             // Add svg element
             var container = d3Container.append('svg').call(tip);
-            
+
             // Add SVG group
             var svg = container
                 .attr('width', size)
                 .attr('height', size)
                 .append('g')
-                    .attr('transform', 'translate(' + (size / 2) + ',' + (size / 2) + ')');  
-
+                .attr('transform', 'translate(' + (size / 2) + ',' + (size / 2) + ')');
 
 
             // Construct chart layout
@@ -2329,15 +2397,14 @@ var Dashboard = function () {
                 .sort(null)
                 .startAngle(Math.PI)
                 .endAngle(3 * Math.PI)
-                .value(function (d) { 
+                .value(function (d) {
                     return d.value;
-                }); 
+                });
 
             // Arc
             var arc = d3.svg.arc()
                 .outerRadius(radius)
                 .innerRadius(radius / 2);
-
 
 
             //
@@ -2348,15 +2415,17 @@ var Dashboard = function () {
             var arcGroup = svg.selectAll('.d3-arc')
                 .data(pie(data))
                 .enter()
-                .append('g') 
-                    .attr('class', 'd3-arc')
-                    .style('stroke', '#fff')
-                    .style('cursor', 'pointer');
-            
+                .append('g')
+                .attr('class', 'd3-arc')
+                .style('stroke', '#fff')
+                .style('cursor', 'pointer');
+
             // Append path
             var arcPath = arcGroup
                 .append('path')
-                .style('fill', function (d) { return d.data.color; });
+                .style('fill', function (d) {
+                    return d.data.color;
+                });
 
             // Add tooltip
             arcPath
@@ -2364,7 +2433,7 @@ var Dashboard = function () {
 
                     // Transition on mouseover
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('elastic')
                         .attr('transform', function (d) {
@@ -2376,7 +2445,7 @@ var Dashboard = function () {
                 })
 
                 .on('mousemove', function (d) {
-                    
+
                     // Show tooltip on mousemove
                     tip.show(d)
                         .style('top', (d3.event.pageY - 40) + 'px')
@@ -2387,7 +2456,7 @@ var Dashboard = function () {
 
                     // Mouseout transition
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('bounce')
                         .attr('transform', 'translate(0,0)');
@@ -2399,27 +2468,29 @@ var Dashboard = function () {
             // Animate chart on load
             arcPath
                 .transition()
-                    .delay(function(d, i) { return i * 500; })
-                    .duration(500)
-                    .attrTween('d', function(d) {
-                        var interpolate = d3.interpolate(d.startAngle,d.endAngle);
-                        return function(t) {
-                            d.endAngle = interpolate(t);
-                            return arc(d);  
-                        }; 
-                    });
+                .delay(function (d, i) {
+                    return i * 500;
+                })
+                .duration(500)
+                .attrTween('d', function (d) {
+                    var interpolate = d3.interpolate(d.startAngle, d.endAngle);
+                    return function (t) {
+                        d.endAngle = interpolate(t);
+                        return arc(d);
+                    };
+                });
         }
     };
 
     // Tickets status donut chart
-    var _TicketStatusDonutChart = function(element, size) {
+    var _TicketStatusDonutChart = function (element, size) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if($(element).length > 0) {
+        if ($(element).length > 0) {
 
 
             // Basic setup
@@ -2448,9 +2519,10 @@ var Dashboard = function () {
             // Main variables
             var d3Container = d3.select(element),
                 distance = 2, // reserve 2px space for mouseover arc moving
-                radius = (size/2) - distance,
-                sum = d3.sum(data, function(d) { return d.value; })
-
+                radius = (size / 2) - distance,
+                sum = d3.sum(data, function (d) {
+                    return d.value;
+                })
 
 
             // Tooltip
@@ -2465,9 +2537,8 @@ var Dashboard = function () {
                         '<li>' + '<div class="font-size-base mb-1 mt-1">' + d.data.icon + d.data.status + '</div>' + '</li>' +
                         '<li>' + 'Total: &nbsp;' + '<span class="font-weight-semibold float-right">' + d.value + '</span>' + '</li>' +
                         '<li>' + 'Share: &nbsp;' + '<span class="font-weight-semibold float-right">' + (100 / (sum / d.value)).toFixed(2) + '%' + '</span>' + '</li>' +
-                    '</ul>';
+                        '</ul>';
                 })
-
 
 
             // Create chart
@@ -2475,14 +2546,13 @@ var Dashboard = function () {
 
             // Add svg element
             var container = d3Container.append('svg').call(tip);
-            
+
             // Add SVG group
             var svg = container
                 .attr('width', size)
                 .attr('height', size)
                 .append('g')
-                    .attr('transform', 'translate(' + (size / 2) + ',' + (size / 2) + ')');  
-
+                .attr('transform', 'translate(' + (size / 2) + ',' + (size / 2) + ')');
 
 
             // Construct chart layout
@@ -2493,15 +2563,14 @@ var Dashboard = function () {
                 .sort(null)
                 .startAngle(Math.PI)
                 .endAngle(3 * Math.PI)
-                .value(function (d) { 
+                .value(function (d) {
                     return d.value;
-                }); 
+                });
 
             // Arc
             var arc = d3.svg.arc()
                 .outerRadius(radius)
                 .innerRadius(radius / 2);
-
 
 
             //
@@ -2512,15 +2581,17 @@ var Dashboard = function () {
             var arcGroup = svg.selectAll('.d3-arc')
                 .data(pie(data))
                 .enter()
-                .append('g') 
-                    .attr('class', 'd3-arc')
-                    .style('stroke', '#fff')
-                    .style('cursor', 'pointer');
-            
+                .append('g')
+                .attr('class', 'd3-arc')
+                .style('stroke', '#fff')
+                .style('cursor', 'pointer');
+
             // Append path
             var arcPath = arcGroup
                 .append('path')
-                .style('fill', function (d) { return d.data.color; });
+                .style('fill', function (d) {
+                    return d.data.color;
+                });
 
             // Add tooltip
             arcPath
@@ -2528,7 +2599,7 @@ var Dashboard = function () {
 
                     // Transition on mouseover
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('elastic')
                         .attr('transform', function (d) {
@@ -2540,7 +2611,7 @@ var Dashboard = function () {
                 })
 
                 .on('mousemove', function (d) {
-                    
+
                     // Show tooltip on mousemove
                     tip.show(d)
                         .style('top', (d3.event.pageY - 40) + 'px')
@@ -2551,7 +2622,7 @@ var Dashboard = function () {
 
                     // Mouseout transition
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('bounce')
                         .attr('transform', 'translate(0,0)');
@@ -2563,27 +2634,29 @@ var Dashboard = function () {
             // Animate chart on load
             arcPath
                 .transition()
-                    .delay(function(d, i) { return i * 500; })
-                    .duration(500)
-                    .attrTween('d', function(d) {
-                        var interpolate = d3.interpolate(d.startAngle,d.endAngle);
-                        return function(t) {
-                            d.endAngle = interpolate(t);
-                            return arc(d);  
-                        }; 
-                    });
+                .delay(function (d, i) {
+                    return i * 500;
+                })
+                .duration(500)
+                .attrTween('d', function (d) {
+                    var interpolate = d3.interpolate(d.startAngle, d.endAngle);
+                    return function (t) {
+                        d.endAngle = interpolate(t);
+                        return arc(d);
+                    };
+                });
         }
     };
 
     // Bar charts
-    var _BarChart = function(element, barQty, height, animate, easing, duration, delay, color, tooltip) {
+    var _BarChart = function (element, barQty, height, animate, easing, duration, delay, color, tooltip) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if($(element).length > 0) {
+        if ($(element).length > 0) {
 
 
             // Basic setup
@@ -2591,14 +2664,13 @@ var Dashboard = function () {
 
             // Add data set
             var bardata = [];
-            for (var i=0; i < barQty; i++) {
-                bardata.push(Math.round(Math.random()*10) + 10);
+            for (var i = 0; i < barQty; i++) {
+                bardata.push(Math.round(Math.random() * 10) + 10);
             }
 
             // Main variables
             var d3Container = d3.select(element),
                 width = d3Container.node().getBoundingClientRect().width;
-            
 
 
             // Construct scales
@@ -2613,7 +2685,6 @@ var Dashboard = function () {
                 .range([0, height]);
 
 
-
             // Set input domains
             // ------------------------------
 
@@ -2622,7 +2693,6 @@ var Dashboard = function () {
 
             // Vertical
             y.domain([0, d3.max(bardata)]);
-
 
 
             // Create chart
@@ -2638,7 +2708,6 @@ var Dashboard = function () {
                 .append('g');
 
 
-
             //
             // Append chart elements
             //
@@ -2648,13 +2717,12 @@ var Dashboard = function () {
                 .data(bardata)
                 .enter()
                 .append('rect')
-                    .attr('class', 'd3-random-bars')
-                    .attr('width', x.rangeBand())
-                    .attr('x', function(d,i) {
-                        return x(i);
-                    })
-                    .style('fill', color);
-
+                .attr('class', 'd3-random-bars')
+                .attr('width', x.rangeBand())
+                .attr('x', function (d, i) {
+                    return x(i);
+                })
+                .style('fill', color);
 
 
             // Tooltip
@@ -2665,52 +2733,51 @@ var Dashboard = function () {
                 .offset([-10, 0]);
 
             // Show and hide
-            if(tooltip == 'hours' || tooltip == 'goal' || tooltip == 'members') {
+            if (tooltip == 'hours' || tooltip == 'goal' || tooltip == 'members') {
                 bars.call(tip)
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide);
             }
 
             // Daily meetings tooltip content
-            if(tooltip == 'hours') {
+            if (tooltip == 'hours') {
                 tip.html(function (d, i) {
                     return '<div class="text-center">' +
-                            '<h6 class="m-0">' + d + '</h6>' +
-                            '<span class="font-size-sm">meetings</span>' +
-                            '<div class="font-size-sm">' + i + ':00' + '</div>' +
+                        '<h6 class="m-0">' + d + '</h6>' +
+                        '<span class="font-size-sm">meetings</span>' +
+                        '<div class="font-size-sm">' + i + ':00' + '</div>' +
                         '</div>'
                 });
             }
 
             // Statements tooltip content
-            if(tooltip == 'goal') {
+            if (tooltip == 'goal') {
                 tip.html(function (d, i) {
                     return '<div class="text-center">' +
-                            '<h6 class="m-0">' + d + '</h6>' +
-                            '<span class="font-size-sm">statements</span>' +
-                            '<div class="font-size-sm">' + i + ':00' + '</div>' +
+                        '<h6 class="m-0">' + d + '</h6>' +
+                        '<span class="font-size-sm">statements</span>' +
+                        '<div class="font-size-sm">' + i + ':00' + '</div>' +
                         '</div>'
                 });
             }
 
             // Online members tooltip content
-            if(tooltip == 'members') {
+            if (tooltip == 'members') {
                 tip.html(function (d, i) {
                     return '<div class="text-center">' +
-                            '<h6 class="m-0">' + d + '0' + '</h6>' +
-                            '<span class="font-size-sm">members</span>' +
-                            '<div class="font-size-sm">' + i + ':00' + '</div>' +
+                        '<h6 class="m-0">' + d + '0' + '</h6>' +
+                        '<span class="font-size-sm">members</span>' +
+                        '<div class="font-size-sm">' + i + ':00' + '</div>' +
                         '</div>'
                 });
             }
-
 
 
             // Bar loading animation
             // ------------------------------
 
             // Choose between animated or static
-            if(animate) {
+            if (animate) {
                 withAnimation();
             } else {
                 withoutAnimation();
@@ -2722,30 +2789,29 @@ var Dashboard = function () {
                     .attr('height', 0)
                     .attr('y', height)
                     .transition()
-                        .attr('height', function(d) {
-                            return y(d);
-                        })
-                        .attr('y', function(d) {
-                            return height - y(d);
-                        })
-                        .delay(function(d, i) {
-                            return i * delay;
-                        })
-                        .duration(duration)
-                        .ease(easing);
+                    .attr('height', function (d) {
+                        return y(d);
+                    })
+                    .attr('y', function (d) {
+                        return height - y(d);
+                    })
+                    .delay(function (d, i) {
+                        return i * delay;
+                    })
+                    .duration(duration)
+                    .ease(easing);
             }
 
             // Load without animateion
             function withoutAnimation() {
                 bars
-                    .attr('height', function(d) {
+                    .attr('height', function (d) {
                         return y(d);
                     })
-                    .attr('y', function(d) {
+                    .attr('y', function (d) {
                         return height - y(d);
                     })
             }
-
 
 
             // Resize chart
@@ -2758,9 +2824,9 @@ var Dashboard = function () {
             $(document).on('click', '.sidebar-control', barsResize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function barsResize() {
 
@@ -2787,7 +2853,7 @@ var Dashboard = function () {
                 // Bars
                 svg.selectAll('.d3-random-bars')
                     .attr('width', x.rangeBand())
-                    .attr('x', function(d,i) {
+                    .attr('x', function (d, i) {
                         return x(i);
                     });
             }
@@ -2795,14 +2861,14 @@ var Dashboard = function () {
     };
 
     // Rounded progress charts
-    var _RoundedProgressChart = function(element, radius, border, color, end, iconClass, textTitle, textAverage) {
+    var _RoundedProgressChart = function (element, radius, border, color, end, iconClass, textTitle, textAverage) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if($(element).length > 0) {
+        if ($(element).length > 0) {
 
 
             // Basic setup
@@ -2824,7 +2890,6 @@ var Dashboard = function () {
             var step = endPercent < startPercent ? -0.01 : 0.01;
 
 
-
             // Create chart
             // ------------------------------
 
@@ -2836,8 +2901,7 @@ var Dashboard = function () {
                 .attr('width', boxSize)
                 .attr('height', boxSize)
                 .append('g')
-                    .attr('transform', 'translate(' + (boxSize / 2) + ',' + (boxSize / 2) + ')');
-
+                .attr('transform', 'translate(' + (boxSize / 2) + ',' + (boxSize / 2) + ')');
 
 
             // Construct chart layout
@@ -2848,7 +2912,6 @@ var Dashboard = function () {
                 .startAngle(0)
                 .innerRadius(radius)
                 .outerRadius(radius - border);
-
 
 
             //
@@ -2878,32 +2941,30 @@ var Dashboard = function () {
                 .style('fill-opacity', 1);
 
 
-
             // Text
             // ------------------------------
 
             // Percentage text value
             var numberText = d3.select(element)
                 .append('h2')
-                    .attr('class', 'pt-1 mt-2 mb-1')
+                .attr('class', 'pt-1 mt-2 mb-1')
 
             // Icon
             d3.select(element)
                 .append('i')
-                    .attr('class', iconClass + ' counter-icon')
-                    .attr('style', 'top: ' + ((boxSize - iconSize) / 2) + 'px');
+                .attr('class', iconClass + ' counter-icon')
+                .attr('style', 'top: ' + ((boxSize - iconSize) / 2) + 'px');
 
             // Title
             d3.select(element)
                 .append('div')
-                    .text(textTitle);
+                .text(textTitle);
 
             // Subtitle
             d3.select(element)
                 .append('div')
-                    .attr('class', 'font-size-sm text-muted mb-3')
-                    .text(textAverage);
-
+                .attr('class', 'font-size-sm text-muted mb-3')
+                .text(textAverage);
 
 
             // Animation
@@ -2935,12 +2996,12 @@ var Dashboard = function () {
     //
 
     return {
-        initComponents: function() {
+        initComponents: function () {
             _componentSwitchery();
             _componentDaterange();
             _componentIconLetter();
         },
-        initCharts: function() {
+        initCharts: function () {
 
             // Sparklines
             _chartSparkline('#new-visitors', 'line', 30, 35, 'basis', 750, 2000, '#26A69A');
@@ -2982,7 +3043,7 @@ var Dashboard = function () {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     Dashboard.initComponents();
     Dashboard.initCharts();
 });

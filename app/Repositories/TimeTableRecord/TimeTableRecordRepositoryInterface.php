@@ -9,6 +9,7 @@ interface TimeTableRecordRepositoryInterface extends RepositoryInterface
     public function getAll();
 
     public function getTTRByIDs($ids);
+
     public function getRecord($where);
 
 }

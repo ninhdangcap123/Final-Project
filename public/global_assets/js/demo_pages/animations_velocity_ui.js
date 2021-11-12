@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var AnimationsVelocityUi = function() {
+var AnimationsVelocityUi = function () {
 
 
     //
@@ -18,7 +18,7 @@ var AnimationsVelocityUi = function() {
     //
 
     // Velocity UI
-    var _componentAnimationVelocityUi = function() {
+    var _componentAnimationVelocityUi = function () {
         if (!$().velocity) {
             console.warn('Warning - velocity.min.js is not loaded.');
             return;
@@ -31,7 +31,7 @@ var AnimationsVelocityUi = function() {
             var animation = $(this).data('animation');
 
             // Add animation class to card element
-            $(this).parents('.card').velocity('callout.' + animation, { stagger: 500 });
+            $(this).parents('.card').velocity('callout.' + animation, {stagger: 500});
             e.preventDefault();
         });
 
@@ -42,7 +42,7 @@ var AnimationsVelocityUi = function() {
             var transition = $(this).data('transition');
 
             // Add animation class to card element
-            $(this).parents('.card').velocity('transition.' + transition, { 
+            $(this).parents('.card').velocity('transition.' + transition, {
                 stagger: 1000,
                 duration: 1000
             });
@@ -51,7 +51,7 @@ var AnimationsVelocityUi = function() {
         });
 
         // Clear styles after 2 seconds
-        window.setInterval(function(){
+        window.setInterval(function () {
             $('.velocity-transition').parents('.card').removeAttr('style');
         }, 2000);
     };
@@ -62,7 +62,7 @@ var AnimationsVelocityUi = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentAnimationVelocityUi();
         }
     }
@@ -72,6 +72,6 @@ var AnimationsVelocityUi = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     AnimationsVelocityUi.init();
 });

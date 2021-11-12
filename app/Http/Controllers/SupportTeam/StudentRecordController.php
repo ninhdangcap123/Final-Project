@@ -9,9 +9,8 @@ use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\GetUsersHelper;
 use App\Helpers\JsonHelper;
 use App\Helpers\PrintMarkSheetHelper;
-use App\Helpers\Qs;
-use App\Helpers\Mk;
 use App\Helpers\RouteHelper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\StudentRecordCreate;
 use App\Http\Requests\Student\StudentRecordUpdate;
 use App\Repositories\Classes\ClassesRepositoryInterface;
@@ -26,7 +25,6 @@ use App\Repositories\Student\StudentRepositoryInterface;
 use App\Repositories\StudentRepo;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -43,17 +41,17 @@ class StudentRecordController extends Controller
     protected $state;
     protected $nationalityRepo;
 
-   public function __construct(PromotionRepositoryInterface $promotionRepo,
-                               ClassesRepositoryInterface   $classRepo,
-                               MyCourseRepositoryInterface  $myCourseRepo,
-                               UserRepositoryInterface      $userRepo,
-                               StudentRepositoryInterface   $studentRepo,
-                               StateRepositoryInterface     $stateRepo,
-                               NationalRepositoryInterface  $nationalityRepo,
-                               MajorRepositoryInterface     $majorRepo)
-   {
-       $this->middleware('teamSA', ['only' => ['edit','update', 'reset_pass', 'create', 'store', 'graduated'] ]);
-       $this->middleware('super_admin', ['only' => ['destroy',] ]);
+    public function __construct(PromotionRepositoryInterface $promotionRepo,
+                                ClassesRepositoryInterface   $classRepo,
+                                MyCourseRepositoryInterface  $myCourseRepo,
+                                UserRepositoryInterface      $userRepo,
+                                StudentRepositoryInterface   $studentRepo,
+                                StateRepositoryInterface     $stateRepo,
+                                NationalRepositoryInterface  $nationalityRepo,
+                                MajorRepositoryInterface     $majorRepo)
+    {
+        $this->middleware('teamSA', [ 'only' => [ 'edit', 'update', 'reset_pass', 'create', 'store', 'graduated' ] ]);
+        $this->middleware('super_admin', [ 'only' => [ 'destroy', ] ]);
         $this->myCourseRepo = $myCourseRepo;
         $this->userRepo = $userRepo;
         $this->studentRepo = $studentRepo;
@@ -62,7 +60,7 @@ class StudentRecordController extends Controller
         $this->majorRepo = $majorRepo;
         $this->nationalityRepo = $nationalityRepo;
         $this->promotionRepo = $promotionRepo;
-   }
+    }
 
     public function resetPass($st_id)
     {
@@ -84,8 +82,8 @@ class StudentRecordController extends Controller
 
     public function store(StudentRecordCreate $request)
     {
-       $data =  $request->only(GetUsersHelper::getUserRecord());
-       $studentRecord = $request->only(GetUsersHelper::getStudentData());
+        $data = $request->only(GetUsersHelper::getUserRecord());
+        $studentRecord = $request->only(GetUsersHelper::getStudentData());
 
         $major = $this->majorRepo->findMajorByCourse($request->my_course_id)->code;
 
@@ -96,14 +94,14 @@ class StudentRecordController extends Controller
         $data['password'] = Hash::make('student');
         $data['photo'] = GetPathHelper::getDefaultUserImage();
         $administrationNo = $request->adm_no;
-        $data['username'] = strtoupper(GetSystemInfoHelper::getAppCode().'/'.$major.'/'.$studentRecord['year_admitted'].'/'.($administrationNo ?: mt_rand(1000, 99999)));
+        $data['username'] = strtoupper(GetSystemInfoHelper::getAppCode().'/'.$major.'/'.$studentRecord['year_admitted'].'/'.( $administrationNo ?: mt_rand(1000, 99999) ));
 
-        if($request->hasFile('photo')) {
+        if( $request->hasFile('photo') ) {
             $photo = $request->file('photo');
             $file = GetPathHelper::getFileMetaData($photo);
-            $file['name'] = 'photo.' . $file['ext'];
+            $file['name'] = 'photo.'.$file['ext'];
             $file['path'] = $photo->storeAs(GetPathHelper::getUploadPath('student').$data['code'], $file['name']);
-            $data['photo'] = asset('storage/' . $file['path']);
+            $data['photo'] = asset('storage/'.$file['path']);
         }
 
         $user = $this->userRepo->create($data); // Create User
@@ -118,7 +116,7 @@ class StudentRecordController extends Controller
 
     public function listByClass($course_id)
     {
-        $data['my_course'] = $myCourse = $this->myCourseRepo->getMC(['id' => $course_id])->first();
+        $data['my_course'] = $myCourse = $this->myCourseRepo->getMC([ 'id' => $course_id ])->first();
         $data['students'] = $this->studentRepo->findStudentsByCourse($course_id);
         $data['classes'] = $this->classRepo->getCourseClasses($course_id);
 
@@ -145,12 +143,14 @@ class StudentRecordController extends Controller
     public function show($sr_id)
     {
         $sr_id = DisplayMessageHelper::decodeHash($sr_id);
-        if(!$sr_id){return RouteHelper::goWithDanger();}
+        if( !$sr_id ) {
+            return RouteHelper::goWithDanger();
+        }
 
-        $data['sr'] = $this->studentRepo->getRecord(['id' => $sr_id])->first();
+        $data['sr'] = $this->studentRepo->getRecord([ 'id' => $sr_id ])->first();
 
         /* Prevent Other Students/Parents from viewing Profile of others */
-        if(Auth::user()->id != $data['sr']->user_id && !CheckUsersHelper::userIsTeamSAT() && !CheckUsersHelper::userIsMyChild($data['sr']->user_id, Auth::user()->id)){
+        if( Auth::user()->id != $data['sr']->user_id && !CheckUsersHelper::userIsTeamSAT() && !CheckUsersHelper::userIsMyChild($data['sr']->user_id, Auth::user()->id) ) {
             return redirect(route('dashboard'))->with('pop_error', __('msg.denied'));
         }
 
@@ -160,9 +160,11 @@ class StudentRecordController extends Controller
     public function edit($sr_id)
     {
         $sr_id = DisplayMessageHelper::decodeHash($sr_id);
-        if(!$sr_id){return RouteHelper::goWithDanger();}
+        if( !$sr_id ) {
+            return RouteHelper::goWithDanger();
+        }
 
-        $data['sr'] = $this->studentRepo->getRecord(['id' => $sr_id])->first();
+        $data['sr'] = $this->studentRepo->getRecord([ 'id' => $sr_id ])->first();
         $data['my_courses'] = $this->myCourseRepo->getAll();
         $data['parents'] = $this->userRepo->getUserByType('parent');
         $data['dorms'] = $this->studentRepo->getAllDorms();
@@ -174,18 +176,20 @@ class StudentRecordController extends Controller
     public function update(StudentRecordUpdate $request, $sr_id)
     {
         $sr_id = DisplayMessageHelper::decodeHash($sr_id);
-        if(!$sr_id){return RouteHelper::goWithDanger();}
+        if( !$sr_id ) {
+            return RouteHelper::goWithDanger();
+        }
 
-        $studentRecord = $this->studentRepo->getRecord(['id' => $sr_id])->first();
-        $data =  $request->only(GetUsersHelper::getUserRecord());
+        $studentRecord = $this->studentRepo->getRecord([ 'id' => $sr_id ])->first();
+        $data = $request->only(GetUsersHelper::getUserRecord());
         $data['name'] = ucwords($request->name);
 
-        if($request->hasFile('photo')) {
+        if( $request->hasFile('photo') ) {
             $photo = $request->file('photo');
             $file = GetPathHelper::getFileMetaData($photo);
-            $file['name'] = 'photo.' . $file['ext'];
+            $file['name'] = 'photo.'.$file['ext'];
             $file['path'] = $photo->storeAs(GetPathHelper::getUploadPath('student').$studentRecord->user->code, $file['name']);
-            $data['photo'] = asset('storage/' . $file['path']);
+            $data['photo'] = asset('storage/'.$file['path']);
         }
 
         $this->userRepo->update($studentRecord->user->id, $data); // Update User Details
@@ -201,9 +205,11 @@ class StudentRecordController extends Controller
     public function destroy($st_id)
     {
         $st_id = DisplayMessageHelper::decodeHash($st_id);
-        if(!$st_id){return RouteHelper::goWithDanger();}
+        if( !$st_id ) {
+            return RouteHelper::goWithDanger();
+        }
 
-        $studentRecord = $this->studentRepo->getRecord(['user_id' => $st_id])->first();
+        $studentRecord = $this->studentRepo->getRecord([ 'user_id' => $st_id ])->first();
         $path = GetPathHelper::getUploadPath('student').$studentRecord->user->code;
         Storage::exists($path) && Storage::deleteDirectory($path);
         $this->userRepo->delete($studentRecord->user->id);

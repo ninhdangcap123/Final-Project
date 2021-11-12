@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var LearningCourseDetailed = function() {
+var LearningCourseDetailed = function () {
 
 
     //
@@ -18,7 +18,7 @@ var LearningCourseDetailed = function() {
     //
 
     // CKEditor
-    var _componentCKEditor = function() {
+    var _componentCKEditor = function () {
         if (typeof CKEDITOR == 'undefined') {
             console.warn('Warning - ckeditor.js is not loaded.');
             return;
@@ -29,22 +29,22 @@ var LearningCourseDetailed = function() {
             height: 200,
             removeButtons: 'Subscript,Superscript',
             toolbarGroups: [
-                { name: 'styles' },
-                { name: 'editing',     groups: [ 'find', 'selection' ] },
-                { name: 'basicstyles', groups: [ 'basicstyles' ] },
-                { name: 'paragraph',   groups: [ 'list', 'blocks', 'align' ] },
-                { name: 'links' },
-                { name: 'insert' },
-                { name: 'colors' },
-                { name: 'tools' },
-                { name: 'others' },
-                { name: 'document',    groups: [ 'mode', 'document', 'doctools' ] }
+                {name: 'styles'},
+                {name: 'editing', groups: ['find', 'selection']},
+                {name: 'basicstyles', groups: ['basicstyles']},
+                {name: 'paragraph', groups: ['list', 'blocks', 'align']},
+                {name: 'links'},
+                {name: 'insert'},
+                {name: 'colors'},
+                {name: 'tools'},
+                {name: 'others'},
+                {name: 'document', groups: ['mode', 'document', 'doctools']}
             ]
-        });    
+        });
     };
 
     // Schedule
-    var _componentFullCalendar = function() {
+    var _componentFullCalendar = function () {
         if (!$().fullCalendar) {
             console.warn('Warning - fullcalendar.min.js is not loaded.');
             return;
@@ -156,7 +156,7 @@ var LearningCourseDetailed = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentCKEditor();
             _componentFullCalendar();
         }
@@ -167,6 +167,6 @@ var LearningCourseDetailed = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     LearningCourseDetailed.init();
 });

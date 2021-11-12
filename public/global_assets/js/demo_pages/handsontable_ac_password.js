@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var HotAutocompletePassword = function() {
+var HotAutocompletePassword = function () {
 
 
     //
@@ -18,7 +18,7 @@ var HotAutocompletePassword = function() {
     //
 
     // HOT autocomplete and password type examples
-    var _componentHotAutocompletePassword = function() {
+    var _componentHotAutocompletePassword = function () {
         if (typeof Handsontable == 'undefined') {
             console.warn('Warning - handsontable.min.js is not loaded.');
             return;
@@ -89,7 +89,6 @@ var HotAutocompletePassword = function() {
         });
 
 
-
         // Autocomplete strict mode
         // ------------------------------
 
@@ -137,7 +136,6 @@ var HotAutocompletePassword = function() {
                 }
             ]
         });
-
 
 
         // Autocomplete strict mode (AJAX)
@@ -213,27 +211,80 @@ var HotAutocompletePassword = function() {
         });
 
 
-
-
         // Password cell type
         // ------------------------------
 
         // Add sample data used in all password example
         var people = [
-            {id: 1, name: {first: 'Joe', last: 'Fabiano'}, email: '<a href="#">joe.fabiano@ex.com</a>', password: 'djeiryt812ewe'},
-            {id: 2, name: {first: 'Fred', last: 'Wecler'}, email: '<a href="#">fred.wecler@ex.com</a>', password: 'sdfw78273e2d'},
-            {id: 3, name: {first: 'Steve', last: 'Wilson'}, email: '<a href="#">steve.wilson@ex.com</a>', password: 'asdk3uasce'},
-            {id: 4, name: {first: 'Maria', last: 'Fernandez'}, email: '<a href="#">m.fernandez@ex.com</a>', password: '12438127we'},
-            {id: 5, name: {first: 'Pierre', last: 'Barbault'}, email: '<a href="#">pierre.barbault@ex.com</a>', password: 'aksdiuw3'},
-            {id: 6, name: {first: 'Nancy', last: 'Moore'}, email: '<a href="#">nancy.moore@ex.com</a>', password: '18894ksdf'},
-            {id: 7, name: {first: 'Barbara', last: 'MacDonald'}, email: '<a href="#">b.macdonald@ex.com</a>', password: 'asd9834r3e'},
-            {id: 8, name: {first: 'Wilma', last: 'Williams'}, email: '<a href="#">wilma.williams@ex.com</a>', password: '323908jffwe'},
-            {id: 9, name: {first: 'Sasha', last: 'Silver'}, email: '<a href="#">sasha.silver@ex.com</a>', password: 's8884ijs3asdf2'},
-            {id: 10, name: {first: 'Don', last: 'Pérignon'}, email: '<a href="#">don.pérignon@ex.com</a>', password: 'e89293234434f'},
-            {id: 11, name: {first: 'Aaron', last: 'Kinley'}, email: '<a href="#">aaron.kinley@ex.com</a>', password: '12e3932asdw'}
+            {
+                id: 1,
+                name: {first: 'Joe', last: 'Fabiano'},
+                email: '<a href="#">joe.fabiano@ex.com</a>',
+                password: 'djeiryt812ewe'
+            },
+            {
+                id: 2,
+                name: {first: 'Fred', last: 'Wecler'},
+                email: '<a href="#">fred.wecler@ex.com</a>',
+                password: 'sdfw78273e2d'
+            },
+            {
+                id: 3,
+                name: {first: 'Steve', last: 'Wilson'},
+                email: '<a href="#">steve.wilson@ex.com</a>',
+                password: 'asdk3uasce'
+            },
+            {
+                id: 4,
+                name: {first: 'Maria', last: 'Fernandez'},
+                email: '<a href="#">m.fernandez@ex.com</a>',
+                password: '12438127we'
+            },
+            {
+                id: 5,
+                name: {first: 'Pierre', last: 'Barbault'},
+                email: '<a href="#">pierre.barbault@ex.com</a>',
+                password: 'aksdiuw3'
+            },
+            {
+                id: 6,
+                name: {first: 'Nancy', last: 'Moore'},
+                email: '<a href="#">nancy.moore@ex.com</a>',
+                password: '18894ksdf'
+            },
+            {
+                id: 7,
+                name: {first: 'Barbara', last: 'MacDonald'},
+                email: '<a href="#">b.macdonald@ex.com</a>',
+                password: 'asd9834r3e'
+            },
+            {
+                id: 8,
+                name: {first: 'Wilma', last: 'Williams'},
+                email: '<a href="#">wilma.williams@ex.com</a>',
+                password: '323908jffwe'
+            },
+            {
+                id: 9,
+                name: {first: 'Sasha', last: 'Silver'},
+                email: '<a href="#">sasha.silver@ex.com</a>',
+                password: 's8884ijs3asdf2'
+            },
+            {
+                id: 10,
+                name: {first: 'Don', last: 'Pérignon'},
+                email: '<a href="#">don.pérignon@ex.com</a>',
+                password: 'e89293234434f'
+            },
+            {
+                id: 11,
+                name: {first: 'Aaron', last: 'Kinley'},
+                email: '<a href="#">aaron.kinley@ex.com</a>',
+                password: '12e3932asdw'
+            }
         ];
 
-        // Define element  
+        // Define element
         var hot_password = document.getElementById('hot_password');
 
         // Initialize with options
@@ -249,7 +300,6 @@ var HotAutocompletePassword = function() {
                 {data: 'password', type: 'password', width: 50}
             ]
         });
-
 
 
         // Fixed hash length
@@ -271,7 +321,6 @@ var HotAutocompletePassword = function() {
                 {data: 'password', type: 'password', hashLength: 8, width: 50}
             ]
         });
-
 
 
         // Custom hash symbol
@@ -301,7 +350,7 @@ var HotAutocompletePassword = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentHotAutocompletePassword();
         }
     }
@@ -311,6 +360,6 @@ var HotAutocompletePassword = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     HotAutocompletePassword.init();
 });

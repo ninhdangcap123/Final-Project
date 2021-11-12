@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\SupportTeam;
 
 use App\Helpers\JsonHelper;
-use App\Helpers\Qs;
 use App\Helpers\RouteHelper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\MyCourse\CourseCreate;
 use App\Http\Requests\MyCourse\CourseUpdate;
 use App\Repositories\Classes\ClassesRepositoryInterface;
@@ -13,7 +13,6 @@ use App\Repositories\MyCourse\MyCourseRepositoryInterface;
 use App\Repositories\MyCourseRepo;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
-use App\Http\Controllers\Controller;
 
 class MyCourseController extends Controller
 {
@@ -27,8 +26,8 @@ class MyCourseController extends Controller
                                 ClassesRepositoryInterface  $classRepo,
                                 UserRepositoryInterface     $userRepo)
     {
-        $this->middleware('teamSA', ['except' => ['destroy',] ]);
-        $this->middleware('super_admin', ['only' => ['destroy',] ]);
+        $this->middleware('teamSA', [ 'except' => [ 'destroy', ] ]);
+        $this->middleware('super_admin', [ 'only' => [ 'destroy', ] ]);
         $this->myCourseRepo = $myCourseRepo;
         $this->userRepo = $userRepo;
         $this->majorRepo = $majorRepo;
@@ -50,10 +49,10 @@ class MyCourseController extends Controller
         // Create Default Classes
         $section =
             [
-            'my_course_id' => $myCourse->id,
-            'name' => 'A',
-            'active' => 1,
-            'teacher_id' => NULL,
+                'my_course_id' => $myCourse->id,
+                'name' => 'A',
+                'active' => 1,
+                'teacher_id' => NULL,
             ];
 
         $this->classRepo->create($section);
@@ -66,12 +65,12 @@ class MyCourseController extends Controller
         $data['course'] = $course = $this->myCourseRepo->find($id);
 
         return is_null($course) ? RouteHelper::goWithDanger('courses.index') :
-            view('pages.support_team.courses.edit', $data) ;
+            view('pages.support_team.courses.edit', $data);
     }
 
     public function update(CourseUpdate $request, $id)
     {
-        $data = $request->only(['name']);
+        $data = $request->only([ 'name' ]);
         $this->myCourseRepo->update($id, $data);
 
         return JsonHelper::jsonUpdateSuccess();

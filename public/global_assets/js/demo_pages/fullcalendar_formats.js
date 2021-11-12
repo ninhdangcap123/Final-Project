@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var FullCalendarFormats = function() {
+var FullCalendarFormats = function () {
 
 
     //
@@ -18,7 +18,7 @@ var FullCalendarFormats = function() {
     //
 
     // FullCalendar formats examples
-    var _componentFullCalendarFormats = function() {
+    var _componentFullCalendarFormats = function () {
         if (!$().fullCalendar) {
             console.warn('Warning - fullcalendar.min.js is not loaded.');
             return;
@@ -124,17 +124,17 @@ var FullCalendarFormats = function() {
         var initialLocaleCode = 'en';
 
         // Build the language selector's options
-        $.each($.fullCalendar.locales, function(localeCode) {
+        $.each($.fullCalendar.locales, function (localeCode) {
             $('#lang-selector').append(
                 $('<option/>')
-                .attr('value', localeCode)
-                .prop('selected', localeCode == initialLocaleCode)
-                .text(localeCode)
+                    .attr('value', localeCode)
+                    .prop('selected', localeCode == initialLocaleCode)
+                    .text(localeCode)
             );
         });
 
         // Re-render the calendar when the selected option changes
-        $('#lang-selector').on('change', function() {
+        $('#lang-selector').on('change', function () {
             if (this.value) {
                 $('.fullcalendar-languages').fullCalendar('option', 'locale', this.value);
             }
@@ -213,7 +213,7 @@ var FullCalendarFormats = function() {
     };
 
     // Select2 select
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -232,7 +232,7 @@ var FullCalendarFormats = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentFullCalendarFormats();
             _componentSelect2();
         }
@@ -243,6 +243,6 @@ var FullCalendarFormats = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     FullCalendarFormats.init();
 });

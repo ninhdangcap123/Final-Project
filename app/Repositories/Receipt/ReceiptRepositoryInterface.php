@@ -10,5 +10,4 @@ interface ReceiptRepositoryInterface extends RepositoryInterface
     public function getReceipt($data);
 
 
-
 }

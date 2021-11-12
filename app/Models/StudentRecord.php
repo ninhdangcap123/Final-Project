@@ -22,17 +22,17 @@ class StudentRecord extends Eloquent
 
     public function myParent()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function myCourse()
     {
-        return $this->belongsTo(MyCourse::class,'my_course_id');
+        return $this->belongsTo(MyCourse::class, 'my_course_id');
     }
 
     public function classes()
     {
-        return $this->belongsTo(Classes::class,'class_id');
+        return $this->belongsTo(Classes::class, 'class_id');
     }
 
     public function dorm()

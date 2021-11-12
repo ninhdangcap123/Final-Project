@@ -25,7 +25,7 @@
         // Remove top border if multiple tables
         .fixedHeader-floating + &,
         .fixedHeader-locked + & {
-            border-top: 0!important;
+            border-top: 0 !important;
         }
 
         // Hide on mobile

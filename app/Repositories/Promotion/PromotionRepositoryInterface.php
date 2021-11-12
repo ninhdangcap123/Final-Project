@@ -8,6 +8,7 @@ interface PromotionRepositoryInterface extends RepositoryInterface
 {
 
     public function getAll();
+
     public function getPromotions(array $where);
 
 }

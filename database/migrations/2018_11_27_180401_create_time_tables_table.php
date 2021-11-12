@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateTimeTablesTable extends Migration
 {
@@ -39,7 +39,6 @@ class CreateTimeTablesTable extends Migration
             $table->string('timestamp_to', 50)->nullable();
             $table->string('full', 100)->nullable();
             $table->timestamps();
-
 
 
         });

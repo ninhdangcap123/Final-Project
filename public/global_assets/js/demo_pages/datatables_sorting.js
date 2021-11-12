@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DatatableSorting = function() {
+var DatatableSorting = function () {
 
 
     //
@@ -18,26 +18,31 @@ var DatatableSorting = function() {
     //
 
     // Basic Datatable examples
-    var _componentDatatableSorting = function() {
+    var _componentDatatableSorting = function () {
         if (!$().DataTable) {
             console.warn('Warning - datatables.min.js is not loaded.');
             return;
         }
 
         // Setting datatable defaults
-        $.extend( $.fn.dataTable.defaults, {
+        $.extend($.fn.dataTable.defaults, {
             autoWidth: false,
-            columnDefs: [{ 
+            columnDefs: [{
                 orderable: false,
                 width: 100,
-                targets: [ 5 ]
+                targets: [5]
             }],
             dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
             language: {
                 search: '<span>Filter:</span> _INPUT_',
                 searchPlaceholder: 'Type to filter...',
                 lengthMenu: '<span>Show:</span> _MENU_',
-                paginate: { 'first': 'First', 'last': 'Last', 'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;', 'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;' }
+                paginate: {
+                    'first': 'First',
+                    'last': 'Last',
+                    'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;',
+                    'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;'
+                }
             }
         });
 
@@ -74,7 +79,7 @@ var DatatableSorting = function() {
 
 
         // Sequence control
-        $('.datatable-sequence-control').dataTable( {
+        $('.datatable-sequence-control').dataTable({
             "aoColumns": [
                 null,
                 null,
@@ -87,7 +92,7 @@ var DatatableSorting = function() {
     };
 
     // Select2 for length menu styling
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -107,7 +112,7 @@ var DatatableSorting = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentDatatableSorting();
             _componentSelect2();
         }
@@ -118,6 +123,6 @@ var DatatableSorting = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DatatableSorting.init();
 });

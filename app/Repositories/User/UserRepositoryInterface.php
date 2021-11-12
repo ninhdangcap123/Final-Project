@@ -10,6 +10,7 @@ interface UserRepositoryInterface extends RepositoryInterface
     public function getUserByType($type);
 
     public function getAll();
+
     public function getPTAUsers();
 
 }

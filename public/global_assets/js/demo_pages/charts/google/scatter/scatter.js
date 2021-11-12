@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleScatterBasic = function() {
+var GoogleScatterBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleScatterBasic = function() {
     //
 
     // Scatter chart
-    var _googleScatterBasic = function() {
+    var _googleScatterBasic = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleScatterBasic = function() {
 
                 // Resize on window resize
                 var resizeScatterBasic;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeScatterBasic);
                     resizeScatterBasic = setTimeout(function () {
                         drawScatter();
@@ -55,20 +55,20 @@ var GoogleScatterBasic = function() {
             // Data
             var data = google.visualization.arrayToDataTable([
                 ['Age', 'Weight'],
-                [ 8,      12],
-                [ 4,      6],
-                [ 11,     14],
-                [ 4,      5],
-                [ 3,      3.5],
-                [ 6.5,    7],
-                [ 7,    10],
-                [ 6.5,    12],
-                [ 6,    13],
-                [ 8,    16],
-                [ 12,    17],
-                [ 18,    8],
-                [ 18,    9],
-                [ 16,    12]
+                [8, 12],
+                [4, 6],
+                [11, 14],
+                [4, 5],
+                [3, 3.5],
+                [6.5, 7],
+                [7, 10],
+                [6.5, 12],
+                [6, 13],
+                [8, 16],
+                [12, 17],
+                [18, 8],
+                [18, 9],
+                [16, 12]
             ]);
 
             // Options
@@ -97,7 +97,7 @@ var GoogleScatterBasic = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
@@ -121,7 +121,7 @@ var GoogleScatterBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleScatterBasic();
         }
     }

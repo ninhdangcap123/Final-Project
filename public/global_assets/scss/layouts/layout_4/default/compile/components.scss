@@ -6,7 +6,6 @@
  *
  * ---------------------------------------------------------------------------- */
 
-
 // Core
 // ------------------------------
 
@@ -29,7 +28,6 @@
 // FOUC helpers
 @import "../../../../shared/utils/fouc";
 
-
 // Page loader
 // ------------------------------
 
@@ -38,7 +36,6 @@
 
 // Pace.js demo, remove in real project
 @import "../../../../shared/pace/pace-demo";
-
 
 // Forms
 // ------------------------------
@@ -52,13 +49,11 @@
 // BS switch
 @import "../../../../themes/default/components/forms/bootstrap-switch";
 
-
 // Select2
 @import "../../../../themes/default/components/forms/select2";
 
 // Multiselect
 @import "../../../../themes/default/components/forms/multiselect";
-
 
 // Passy
 @import "../../../../themes/default/components/forms/passy";
@@ -75,13 +70,11 @@
 // Alpaca
 @import "../../../../themes/default/components/forms/alpaca";
 
-
 // Tokenfield
 @import "../../../../themes/default/components/forms/tokenfield";
 
 // Tags input
 @import "../../../../themes/default/components/forms/tags-input";
-
 
 // Touchspin spinners
 @import "../../../../themes/default/components/forms/touchspin";
@@ -89,10 +82,8 @@
 // Dual listboxes
 @import "../../../../themes/default/components/forms/dual-listbox";
 
-
 // Wizard
 @import "../../../../themes/default/components/forms/wizard";
-
 
 // Text editors
 // ------------------------------
@@ -105,7 +96,6 @@
 
 // Ace
 @import "../../../../themes/default/components/forms/editors/ace";
-
 
 // Pickers
 // ------------------------------
@@ -128,7 +118,6 @@
 // Color picker
 @import "../../../../themes/default/components/pickers/spectrum";
 
-
 // File uploaders
 // ------------------------------
 
@@ -140,7 +129,6 @@
 
 // Dropzone
 @import "../../../../themes/default/components/forms/uploaders/dropzone";
-
 
 // Notifications
 // ------------------------------
@@ -157,7 +145,6 @@
 // Sweet Alerts
 @import "../../../../themes/default/components/notifications/sweet-alerts";
 
-
 // Sliders
 // ------------------------------
 
@@ -170,7 +157,6 @@
 // Ion range slider
 @import "../../../../themes/default/components/sliders/ion-range-slider";
 
-
 // jQuery UI components
 // ------------------------------
 
@@ -179,7 +165,6 @@
 
 // Widgets
 @import "../../../../themes/default/components/jquery_ui/widgets";
-
 
 // UI components
 // ------------------------------
@@ -202,7 +187,6 @@
 // Perfect scrollbar
 @import "../../../../themes/default/components/ui/perfect-scrollbar";
 
-
 // Misc components
 // ------------------------------
 
@@ -224,20 +208,17 @@
 // Lightbox plugin
 @import "../../../../themes/default/components/misc/fancybox";
 
-
 // Tables
 // ------------------------------
 
 // Footable - responsive table tools
 @import "../../../../themes/default/components/tables/footable";
 
-
 // Handsontable
 // ------------------------------
 
 // Handsontable - excel-like spreadsheet for apps
 @import "../../../../themes/default/components/tables/handsontable";
-
 
 // Datatables
 // ------------------------------
@@ -275,7 +256,6 @@
 // Datatables - responsive
 @import "../../../../themes/default/components/tables/datatables/datatable-responsive";
 
-
 // Maps
 // ------------------------------
 
@@ -284,7 +264,6 @@
 
 // jVectorMap
 @import "../../../../shared/maps/jvectormap";
-
 
 // Charts
 // ------------------------------
@@ -297,7 +276,6 @@
 
 // D3 chart library
 @import "../../../../shared/charts/d3";
-
 
 // Page kits
 // ------------------------------
@@ -328,7 +306,6 @@
 
 // Error page
 @import "../../../../shared/pages/error";
-
 
 // Other components
 // ------------------------------

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\GetUserTypeHelper;
-use App\Helpers\Qs;
 use App\Repositories\Classes\ClassesRepositoryInterface;
 use App\Repositories\LGA\LGARepositoryInterface;
 use App\Repositories\LocationRepo;
@@ -33,16 +32,16 @@ class AjaxController extends Controller
     public function getLga($state_id)
     {
         $lgas = $this->lga->getAllLGAs($state_id);
-        return $data = $lgas->map(function($q){
-            return ['id' => $q->id, 'name' => $q->name];
+        return $data = $lgas->map(function ($q) {
+            return [ 'id' => $q->id, 'name' => $q->name ];
         })->all();
     }
 
     public function getClassSections($class_id)
     {
         $classes = $this->classRepo->getCourseClasses($class_id);
-        return $sections = $classes->map(function($q){
-            return ['id' => $q->id, 'name' => $q->name];
+        return $sections = $classes->map(function ($q) {
+            return [ 'id' => $q->id, 'name' => $q->name ];
         })->all();
     }
 
@@ -51,15 +50,15 @@ class AjaxController extends Controller
         $classes = $this->classRepo->getCourseClasses($class_id);
         $subjects = $this->subjectRepo->findSubjectByCourse($class_id);
 
-        if(GetUserTypeHelper::userIsTeacher()){
+        if( GetUserTypeHelper::userIsTeacher() ) {
             $subjects = $this->subjectRepo->findSubjectByTeacher(Auth::user()->id)->where('my_class_id', $class_id);
         }
 
-        $data['classes'] = $classes->map(function($q){
-            return ['id' => $q->id, 'name' => $q->name];
+        $data['classes'] = $classes->map(function ($q) {
+            return [ 'id' => $q->id, 'name' => $q->name ];
         })->all();
-        $data['subjects'] = $subjects->map(function($q){
-            return ['id' => $q->id, 'name' => $q->name];
+        $data['subjects'] = $subjects->map(function ($q) {
+            return [ 'id' => $q->id, 'name' => $q->name ];
         })->all();
 
         return $data;

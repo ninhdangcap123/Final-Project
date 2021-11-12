@@ -70,6 +70,7 @@ The visual representation of a rich combo widget looks as follows:
         &:hover, &:focus {
             outline: none;
         }
+
         &:active {
             border-color: $gray-darker;
         }
@@ -96,6 +97,7 @@ The visual representation of a rich combo widget looks as follows:
     border-width: 3px;
     padding: 1px;
 }
+
 .cke_hc .cke_combo_off a.cke_combo_button {
     &:hover, &:focus, &:active {
         border-width: 3px;

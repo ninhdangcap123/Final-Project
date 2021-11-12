@@ -16,6 +16,7 @@
     td {
         vertical-align: middle;
     }
+
     th {
         font-weight: $font-weight-semibold;
     }
@@ -296,6 +297,7 @@
                 th:first-child {
                     border-top-left-radius: $card-inner-border-radius;
                 }
+
                 td:last-child,
                 th:last-child {
                     border-top-right-radius: $card-inner-border-radius;
@@ -303,6 +305,7 @@
             }
         }
     }
+
     // Add border bottom radius for last table
     > .table:last-child,
     > [class*=table-responsive]:last-child > .table:last-child {
@@ -318,6 +321,7 @@
                 th:first-child {
                     border-bottom-left-radius: $card-inner-border-radius;
                 }
+
                 td:last-child,
                 th:last-child {
                     border-bottom-right-radius: $card-inner-border-radius;
@@ -338,6 +342,7 @@
             td:first-child {
                 border-left: 0;
             }
+
             th:last-child,
             td:last-child {
                 border-right: 0;

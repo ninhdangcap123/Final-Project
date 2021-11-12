@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var HotContextMenu = function() {
+var HotContextMenu = function () {
 
 
     //
@@ -18,7 +18,7 @@ var HotContextMenu = function() {
     //
 
     // HOT context menu examples
-    var _componentHotContextMenu = function() {
+    var _componentHotContextMenu = function () {
         if (typeof Handsontable == 'undefined') {
             console.warn('Warning - handsontable.min.js is not loaded.');
             return;
@@ -90,7 +90,6 @@ var HotContextMenu = function() {
         });
 
 
-
         // Specific options
         // ------------------------------
 
@@ -135,7 +134,6 @@ var HotContextMenu = function() {
                 }
             ]
         });
-
 
 
         // Custom configuration
@@ -219,7 +217,6 @@ var HotContextMenu = function() {
         });
 
 
-
         // Copy-paste configuration
         // ------------------------------
 
@@ -264,13 +261,13 @@ var HotContextMenu = function() {
                     width: 50
                 }
             ],
-            afterCopy: function(changes) {
+            afterCopy: function (changes) {
                 clipboardCache = sheetclip.stringify(changes);
             },
-            afterCut: function(changes) {
+            afterCut: function (changes) {
                 clipboardCache = sheetclip.stringify(changes);
             },
-            afterPaste: function(changes) {
+            afterPaste: function (changes) {
                 clipboardCache = sheetclip.stringify(changes);
             },
             contextMenu: [
@@ -283,10 +280,10 @@ var HotContextMenu = function() {
                 {
                     key: 'paste',
                     name: 'Paste',
-                    disabled: function() {
+                    disabled: function () {
                         return clipboardCache.length === 0;
                     },
-                    callback: function() {
+                    callback: function () {
                         var plugin = this.getPlugin('copyPaste');
 
                         this.listen();
@@ -303,7 +300,7 @@ var HotContextMenu = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentHotContextMenu();
         }
     }
@@ -313,6 +310,6 @@ var HotContextMenu = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     HotContextMenu.init();
 });

@@ -44,10 +44,14 @@
                             <div class="alert alert-info border-0 alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
 
-                                <div class="text-center">  <span>A total of <strong>{{ $used_pins->count() }}</strong> pin(s) have been used and may no longer be valid </span>
+                                <div class="text-center"><span>A total of <strong>{{ $used_pins->count() }}</strong> pin(s) have been used and may no longer be valid </span>
 
-                                    <a id="used-pins" onclick="confirmDelete(this.id)" href="#" class="btn btn-danger btn-sm ml-2"><i class="icon-trash mr-1"></i> Delete ALL Used Pins</a>
-                                    <form method="post" id="item-delete-used-pins" action="{{ route('pins.destroy', 'used-pins') }}" class="hidden">@csrf @method('delete')</form>
+                                    <a id="used-pins" onclick="confirmDelete(this.id)" href="#"
+                                       class="btn btn-danger btn-sm ml-2"><i class="icon-trash mr-1"></i> Delete ALL
+                                                                                                          Used Pins</a>
+                                    <form method="post" id="item-delete-used-pins"
+                                          action="{{ route('pins.destroy', 'used-pins') }}"
+                                          class="hidden">@csrf @method('delete')</form>
 
                                 </div>
                             </div>
@@ -72,9 +76,13 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $up->code }}</td>
-                                        <td><a href="{{ $up->user->user_type == 'student' ? route('students.show', \App\Helpers\DisplayMessageHelper::hash(\App\Helpers\GetUsersHelper::getSRByUserID($up->user->id)->id)) : route('users.show', \App\Helpers\DisplayMessageHelper::hash($up->user->id)) }}">{{ $up->user->name }}</a></td>
+                                        <td>
+                                            <a href="{{ $up->user->user_type == 'student' ? route('students.show', \App\Helpers\DisplayMessageHelper::hash(\App\Helpers\GetUsersHelper::getSRByUserID($up->user->id)->id)) : route('users.show', \App\Helpers\DisplayMessageHelper::hash($up->user->id)) }}">{{ $up->user->name }}</a>
+                                        </td>
                                         <td>{{ $up->user->user_type }}</td>
-                                        <td><a href="{{ route('students.show', \App\Helpers\DisplayMessageHelper::hash(\App\Helpers\GetUsersHelper::getSRByUserID($up->student->id)->id))  }}">{{ $up->student->name }}</a></td>
+                                        <td>
+                                            <a href="{{ route('students.show', \App\Helpers\DisplayMessageHelper::hash(\App\Helpers\GetUsersHelper::getSRByUserID($up->student->id)->id))  }}">{{ $up->student->name }}</a>
+                                        </td>
                                         <td>{{ $up->updated_at }}</td>
                                     </tr>
                                 @endforeach

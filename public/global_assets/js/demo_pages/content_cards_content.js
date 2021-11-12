@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var CardsContent = function() {
+var CardsContent = function () {
 
 
     //
@@ -18,7 +18,7 @@ var CardsContent = function() {
     //
 
     // Lightbox
-    var _componentFancybox = function() {
+    var _componentFancybox = function () {
         if (!$().fancybox) {
             console.warn('Warning - fancybox.min.js is not loaded.');
             return;
@@ -36,7 +36,7 @@ var CardsContent = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentFancybox();
         }
     }
@@ -46,6 +46,6 @@ var CardsContent = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     CardsContent.init();
 });

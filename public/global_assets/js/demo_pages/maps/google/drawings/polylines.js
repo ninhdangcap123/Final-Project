@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleMapDrawingPolylines = function() {
+var GoogleMapDrawingPolylines = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleMapDrawingPolylines = function() {
     //
 
     // Line chart
-    var _googleMapDrawingPolylines = function() {
+    var _googleMapDrawingPolylines = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Maps library is not loaded.');
             return;
@@ -92,7 +92,7 @@ var GoogleMapDrawingPolylines = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleMapDrawingPolylines();
         }
     }
@@ -102,6 +102,6 @@ var GoogleMapDrawingPolylines = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     GoogleMapDrawingPolylines.init();
 });

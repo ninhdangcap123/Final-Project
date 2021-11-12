@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3ChainedTransitions = function() {
+var D3ChainedTransitions = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3ChainedTransitions = function() {
     //
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -31,7 +31,7 @@ var D3ChainedTransitions = function() {
     };
 
     // Chart
-    var _lineTransitions = function() {
+    var _lineTransitions = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -43,7 +43,7 @@ var D3ChainedTransitions = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -62,7 +62,6 @@ var D3ChainedTransitions = function() {
             parseDate = d3.time.format("%Y%m%d").parse;
 
 
-
             // Construct scales
             // ------------------------------
 
@@ -73,7 +72,6 @@ var D3ChainedTransitions = function() {
             // Vertical
             var y = d3.scale.linear()
                 .range([height, 0]);
-
 
 
             // Create axes
@@ -92,7 +90,6 @@ var D3ChainedTransitions = function() {
                 .orient("left");
 
 
-
             // Create chart
             // ------------------------------
 
@@ -104,8 +101,7 @@ var D3ChainedTransitions = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             // Construct chart layout
@@ -114,18 +110,21 @@ var D3ChainedTransitions = function() {
             // Line
             var line = d3.svg.line()
                 .interpolate("basis")
-                .x(function(d) { return x(d.date); })
-                .y(function(d) { return y(d[city]); });
-
+                .x(function (d) {
+                    return x(d.date);
+                })
+                .y(function (d) {
+                    return y(d[city]);
+                });
 
 
             // Load data
             // ------------------------------
-            
-            d3.tsv("../../../../global_assets/demo_data/d3/lines/lines_transitions.tsv", function(error, data) {
+
+            d3.tsv("../../../../global_assets/demo_data/d3/lines/lines_transitions.tsv", function (error, data) {
 
                 // Pull out values
-                data.forEach(function(d) {
+                data.forEach(function (d) {
                     d.date = parseDate(d.date);
                     d["New York"] = +d["New York"];
                     d["San Francisco"] = +d["San Francisco"];
@@ -139,7 +138,9 @@ var D3ChainedTransitions = function() {
                 x.domain([data[0].date, data[data.length - 1].date]);
 
                 // Vertical
-                y.domain(d3.extent(data, function(d) { return d[city]; }));
+                y.domain(d3.extent(data, function (d) {
+                    return d[city];
+                }));
 
 
                 //
@@ -196,7 +197,7 @@ var D3ChainedTransitions = function() {
                 d3.selectAll(".chained").on("change", change);
 
                 // Set timeout for auto change
-                var timeout = setTimeout(function() {
+                var timeout = setTimeout(function () {
                     d3.select("input[value=\"San Francisco\"]").property("checked", true).each(change);
                     $.uniform.update();
                 }, 3000);
@@ -212,7 +213,9 @@ var D3ChainedTransitions = function() {
                     t0.selectAll(".d3-city").attr("transform", transform).text(city);
 
                     // Then transition the y-axis.
-                    y.domain(d3.extent(data, function(d) { return d[city]; }));
+                    y.domain(d3.extent(data, function (d) {
+                        return d[city];
+                    }));
                     var t1 = t0.transition();
                     t1.selectAll(".d3-line").attr("d", line);
                     t1.selectAll(".d3-city").attr("transform", transform);
@@ -225,7 +228,6 @@ var D3ChainedTransitions = function() {
                 }
 
 
-
                 // Resize chart
                 // ------------------------------
 
@@ -236,9 +238,9 @@ var D3ChainedTransitions = function() {
                 $('.sidebar-control').on('click', resize);
 
                 // Resize function
-                // 
+                //
                 // Since D3 doesn't support SVG resize by default,
-                // we need to manually specify parts of the graph that need to 
+                // we need to manually specify parts of the graph that need to
                 // be updated on window resize
                 function resize() {
 
@@ -285,7 +287,7 @@ var D3ChainedTransitions = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentUniform();
             _lineTransitions();
         }
@@ -296,6 +298,6 @@ var D3ChainedTransitions = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3ChainedTransitions.init();
 });

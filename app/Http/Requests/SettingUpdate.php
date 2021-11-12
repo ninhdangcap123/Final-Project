@@ -32,7 +32,7 @@ class SettingUpdate extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
             'system_name' => 'School Name',
             'system_email' => 'School Email',
             'current_session' => 'Current Session',

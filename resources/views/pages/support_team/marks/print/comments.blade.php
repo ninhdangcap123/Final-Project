@@ -16,7 +16,9 @@
         </tr>
         <tr>
             <td><strong>NEXT TERM FEES:</strong></td>
-            <td><del style="text-decoration-style: double">N</del>{{ $s['next_term_fees_'.strtolower($major->code)] }}</td>
+            <td>
+                <del style="text-decoration-style: double">N</del>{{ $s['next_term_fees_'.strtolower($major->code)] }}
+            </td>
         </tr>
         </tbody>
     </table>

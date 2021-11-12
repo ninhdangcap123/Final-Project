@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3SplineTransition = function() {
+var D3SplineTransition = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3SplineTransition = function() {
     //
 
     // Chart
-    var _splineTransition = function() {
+    var _splineTransition = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3SplineTransition = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -61,7 +61,6 @@ var D3SplineTransition = function() {
                 .range([height, 0]);
 
 
-
             // Create axes
             // ------------------------------
 
@@ -76,7 +75,6 @@ var D3SplineTransition = function() {
                 .orient("left");
 
 
-
             // Create chart
             // ------------------------------
 
@@ -88,8 +86,7 @@ var D3SplineTransition = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             // Construct chart layout
@@ -98,9 +95,12 @@ var D3SplineTransition = function() {
             // Line
             var line = d3.svg.line()
                 .interpolate("basis")
-                .x(function(d, i) { return x(i); })
-                .y(function(d, i) { return y(d); });
-
+                .x(function (d, i) {
+                    return x(i);
+                })
+                .y(function (d, i) {
+                    return y(d);
+                });
 
 
             //
@@ -110,10 +110,10 @@ var D3SplineTransition = function() {
             // Add mask
             svg.append("defs")
                 .append("clipPath")
-                    .attr("id", "transition-clip")
-                    .append("rect")
-                        .attr("width", width)
-                        .attr("height", height);
+                .attr("id", "transition-clip")
+                .append("rect")
+                .attr("width", width)
+                .attr("height", height);
 
 
             // Append axes
@@ -135,10 +135,10 @@ var D3SplineTransition = function() {
             var path = svg.append("g")
                 .attr("clip-path", "url(#transition-clip)")
                 .append("path")
-                    .datum(data)
-                    .attr("d", line)
-                    .attr("class", "d3-line d3-line-medium")
-                    .style("stroke", "#607D8B");
+                .datum(data)
+                .attr("d", line)
+                .attr("class", "d3-line d3-line-medium")
+                .style("stroke", "#607D8B");
 
 
             // Transition
@@ -158,15 +158,14 @@ var D3SplineTransition = function() {
                     .attr("d", line)
                     .attr("transform", null)
                     .transition()
-                        .duration(500)
-                        .ease("linear")
-                        .attr("transform", "translate(" + x(0) + ",0)")
-                        .each("end", tick);
+                    .duration(500)
+                    .ease("linear")
+                    .attr("transform", "translate(" + x(0) + ",0)")
+                    .each("end", tick);
 
                 // pop the old data point off the front
                 data.shift();
             }
-
 
 
             // Resize chart
@@ -179,9 +178,9 @@ var D3SplineTransition = function() {
             $('.sidebar-control').on('click', resize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resize() {
 
@@ -227,7 +226,7 @@ var D3SplineTransition = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _splineTransition();
         }
     }
@@ -237,6 +236,6 @@ var D3SplineTransition = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3SplineTransition.init();
 });

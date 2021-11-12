@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3VennColors = function() {
+var D3VennColors = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3VennColors = function() {
     //
 
     // Chart
-    var _vennColors = function() {
+    var _vennColors = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var D3VennColors = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Data set
             // ------------------------------
@@ -44,17 +44,17 @@ var D3VennColors = function() {
 
             // Overlaps
             var overlaps = [
-                {sets: [0,1], size: 1},
-                {sets: [0,2], size: 1},
-                {sets: [0,3], size: 14},
-                {sets: [1,2], size: 6},
-                {sets: [1,3], size: 0},
-                {sets: [2,3], size: 1},
-                {sets: [0,2,3], size: 1},
-                {sets: [0,1,2], size: 0},
-                {sets: [0,1,3], size: 0},
-                {sets: [1,2,3], size: 0},
-                {sets: [0,1,2,3], size: 0}
+                {sets: [0, 1], size: 1},
+                {sets: [0, 2], size: 1},
+                {sets: [0, 3], size: 14},
+                {sets: [1, 2], size: 6},
+                {sets: [1, 3], size: 0},
+                {sets: [2, 3], size: 1},
+                {sets: [0, 2, 3], size: 1},
+                {sets: [0, 1, 2], size: 0},
+                {sets: [0, 1, 3], size: 0},
+                {sets: [1, 2, 3], size: 0},
+                {sets: [0, 1, 2, 3], size: 0}
             ];
 
 
@@ -73,8 +73,12 @@ var D3VennColors = function() {
             diagram.circles
                 .style("fill-opacity", .7)
                 .style("stroke-opacity", 0)
-                .style("fill", function(d,i) { return colours(i); })
-                .style("stroke", function(d,i) { return colours(i); });
+                .style("fill", function (d, i) {
+                    return colours(i);
+                })
+                .style("stroke", function (d, i) {
+                    return colours(i);
+                });
 
 
             // Style text
@@ -90,7 +94,7 @@ var D3VennColors = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _vennColors();
         }
     }
@@ -100,6 +104,6 @@ var D3VennColors = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3VennColors.init();
 });

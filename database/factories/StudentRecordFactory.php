@@ -3,9 +3,8 @@
 namespace Database\Factories;
 
 use App\Helpers\GetSystemInfoHelper;
-use App\Helpers\Qs;
-use App\Models\MyCourse;
 use App\Models\Classes;
+use App\Models\MyCourse;
 use App\Models\StudentRecord;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

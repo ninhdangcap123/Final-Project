@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleBubbleMatrix = function() {
+var DimpleBubbleMatrix = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleBubbleMatrix = function() {
     //
 
     // Chart
-    var _bubbleMatrix = function() {
+    var _bubbleMatrix = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleBubbleMatrix = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -76,8 +76,8 @@ var DimpleBubbleMatrix = function() {
 
                 // Add bubbles
                 var s = myChart.addSeries("Price Tier", dimple.plot.bubble);
-                    s.aggregate = dimple.aggregateMethod.max;
-                    z.overrideMax = 200;
+                s.aggregate = dimple.aggregateMethod.max;
+                z.overrideMax = 200;
 
 
                 // Add legend
@@ -139,7 +139,7 @@ var DimpleBubbleMatrix = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _bubbleMatrix();
         }
     }
@@ -149,6 +149,6 @@ var DimpleBubbleMatrix = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleBubbleMatrix.init();
 });

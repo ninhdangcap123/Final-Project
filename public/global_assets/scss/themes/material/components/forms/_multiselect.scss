@@ -54,7 +54,7 @@
         &:not([class*=font-weight-]) {
             font-weight: $multiselect-font-weight;
         }
-        
+
         // Default button overrides
         &.btn-light {
             background-color: $input-bg;
@@ -71,6 +71,7 @@
                 background-color: $input-bg;
                 border-top-color: transparent;
             }
+
             &:focus,
             &:not([disabled]):not(.disabled):active,
             .btn-group.show & {
@@ -251,8 +252,7 @@
                 input[type=radio] ~ .form-check-control-indicator {
                     border-color: $white;
                 }
-            }
-            @else {
+            } @else {
                 input[type=checkbox] ~ .form-check-control-indicator {
                     border-color: $checkbox-color;
                     color: $checkbox-color;

@@ -13,7 +13,7 @@
     .layout-boxed-bg {
         background: $boxed-bg; // mainly for demo, use whatever you want
     }
-    
+
     // Boxed layout base
     .layout-boxed {
         @include box-shadow($boxed-container-box-shadow);
@@ -50,6 +50,7 @@
                 > *:first-child {
                     margin-left: 6%;
                 }
+
                 > *:last-child {
                     margin-right: 6%;
                 }
@@ -60,6 +61,7 @@
                 > *:first-child {
                     margin-left: $content-container-padding-x;
                 }
+
                 > *:last-child {
                     margin-right: $content-container-padding-x;
                 }

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\SuperAdmin;
 
 use App\Helpers\GetPathHelper;
-use App\Helpers\Qs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingUpdate;
 use App\Repositories\Major\MajorRepositoryInterface;
 use App\Repositories\MyCourseRepo;
-use App\Repositories\Setting\SettingRepository;
 use App\Repositories\Setting\SettingRepositoryInterface;
 use App\Repositories\SettingRepo;
 
@@ -26,10 +24,10 @@ class SettingController extends Controller
 
     public function index()
     {
-         $setting = $this->settingRepo->getAll();
-         $data['majors'] = $this->majorRepo->getAll();
-         $data['s'] = $setting->flatMap(function($s){
-            return [$s->type => $s->description];
+        $setting = $this->settingRepo->getAll();
+        $data['majors'] = $this->majorRepo->getAll();
+        $data['s'] = $setting->flatMap(function ($s) {
+            return [ $s->type => $s->description ];
         });
         return view('pages.super_admin.settings', $data);
     }
@@ -40,16 +38,16 @@ class SettingController extends Controller
         $settings['lock_exam'] = $settings['lock_exam'] == 1 ? 1 : 0;
         $keys = array_keys($settings);
         $values = array_values($settings);
-        for($i=0; $i<count($settings); $i++){
+        for( $i = 0; $i < count($settings); $i++ ) {
             $this->settingRepo->update($keys[$i], $values[$i]);
         }
 
-        if($request->hasFile('logo')) {
+        if( $request->hasFile('logo') ) {
             $logo = $request->file('logo');
             $file = GetPathHelper::getFileMetaData($logo);
-            $file['name'] = 'logo.' . $file['ext'];
+            $file['name'] = 'logo.'.$file['ext'];
             $file['path'] = $logo->storeAs(GetPathHelper::getPublicUploadPath(), $file['name']);
-            $logo_path = asset('storage/' . $file['path']);
+            $logo_path = asset('storage/'.$file['path']);
             $this->settingRepo->update('logo', $logo_path);
 
         }

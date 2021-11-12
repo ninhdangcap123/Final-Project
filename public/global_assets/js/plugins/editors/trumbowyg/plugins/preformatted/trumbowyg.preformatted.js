@@ -46,8 +46,7 @@
                                     var curtag = getSelectionParentElement().tagName.toLowerCase();
                                     if (curtag === 'code' || curtag === 'pre') {
                                         return unwrapCode();
-                                    }
-                                    else {
+                                    } else {
                                         trumbowyg.execCmd('insertHTML', '<pre><code>' + strip(text) + '</code></pre>');
                                     }
                                 } catch (e) {

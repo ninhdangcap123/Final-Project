@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Helpers\CheckUsersHelper;
 use App\Helpers\GetSystemInfoHelper;
-use App\Helpers\Qs;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
 
 class HomeController extends Controller
 {
     protected $userRepo;
+
     public function __construct(UserRepositoryInterface $userRepo)
     {
         $this->userRepo = $userRepo;
@@ -39,8 +39,8 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        $data=[];
-        if(CheckUsersHelper::userIsTeamSAT()){
+        $data = [];
+        if( CheckUsersHelper::userIsTeamSAT() ) {
             $data['users'] = $this->userRepo->getAll();
         }
 

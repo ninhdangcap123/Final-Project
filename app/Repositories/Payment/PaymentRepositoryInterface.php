@@ -8,10 +8,12 @@ interface PaymentRepositoryInterface extends RepositoryInterface
 {
 
     public function getPayment($data);
-    public function getGeneralPayment($data);
-    public function getActivePayments();
-    public function getPaymentYears();
 
+    public function getGeneralPayment($data);
+
+    public function getActivePayments();
+
+    public function getPaymentYears();
 
 
 }

@@ -2,7 +2,7 @@
     <table border="0" cellpadding="5" cellspacing="5" style="text-align: center; margin: 0 auto;">
         <tr>
             <td><strong>KEY TO THE GRADING</strong></td>
-{{--            {{dd($major->id)}}--}}
+            {{--            {{dd($major->id)}}--}}
             @if(\App\Helpers\PrintMarkSheetHelper::getGradeList($major->id)->count())
                 @foreach(\App\Helpers\PrintMarkSheetHelper::getGradeList($major->id) as $gr)
                     <td><strong>{{ $gr->name }}</strong>
@@ -24,7 +24,8 @@
         <td><strong>Credits:</strong> {{ \App\Helpers\PrintMarkSheetHelper::countCredits($marks) }}</td>
         <td><strong>Passes:</strong> {{ \App\Helpers\PrintMarkSheetHelper::countPasses($marks) }}</td>
         <td><strong>Failures:</strong> {{ \App\Helpers\PrintMarkSheetHelper::countFailures($marks) }}</td>
-        <td><strong>Subjects Offered:</strong> {{ \App\Helpers\PrintMarkSheetHelper::countSubjectsOffered($marks) }}</td>
+        <td><strong>Subjects Offered:</strong> {{ \App\Helpers\PrintMarkSheetHelper::countSubjectsOffered($marks) }}
+        </td>
     </tr>
 
     </tbody>

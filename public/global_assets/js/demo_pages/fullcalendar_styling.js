@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var FullCalendarStyling = function() {
+var FullCalendarStyling = function () {
 
 
     //
@@ -18,7 +18,7 @@ var FullCalendarStyling = function() {
     //
 
     // External events
-    var _componentFullCalendarStyling = function() {
+    var _componentFullCalendarStyling = function () {
         if (!$().fullCalendar) {
             console.warn('Warning - fullcalendar.min.js is not loaded.');
             return;
@@ -258,9 +258,9 @@ var FullCalendarStyling = function() {
                 right: 'listDay,listWeek,listMonth'
             },
             views: {
-                listDay: { buttonText: 'Day' },
-                listWeek: { buttonText: 'Week' },
-                listMonth: { buttonText: 'Month' }
+                listDay: {buttonText: 'Day'},
+                listWeek: {buttonText: 'Week'},
+                listMonth: {buttonText: 'Month'}
             },
             defaultView: 'listMonth',
             defaultDate: '2014-11-12',
@@ -304,7 +304,7 @@ var FullCalendarStyling = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentFullCalendarStyling();
         }
     }
@@ -314,6 +314,6 @@ var FullCalendarStyling = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     FullCalendarStyling.init();
 });

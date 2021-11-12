@@ -97,7 +97,6 @@
     }
 
 
-
     // Tooltip
     // ------------------------------
 
@@ -135,6 +134,7 @@
             border-width: $tooltip-arrow-height $tooltip-arrow-height 0;
             border-top-color: $tooltip-arrow-color;
         }
+
         &.e .d3-tip-arrow {
             top: 50%;
             margin-top: -$tooltip-arrow-height;
@@ -144,6 +144,7 @@
             border-right-color: $tooltip-arrow-color;
             /*rtl:end:ignore*/
         }
+
         &.w .d3-tip-arrow {
             top: 50%;
             margin-top: -$tooltip-arrow-height;
@@ -153,6 +154,7 @@
             border-left-color: $tooltip-arrow-color;
             /*rtl:end:ignore*/
         }
+
         &.s .d3-tip-arrow {
             top: 0;
             left: 50%;
@@ -178,7 +180,6 @@
         display: none;
         @include border-radius($tooltip-border-radius);
     }
-
 
 
     // Chart types
@@ -227,7 +228,6 @@
     }
 
 
-
     // Grid
     // ------------------------------
 
@@ -251,7 +251,7 @@
     // Dashed grid
     .d3-grid-dashed {
         .tick {
-            stroke-dasharray: 4,2;
+            stroke-dasharray: 4, 2;
             stroke-width: 1px;
             stroke: $gray-300;
             shape-rendering: crispEdges;
@@ -263,7 +263,6 @@
     }
 
 
-
     // Components
     // ------------------------------
 
@@ -272,7 +271,6 @@
         fill: none;
         pointer-events: all;
     }
-
 
 
     // Bullets
@@ -404,7 +402,6 @@
     }
 
 
-
     // Progress counter icon. Styles moved to
     // CSS, because IE9 drove me crazy...
     // ------------------------------
@@ -425,7 +422,7 @@
         padding: 0;
         font-size: $font-size-sm;
         text-align: center;
-        
+
         li {
             margin: 0.3125rem 0.625rem 0;
             padding: 0.4375rem 0.5rem 0.3125rem;

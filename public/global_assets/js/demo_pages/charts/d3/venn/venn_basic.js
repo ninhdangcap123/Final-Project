@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3VennBasic = function() {
+var D3VennBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3VennBasic = function() {
     //
 
     // Chart
-    var _vennBasic = function() {
+    var _vennBasic = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var D3VennBasic = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Data set
             // ------------------------------
@@ -44,17 +44,17 @@ var D3VennBasic = function() {
 
             // Overlaps
             var overlaps = [
-                {sets: [0,1], size: 1},
-                {sets: [0,2], size: 1},
-                {sets: [0,3], size: 14},
-                {sets: [1,2], size: 6},
-                {sets: [1,3], size: 0},
-                {sets: [2,3], size: 1},
-                {sets: [0,2,3], size: 1},
-                {sets: [0,1,2], size: 0},
-                {sets: [0,1,3], size: 0},
-                {sets: [1,2,3], size: 0},
-                {sets: [0,1,2,3], size: 0}
+                {sets: [0, 1], size: 1},
+                {sets: [0, 2], size: 1},
+                {sets: [0, 3], size: 14},
+                {sets: [1, 2], size: 6},
+                {sets: [1, 3], size: 0},
+                {sets: [2, 3], size: 1},
+                {sets: [0, 2, 3], size: 1},
+                {sets: [0, 1, 2], size: 0},
+                {sets: [0, 1, 3], size: 0},
+                {sets: [1, 2, 3], size: 0},
+                {sets: [0, 1, 2, 3], size: 0}
             ];
 
 
@@ -76,7 +76,7 @@ var D3VennBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _vennBasic();
         }
     }
@@ -86,6 +86,6 @@ var D3VennBasic = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3VennBasic.init();
 });
