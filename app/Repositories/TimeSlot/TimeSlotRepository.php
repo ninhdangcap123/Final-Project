@@ -36,7 +36,8 @@ class TimeSlotRepository extends BaseRepository implements TimeSlotRepositoryInt
     public function getDistinctTTR($remove_ttr = NULL)
     {
         // TODO: Implement getDistinctTTR() method.
-        return $remove_ttr ? $this->model->where('ttr_id', '<>', $remove_ttr)->distinct()->select('ttr_id')->pluck('ttr_id') : $this->model->distinct()->select('ttr_id')->pluck('ttr_id');
+        return $remove_ttr ? $this->model->where('ttr_id', '<>', $remove_ttr)
+            ->distinct()->select('ttr_id')->pluck('ttr_id') : $this->model->distinct()->select('ttr_id')->pluck('ttr_id');
     }
 
     public function getTTRByIDs($ids)

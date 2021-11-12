@@ -17,8 +17,10 @@ class SkillRepository extends BaseRepository implements SkillRepositoryInterface
     {
         // TODO: Implement getSkillByMajor() method.
         return ( $skill_type )
-            ? $this->getSkill([ 'major' => $major, 'skill_type' => $skill_type ])
-            : $this->getSkill([ 'major' => $major ]);
+            ? $this->getSkill([
+                'major' => $major,
+                'skill_type' => $skill_type
+            ]) : $this->getSkill([ 'major' => $major ]);
     }
 
     public function getSkill($where)

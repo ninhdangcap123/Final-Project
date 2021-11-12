@@ -14,39 +14,39 @@ class CheckExamInfoHelper
     }
 
     /*Get Exam Avg Per Term*/
-    public static function getTermAverage($st_id, $term, $year)
+    public static function getTermAverage($student_id, $term, $year)
     {
         $exam = self::getExamByTerm($term, $year);
-        $d = [ 'exam_id' => $exam->id, 'student_id' => $st_id, 'year' => $year ];
+        $data = [ 'exam_id' => $exam->id, 'student_id' => $student_id, 'year' => $year ];
 
         if( $term < 3 ) {
-            $exr = ExamRecord::where($d);
-            $avg = $exr->first()->ave ?: NULL;
-            return $avg > 0 ? round($avg, 1) : $avg;
+            $examRecord = ExamRecord::where($data);
+            $average = $examRecord->first()->ave ?: NULL;
+            return $average > 0 ? round($average, 1) : $average;
         }
 
-        $mk = Mark::where($d)->whereNotNull('tex3');
-        $avg = $mk->select('tex3')->avg('tex3');
-        return round($avg, 1);
+        $mark = Mark::where($data)->whereNotNull('tex3');
+        $average = $mark->select('tex3')->avg('tex3');
+        return round($average, 1);
     }
 
     public static function getExamByTerm($term, $year)
     {
-        $d = [ 'term' => $term, 'year' => $year ];
-        return Exam::where($d)->first();
+        $data = [ 'term' => $term, 'year' => $year ];
+        return Exam::where($data)->first();
     }
 
-    public static function getTermTotal($st_id, $term, $year)
+    public static function getTermTotal($student_id, $term, $year)
     {
         $exam = self::getExamByTerm($term, $year);
-        $d = [ 'exam_id' => $exam->id, 'student_id' => $st_id, 'year' => $year ];
+        $data = [ 'exam_id' => $exam->id, 'student_id' => $student_id, 'year' => $year ];
 
         if( $term < 3 ) {
-            return ExamRecord::where($d)->first()->total ?? NULL;
+            return ExamRecord::where($data)->first()->total ?? NULL;
         }
 
-        $mk = Mark::where($d)->whereNotNull('tex3');
-        return $mk->select('tex3')->sum('tex3');
+        $mark = Mark::where($data)->whereNotNull('tex3');
+        return $mark->select('tex3')->sum('tex3');
     }
 
 

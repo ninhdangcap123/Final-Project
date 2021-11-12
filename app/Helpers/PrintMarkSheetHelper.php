@@ -27,13 +27,13 @@ class PrintMarkSheetHelper
             return $number.'<sup>'.$ends[$number % 10].'</sup>';
     }
 
-    public static function getSubTotalTerm($st_id, $sub_id, $term, $my_course_id, $year)
+    public static function getSubTotalTerm($student_id, $subject_id, $term, $my_course_id, $year)
     {
-        $d = [ 'student_id' => $st_id, 'subject_id' => $sub_id, 'my_course_id' => $my_course_id, 'year' => $year ];
+        $data = [ 'student_id' => $student_id, 'subject_id' => $subject_id, 'my_course_id' => $my_course_id, 'year' => $year ];
 
         $tex = 'tex'.$term;
-        $sub_total = Mark::where($d)->select($tex)->get()->where($tex, '>', 0);
-        return $sub_total->count() > 0 ? $sub_total->first()->$tex : '-';
+        $subjectTotal = Mark::where($data)->select($tex)->get()->where($tex, '>', 0);
+        return $subjectTotal->count() > 0 ? $subjectTotal->first()->$tex : '-';
     }
 
     public static function getGradeList($major_id)
@@ -46,15 +46,15 @@ class PrintMarkSheetHelper
         return $grades;
     }
 
-    public static function deleteOldRecord($st_id, $my_course_id)
+    public static function deleteOldRecord($student_id, $my_course_id)
     {
-        $d = [ 'student_id' => $st_id, 'year' => self::getCurrentSession() ];
+        $data = [ 'student_id' => $student_id, 'year' => self::getCurrentSession() ];
 
-        $marks = Mark::where('my_course_id', '<>', $my_course_id)->where($d);
+        $marks = Mark::where('my_course_id', '<>', $my_course_id)->where($data);
         if( $marks->get()->count() > 0 ) {
-            $exr = ExamRecord::where('my_course_id', '<>', $my_course_id)->where($d);
+            $examRecord = ExamRecord::where('my_course_id', '<>', $my_course_id)->where($data);
             $marks->delete();
-            $exr->delete();
+            $examRecord->delete();
         }
         return true;
     }
@@ -92,8 +92,8 @@ class PrintMarkSheetHelper
 
     public static function countStudents($exam_id, $my_course_id, $class_id, $year)
     {
-        $d = [ 'exam_id' => $exam_id, 'my_course_id' => $my_course_id, 'class_id' => $class_id, 'year' => $year ];
-        return Mark::where($d)->select('student_id')->distinct()->get()->count();
+        $data = [ 'exam_id' => $exam_id, 'my_course_id' => $my_course_id, 'class_id' => $class_id, 'year' => $year ];
+        return Mark::where($data)->select('student_id')->distinct()->get()->count();
     }
 
     public static function countSubjectsOffered(Collection $mark)

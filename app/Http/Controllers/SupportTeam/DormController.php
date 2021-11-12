@@ -44,7 +44,7 @@ class DormController extends Controller
 
     public function update(DormUpdate $request, $id)
     {
-        $data = $request->only([ 'name', 'description' ]);
+        $data = $request->validated();
         $this->dormRepo->update($id, $data);
         return JsonHelper::jsonUpdateSuccess();
     }

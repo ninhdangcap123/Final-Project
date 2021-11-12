@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SupportTeam;
 use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\JsonHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TimeSlot;
 use App\Http\Requests\TimeTable\TSRequest;
 use App\Http\Requests\TimeTable\TTRecordRequest;
 use App\Http\Requests\TimeTable\TTRequest;
@@ -127,9 +128,9 @@ class TimeTableController extends Controller
         return JsonHelper::jsonStoreSuccess();
     }
 
-    public function useTimeSlot(Request $request, $ttr_id)
+    public function useTimeSlot(TimeSlot $request, $ttr_id)
     {
-        $this->validate($request, [ 'ttr_id' => 'required' ], [], [ 'ttr_id' => 'TimeTable Record' ]);
+        $timeSlot = $request->validated();
 
         $data = [];  //  Empty Current Time Slot Before Adding New
         $this->timeSlotRepo->deleteTimeSlotByIDs([ 'ttr_id' => $ttr_id ]);
@@ -191,7 +192,6 @@ class TimeTableController extends Controller
         $data['ttr'] = $timeTableRecord = $this->timeTableRecordRepo->find($ttr_id);
         $data['ttr_id'] = $ttr_id;
         $data['my_course'] = $this->myCourseRepo->find($timeTableRecord->my_course_id);
-
         $data['time_slots'] = $timeSlots = $this->timeTableRepo->getTimeSlotByTTR($ttr_id);
         $data['tts'] = $timeTables = $this->timeTableRepo->getTimeTable([ 'ttr_id' => $ttr_id ]);
 
@@ -207,7 +207,12 @@ class TimeTableController extends Controller
 
         foreach( $days as $day ) {
             foreach( $timeSlots as $timeSlot ) {
-                $dayTime[] = [ 'day' => $day, 'time' => $timeSlot->full, 'subject' => $timeTables->where('ts_id', $timeSlot->id)->where($examDate, $day)->first()->subject->name ?? NULL ];
+                $dayTime[] = [
+                    'day' => $day,
+                    'time' => $timeSlot->full,
+                    'subject' => $timeTables->where('ts_id', $timeSlot->id)->where($examDate, $day)->first()->subject->name
+                        ?? NULL
+                ];
             }
         }
         $data['d_time'] = collect($dayTime);
@@ -237,7 +242,12 @@ class TimeTableController extends Controller
 
         foreach( $days as $day ) {
             foreach( $timeSlots as $timeSlot ) {
-                $dayTime[] = [ 'day' => $day, 'time' => $timeSlot->full, 'subject' => $timeTables->where('ts_id', $timeSlot->id)->where($examDate, $day)->first()->subject->name ?? NULL ];
+                $dayTime[] = [
+                    'day' => $day,
+                    'time' => $timeSlot->full,
+                    'subject' => $timeTables->where('ts_id', $timeSlot->id)->where($examDate, $day)->first()->subject->name
+                        ?? NULL
+                ];
             }
         }
 

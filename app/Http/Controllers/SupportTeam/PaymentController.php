@@ -9,6 +9,8 @@ use App\Helpers\RouteHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\PaymentCreate;
 use App\Http\Requests\Payment\PaymentUpdate;
+use App\Http\Requests\PaymentNow;
+use App\Http\Requests\PaymentSelectClass;
 use App\Models\Setting;
 use App\Repositories\MyCourse\MyCourseRepositoryInterface;
 use App\Repositories\MyCourseRepo;
@@ -145,12 +147,9 @@ class PaymentController extends Controller
         //return $this->downloadReceipt('pages.support_team.payments.receipt', $d, $pdf_name);
     }
 
-    public function payNow(Request $request, $pr_id)
+    public function payNow(PaymentNow $request, $pr_id)
     {
-        $this->validate($request, [
-            'amt_paid' => 'required|numeric'
-        ], [], [ 'amt_paid' => 'Amount Paid' ]);
-
+        $data = $request->validated();
         $paymentRecord = $this->paymentRecordRepo->find($pr_id);
         $payment = $this->paymentRepo->find($paymentRecord->payment_id);
         $data['amt_paid'] = $amount = $paymentRecord->amt_paid + $request->amt_paid;
@@ -184,18 +183,19 @@ class PaymentController extends Controller
         return view('pages.support_team.payments.manage', $data);
     }
 
-    public function selectClass(Request $request)
+    public function selectClass(PaymentSelectClass $request)
     {
-        $this->validate($request, [
-            'my_course_id' => 'required'
-        ], [], [ 'my_course_id' => 'Course' ]);
+        $where = $request->validated();
 
-        $wh['my_course_id'] = $course_id = $request->my_course_id;
+        $where['my_course_id'] = $course_id = $request->my_course_id;
 
-        $payment1 = $this->paymentRepo->getPayment([ 'my_course_id' => $course_id, 'year' => $this->year ])->get();
+        $payment1 = $this->paymentRepo->getPayment([
+            'my_course_id' => $course_id,
+            'year' => $this->year
+        ])->get();
         $payment2 = $this->paymentRepo->getGeneralPayment([ 'year' => $this->year ])->get();
         $payments = $payment2->count() ? $payment1->merge($payment2) : $payment1;
-        $students = $this->studentRepo->getRecord($wh)->get();
+        $students = $this->studentRepo->getRecord($where)->get();
 
         if( $payments->count() && $students->count() ) {
             foreach( $payments as $payment ) {

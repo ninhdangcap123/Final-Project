@@ -33,7 +33,10 @@ class AjaxController extends Controller
     {
         $lgas = $this->lga->getAllLGAs($state_id);
         return $data = $lgas->map(function ($q) {
-            return [ 'id' => $q->id, 'name' => $q->name ];
+            return [
+                'id' => $q->id,
+                'name' => $q->name
+            ];
         })->all();
     }
 
@@ -55,10 +58,17 @@ class AjaxController extends Controller
         }
 
         $data['classes'] = $classes->map(function ($q) {
-            return [ 'id' => $q->id, 'name' => $q->name ];
+            return [
+                'id' => $q->id,
+                'name' => $q->name
+            ];
         })->all();
+
         $data['subjects'] = $subjects->map(function ($q) {
-            return [ 'id' => $q->id, 'name' => $q->name ];
+            return [
+                'id' => $q->id,
+                'name' => $q->name
+            ];
         })->all();
 
         return $data;

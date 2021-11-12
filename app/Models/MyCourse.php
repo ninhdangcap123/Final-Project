@@ -6,7 +6,10 @@ use Eloquent;
 
 class MyCourse extends Eloquent
 {
-    protected $fillable = [ 'name', 'major_id' ];
+    protected $fillable = [
+        'name',
+        'major_id'
+    ];
 
     public function classes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

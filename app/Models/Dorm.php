@@ -6,5 +6,8 @@ use Eloquent;
 
 class Dorm extends Eloquent
 {
-    protected $fillable = [ 'name', 'description' ];
+    protected $fillable = [
+        'name',
+        'description'
+    ];
 }

@@ -27,12 +27,6 @@ class StudentRepository extends BaseRepository implements StudentRepositoryInter
 
     }
 
-    public function update($id, $attribute)
-    {
-        // TODO: Implement update() method.
-        return $this->model->where($id)->update($attribute);
-    }
-
     public function getAllDorms()
     {
         // TODO: Implement getAllDorms() method.
@@ -54,7 +48,11 @@ class StudentRepository extends BaseRepository implements StudentRepositoryInter
     public function allGradStudents()
     {
         // TODO: Implement allGradStudents() method.
-        return $this->gradStudents()->with([ 'myCourse', 'classes', 'user' ])->get()->sortBy('user.name');
+        return $this->gradStudents()->with([
+            'myCourse',
+            'classes',
+            'user'
+        ])->get()->sortBy('user.name');
     }
 
     public function gradStudents()

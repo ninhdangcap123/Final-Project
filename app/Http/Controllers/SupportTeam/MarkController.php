@@ -17,6 +17,7 @@ use App\Repositories\Classes\ClassesRepositoryInterface;
 use App\Repositories\Exam\ExamRepositoryInterface;
 use App\Repositories\ExamRecord\ExamRecordRepositoryInterface;
 use App\Repositories\ExamRepo;
+use App\Repositories\Grade\GradeRepositoryInterface;
 use App\Repositories\Major\MajorRepositoryInterface;
 use App\Repositories\Mark\MarkRepositoryInterface;
 use App\Repositories\MarkRepo;
@@ -43,6 +44,7 @@ class MarkController extends Controller
     protected $markRepo;
     protected $subjectRepo;
     protected $majorRepo;
+    protected $gradeRepo;
 
     public function __construct(ExamRecordRepositoryInterface $examRecordRepo,
                                 SkillRepositoryInterface      $skillRepo,
@@ -52,10 +54,12 @@ class MarkController extends Controller
                                 ExamRepositoryInterface       $examRepo,
                                 StudentRepositoryInterface    $studentRepo,
                                 MarkRepositoryInterface       $markRepo,
-                                MajorRepositoryInterface      $majorRepo)
+                                MajorRepositoryInterface      $majorRepo,
+                                GradeRepositoryInterface      $gradeRepo)
     {
         $this->examRepo = $examRepo;
         $this->markRepo = $markRepo;
+        $this->gradeRepo = $gradeRepo;
         $this->subjectRepo = $subjectRepo;
         $this->studentRepo = $studentRepo;
         $this->myCourseRepo = $myCourseRepo;
@@ -131,9 +135,12 @@ class MarkController extends Controller
             return $this->noStudentRecord();
         }
 
-        $wh = [ 'student_id' => $student_id, 'year' => $year ];
-        $data['marks'] = $this->markRepo->getMark($wh);
-        $data['exam_records'] = $exr = $this->examRecordRepo->getRecord($wh);
+        $where = [
+            'student_id' => $student_id,
+            'year' => $year
+        ];
+        $data['marks'] = $this->markRepo->getMark($where);
+        $data['exam_records'] = $exr = $this->examRecordRepo->getRecord($where);
         $data['exams'] = $this->examRepo->getExam([ 'year' => $year ]);
         $data['sr'] = $this->studentRepo->getRecord([ 'user_id' => $student_id ])->first();
         $data['my_course'] = $mc = $this->myCourseRepo->getMC([ 'id' => $exr->first()->my_course_id ])->first();
@@ -170,9 +177,13 @@ class MarkController extends Controller
             return $this->noStudentRecord();
         }
 
-        $wh = [ 'student_id' => $student_id, 'exam_id' => $exam_id, 'year' => $year ];
-        $data['marks'] = $mks = $this->markRepo->getMark($wh);
-        $data['exr'] = $examRecord = $this->examRecordRepo->getRecord($wh)->first();
+        $where = [
+            'student_id' => $student_id,
+            'exam_id' => $exam_id,
+            'year' => $year
+        ];
+        $data['marks'] = $marks = $this->markRepo->getMark($where);
+        $data['exr'] = $examRecord = $this->examRecordRepo->getRecord($where)->first();
         $data['my_course'] = $myCourse = $this->myCourseRepo->find($examRecord->my_course_id);
         $data['class_id'] = $examRecord->class_id;
         $data['ex'] = $exam = $this->examRepo->find($exam_id);
@@ -196,7 +207,7 @@ class MarkController extends Controller
 
     public function selector(MarkSelector $request): \Illuminate\Http\RedirectResponse
     {
-        $data = $request->only([ 'exam_id', 'my_course_id', 'class_id', 'subject_id' ]);
+        $data = $request->validated();
         $data2 = $request->only([ 'exam_id', 'my_course_id', 'class_id' ]);
         $data3 = $request->only([ 'my_course_id', 'class_id' ]);
         $data3['session'] = $data['year'] = $data2['year'] = $this->year;
@@ -217,7 +228,13 @@ class MarkController extends Controller
 
     public function manage($exam_id, $my_course_id, $class_id, $subject_id)
     {
-        $data = [ 'exam_id' => $exam_id, 'my_course_id' => $my_course_id, 'class_id' => $class_id, 'subject_id' => $subject_id, 'year' => $this->year ];
+        $data = [
+            'exam_id' => $exam_id,
+            'my_course_id' => $my_course_id,
+            'class_id' => $class_id,
+            'subject_id' => $subject_id,
+            'year' => $this->year
+        ];
 
         $data['marks'] = $this->markRepo->getMark($data);
         if( $data['marks']->count() < 1 ) {
@@ -240,13 +257,19 @@ class MarkController extends Controller
 
     public function update(MarkUpdate $request, $exam_id, $my_course_id, $class_id, $subject_id)
     {
-        $input = [ 'exam_id' => $exam_id, 'my_course_id' => $my_course_id, 'class_id' => $class_id, 'subject_id' => $subject_id, 'year' => $this->year ];
+        $input = [
+            'exam_id' => $exam_id,
+            'my_course_id' => $my_course_id,
+            'class_id' => $class_id,
+            'subject_id' => $subject_id,
+            'year' => $this->year
+        ];
 
         $data = $data3 = $all_student_ids = [];
         $findExam = $this->examRepo->find($exam_id);
         $marks = $this->markRepo->getMark($input);
         $major = $this->majorRepo->findMajorByCourse($my_course_id);
-        $allMarks = $request->all();
+        $allMarks = $request->validated();
 
         /** Test, Exam, Grade **/
         foreach( $marks->sortBy('user.name') as $mark ) {
@@ -263,8 +286,7 @@ class MarkController extends Controller
             if( $total > 100 ) {
                 $data['tex'.$findExam->term] = $data['t1'] = $data['t2'] = $data['t3'] = $data['t4'] = $data['tca'] = $data['exm'] = NULL;
             }
-
-            $grade = $this->markRepo->getGrade($total, $major->id);
+            $grade = $this->gradeRepo->getGrade($total, $major->id);
             $data['grade_id'] = $grade ? $grade->id : NULL;
             $this->markRepo->update($mark->id, $data);
         }
@@ -303,12 +325,12 @@ class MarkController extends Controller
         return JsonHelper::jsonUpdateSuccess();
     }
 
-    public function skillsUpdate(Request $req, $skill, $exr_id): \Illuminate\Http\JsonResponse
+    public function skillsUpdate(Request $request, $skill, $exr_id): \Illuminate\Http\JsonResponse
     {
         $data = [];
         if( $skill == 'AF' || $skill == 'PS' ) {
             $skills = strtolower($skill);
-            $data[$skill] = implode(',', $req->$skills);
+            $data[$skill] = implode(',', $request->$skills);
         }
         $this->examRecordRepo->update([ 'id' => $exr_id ], $data);
         return JsonHelper::jsonUpdateSuccess();
@@ -320,7 +342,10 @@ class MarkController extends Controller
         $data['selected'] = false;
         if( $my_course_id && $class_id ) {
             $data['classes'] = $this->classRepo->getAll()->where('my_course_id', $my_course_id);
-            $data['students'] = $student = $this->studentRepo->getRecord([ 'my_course_id' => $my_course_id, 'class_id' => $class_id ])->get()->sortBy('user.name');
+            $data['students'] = $student = $this->studentRepo->getRecord([
+                'my_course_id' => $my_course_id,
+                'class_id' => $class_id
+            ])->get()->sortBy('user.name');
             if( $student->count() < 1 ) {
                 return redirect()->route('marks.bulk')->with('flash_danger', __('msg.srnf'));
             }
@@ -344,10 +369,15 @@ class MarkController extends Controller
 
         if( $my_course_id && $exam_id && $class_id ) {
 
-            $wh = [ 'my_course_id' => $my_course_id, 'class_id' => $class_id, 'exam_id' => $exam_id, 'year' => $this->year ];
+            $where = [
+                'my_course_id' => $my_course_id,
+                'class_id' => $class_id,
+                'exam_id' => $exam_id,
+                'year' => $this->year
+            ];
 
-            $subjectIDs = $this->markRepo->getSubjectIDs($wh);
-            $studentIDs = $this->markRepo->getStudentIDs($wh);
+            $subjectIDs = $this->markRepo->getSubjectIDs($where);
+            $studentIDs = $this->markRepo->getStudentIDs($where);
 
             if( count($subjectIDs) < 1 or count($studentIDs) < 1 ) {
                 return RouteHelper::goWithDanger('marks.tabulation', __('msg.srnf'));
@@ -362,8 +392,8 @@ class MarkController extends Controller
             $data['class_id'] = $class_id;
             $data['exam_id'] = $exam_id;
             $data['year'] = $this->year;
-            $data['marks'] = $mks = $this->markRepo->getMark($wh);
-            $data['exr'] = $exr = $this->examRecordRepo->getRecord($wh);
+            $data['marks'] = $mks = $this->markRepo->getMark($where);
+            $data['exr'] = $exr = $this->examRecordRepo->getRecord($where);
 
             $data['my_course'] = $mc = $this->myCourseRepo->find($my_course_id);
             $data['class'] = $this->classRepo->find($class_id);
@@ -375,10 +405,15 @@ class MarkController extends Controller
 
     public function printTabulation($exam_id, $my_course_id, $class_id)
     {
-        $wh = [ 'my_course_id' => $my_course_id, 'class_id' => $class_id, 'exam_id' => $exam_id, 'year' => $this->year ];
+        $where = [
+            'my_course_id' => $my_course_id,
+            'class_id' => $class_id,
+            'exam_id' => $exam_id,
+            'year' => $this->year
+        ];
 
-        $subjectIDs = $this->markRepo->getSubjectIDs($wh);
-        $studentIDs = $this->markRepo->getStudentIDs($wh);
+        $subjectIDs = $this->markRepo->getSubjectIDs($where);
+        $studentIDs = $this->markRepo->getStudentIDs($where);
 
         if( count($subjectIDs) < 1 or count($studentIDs) < 1 ) {
             return RouteHelper::goWithDanger('marks.tabulation', __('msg.srnf'));
@@ -390,9 +425,9 @@ class MarkController extends Controller
         $data['my_course_id'] = $my_course_id;
         $data['exam_id'] = $exam_id;
         $data['year'] = $this->year;
-        $wh = [ 'exam_id' => $exam_id, 'my_course_id' => $my_course_id ];
-        $data['marks'] = $marks = $this->markRepo->getMark($wh);
-        $data['exr'] = $examRecord = $this->examRecordRepo->getRecord($wh);
+        $where = [ 'exam_id' => $exam_id, 'my_course_id' => $my_course_id ];
+        $data['marks'] = $marks = $this->markRepo->getMark($where);
+        $data['exr'] = $examRecord = $this->examRecordRepo->getRecord($where);
 
         $data['my_course'] = $myCourse = $this->myCourseRepo->find($my_course_id);
         $data['class'] = $this->classRepo->find($class_id);

@@ -8,8 +8,8 @@ class DisplayMessageHelper
 {
     public static function displayError($errors)
     {
-        foreach( $errors as $err ) {
-            $data[] = $err;
+        foreach( $errors as $error ) {
+            $data[] = $error;
         }
         return '
                 <div class="alert alert-danger alert-styled-left alert-dismissible">

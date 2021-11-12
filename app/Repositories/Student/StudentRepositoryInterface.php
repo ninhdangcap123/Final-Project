@@ -14,8 +14,6 @@ interface StudentRepositoryInterface extends RepositoryInterface
 
     public function updateRecord($id, array $attribute);
 
-    public function update($id, $attribute);
-
     public function getRecord($data);
 
     public function getRecordByUserIDs($ids);

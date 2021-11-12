@@ -44,11 +44,15 @@ class PromotionController extends Controller
 
         if( $fromCourse && $fromSection && $toCourse && $toSection ) {
             $data['selected'] = true;
-            $data['fc'] = $fromCourse;
-            $data['fs'] = $fromSection;
-            $data['tc'] = $toCourse;
-            $data['ts'] = $toSection;
-            $data['students'] = $students = $this->studentRepo->getRecord([ 'my_course_id' => $fromCourse, 'class_id' => $fromSection, 'session' => $data['old_year'] ])->get();
+            $data['fromCourse'] = $fromCourse;
+            $data['fromSection'] = $fromSection;
+            $data['toCourse'] = $toCourse;
+            $data['toSection'] = $toSection;
+            $data['students'] = $students = $this->studentRepo->getRecord([
+                'my_course_id' => $fromCourse,
+                'class_id' => $fromSection,
+                'session' => $data['old_year']
+            ])->get();
 
             if( $students->count() < 1 ) {
                 return redirect()->route('students.promotion')->with('flash_success', __('msg.nstp'));
@@ -60,7 +64,12 @@ class PromotionController extends Controller
 
     public function selector(Request $request)
     {
-        return redirect()->route('students.promotion', [ $request->fc, $request->fs, $request->tc, $request->ts ]);
+        return redirect()->route('students.promotion', [
+            $request->fromCourse,
+            $request->fromSection,
+            $request->toCourse,
+            $request->toSection
+        ]);
     }
 
     public function promote(Request $request, $fromCourse, $fromSection, $toCourse, $toSection)
@@ -69,7 +78,11 @@ class PromotionController extends Controller
         $data = [];
         $oldYear = explode('-', $oldSession);
         $newYear = ++$oldYear[0].'-'.++$oldYear[1];
-        $students = $this->studentRepo->getRecord([ 'my_course_id' => $fromCourse, 'class_id' => $fromSection, 'session' => $oldSession ])->get()->sortBy('user.name');
+        $students = $this->studentRepo->getRecord([
+            'my_course_id' => $fromCourse,
+            'class_id' => $fromSection,
+            'session' => $oldSession
+        ])->get()->sortBy('user.name');
 
         if( $students->count() < 1 ) {
             return redirect()->route('students.promotion')->with('flash_danger', __('msg.srnf'));
@@ -98,11 +111,11 @@ class PromotionController extends Controller
             $this->studentRepo->updateRecord($student->id, $data);
 
 //            Insert New Promotion Data
-            $promote['from_course'] = $fromCourse;
-            $promote['from_section'] = $fromSection;
+            $promote['fromCourse'] = $fromCourse;
+            $promote['fromSection'] = $fromSection;
             $promote['grad'] = ( $promote === 'G' ) ? 1 : 0;
-            $promote['to_course'] = in_array($promote, [ 'D', 'G' ]) ? $fromCourse : $toCourse;
-            $promote['to_section'] = in_array($promote, [ 'D', 'G' ]) ? $fromSection : $toSection;
+            $promote['toCourse'] = in_array($promote, [ 'D', 'G' ]) ? $fromCourse : $toCourse;
+            $promote['toSection'] = in_array($promote, [ 'D', 'G' ]) ? $fromSection : $toSection;
             $promote['student_id'] = $student->user_id;
             $promote['from_session'] = $oldSession;
             $promote['to_session'] = $newYear;
@@ -125,7 +138,6 @@ class PromotionController extends Controller
     public function reset($promotion_id)
     {
         $this->resetSingle($promotion_id);
-
         return redirect()->route('students.promotion_manage')->with('flash_success', __('msg.update_ok'));
     }
 

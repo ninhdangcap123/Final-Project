@@ -13,12 +13,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return User::class;
     }
 
-    public function create($attributes = [])
-    {
-        // TODO: Implement create() method.
-        return $this->model->create($attributes);
-    }
-
     public function getUserByType($type)
     {
         return $this->model->where([ 'user_type' => $type ])->orderBy('name', 'asc')->get();

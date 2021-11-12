@@ -22,7 +22,7 @@ interface RepositoryInterface
      * @param array $attributes
      * @return mixed
      */
-    public function create($attributes = []);
+    public function create(array $attributes = []);
 
     /**
      * Update
