@@ -18,9 +18,9 @@ class BloodGroupsTableSeeder extends Seeder
     {
         DB::table('blood_groups')->delete();
 
-        $bgs = ['O-', 'O+', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-'];
-        foreach($bgs as  $bg){
-            BloodGroup::create(['name' => $bg]);
+        $bgs = [ 'O-', 'O+', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-' ];
+        foreach( $bgs as $bg ) {
+            BloodGroup::create([ 'name' => $bg ]);
         }
     }
 

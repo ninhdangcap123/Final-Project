@@ -52,7 +52,7 @@
     // Button placements
     //
 
-     // Top placement
+    // Top placement
     .fab-menu-top-left,
     .fab-menu-top-right, {
 
@@ -67,7 +67,7 @@
     .fab-menu-bottom-right {
         bottom: $spacer;
         transition: bottom ease-in-out $component-transition-timer;
-        
+
         // Keep space for footer
         &.reached-bottom {
             bottom: $nav-link-height + rem-calc($navbar-border-width * 2) + ($spacer * 2);
@@ -224,7 +224,7 @@
         // Show shadow in disabled state
         &:disabled,
         &.disabled {
-            box-shadow: $shadow-depth1; 
+            box-shadow: $shadow-depth1;
         }
     }
 
@@ -278,15 +278,19 @@
             &:nth-child(1) {
                 transition-delay: 0.05s;
             }
+
             &:nth-child(2) {
                 transition-delay: 0.1s;
             }
+
             &:nth-child(3) {
                 transition-delay: 0.15s;
             }
+
             &:nth-child(4) {
                 transition-delay: 0.2s;
             }
+
             &:nth-child(5) {
                 transition-delay: 0.25s;
             }
@@ -312,15 +316,19 @@
                 &:nth-child(1) {
                     top: ($fab-inner-btn-size + $fab-inner-btn-spacing) + ($fab-btn-gap * 2);
                 }
+
                 &:nth-child(2) {
                     top: (($fab-inner-btn-size + $fab-inner-btn-spacing) * 2) + ($fab-btn-gap * 2);
                 }
+
                 &:nth-child(3) {
                     top: (($fab-inner-btn-size + $fab-inner-btn-spacing) * 3) + ($fab-btn-gap * 2);
                 }
+
                 &:nth-child(4) {
                     top: (($fab-inner-btn-size + $fab-inner-btn-spacing) * 4) + ($fab-btn-gap * 2);
                 }
+
                 &:nth-child(5) {
                     top: (($fab-inner-btn-size + $fab-inner-btn-spacing) * 5) + ($fab-btn-gap * 2);
                 }
@@ -338,15 +346,19 @@
                 &:nth-child(1) {
                     top: -($fab-inner-btn-size + $fab-inner-btn-spacing) + ($fab-btn-gap * 2);
                 }
+
                 &:nth-child(2) {
                     top: -(($fab-inner-btn-size + $fab-inner-btn-spacing) * 2) + ($fab-btn-gap * 2);
                 }
+
                 &:nth-child(3) {
                     top: -(($fab-inner-btn-size + $fab-inner-btn-spacing) * 3) + ($fab-btn-gap * 2);
                 }
+
                 &:nth-child(4) {
                     top: -(($fab-inner-btn-size + $fab-inner-btn-spacing) * 4) + ($fab-btn-gap * 2);
                 }
+
                 &:nth-child(5) {
                     top: -(($fab-inner-btn-size + $fab-inner-btn-spacing) * 5) + ($fab-btn-gap * 2);
                 }
@@ -413,7 +425,6 @@
     }
 
 
-
     // Layout specific additions
     // ------------------------------
 
@@ -435,7 +446,7 @@
                 left: (($page-container-padding-x - $fab-main-btn-size) / 2) + $content-container-padding-x;
             }
         }
-        
+
         // Right placement
         .fab-menu-top-right,
         .fab-menu-bottom-right {

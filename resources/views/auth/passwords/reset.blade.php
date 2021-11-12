@@ -12,7 +12,8 @@
                             <hr>
                             @if($errors->any())
                                 <div class="alert alert-danger border-0 alert-dismissible">
-                                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span>
+                                    </button>
 
                                     @foreach($errors->all() as $er)
                                         <span><i class="icon-arrow-right5"></i> {{ $er }}</span> <br>

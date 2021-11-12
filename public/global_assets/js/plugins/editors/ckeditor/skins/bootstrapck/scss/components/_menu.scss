@@ -72,6 +72,7 @@ Special outer level courses used in this file:
 
 .cke_hc .cke_menubutton {
     padding: 2px;
+
     &:hover, &:focus, &:active {
         border: 2px solid;
         padding: 0;
@@ -137,6 +138,7 @@ Special outer level courses used in this file:
 .cke_menubutton_on {
     border: 1px solid #dedede;
     background-color: #f2f2f2;
+
     .cke_menubutton_icon {
         padding-right: 3px;
     }
@@ -166,6 +168,7 @@ Special outer level courses used in this file:
     background-position: 0 10px;
     background-repeat: no-repeat;
     padding: 0 5px;
+
     span {
         display: none;
     }

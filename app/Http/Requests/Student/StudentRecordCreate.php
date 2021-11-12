@@ -4,7 +4,6 @@ namespace App\Http\Requests\Student;
 
 use App\Helpers\DisplayMessageHelper;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Helpers\Qs;
 
 class StudentRecordCreate extends FormRequest
 {
@@ -43,7 +42,7 @@ class StudentRecordCreate extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
             'class_id' => 'Classes',
             'nal_id' => 'Nationality',
             'my_course_id' => 'Course',

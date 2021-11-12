@@ -10,26 +10,30 @@
  */
 
 .trumbowyg-dropdown-emoji {
-  width: 265px;
-  padding: 7px 0 7px 5px;
-  height: 200px;
-  overflow-y: scroll;
-  overflow-x: hidden; }
+    width: 265px;
+    padding: 7px 0 7px 5px;
+    height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 
 .trumbowyg-dropdown-emoji svg {
-  display: none !important; }
+    display: none !important;
+}
 
 .trumbowyg-dropdown-emoji button {
-  display: block;
-  position: relative;
-  float: left;
-  height: 26px;
-  width: 26px;
-  padding: 0;
-  margin: 2px;
-  line-height: 24px;
-  text-align: center; }
-  .trumbowyg-dropdown-emoji button:hover::after, .trumbowyg-dropdown-emoji button:focus::after {
+    display: block;
+    position: relative;
+    float: left;
+    height: 26px;
+    width: 26px;
+    padding: 0;
+    margin: 2px;
+    line-height: 24px;
+    text-align: center;
+}
+
+.trumbowyg-dropdown-emoji button:hover::after, .trumbowyg-dropdown-emoji button:focus::after {
     display: block;
     position: absolute;
     top: -5px;
@@ -39,9 +43,11 @@
     background: inherit;
     box-shadow: #000 0 0 2px;
     z-index: 10;
-    background-color: transparent; }
+    background-color: transparent;
+}
 
 .trumbowyg .emoji {
-  width: 22px;
-  height: 22px;
-  display: inline-block; }
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+}

@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <ul class="nav nav-tabs nav-tabs-highlight">
                         <li class="nav-item">
-                            <a href="#" class="nav-link active" >{{ $user->name }}</a>
+                            <a href="#" class="nav-link active">{{ $user->name }}</a>
                         </li>
                     </ul>
 
@@ -87,8 +87,10 @@
                                     <tr>
                                         <td class="font-weight-bold">Children/Ward</td>
                                         <td>
-                                        @foreach(\App\Helpers\GetUsersHelper::findMyChildren($user->id) as $sr)
-                                            <span> - <a href="{{ route('students.show', \App\Helpers\DisplayMessageHelper::hash($sr->id)) }}">{{ $sr->user->name.' - '.$sr->myCourse->name. ' '.$sr->section->name }}</a></span><br>
+                                            @foreach(\App\Helpers\GetUsersHelper::findMyChildren($user->id) as $sr)
+                                                <span> - <a
+                                                        href="{{ route('students.show', \App\Helpers\DisplayMessageHelper::hash($sr->id)) }}">{{ $sr->user->name.' - '.$sr->myCourse->name. ' '.$sr->section->name }}</a></span>
+                                                <br>
 
                                             @endforeach
                                         </td>

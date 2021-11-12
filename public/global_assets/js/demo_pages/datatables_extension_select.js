@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DatatableSelect = function() {
+var DatatableSelect = function () {
 
 
     //
@@ -18,26 +18,31 @@ var DatatableSelect = function() {
     //
 
     // Basic Datatable examples
-    var _componentDatatableSelect = function() {
+    var _componentDatatableSelect = function () {
         if (!$().DataTable) {
             console.warn('Warning - datatables.min.js is not loaded.');
             return;
         }
 
         // Setting datatable defaults
-        $.extend( $.fn.dataTable.defaults, {
+        $.extend($.fn.dataTable.defaults, {
             autoWidth: false,
             columnDefs: [{
                 orderable: false,
                 width: 100,
-                targets: [ 5 ]
+                targets: [5]
             }],
             dom: '<"datatable-header"fl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
             language: {
                 search: '<span>Filter:</span> _INPUT_',
                 searchPlaceholder: 'Type to filter...',
                 lengthMenu: '<span>Show:</span> _MENU_',
-                paginate: { 'first': 'First', 'last': 'Last', 'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;', 'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;' }
+                paginate: {
+                    'first': 'First',
+                    'last': 'Last',
+                    'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;',
+                    'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;'
+                }
             }
         });
 
@@ -103,7 +108,7 @@ var DatatableSelect = function() {
     };
 
     // Select2 for length menu styling
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -123,7 +128,7 @@ var DatatableSelect = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentDatatableSelect();
             _componentSelect2();
         }
@@ -134,6 +139,6 @@ var DatatableSelect = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DatatableSelect.init();
 });

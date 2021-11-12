@@ -268,15 +268,19 @@ $ll-theme-colors: (
 .border-transparent {
     border-color: transparent !important;
 }
+
 .border-top-transparent {
     border-top-color: transparent !important;
 }
+
 .border-bottom-transparent {
     border-bottom-color: transparent !important;
 }
+
 .border-left-transparent {
     border-left-color: transparent !important;
 }
+
 .border-right-transparent {
     border-right-color: transparent !important;
 }
@@ -285,15 +289,19 @@ $ll-theme-colors: (
 .border-light-alpha {
     @include ll-border-color-variant(rgba($white, 0.1));
 }
+
 .border-top-light-alpha {
     @include ll-border-top-color-variant(rgba($white, 0.1));
 }
+
 .border-bottom-light-alpha {
     @include ll-border-bottom-color-variant(rgba($white, 0.1));
 }
+
 .border-left-light-alpha {
     @include ll-border-left-color-variant(rgba($white, 0.1));
 }
+
 .border-right-light-alpha {
     @include ll-border-right-color-variant(rgba($white, 0.1));
 }
@@ -302,15 +310,19 @@ $ll-theme-colors: (
 .border-dark-alpha {
     @include ll-border-color-variant(rgba($black, 0.1));
 }
+
 .border-top-dark-alpha {
     @include ll-border-top-color-variant(rgba($black, 0.1));
 }
+
 .border-bottom-dark-alpha {
     @include ll-border-bottom-color-variant(rgba($black, 0.1));
 }
+
 .border-left-dark-alpha {
     @include ll-border-left-color-variant(rgba($black, 0.1));
 }
+
 .border-right-dark-alpha {
     @include ll-border-right-color-variant(rgba($black, 0.1));
 }
@@ -319,6 +331,7 @@ $ll-theme-colors: (
 .bg-dark-alpha {
     @include ll-background-variant(rgba($black, 0.2));
 }
+
 .bg-light-alpha {
     @include ll-background-variant(rgba($white, 0.1));
 }

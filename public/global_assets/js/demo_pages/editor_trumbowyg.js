@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var Trumbowyg = function() {
+var Trumbowyg = function () {
 
 
     //
@@ -18,7 +18,7 @@ var Trumbowyg = function() {
     //
 
     // Trumbowyg editor
-    var _componentTrumbowyg = function() {
+    var _componentTrumbowyg = function () {
         if (!$().trumbowyg) {
             console.warn('Warning - trumbowyg.min.js is not loaded.');
             return;
@@ -85,7 +85,7 @@ var Trumbowyg = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentTrumbowyg();
         }
     }
@@ -95,6 +95,6 @@ var Trumbowyg = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     Trumbowyg.init();
 });

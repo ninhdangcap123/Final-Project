@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DatatableKeyTable = function() {
+var DatatableKeyTable = function () {
 
 
     //
@@ -18,26 +18,31 @@ var DatatableKeyTable = function() {
     //
 
     // Basic Datatable examples
-    var _componentDatatableKeyTable = function() {
+    var _componentDatatableKeyTable = function () {
         if (!$().DataTable) {
             console.warn('Warning - datatables.min.js is not loaded.');
             return;
         }
 
         // Setting datatable defaults
-        $.extend( $.fn.dataTable.defaults, {
+        $.extend($.fn.dataTable.defaults, {
             autoWidth: false,
             columnDefs: [{
                 orderable: false,
                 width: 100,
-                targets: [ 5 ]
+                targets: [5]
             }],
             dom: '<"datatable-header"fl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
             language: {
                 search: '<span>Filter:</span> _INPUT_',
                 searchPlaceholder: 'Type to filter...',
                 lengthMenu: '<span>Show:</span> _MENU_',
-                paginate: { 'first': 'First', 'last': 'Last', 'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;', 'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;' }
+                paginate: {
+                    'first': 'First',
+                    'last': 'Last',
+                    'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;',
+                    'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;'
+                }
             }
         });
 
@@ -55,7 +60,7 @@ var DatatableKeyTable = function() {
             paging: false,
             keys: true
         });
-     
+
 
         // Custom class
         $('.datatable-key-class').DataTable({
@@ -69,23 +74,23 @@ var DatatableKeyTable = function() {
         var table = $('.datatable-key-events').DataTable({
             keys: true
         });
-     
+
         // Events
         var events = $('#key-events');
         table
             .on('key', function (e, datatable, key, cell, originalEvent) {
-                events.append(JSON.stringify('Key press: '+key+' for cell '+cell.data()), '\n');
+                events.append(JSON.stringify('Key press: ' + key + ' for cell ' + cell.data()), '\n');
             })
             .on('key-focus', function (e, datatable, cell) {
-                events.append(JSON.stringify('Cell focus: '+cell.data()), '\n');
+                events.append(JSON.stringify('Cell focus: ' + cell.data()), '\n');
             })
             .on('key-blur', function (e, datatable, cell) {
-                events.append(JSON.stringify('Cell blur: '+cell.data()), '\n');
+                events.append(JSON.stringify('Cell blur: ' + cell.data()), '\n');
             });
     };
 
     // Select2 for length menu styling
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -105,7 +110,7 @@ var DatatableKeyTable = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentDatatableKeyTable();
             _componentSelect2();
         }
@@ -116,6 +121,6 @@ var DatatableKeyTable = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DatatableKeyTable.init();
 });

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var AnimationsCSS3 = function() {
+var AnimationsCSS3 = function () {
 
 
     //
@@ -18,7 +18,7 @@ var AnimationsCSS3 = function() {
     //
 
     // CSS3 animations
-    var _componentAnimationCSS = function() {
+    var _componentAnimationCSS = function () {
 
         // Toggle animations
         $('body').on('click', '.animation', function (e) {
@@ -40,7 +40,7 @@ var AnimationsCSS3 = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentAnimationCSS();
         }
     }
@@ -50,6 +50,6 @@ var AnimationsCSS3 = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     AnimationsCSS3.init();
 });

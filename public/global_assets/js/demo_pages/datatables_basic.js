@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DatatableBasic = function() {
+var DatatableBasic = function () {
 
 
     //
@@ -18,26 +18,31 @@ var DatatableBasic = function() {
     //
 
     // Basic Datatable examples
-    var _componentDatatableBasic = function() {
+    var _componentDatatableBasic = function () {
         if (!$().DataTable) {
             console.warn('Warning - datatables.min.js is not loaded.');
             return;
         }
 
         // Setting datatable defaults
-        $.extend( $.fn.dataTable.defaults, {
+        $.extend($.fn.dataTable.defaults, {
             autoWidth: false,
-            columnDefs: [{ 
+            columnDefs: [{
                 orderable: false,
                 width: 100,
-                targets: [ 5 ]
+                targets: [5]
             }],
             dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
             language: {
                 search: '<span>Filter:</span> _INPUT_',
                 searchPlaceholder: 'Type to filter...',
                 lengthMenu: '<span>Show:</span> _MENU_',
-                paginate: { 'first': 'First', 'last': 'Last', 'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;', 'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;' }
+                paginate: {
+                    'first': 'First',
+                    'last': 'Last',
+                    'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;',
+                    'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;'
+                }
             }
         });
 
@@ -48,7 +53,10 @@ var DatatableBasic = function() {
         $('.datatable-pagination').DataTable({
             pagingType: "simple",
             language: {
-                paginate: {'next': $('html').attr('dir') == 'rtl' ? 'Next &larr;' : 'Next &rarr;', 'previous': $('html').attr('dir') == 'rtl' ? '&rarr; Prev' : '&larr; Prev'}
+                paginate: {
+                    'next': $('html').attr('dir') == 'rtl' ? 'Next &larr;' : 'Next &rarr;',
+                    'previous': $('html').attr('dir') == 'rtl' ? '&rarr; Prev' : '&larr; Prev'
+                }
             }
         });
 
@@ -64,13 +72,13 @@ var DatatableBasic = function() {
         });
 
         // Resize scrollable table when sidebar width changes
-        $('.sidebar-control').on('click', function() {
+        $('.sidebar-control').on('click', function () {
             table.columns.adjust().draw();
         });
     };
 
     // Select2 for length menu styling
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -90,7 +98,7 @@ var DatatableBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentDatatableBasic();
             _componentSelect2();
         }
@@ -101,6 +109,6 @@ var DatatableBasic = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DatatableBasic.init();
 });

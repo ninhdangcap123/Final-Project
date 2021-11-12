@@ -23,6 +23,7 @@
                 @include border-right-radius(0);
             }
         }
+
         &:not(:first-child) {
             .form-control {
                 @include border-left-radius(0);

@@ -1,11 +1,13 @@
 .container {
     font-size: 11px;
 }
+
 @media (min-width: 768px) {
     .container {
         width: 750px;
     }
 }
+
 @media (min-width: 992px) {
     .container {
         width: 970px;
@@ -45,7 +47,7 @@ td {
     text-align: center;
 }
 
-table.td-left td{
-    text-align: left!important;
+table.td-left td {
+    text-align: left !important;
     padding: 5px;
 }

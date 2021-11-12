@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var I18nextDirect = function() {
+var I18nextDirect = function () {
 
 
     //
@@ -18,7 +18,7 @@ var I18nextDirect = function() {
     //
 
     // Change language without page reload
-    var _componentI18nextDirect = function() {
+    var _componentI18nextDirect = function () {
         if (typeof i18next == 'undefined') {
             console.warn('Warning - i18next.min.js is not loaded.');
             return;
@@ -37,35 +37,35 @@ var I18nextDirect = function() {
 
         // Add options
         i18next.use(i18nextXHRBackend).use(i18nextBrowserLanguageDetector).init({
-            backend: {
-                loadPath: '../../../../global_assets/locales/{{lng}}.json'
+                backend: {
+                    loadPath: '../../../../global_assets/locales/{{lng}}.json'
+                },
+                debug: true,
+                fallbackLng: false
             },
-            debug: true,
-            fallbackLng: false
-        },
-        function (err, t) {
-            
-            // Initialize library
-            jqueryI18next.init(i18next, $);
+            function (err, t) {
 
-            // Initialize translation
-            $localizationElement.localize();
+                // Initialize library
+                jqueryI18next.init(i18next, $);
 
-            // To avoid FOUC when translation gets initialized,
-            // use data-fouc attribute in all elements by default. When translation
-            // is initialized, remove it from all elements
-            $localizationElement.find('[data-i18n]').removeAttr('data-fouc');
-        });
+                // Initialize translation
+                $localizationElement.localize();
+
+                // To avoid FOUC when translation gets initialized,
+                // use data-fouc attribute in all elements by default. When translation
+                // is initialized, remove it from all elements
+                $localizationElement.find('[data-i18n]').removeAttr('data-fouc');
+            });
 
 
         // Change languages in dropdown
         // -------------------------
 
         // Do stuff when i18Next is initialized
-        i18next.on('initialized', function() {
+        i18next.on('initialized', function () {
 
             // English
-            if(i18next.language === "en") {
+            if (i18next.language === "en") {
 
                 // Set active class
                 $('.dropdown-item' + englishLangClass).addClass('active');
@@ -78,7 +78,7 @@ var I18nextDirect = function() {
             }
 
             // Russian
-            if(i18next.language === "ru") {
+            if (i18next.language === "ru") {
 
                 // Set active class
                 $('.dropdown-item' + russianLangClass).addClass('active');
@@ -91,7 +91,7 @@ var I18nextDirect = function() {
             }
 
             // Ukrainian
-            if(i18next.language === "ua") {
+            if (i18next.language === "ua") {
 
                 // Set active class
                 $('.dropdown-item' + ukrainianLangClass).addClass('active');
@@ -115,7 +115,7 @@ var I18nextDirect = function() {
             i18next.changeLanguage('en');
 
             // When changed, run translation again
-            i18next.on('languageChanged', function() {
+            i18next.on('languageChanged', function () {
                 $localizationElement.localize();
             });
 
@@ -137,7 +137,7 @@ var I18nextDirect = function() {
             i18next.changeLanguage('ru');
 
             // When changed, run translation again
-            i18next.on('languageChanged', function() {
+            i18next.on('languageChanged', function () {
                 $localizationElement.localize();
             });
 
@@ -145,7 +145,7 @@ var I18nextDirect = function() {
             $switchContainer.children('.dropdown-toggle').html(
                 $(russianLangClass).html()
             ).children('img').addClass('mr-2');
-            
+
             // Set active class
             $switchContainer.find('.dropdown-item.active, .nav-item.active').removeClass('active');
             $('.dropdown-item' + russianLangClass).addClass('active');
@@ -159,7 +159,7 @@ var I18nextDirect = function() {
             i18next.changeLanguage('ua');
 
             // When changed, run translation again
-            i18next.on('languageChanged', function() {
+            i18next.on('languageChanged', function () {
                 $localizationElement.localize();
             });
 
@@ -167,7 +167,7 @@ var I18nextDirect = function() {
             $switchContainer.children('.dropdown-toggle').html(
                 $(ukrainianLangClass).html()
             ).children('img').addClass('mr-2');
-            
+
             // Set active class
             $switchContainer.find('.dropdown-item.active, .nav-item.active').removeClass('active');
             $('.dropdown-item' + ukrainianLangClass).addClass('active');
@@ -181,7 +181,7 @@ var I18nextDirect = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentI18nextDirect();
         }
     }
@@ -191,6 +191,6 @@ var I18nextDirect = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     I18nextDirect.init();
 });

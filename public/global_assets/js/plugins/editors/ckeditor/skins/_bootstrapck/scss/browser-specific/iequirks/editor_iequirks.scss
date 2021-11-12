@@ -16,13 +16,11 @@ in Quirks mode only.
 
 .cke_top,
 .cke_contents,
-.cke_bottom
-{
+.cke_bottom {
     width: 100%; /* hasLayout = true */
 }
 
-.cke_button_arrow
-{
+.cke_button_arrow {
     font-size: 0; /* Set minimal font size, so arrow won't be streched by the text that doesn't exist. */
 }
 
@@ -36,8 +34,7 @@ in Quirks mode only.
 .cke_rtl .cke_combo *,
 .cke_rtl .cke_path_item,
 .cke_rtl .cke_path_item *,
-.cke_rtl .cke_path_empty
-{
+.cke_rtl .cke_path_empty {
     float: none;
 }
 
@@ -53,27 +50,22 @@ in Quirks mode only.
 }
 
 /* Otherwise formatting toolbar breaks when editing a mixed content (#9893). */
-.cke_rtl .cke_button_icon
-{
+.cke_rtl .cke_button_icon {
     float: none;
 }
 
-.cke_resizer
-{
+.cke_resizer {
     width: 10px;
 }
 
-.cke_source
-{
+.cke_source {
     white-space: normal;
 }
 
-.cke_bottom
-{
+.cke_bottom {
     position: static; /* Without this bottom space doesn't move when resizing editor. */
 }
 
-.cke_colorbox
-{
+.cke_colorbox {
     font-size: 0; /* Set minimal font size, so button won't be streched by the text that doesn't exist. */
 }

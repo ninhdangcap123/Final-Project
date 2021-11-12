@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleHistogram = function() {
+var GoogleHistogram = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleHistogram = function() {
     //
 
     // Histogram
-    var _googleHistogram = function() {
+    var _googleHistogram = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleHistogram = function() {
 
                 // Resize on window resize
                 var resizeHistogram;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeHistogram);
                     resizeHistogram = setTimeout(function () {
                         drawHistogram();
@@ -109,14 +109,14 @@ var GoogleHistogram = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
                     minValue: 0
                 },
                 hAxis: {
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5'
                     },
                     minValue: 0
@@ -142,7 +142,7 @@ var GoogleHistogram = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleHistogram();
         }
     }

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var Fancytree = function() {
+var Fancytree = function () {
 
 
     //
@@ -18,7 +18,7 @@ var Fancytree = function() {
     //
 
     // Uniform
-    var _componentFancytree = function() {
+    var _componentFancytree = function () {
         if (!$().fancytree) {
             console.warn('Warning - fancytree_all.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var Fancytree = function() {
 
         // Basic example
         $('.tree-default').fancytree({
-            init: function(event, data) {
+            init: function (event, data) {
                 $('.has-tooltip .fancytree-title').tooltip();
             }
         });
@@ -40,14 +40,14 @@ var Fancytree = function() {
             source: {
                 url: '../../../../global_assets/demo_data/fancytree/fancytree.json'
             },
-            init: function(event, data) {
+            init: function (event, data) {
                 $('.has-tooltip .fancytree-title').tooltip();
             }
         });
 
         // Embed JSON data
         $('.tree-json').fancytree({
-            init: function(event, data) {
+            init: function (event, data) {
                 $('.has-tooltip .fancytree-title').tooltip();
             }
         });
@@ -63,7 +63,7 @@ var Fancytree = function() {
                 hideZeros: true,
                 hideExpanded: true
             },
-            init: function(event, data) {
+            init: function (event, data) {
                 $('.has-tooltip .fancytree-title').tooltip();
             }
         });
@@ -79,19 +79,19 @@ var Fancytree = function() {
                 focusOnClick: true,
                 preventVoidMoves: true, // Prevent dropping nodes 'before self', etc.
                 preventRecursiveMoves: true, // Prevent dropping nodes on own descendants
-                dragStart: function(node, data) {
+                dragStart: function (node, data) {
                     return true;
                 },
-                dragEnter: function(node, data) {
+                dragEnter: function (node, data) {
                     return true;
                 },
-                dragDrop: function(node, data) {
+                dragDrop: function (node, data) {
 
                     // This function MUST be defined to enable dropping of items on the tree.
                     data.otherNode.moveTo(node, data.hitMode);
                 }
             },
-            init: function(event, data) {
+            init: function (event, data) {
                 $('.has-tooltip .fancytree-title').tooltip();
             }
         });
@@ -106,7 +106,7 @@ var Fancytree = function() {
                 adjustWidthOfs: 0,
                 inputCss: {minWidth: '0'},
                 triggerStart: ['f2', 'dblclick', 'shift+click', 'mac+enter'],
-                save: function(event, data) {
+                save: function (event, data) {
                     alert('save ' + data.input.val()); // Save data.input.val() or return false to keep editor open
                 }
             }
@@ -123,7 +123,7 @@ var Fancytree = function() {
             selectMode: 1,
             source: {
                 url: '../../../../global_assets/demo_data/fancytree/fancytree.json'
-            }    
+            }
         });
 
         // Multiple selection
@@ -158,7 +158,7 @@ var Fancytree = function() {
             selectMode: 2,
             source: {
                 url: '../../../../global_assets/demo_data/fancytree/fancytree.json'
-            }    
+            }
         });
 
         // Initialize switchery toggle
@@ -166,21 +166,19 @@ var Fancytree = function() {
         var initSelect = new Switchery(switcherySelect);
 
         // Change checkbox states
-        switcherySelect.onchange = function() {
-            if(switcherySelect.checked) {
-                $('.tree-checkbox-toggle').fancytree('getTree').visit(function(node){
+        switcherySelect.onchange = function () {
+            if (switcherySelect.checked) {
+                $('.tree-checkbox-toggle').fancytree('getTree').visit(function (node) {
                     node.setSelected(true);
                 });
                 return false;
-            }
-            else {
-                $('.tree-checkbox-toggle').fancytree('getTree').visit(function(node){
+            } else {
+                $('.tree-checkbox-toggle').fancytree('getTree').visit(function (node) {
                     node.setSelected(false);
                 });
                 return false;
             }
         };
-
 
 
         // Advanced examples
@@ -195,11 +193,10 @@ var Fancytree = function() {
         var init = new Switchery(switchery);
 
         // Do something on state change
-        switchery.onchange = function() {
-            if(switchery.checked) {
+        switchery.onchange = function () {
+            if (switchery.checked) {
                 $('.tree-toggle').fancytree('disable');
-            }
-            else {
+            } else {
                 $('.tree-toggle').fancytree('enable');
             }
         };
@@ -209,7 +206,7 @@ var Fancytree = function() {
             source: {
                 url: '../../../../global_assets/demo_data/fancytree/fancytree.json'
             },
-            init: function(event, data) {
+            init: function (event, data) {
                 $('.has-tooltip .fancytree-title').tooltip();
             }
         });
@@ -223,17 +220,17 @@ var Fancytree = function() {
         $('.tree-sorting').fancytree();
 
         // Sort tree
-        $('.sort-tree').on('click', function() {
+        $('.sort-tree').on('click', function () {
             var node = $('.tree-sorting').fancytree('getRootNode');
             node.sortChildren(null, true);
         });
 
         // Sort active nodes
-        $('.sort-branch').on('click', function() {
+        $('.sort-branch').on('click', function () {
             var node = $('.tree-sorting').fancytree('getActiveNode');
 
             // Custom compare function (optional) that sorts case insensitive
-            var cmp = function(a, b) {
+            var cmp = function (a, b) {
                 a = a.title.toLowerCase();
                 b = b.title.toLowerCase();
                 return a > b ? 1 : a < b ? -1 : 0;
@@ -257,10 +254,10 @@ var Fancytree = function() {
                 overrideSource: false, // true: cookie takes precedence over `source` data attributes.
                 store: 'auto' // 'cookie', 'local': use localStore, 'session': sessionStore
             },
-            postProcess: function(event, data) {
+            postProcess: function (event, data) {
                 var prefix = data.node.getIndexHier() + '.';
-                $.each(data.response, function(idx, childEntry) {
-                    if( childEntry.key == null ) {
+                $.each(data.response, function (idx, childEntry) {
+                    if (childEntry.key == null) {
                         childEntry.key = prefix + (idx + 1);
                         childEntry.title += ' (' + childEntry.key + ')';
                     }
@@ -270,7 +267,7 @@ var Fancytree = function() {
         var tree5 = $('.tree-persistence').fancytree('getTree');
 
         // Reset cookies on button click
-        $('.reset-cookies').on('click', function() {
+        $('.reset-cookies').on('click', function () {
             tree5.clearCookies();
         });
 
@@ -290,12 +287,12 @@ var Fancytree = function() {
             source: {
                 url: '../../../../global_assets/demo_data/fancytree/fancytree.json'
             },
-            lazyLoad: function(event, data) {
+            lazyLoad: function (event, data) {
                 data.result = {url: 'ajax-sub2.json'}
             },
-            renderColumns: function(event, data) {
+            renderColumns: function (event, data) {
                 var node = data.node,
-                $tdList = $(node.tr).find('>td');
+                    $tdList = $(node.tr).find('>td');
 
                 // (index #0 is rendered by fancytree by adding the checkbox)
                 $tdList.eq(1).text(node.getIndexHier()).addClass('alignRight');
@@ -310,14 +307,13 @@ var Fancytree = function() {
         });
 
         // Handle custom checkbox clicks
-        $('.tree-table').on('input[name=like]', 'click', function(e) {
+        $('.tree-table').on('input[name=like]', 'click', function (e) {
             var node = $.ui.fancytree.getNode(e),
-            $input = $(e.target);
+                $input = $(e.target);
             e.stopPropagation(); // prevent fancytree activate for this row
-            if($input.is(':checked')){
+            if ($input.is(':checked')) {
                 alert('like ' + $input.val());
-            }
-            else{
+            } else {
                 alert('dislike ' + $input.val());
             }
         });
@@ -329,7 +325,7 @@ var Fancytree = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentFancytree();
         }
     }
@@ -339,6 +335,6 @@ var Fancytree = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     Fancytree.init();
 });

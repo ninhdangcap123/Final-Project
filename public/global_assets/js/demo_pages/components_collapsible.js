@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var ComponentsCollapsible = function() {
+var ComponentsCollapsible = function () {
 
 
     //
@@ -18,7 +18,7 @@ var ComponentsCollapsible = function() {
     //
 
     // Pickadate picker
-    var _componentSortable = function() {
+    var _componentSortable = function () {
         if (!$().sortable) {
             console.warn('Warning - interactions.min.js from jQuery UI library is not loaded.');
             return;
@@ -37,7 +37,7 @@ var ComponentsCollapsible = function() {
             placeholder: 'sortable-placeholder',
             forcePlaceholderSize: true,
             tolerance: 'pointer',
-            start: function(e, ui){
+            start: function (e, ui) {
                 ui.placeholder.height(ui.item.outerHeight());
             }
         });
@@ -56,7 +56,7 @@ var ComponentsCollapsible = function() {
             placeholder: 'sortable-placeholder',
             forcePlaceholderSize: true,
             tolerance: 'pointer',
-            start: function(e, ui){
+            start: function (e, ui) {
                 ui.placeholder.height(ui.item.outerHeight());
             }
         });
@@ -68,7 +68,7 @@ var ComponentsCollapsible = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentSortable();
         }
     }
@@ -78,6 +78,6 @@ var ComponentsCollapsible = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     ComponentsCollapsible.init();
 });

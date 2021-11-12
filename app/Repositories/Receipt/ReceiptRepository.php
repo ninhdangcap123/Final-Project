@@ -12,16 +12,7 @@ class ReceiptRepository extends BaseRepository implements ReceiptRepositoryInter
         // TODO: Implement getModel() method.
         return Receipt::class;
     }
-    public function create($attributes = [])
-    {
-        // TODO: Implement create() method.
-        return $this->model->create($attributes);
-    }
-    public function delete($id) : bool
-    {
-        // TODO: Implement delete() method.
-        return $this->model->destroy($id);
-    }
+
     public function getReceipt($data)
     {
         // TODO: Implement getReceipt() method.

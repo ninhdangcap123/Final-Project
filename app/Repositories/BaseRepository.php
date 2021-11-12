@@ -2,8 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Repositories\RepositoryInterface;
-
 abstract class BaseRepository implements RepositoryInterface
 {
     protected $model;
@@ -36,11 +34,6 @@ abstract class BaseRepository implements RepositoryInterface
         return $this->model->all();
     }
 
-    public function find($id)
-    {
-        return $this->model->find($id);
-    }
-
     public function create($attributes = [])
     {
         return $this->model->create($attributes);
@@ -49,17 +42,22 @@ abstract class BaseRepository implements RepositoryInterface
     public function update($id, $attribute)
     {
         $result = $this->find($id);
-        if ($result) {
+        if( $result ) {
             $result->update($attribute);
             return $result;
         }
         return false;
     }
 
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+
     public function delete($id): bool
     {
         $result = $this->find($id);
-        if ($result) {
+        if( $result ) {
             $result->delete();
 
             return true;

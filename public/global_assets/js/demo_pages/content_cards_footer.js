@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var CardFooter = function() {
+var CardFooter = function () {
 
 
     //
@@ -18,7 +18,7 @@ var CardFooter = function() {
     //
 
     // Switchery
-    var _componentSwitchery = function() {
+    var _componentSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
@@ -26,13 +26,13 @@ var CardFooter = function() {
 
         // Initialize multiple switches
         var elems = Array.prototype.slice.call(document.querySelectorAll('.form-input-switchery'));
-        elems.forEach(function(html) {
+        elems.forEach(function (html) {
             var switchery = new Switchery(html);
         });
     };
 
     // Bootstrap switch
-    var _componentBootstrapSwitch = function() {
+    var _componentBootstrapSwitch = function () {
         if (!$().bootstrapSwitch) {
             console.warn('Warning - switch.min.js is not loaded.');
             return;
@@ -43,7 +43,7 @@ var CardFooter = function() {
     };
 
     // Select2
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -56,7 +56,7 @@ var CardFooter = function() {
     };
 
     // Touchspin
-    var _componentTouchSpin = function() {
+    var _componentTouchSpin = function () {
         if (!$().TouchSpin) {
             console.warn('Warning - touchspin.min.js is not loaded.');
             return;
@@ -80,7 +80,7 @@ var CardFooter = function() {
     };
 
     // Multiselect
-    var _componentMulti = function() {
+    var _componentMulti = function () {
         if (!$().multiselect) {
             console.warn('Warning - bootstrap-multiselect.js is not loaded.');
             return;
@@ -91,7 +91,7 @@ var CardFooter = function() {
     };
 
     // NoUI slider
-    var _componentNouiSlider = function() {
+    var _componentNouiSlider = function () {
         if (typeof noUiSlider == 'undefined') {
             console.warn('Warning - nouislider.min.js is not loaded.');
             return;
@@ -111,8 +111,8 @@ var CardFooter = function() {
             connect: 'lower',
             tooltips: true,
             range: {
-              'min': 0,
-              'max': 100
+                'min': 0,
+                'max': 100
             }
         });
 
@@ -126,19 +126,19 @@ var CardFooter = function() {
 
         // Create slider
         noUiSlider.create(noui_slider_demo, {
-            start: [ 20, 80 ],
+            start: [20, 80],
             behaviour: 'drag',
             connect: true,
             tooltips: true,
             range: {
-                'min':  0,
-                'max':  100
+                'min': 0,
+                'max': 100
             }
         });
     };
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - switch.min.js is not loaded.');
             return;
@@ -152,7 +152,7 @@ var CardFooter = function() {
     };
 
     // jQuery UI slider
-    var _componentJuiSlider = function() {
+    var _componentJuiSlider = function () {
         if (!$().slider) {
             console.warn('Warning - jQuery UI components are not loaded.');
             return;
@@ -180,7 +180,7 @@ var CardFooter = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentSwitchery();
             _componentBootstrapSwitch();
 
@@ -198,6 +198,6 @@ var CardFooter = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     CardFooter.init();
 });

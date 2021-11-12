@@ -101,8 +101,7 @@
             &:after {
                 @if $direction == 'LTR' {
                     content: '\e9c7';
-                }
-                @else {
+                } @else {
                     content: '\e9c4';
                 }
                 right: $dropdown-item-padding-x;
@@ -120,8 +119,7 @@
             &:before {
                 @if $direction == 'LTR' {
                     content: '\ede7';
-                }
-                @else {
+                } @else {
                     content: '\ede5';
                 }
                 left: $dropdown-item-padding-x;

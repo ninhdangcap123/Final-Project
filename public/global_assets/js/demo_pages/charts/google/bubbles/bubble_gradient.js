@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleBubbleGradientChart = function() {
+var GoogleBubbleGradientChart = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleBubbleGradientChart = function() {
     //
 
     // Bubble chart with gradient
-    var _googleBubbleGradientChart = function() {
+    var _googleBubbleGradientChart = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleBubbleGradientChart = function() {
 
                 // Resize on window resize
                 var resizeBubbleGradientChart;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeBubbleGradientChart);
                     resizeBubbleGradientChart = setTimeout(function () {
                         drawBubbleGradientChart();
@@ -55,13 +55,13 @@ var GoogleBubbleGradientChart = function() {
             // Data
             var data = google.visualization.arrayToDataTable([
                 ['ID', 'X', 'Y', 'Temperature'],
-                ['',   80,  167,      120],
-                ['',   79,  136,      130],
-                ['',   78,  184,      50],
-                ['',   72,  278,      230],
-                ['',   81,  200,      210],
-                ['',   72,  170,      100],
-                ['',   68,  477,      80]
+                ['', 80, 167, 120],
+                ['', 79, 136, 130],
+                ['', 78, 184, 50],
+                ['', 72, 278, 230],
+                ['', 81, 200, 210],
+                ['', 72, 170, 100],
+                ['', 68, 477, 80]
             ]);
 
             // Optinos
@@ -81,17 +81,17 @@ var GoogleBubbleGradientChart = function() {
                     }
                 },
                 vAxis: {
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
                     minValue: 0
                 },
                 bubble: {
-                  textStyle: {
-                    fontSize: 11
-                  },
-                  stroke: '#fff'
+                    textStyle: {
+                        fontSize: 11
+                    },
+                    stroke: '#fff'
                 }
             };
 
@@ -107,7 +107,7 @@ var GoogleBubbleGradientChart = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleBubbleGradientChart();
         }
     }

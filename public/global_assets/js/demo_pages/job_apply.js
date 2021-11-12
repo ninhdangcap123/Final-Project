@@ -18,7 +18,7 @@ var JobApply = function () {
     //
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -31,7 +31,7 @@ var JobApply = function () {
     };
 
     // Select2
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -42,7 +42,7 @@ var JobApply = function () {
     };
 
     // Datepicker
-    var _componentUiDatepicker = function() {
+    var _componentUiDatepicker = function () {
         if (!$().datepicker) {
             console.warn('Warning - jQuery UI components are not loaded.');
             return;
@@ -58,7 +58,7 @@ var JobApply = function () {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentUniform();
             _componentSelect2();
             _componentUiDatepicker();
@@ -70,6 +70,6 @@ var JobApply = function () {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     JobApply.init();
 });

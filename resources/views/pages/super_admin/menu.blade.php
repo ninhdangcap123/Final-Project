@@ -1,6 +1,8 @@
 {{--Manage Settings--}}
 <li class="nav-item">
-    <a href="{{ route('settings') }}" class="nav-link {{ in_array(Route::currentRouteName(), ['settings',]) ? 'active' : '' }}"><i class="icon-gear"></i> <span>Settings</span></a>
+    <a href="{{ route('settings') }}"
+       class="nav-link {{ in_array(Route::currentRouteName(), ['settings',]) ? 'active' : '' }}"><i
+            class="icon-gear"></i> <span>Settings</span></a>
 </li>
 
 {{--Pins--}}
@@ -9,10 +11,10 @@
 
     <ul class="nav nav-group-sub" data-submenu-title="Manage Pins">
         {{--Generate Pins--}}
-            <li class="nav-item">
-                <a href="{{ route('pins.create') }}"
-                   class="nav-link {{ (Route::is('pins.create')) ? 'active' : '' }}">Generate Pins</a>
-            </li>
+        <li class="nav-item">
+            <a href="{{ route('pins.create') }}"
+               class="nav-link {{ (Route::is('pins.create')) ? 'active' : '' }}">Generate Pins</a>
+        </li>
 
         {{--    Valid/Invalid Pins  --}}
         <li class="nav-item">

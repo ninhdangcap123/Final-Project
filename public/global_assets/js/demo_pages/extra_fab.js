@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var FloatingActionButton = function() {
+var FloatingActionButton = function () {
 
 
     //
@@ -18,7 +18,7 @@ var FloatingActionButton = function() {
     //
 
     // FAB
-    var _componentFab = function() {
+    var _componentFab = function () {
         if (!$().stick_in_parent) {
             console.warn('Warning - sticky.min.js is not loaded.');
             return;
@@ -27,12 +27,11 @@ var FloatingActionButton = function() {
         // Add bottom spacing if reached bottom,
         // to avoid footer overlapping
         // -------------------------
-        
-        $(window).on('scroll', function() {
-            if($(window).scrollTop() + $(window).height() > $(document).height() - 40) {
+
+        $(window).on('scroll', function () {
+            if ($(window).scrollTop() + $(window).height() > $(document).height() - 40) {
                 $('.fab-menu-bottom-left, .fab-menu-bottom-right').addClass('reached-bottom');
-            }
-            else {
+            } else {
                 $('.fab-menu-bottom-left, .fab-menu-bottom-right').removeClass('reached-bottom');
             }
         });
@@ -49,7 +48,7 @@ var FloatingActionButton = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentFab();
         }
     }
@@ -59,6 +58,6 @@ var FloatingActionButton = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     FloatingActionButton.init();
 });

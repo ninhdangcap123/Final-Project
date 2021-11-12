@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3BarNormalized = function() {
+var D3BarNormalized = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3BarNormalized = function() {
     //
 
     // Chart
-    var _barNormalized = function() {
+    var _barNormalized = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3BarNormalized = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -40,7 +40,6 @@ var D3BarNormalized = function() {
                 margin = {top: 5, right: 130, bottom: 20, left: 40},
                 width = d3Container.node().getBoundingClientRect().width - margin.left - margin.right,
                 height = height - margin.top - margin.bottom - 5;
-
 
 
             // Construct scales
@@ -59,7 +58,6 @@ var D3BarNormalized = function() {
                 .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
 
-
             // Create axes
             // ------------------------------
 
@@ -75,7 +73,6 @@ var D3BarNormalized = function() {
                 .tickFormat(d3.format(".0%"));
 
 
-
             // Create chart
             // ------------------------------
 
@@ -87,35 +84,44 @@ var D3BarNormalized = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             // Load data
             // ------------------------------
 
-            d3.csv("../../../../global_assets/demo_data/d3/bars/bars_stacked.csv", function(error, data) {
+            d3.csv("../../../../global_assets/demo_data/d3/bars/bars_stacked.csv", function (error, data) {
 
                 // Filter values by key
-                color.domain(d3.keys(data[0]).filter(function(key) { return key !== "State"; }));
+                color.domain(d3.keys(data[0]).filter(function (key) {
+                    return key !== "State";
+                }));
 
                 // Pull out values
-                data.forEach(function(d) {
+                data.forEach(function (d) {
                     var y0 = 0;
-                    d.ages = color.domain().map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
-                    d.ages.forEach(function(d) { d.y0 /= y0; d.y1 /= y0; });
+                    d.ages = color.domain().map(function (name) {
+                        return {name: name, y0: y0, y1: y0 += +d[name]};
+                    });
+                    d.ages.forEach(function (d) {
+                        d.y0 /= y0;
+                        d.y1 /= y0;
+                    });
                 });
 
                 // Sort data
-                data.sort(function(a, b) { return b.ages[0].y1 - a.ages[0].y1; });
+                data.sort(function (a, b) {
+                    return b.ages[0].y1 - a.ages[0].y1;
+                });
 
 
                 // Set input domains
                 // ------------------------------
 
                 // Horizontal
-                x.domain(data.map(function(d) { return d.State; }));
-
+                x.domain(data.map(function (d) {
+                    return d.State;
+                }));
 
 
                 //
@@ -137,7 +143,6 @@ var D3BarNormalized = function() {
                     .call(yAxis);
 
 
-
                 // Add bars
                 // ------------------------------
 
@@ -146,20 +151,29 @@ var D3BarNormalized = function() {
                     .data(data)
                     .enter()
                     .append("g")
-                        .attr("class", "bar-group")
-                        .attr("transform", function(d) { return "translate(" + x(d.State) + ",0)"; });
+                    .attr("class", "bar-group")
+                    .attr("transform", function (d) {
+                        return "translate(" + x(d.State) + ",0)";
+                    });
 
                 // Append bars
                 state.selectAll(".d3-bar")
-                    .data(function(d) { return d.ages; })
+                    .data(function (d) {
+                        return d.ages;
+                    })
                     .enter()
                     .append("rect")
-                        .attr("class", "d3-bar")
-                        .attr("width", x.rangeBand())
-                        .attr("y", function(d) { return y(d.y1); })
-                        .attr("height", function(d) { return y(d.y0) - y(d.y1); })
-                        .style("fill", function(d) { return color(d.name); });
-
+                    .attr("class", "d3-bar")
+                    .attr("width", x.rangeBand())
+                    .attr("y", function (d) {
+                        return y(d.y1);
+                    })
+                    .attr("height", function (d) {
+                        return y(d.y0) - y(d.y1);
+                    })
+                    .style("fill", function (d) {
+                        return color(d.name);
+                    });
 
 
                 // Add legend
@@ -168,10 +182,14 @@ var D3BarNormalized = function() {
                 // Create legend
                 var legend = svg.select(".bar-group:last-child")
                     .selectAll(".d3-legend")
-                    .data(function(d) { return d.ages; })
+                    .data(function (d) {
+                        return d.ages;
+                    })
                     .enter().append("g")
                     .attr("class", "d3-legend")
-                    .attr("transform", function(d) { return "translate(" + x.rangeBand() + "," + y((d.y0 + d.y1) / 2) + ")"; });
+                    .attr("transform", function (d) {
+                        return "translate(" + x.rangeBand() + "," + y((d.y0 + d.y1) / 2) + ")";
+                    });
 
                 // Legend line
                 legend.append("line")
@@ -183,10 +201,10 @@ var D3BarNormalized = function() {
                 legend.append("text")
                     .attr("x", 15)
                     .attr("dy", ".35em")
-                    .text(function(d) { return d.name; });
+                    .text(function (d) {
+                        return d.name;
+                    });
             });
-
-
 
 
             // Resize chart
@@ -199,9 +217,9 @@ var D3BarNormalized = function() {
             $('.sidebar-control').on('click', resize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resize() {
 
@@ -233,13 +251,17 @@ var D3BarNormalized = function() {
                 // -------------------------
 
                 // Bar group
-                svg.selectAll('.bar-group').attr("transform", function(d) { return "translate(" + x(d.State) + ",0)"; });
+                svg.selectAll('.bar-group').attr("transform", function (d) {
+                    return "translate(" + x(d.State) + ",0)";
+                });
 
                 // Bars
                 svg.selectAll('.d3-bar').attr("width", x.rangeBand())
 
                 // Legend
-                svg.selectAll(".d3-legend").attr("transform", function(d) { return "translate(" + x.rangeBand() + "," + y((d.y0 + d.y1) / 2) + ")"; });
+                svg.selectAll(".d3-legend").attr("transform", function (d) {
+                    return "translate(" + x.rangeBand() + "," + y((d.y0 + d.y1) / 2) + ")";
+                });
             }
         }
     };
@@ -250,7 +272,7 @@ var D3BarNormalized = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _barNormalized();
         }
     }
@@ -260,6 +282,6 @@ var D3BarNormalized = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3BarNormalized.init();
 });

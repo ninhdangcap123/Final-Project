@@ -76,7 +76,7 @@
         line-height: 1;
         @include border-radius($border-radius);
         @include transition(all ease-in-out $component-transition-timer);
-        
+
         // Prev and next nav
         &:before {
             font-family: $icon-font-family;
@@ -103,8 +103,7 @@
         &:before {
             @if $direction == 'LTR' {
                 content: '\e9c8';
-            }
-            @else {
+            } @else {
                 content: '\e9cb';
             }
         }
@@ -118,8 +117,7 @@
         &:before {
             @if $direction == 'LTR' {
                 content: '\e9cb';
-            }
-            @else {
+            } @else {
                 content: '\e9c8';
             }
         }

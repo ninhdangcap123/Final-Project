@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleBubbleLollipopHorizontal = function() {
+var DimpleBubbleLollipopHorizontal = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleBubbleLollipopHorizontal = function() {
     //
 
     // Chart
-    var _bubbleLollipopHorizontal = function() {
+    var _bubbleLollipopHorizontal = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleBubbleLollipopHorizontal = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -145,7 +145,7 @@ var DimpleBubbleLollipopHorizontal = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _bubbleLollipopHorizontal();
         }
     }
@@ -155,6 +155,6 @@ var DimpleBubbleLollipopHorizontal = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleBubbleLollipopHorizontal.init();
 });

@@ -8,7 +8,7 @@ class GetPaymentHelper
 {
     public static function getYears($st_id)
     {
-        return PaymentRecord::where(['student_id' => $st_id])->pluck('year')->unique();
+        return PaymentRecord::where([ 'student_id' => $st_id ])->pluck('year')->unique();
     }
 
     public static function genRefCode()

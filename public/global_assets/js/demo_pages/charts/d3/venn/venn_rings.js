@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3VennRings = function() {
+var D3VennRings = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3VennRings = function() {
     //
 
     // Chart
-    var _vennRings = function() {
+    var _vennRings = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var D3VennRings = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Data set
             // ------------------------------
@@ -44,17 +44,17 @@ var D3VennRings = function() {
 
             // Overlaps
             var overlaps = [
-                {sets: [0,1], size: 1},
-                {sets: [0,2], size: 1},
-                {sets: [0,3], size: 14},
-                {sets: [1,2], size: 6},
-                {sets: [1,3], size: 0},
-                {sets: [2,3], size: 1},
-                {sets: [0,2,3], size: 1},
-                {sets: [0,1,2], size: 0},
-                {sets: [0,1,3], size: 0},
-                {sets: [1,2,3], size: 0},
-                {sets: [0,1,2,3], size: 0}
+                {sets: [0, 1], size: 1},
+                {sets: [0, 2], size: 1},
+                {sets: [0, 3], size: 14},
+                {sets: [1, 2], size: 6},
+                {sets: [1, 3], size: 0},
+                {sets: [2, 3], size: 1},
+                {sets: [0, 2, 3], size: 1},
+                {sets: [0, 1, 2], size: 0},
+                {sets: [0, 1, 3], size: 0},
+                {sets: [1, 2, 3], size: 0},
+                {sets: [0, 1, 2, 3], size: 0}
             ];
 
 
@@ -74,13 +74,19 @@ var D3VennRings = function() {
                 .style("fill-opacity", 0)
                 .style("stroke-width", 6)
                 .style("stroke-opacity", .6)
-                .style("fill", function(d,i) { return colours(i); })
-                .style("stroke", function(d,i) { return colours(i); });
+                .style("fill", function (d, i) {
+                    return colours(i);
+                })
+                .style("stroke", function (d, i) {
+                    return colours(i);
+                });
 
 
             // Style text
             diagram.text
-                .style("fill", function(d,i) { return colours(i)})
+                .style("fill", function (d, i) {
+                    return colours(i)
+                })
                 .style("font-weight", "500");
         }
     };
@@ -91,7 +97,7 @@ var D3VennRings = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _vennRings();
         }
     }
@@ -101,6 +107,6 @@ var D3VennRings = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3VennRings.init();
 });

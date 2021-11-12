@@ -23,7 +23,7 @@ class GradeUpdate extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
             'mark_from' => 'Mark From',
             'mark_to' => 'Mark To',
         ];

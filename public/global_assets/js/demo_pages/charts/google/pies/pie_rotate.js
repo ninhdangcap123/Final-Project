@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GooglePieRotate = function() {
+var GooglePieRotate = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GooglePieRotate = function() {
     //
 
     // Rotated pie
-    var _googlePieRotate = function() {
+    var _googlePieRotate = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GooglePieRotate = function() {
 
                 // Resize on window resize
                 var resizePieRotate;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizePieRotate);
                     resizePieRotate = setTimeout(function () {
                         drawPieRotated();
@@ -55,11 +55,11 @@ var GooglePieRotate = function() {
             // Data
             var data = google.visualization.arrayToDataTable([
                 ['Task', 'Hours per Day'],
-                ['Work',     11],
-                ['Eat',      2],
-                ['Commute',  2],
+                ['Work', 11],
+                ['Eat', 2],
+                ['Commute', 2],
                 ['Watch TV', 2],
-                ['Sleep',    7]
+                ['Sleep', 7]
             ]);
 
             // Options
@@ -87,7 +87,7 @@ var GooglePieRotate = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googlePieRotate();
         }
     }

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleTrendline = function() {
+var GoogleTrendline = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleTrendline = function() {
     //
 
     // Trendline chart
-    var _googleTrendline = function() {
+    var _googleTrendline = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleTrendline = function() {
 
                 // Resize on window resize
                 var resizeTrendline;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeTrendline);
                     resizeTrendline = setTimeout(function () {
                         drawTrendline();
@@ -87,7 +87,7 @@ var GoogleTrendline = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
@@ -125,7 +125,7 @@ var GoogleTrendline = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleTrendline();
         }
     }

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var HotCustomChecks = function() {
+var HotCustomChecks = function () {
 
 
     //
@@ -18,7 +18,7 @@ var HotCustomChecks = function() {
     //
 
     // HOT custom renderers and checkboxes examples
-    var _componentHotCustomChecks = function() {
+    var _componentHotCustomChecks = function () {
         if (typeof Handsontable == 'undefined') {
             console.warn('Warning - handsontable.min.js is not loaded.');
             return;
@@ -77,7 +77,7 @@ var HotCustomChecks = function() {
         // Original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
         function strip_tags(input, allowed) {
             var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
-            commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+                commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
 
             // Making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
             allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join('');
@@ -88,7 +88,7 @@ var HotCustomChecks = function() {
         }
 
         // Renderer for image
-        function coverRenderer (instance, td, row, col, prop, value, cellProperties) {
+        function coverRenderer(instance, td, row, col, prop, value, cellProperties) {
             var escaped = Handsontable.helper.stringify(value),
                 img;
 
@@ -101,20 +101,18 @@ var HotCustomChecks = function() {
                 img.style.display = 'block';
                 img.src = value;
 
-                Handsontable.dom.addEvent(img, 'mousedown', function (e){
+                Handsontable.dom.addEvent(img, 'mousedown', function (e) {
                     e.preventDefault(); // prevent selection quirk
                 });
 
                 Handsontable.dom.empty(td);
                 td.appendChild(img);
-            }
-            else {
+            } else {
                 Handsontable.renderers.TextRenderer.apply(this, arguments); // render as text
             }
 
             return td;
         }
-
 
 
         // Rendering custom HTML in header
@@ -200,13 +198,13 @@ var HotCustomChecks = function() {
 
         // Setup custom renderer
         var isChecked;
+
         function customRenderer(instance, td) {
             Handsontable.renderers.TextRenderer.apply(this, arguments);
 
             if (isChecked) {
                 td.style.backgroundColor = '#F1F8E9';
-            }
-            else {
+            } else {
                 td.style.backgroundColor = '';
             }
 
@@ -227,7 +225,6 @@ var HotCustomChecks = function() {
                 hot_html_header_init.render();
             }
         });
-
 
 
         // Change column type
@@ -260,12 +257,12 @@ var HotCustomChecks = function() {
         ];
 
         // Initialize with options
-        var hot_change_type = new Handsontable(hot_change_type,{
+        var hot_change_type = new Handsontable(hot_change_type, {
             data: car_data,
             colHeaders: true,
             stretchH: 'all',
             columns: columns,
-            afterGetColHeader: function(col, TH) {
+            afterGetColHeader: function (col, TH) {
                 var instance = this,
                     menu = buildMenu(columns[col].type),
                     button = buildButton();
@@ -330,7 +327,7 @@ var HotCustomChecks = function() {
         }
 
         // Build menu
-        function buildMenu(activeCellType){
+        function buildMenu(activeCellType) {
 
             // Define elements
             var menu = document.createElement('UL'),
@@ -341,9 +338,9 @@ var HotCustomChecks = function() {
             menu.className = 'changeTypeMenu';
 
             // Menu items
-            for (var i = 0, len = types.length; i< len; i++) {
+            for (var i = 0, len = types.length; i < len; i++) {
                 item = document.createElement('LI');
-                if('innerText' in item) {
+                if ('innerText' in item) {
                     item.innerText = types[i];
                 } else {
                     item.textContent = types[i];
@@ -377,12 +374,10 @@ var HotCustomChecks = function() {
         function setColumnType(i, type, instance) {
             columns[i].type = type;
             instance.updateSettings({columns: columns});
-            instance.validateCells(function() {
+            instance.validateCells(function () {
                 instance.render();
             });
         }
-
-
 
 
         // Checkbox true/false values
@@ -403,7 +398,7 @@ var HotCustomChecks = function() {
             {car: "Audi", model: "Q7", year: 2012, price: 21000, available: false},
             {car: "Cadillac", model: "Escalade", year: 2012, price: 63900, available: true}
         ];
-      
+
         // Define element
         var hot_checks_values = document.getElementById('hot_checks_values');
 
@@ -440,7 +435,6 @@ var HotCustomChecks = function() {
                 }
             ]
         });
-
 
 
         // Checkbox labels
@@ -508,7 +502,6 @@ var HotCustomChecks = function() {
         });
 
 
-
         // Checkbox template
         // ------------------------------
 
@@ -574,7 +567,7 @@ var HotCustomChecks = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentHotCustomChecks();
         }
     }
@@ -584,6 +577,6 @@ var HotCustomChecks = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     HotCustomChecks.init();
 });

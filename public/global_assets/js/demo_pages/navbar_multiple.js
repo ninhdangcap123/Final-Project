@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var NavbarMultiple = function() {
+var NavbarMultiple = function () {
 
 
     //
@@ -18,7 +18,7 @@ var NavbarMultiple = function() {
     //
 
     // Switchery
-    var _componentSwitchery = function() {
+    var _componentSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
@@ -26,7 +26,7 @@ var NavbarMultiple = function() {
 
         // Initialize
         var rememberMe = Array.prototype.slice.call(document.querySelectorAll('.form-input-switchery'));
-        rememberMe.forEach(function(html) {
+        rememberMe.forEach(function (html) {
             var switchery = new Switchery(html);
         });
     };
@@ -37,7 +37,7 @@ var NavbarMultiple = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentSwitchery();
         }
     }
@@ -47,6 +47,6 @@ var NavbarMultiple = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     NavbarMultiple.init();
 });

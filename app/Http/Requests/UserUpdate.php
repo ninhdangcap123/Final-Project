@@ -31,7 +31,7 @@ class UserUpdate extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
             'nal_id' => 'Nationality',
             'state_id' => 'State',
             'lga_id' => 'LGA',

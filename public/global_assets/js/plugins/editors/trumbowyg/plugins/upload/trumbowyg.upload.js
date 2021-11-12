@@ -21,7 +21,7 @@
         headers: {},                    // Additional headers
         xhrFields: {},                  // Additional fields
         urlPropertyName: 'file',        // How to get url from the json response (for instance 'url' for {url: ....})
-        statusPropertyName: 'success',  // How to get status from the json response 
+        statusPropertyName: 'success',  // How to get status from the json response
         success: undefined,             // Success callback: function (data, trumbowyg, $modal, values) {}
         error: undefined,               // Error callback: function () {}
         imageWidthModalEdit: false      // Add ability to edit image width
@@ -77,7 +77,7 @@
                 upload: '上傳',
                 file: '文件',
                 uploadError: '錯誤'
-            },            
+            },
             ru: {
                 upload: 'Загрузка',
                 file: 'Файл',
@@ -142,9 +142,9 @@
                                     trumbowyg.o.plugins.upload.data.map(function (cur) {
                                         data.append(cur.name, cur.value);
                                     });
-                                    
-                                    $.map(values, function(curr, key){
-                                        if(key !== 'file') { 
+
+                                    $.map(values, function (curr, key) {
+                                        if (key !== 'file') {
                                             data.append(key, curr);
                                         }
                                     });

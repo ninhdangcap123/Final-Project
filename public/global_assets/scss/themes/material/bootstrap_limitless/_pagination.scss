@@ -61,6 +61,7 @@
                 @include border-left-radius($border-radius-round);
             }
         }
+
         &:last-child {
             .page-link {
                 @include border-right-radius($border-radius-round);
@@ -175,6 +176,7 @@
             @include border-radius($border-radius-lg);
         }
     }
+
     &:not(.pagination-rounded).pagination-sm {
         .page-link {
             @include border-radius($border-radius-sm);

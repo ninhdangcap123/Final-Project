@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GooglePieDiffBorder = function() {
+var GooglePieDiffBorder = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GooglePieDiffBorder = function() {
     //
 
     // Pie with border factor
-    var _googlePieDiffBorder = function() {
+    var _googlePieDiffBorder = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GooglePieDiffBorder = function() {
 
                 // Resize on window resize
                 var resizePieDiffBorder;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizePieDiffBorder);
                     resizePieDiffBorder = setTimeout(function () {
                         drawPieDiffBorder();
@@ -102,7 +102,7 @@ var GooglePieDiffBorder = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googlePieDiffBorder();
         }
     }

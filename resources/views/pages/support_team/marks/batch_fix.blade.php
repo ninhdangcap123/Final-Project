@@ -18,9 +18,11 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exam_id" class="col-form-label font-weight-bold">Exam:</label>
-                                        <select required id="exam_id" name="exam_id" data-placeholder="Select Exam" class="form-control select">
+                                        <select required id="exam_id" name="exam_id" data-placeholder="Select Exam"
+                                                class="form-control select">
                                             @foreach($exams as $ex)
-                                                <option {{ $selected && $exam_id == $ex->id ? 'selected' : '' }} value="{{ $ex->id }}">{{ $ex->name }}</option>
+                                                <option
+                                                    {{ $selected && $exam_id == $ex->id ? 'selected' : '' }} value="{{ $ex->id }}">{{ $ex->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -29,10 +31,12 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="my_course_id" class="col-form-label font-weight-bold">Class:</label>
-                                        <select required onchange="getClassSections(this.value)" id="my_course_id" name="my_course_id" class="form-control select">
+                                        <select required onchange="getClassSections(this.value)" id="my_course_id"
+                                                name="my_course_id" class="form-control select">
                                             <option value="">Select Course</option>
                                             @foreach($my_courses as $c)
-                                                <option {{ ($selected && $my_course_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                                <option
+                                                    {{ ($selected && $my_course_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -41,10 +45,12 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="section_id" class="col-form-label font-weight-bold">Classes:</label>
-                                        <select required id="section_id" name="section_id" data-placeholder="Select Class First" class="form-control select">
+                                        <select required id="section_id" name="section_id"
+                                                data-placeholder="Select Class First" class="form-control select">
                                             @if($selected)
                                                 @foreach($classes->where('my_class_id', $my_class_id) as $s)
-                                                    <option {{ $section_id == $s->id ? 'selected' : '' }} value="{{ $s->id }}">{{ $s->name }}</option>
+                                                    <option
+                                                        {{ $section_id == $s->id ? 'selected' : '' }} value="{{ $s->id }}">{{ $s->name }}</option>
                                                 @endforeach
                                             @endif
                                         </select>
@@ -58,7 +64,8 @@
 
                     <div class="col-md-2 mt-4">
                         <div class="text-right mt-1">
-                            <button type="submit" class="btn btn-danger">Fix Errors <i class="icon-wrench2 ml-2"></i></button>
+                            <button type="submit" class="btn btn-danger">Fix Errors <i class="icon-wrench2 ml-2"></i>
+                            </button>
                         </div>
                     </div>
 

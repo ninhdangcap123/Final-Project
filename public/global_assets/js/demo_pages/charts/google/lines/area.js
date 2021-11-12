@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleAreaBasic = function() {
+var GoogleAreaBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleAreaBasic = function() {
     //
 
     // Area chart
-    var _googleAreaBasic = function() {
+    var _googleAreaBasic = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleAreaBasic = function() {
 
                 // Resize on window resize
                 var resizeAreaChart;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeAreaChart);
                     resizeAreaChart = setTimeout(function () {
                         drawAreaChart();
@@ -55,10 +55,10 @@ var GoogleAreaBasic = function() {
             // Data
             var data = google.visualization.arrayToDataTable([
                 ['Year', 'Sales', 'Expenses'],
-                ['2004',  1000,      400],
-                ['2005',  1170,      460],
-                ['2006',  660,       1120],
-                ['2007',  1030,      540]
+                ['2004', 1000, 400],
+                ['2005', 1170, 460],
+                ['2006', 660, 1120],
+                ['2007', 1030, 540]
             ]);
 
 
@@ -87,7 +87,7 @@ var GoogleAreaBasic = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridarea:{
+                    gridarea: {
                         color: '#e5e5e5',
                         count: 10
                     },
@@ -114,7 +114,7 @@ var GoogleAreaBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleAreaBasic();
         }
     }

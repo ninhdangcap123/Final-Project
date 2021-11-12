@@ -202,7 +202,7 @@ select[size] {
     // Inline list
     &.form-check-inline {
         padding: 0;
-        
+
         // Input
         .form-check-input {
             margin-right: 0;
@@ -236,6 +236,7 @@ select[size] {
             &-lg {
                 padding-left: $input-padding-x-lg + $input-btn-padding-x-lg + $icon-font-size;
             }
+
             &-sm {
                 padding-left: $input-padding-x-sm + $input-btn-padding-x-sm + $icon-font-size;
             }
@@ -258,6 +259,7 @@ select[size] {
             &-lg {
                 padding-right: $input-padding-x-lg + $input-btn-padding-x-lg + $icon-font-size;
             }
+
             &-sm {
                 padding-right: $input-padding-x-sm + $input-btn-padding-x-sm + $icon-font-size;
             }

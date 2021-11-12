@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleMapMarkerAnimation = function() {
+var GoogleMapMarkerAnimation = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleMapMarkerAnimation = function() {
     //
 
     // Line chart
-    var _googleMapMarkerAnimation = function() {
+    var _googleMapMarkerAnimation = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Maps library is not loaded.');
             return;
@@ -65,7 +65,7 @@ var GoogleMapMarkerAnimation = function() {
         // Drop markers
         function drop() {
             for (var i = 0; i < neighborhoods.length; i++) {
-                setTimeout(function() {
+                setTimeout(function () {
                     addMarker();
                 }, i * 200);
             }
@@ -83,7 +83,7 @@ var GoogleMapMarkerAnimation = function() {
         }
 
         // Drop markers on button click
-        $('.drop-markers').on('click', function() {
+        $('.drop-markers').on('click', function () {
             drop();
         });
 
@@ -97,7 +97,7 @@ var GoogleMapMarkerAnimation = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleMapMarkerAnimation();
         }
     }
@@ -107,6 +107,6 @@ var GoogleMapMarkerAnimation = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     GoogleMapMarkerAnimation.init();
 });

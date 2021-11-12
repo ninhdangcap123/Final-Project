@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleColumnBasic = function() {
+var GoogleColumnBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleColumnBasic = function() {
     //
 
     // Column chart
-    var _googleColumnBasic = function() {
+    var _googleColumnBasic = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleColumnBasic = function() {
 
                 // Resize on window resize
                 var resizeColumn;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeColumn);
                     resizeColumn = setTimeout(function () {
                         drawColumn();
@@ -55,10 +55,10 @@ var GoogleColumnBasic = function() {
             // Data
             var data = google.visualization.arrayToDataTable([
                 ['Year', 'Sales', 'Expenses'],
-                ['2004',  1000,      400],
-                ['2005',  1170,      460],
-                ['2006',  660,       1120],
-                ['2007',  1030,      540]
+                ['2004', 1000, 400],
+                ['2005', 1170, 460],
+                ['2006', 660, 1120],
+                ['2007', 1030, 540]
             ]);
 
 
@@ -84,7 +84,7 @@ var GoogleColumnBasic = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
@@ -111,7 +111,7 @@ var GoogleColumnBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleColumnBasic();
         }
     }

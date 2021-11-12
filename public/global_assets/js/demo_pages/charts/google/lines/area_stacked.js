@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleAreaStacked = function() {
+var GoogleAreaStacked = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleAreaStacked = function() {
     //
 
     // Stacked area chart
-    var _googleAreaStacked = function() {
+    var _googleAreaStacked = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleAreaStacked = function() {
 
                 // Resize on window resize
                 var resizeAreaStacked;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeAreaStacked);
                     resizeAreaStacked = setTimeout(function () {
                         drawAreaStackedChart();
@@ -55,10 +55,10 @@ var GoogleAreaStacked = function() {
             // Data
             var data = google.visualization.arrayToDataTable([
                 ['Year', 'Cars', 'Trucks', 'Drones', 'Segways'],
-                ['2013',  870,  460, 310, 220],
-                ['2014',  460,   720, 220, 460],
-                ['2015',  930,  640, 340, 330],
-                ['2016',  1000,  400, 180, 500]
+                ['2013', 870, 460, 310, 220],
+                ['2014', 460, 720, 220, 460],
+                ['2015', 930, 640, 340, 330],
+                ['2016', 1000, 400, 180, 500]
             ]);
 
             // Options
@@ -88,7 +88,7 @@ var GoogleAreaStacked = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
@@ -115,7 +115,7 @@ var GoogleAreaStacked = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleAreaStacked();
         }
     }

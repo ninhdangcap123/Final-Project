@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3BarHistogram = function() {
+var D3BarHistogram = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3BarHistogram = function() {
     //
 
     // Chart
-    var _barHistogram = function() {
+    var _barHistogram = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3BarHistogram = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -48,7 +48,6 @@ var D3BarHistogram = function() {
             var formatCount = d3.format(",.0f");
 
 
-
             // Construct scales
             // ------------------------------
 
@@ -64,12 +63,13 @@ var D3BarHistogram = function() {
 
             // Vertical
             var y = d3.scale.linear()
-                .domain([0, d3.max(data, function(d) { return d.y; })])
+                .domain([0, d3.max(data, function (d) {
+                    return d.y;
+                })])
                 .range([height, 0]);
 
             // Colors
             var color = d3.scale.ordinal().range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
 
 
             // Create axes
@@ -79,7 +79,6 @@ var D3BarHistogram = function() {
             var xAxis = d3.svg.axis()
                 .scale(x)
                 .orient("bottom");
-
 
 
             // Create chart
@@ -93,8 +92,7 @@ var D3BarHistogram = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             // Add tooltip
@@ -104,7 +102,7 @@ var D3BarHistogram = function() {
             var tip = d3.tip()
                 .attr('class', 'd3-tip')
                 .offset([-25, 0])
-                .html(function(d) {
+                .html(function (d) {
                     return "Current value: " + "<span class='font-weight-semibold'>" + formatCount(d.y) + "</span>";
                 })
 
@@ -124,17 +122,23 @@ var D3BarHistogram = function() {
                 .data(data)
                 .enter()
                 .append("g")
-                    .attr("class", "d3-bar")
-                    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; })
-                    .on('mouseover', tip.show)
-                    .on('mouseout', tip.hide);
+                .attr("class", "d3-bar")
+                .attr("transform", function (d) {
+                    return "translate(" + x(d.x) + "," + y(d.y) + ")";
+                })
+                .on('mouseover', tip.show)
+                .on('mouseout', tip.hide);
 
             // Append bars
             bar.append("rect")
                 .attr("x", 1)
                 .attr("width", x(data[0].dx) - 3)
-                .attr("height", function(d) { return height - y(d.y); })
-                .style("fill", function(d) { return color(d); });
+                .attr("height", function (d) {
+                    return height - y(d.y);
+                })
+                .style("fill", function (d) {
+                    return color(d);
+                });
 
             // Append text
             bar.append("text")
@@ -143,7 +147,9 @@ var D3BarHistogram = function() {
                 .attr("x", x(data[0].dx) / 2)
                 .style("text-anchor", "middle")
                 .style("fill", "#333")
-                .text(function(d) { return formatCount(d.y); });
+                .text(function (d) {
+                    return formatCount(d.y);
+                });
 
             // Append axes
             // ------------------------------
@@ -153,7 +159,6 @@ var D3BarHistogram = function() {
                 .attr("class", "d3-axis d3-axis-horizontal d3-axis-strong")
                 .attr("transform", "translate(0," + height + ")")
                 .call(xAxis);
-
 
 
             // Resize chart
@@ -166,9 +171,9 @@ var D3BarHistogram = function() {
             $('.sidebar-control').on('click', resize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resize() {
 
@@ -200,7 +205,9 @@ var D3BarHistogram = function() {
                 // -------------------------
 
                 // Bar group
-                svg.selectAll('.d3-bar').attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+                svg.selectAll('.d3-bar').attr("transform", function (d) {
+                    return "translate(" + x(d.x) + "," + y(d.y) + ")";
+                });
 
                 // Bar rect
                 svg.selectAll('.d3-bar rect').attr("x", 1).attr("width", x(data[0].dx) - 3);
@@ -217,7 +224,7 @@ var D3BarHistogram = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _barHistogram();
         }
     }
@@ -227,6 +234,6 @@ var D3BarHistogram = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3BarHistogram.init();
 });

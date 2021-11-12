@@ -196,6 +196,7 @@
             .trumbowyg-box:not(.trumbowyg-fullscreen) &:first-child button {
                 @include border-radius($border-radius - rem-calc($card-border-width) 0 0 0);
             }
+
             .trumbowyg-box:not(.trumbowyg-fullscreen) &:last-child button {
                 @include border-radius(0 $border-radius - rem-calc($card-border-width) 0 0);
             }
@@ -519,6 +520,7 @@
             height: calc(100% - #{$trumbowyg-toolbar-height}) !important;
             overflow: auto;
         }
+
         .trumbowyg-overlay {
             height: 100% !important;
         }

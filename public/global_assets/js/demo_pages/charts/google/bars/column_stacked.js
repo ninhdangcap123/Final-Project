@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleColumnStacked = function() {
+var GoogleColumnStacked = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleColumnStacked = function() {
     //
 
     // Stacked column chart
-    var _googleColumnStacked = function() {
+    var _googleColumnStacked = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleColumnStacked = function() {
 
                 // Resize on window resize
                 var resizeColumnStacked;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeColumnStacked);
                     resizeColumnStacked = setTimeout(function () {
                         drawColumnStacked();
@@ -54,7 +54,7 @@ var GoogleColumnStacked = function() {
 
             // Data
             var data = google.visualization.arrayToDataTable([
-                ['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General', 'Western', 'Literature', { role: 'annotation' } ],
+                ['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General', 'Western', 'Literature', {role: 'annotation'}],
                 ['2000', 20, 30, 35, 40, 45, 30, ''],
                 ['2005', 14, 20, 25, 30, 48, 30, ''],
                 ['2010', 10, 24, 20, 32, 18, 5, ''],
@@ -88,7 +88,7 @@ var GoogleColumnStacked = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
@@ -115,7 +115,7 @@ var GoogleColumnStacked = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleColumnStacked();
         }
     }

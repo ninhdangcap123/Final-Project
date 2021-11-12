@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3PieDonutBasic = function() {
+var D3PieDonutBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3PieDonutBasic = function() {
     //
 
     // Chart
-    var _pieDonutBasic = function() {
+    var _pieDonutBasic = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3PieDonutBasic = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -50,7 +50,7 @@ var D3PieDonutBasic = function() {
                 .attr("width", radius * 2)
                 .attr("height", radius * 2)
                 .append("g")
-                    .attr("transform", "translate(" + radius + "," + radius + ")");
+                .attr("transform", "translate(" + radius + "," + radius + ")");
 
 
             // Construct chart layout
@@ -64,16 +64,18 @@ var D3PieDonutBasic = function() {
             // Pie
             var pie = d3.layout.pie()
                 .sort(null)
-                .value(function(d) { return d.population; });
+                .value(function (d) {
+                    return d.population;
+                });
 
 
             // Load data
             // ------------------------------
 
-            d3.csv("../../../../global_assets/demo_data/d3/pies/pies_basic.csv", function(error, data) {
+            d3.csv("../../../../global_assets/demo_data/d3/pies/pies_basic.csv", function (error, data) {
 
                 // Pull out values
-                data.forEach(function(d) {
+                data.forEach(function (d) {
                     d.population = +d.population;
                 });
 
@@ -87,22 +89,28 @@ var D3PieDonutBasic = function() {
                     .data(pie(data))
                     .enter()
                     .append("g")
-                        .attr("class", "d3-arc");
+                    .attr("class", "d3-arc");
 
                 // Add arc path
                 g.append("path")
                     .attr("d", arc)
                     .style("stroke", "#fff")
-                    .style("fill", function(d) { return color(d.data.age); });
+                    .style("fill", function (d) {
+                        return color(d.data.age);
+                    });
 
                 // Add text labels
                 g.append("text")
-                    .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+                    .attr("transform", function (d) {
+                        return "translate(" + arc.centroid(d) + ")";
+                    })
                     .attr("dy", ".35em")
                     .style("fill", "#fff")
                     .style("font-size", 12)
                     .style("text-anchor", "middle")
-                    .text(function(d) { return d.data.age; });
+                    .text(function (d) {
+                        return d.data.age;
+                    });
             });
         }
     };
@@ -113,7 +121,7 @@ var D3PieDonutBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _pieDonutBasic();
         }
     }
@@ -123,6 +131,6 @@ var D3PieDonutBasic = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3PieDonutBasic.init();
 });

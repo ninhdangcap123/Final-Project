@@ -7,7 +7,7 @@ use Eloquent;
 
 class Classes extends Eloquent
 {
-    protected $fillable = ['name', 'my_course_id', 'active', 'teacher_id'];
+    protected $fillable = [ 'name', 'my_course_id', 'active', 'teacher_id' ];
 
     public function myCourse()
     {

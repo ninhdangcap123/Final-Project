@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleRingScatter = function() {
+var DimpleRingScatter = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleRingScatter = function() {
     //
 
     // Chart
-    var _ringScatter = function() {
+    var _ringScatter = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleRingScatter = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -136,7 +136,7 @@ var DimpleRingScatter = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _ringScatter();
         }
     }
@@ -146,6 +146,6 @@ var DimpleRingScatter = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleRingScatter.init();
 });

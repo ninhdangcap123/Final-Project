@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DatatableResponsive = function() {
+var DatatableResponsive = function () {
 
 
     //
@@ -18,27 +18,32 @@ var DatatableResponsive = function() {
     //
 
     // Basic Datatable examples
-    var _componentDatatableResponsive = function() {
+    var _componentDatatableResponsive = function () {
         if (!$().DataTable) {
             console.warn('Warning - datatables.min.js is not loaded.');
             return;
         }
 
         // Setting datatable defaults
-        $.extend( $.fn.dataTable.defaults, {
+        $.extend($.fn.dataTable.defaults, {
             autoWidth: false,
             responsive: true,
-            columnDefs: [{ 
+            columnDefs: [{
                 orderable: false,
                 width: 100,
-                targets: [ 5 ]
+                targets: [5]
             }],
             dom: '<"datatable-header"fl><"datatable-scroll-wrap"t><"datatable-footer"ip>',
             language: {
                 search: '<span>Filter:</span> _INPUT_',
                 searchPlaceholder: 'Type to filter...',
                 lengthMenu: '<span>Show:</span> _MENU_',
-                paginate: { 'first': 'First', 'last': 'Last', 'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;', 'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;' }
+                paginate: {
+                    'first': 'First',
+                    'last': 'Last',
+                    'next': $('html').attr('dir') == 'rtl' ? '&larr;' : '&rarr;',
+                    'previous': $('html').attr('dir') == 'rtl' ? '&rarr;' : '&larr;'
+                }
             }
         });
 
@@ -58,13 +63,13 @@ var DatatableResponsive = function() {
                 {
                     className: 'control',
                     orderable: false,
-                    targets:   0
+                    targets: 0
                 },
-                { 
+                {
                     width: "100px",
                     targets: [6]
                 },
-                { 
+                {
                     orderable: false,
                     targets: [6]
                 }
@@ -87,11 +92,11 @@ var DatatableResponsive = function() {
                     orderable: false,
                     targets: -1
                 },
-                { 
+                {
                     width: "100px",
                     targets: [5]
                 },
-                { 
+                {
                     orderable: false,
                     targets: [5]
                 }
@@ -111,13 +116,13 @@ var DatatableResponsive = function() {
                 {
                     className: 'control',
                     orderable: false,
-                    targets:   0
+                    targets: 0
                 },
-                { 
+                {
                     width: "100px",
                     targets: [6]
                 },
-                { 
+                {
                     orderable: false,
                     targets: [6]
                 }
@@ -127,7 +132,7 @@ var DatatableResponsive = function() {
     };
 
     // Select2 for length menu styling
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -147,7 +152,7 @@ var DatatableResponsive = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentDatatableResponsive();
             _componentSelect2();
         }
@@ -158,6 +163,6 @@ var DatatableResponsive = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DatatableResponsive.init();
 });

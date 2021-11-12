@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3AreaMissingData = function() {
+var D3AreaMissingData = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3AreaMissingData = function() {
     //
 
     // Chart
-    var _areaMissingData = function() {
+    var _areaMissingData = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3AreaMissingData = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -42,10 +42,9 @@ var D3AreaMissingData = function() {
                 height = height - margin.top - margin.bottom - 5;
 
             // Data set
-            var data = d3.range(60).map(function(i) {
-              return {x: i / 59, y: i % 5 ? (Math.sin(i / 3) + 2) / 4 : null};
+            var data = d3.range(60).map(function (i) {
+                return {x: i / 59, y: i % 5 ? (Math.sin(i / 3) + 2) / 4 : null};
             });
-
 
 
             // Construct scales
@@ -58,7 +57,6 @@ var D3AreaMissingData = function() {
             // Vertical
             var y = d3.scale.linear()
                 .range([height, 0]);
-
 
 
             // Create axes
@@ -79,10 +77,9 @@ var D3AreaMissingData = function() {
             var tip = d3.tip()
                 .attr('class', 'd3-tip')
                 .offset([-10, 0])
-                .html(function(d) {
+                .html(function (d) {
                     return d.x;
                 });
-
 
 
             // Create chart
@@ -97,9 +94,8 @@ var D3AreaMissingData = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                    .call(tip);
-
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .call(tip);
 
 
             // Construct chart layout
@@ -107,9 +103,15 @@ var D3AreaMissingData = function() {
 
             // Line
             var line = d3.svg.line()
-                .defined(function(d) { return d.y != null; })
-                .x(function(d) { return x(d.x); })
-                .y(function(d) { return y(d.y); });
+                .defined(function (d) {
+                    return d.y != null;
+                })
+                .x(function (d) {
+                    return x(d.x);
+                })
+                .y(function (d) {
+                    return y(d.y);
+                });
 
             // Area
             var area = d3.svg.area()
@@ -156,19 +158,20 @@ var D3AreaMissingData = function() {
 
             // Add dots
             svg.selectAll(".d3-dot")
-                .data(data.filter(function(d) { return d.y; }))
+                .data(data.filter(function (d) {
+                    return d.y;
+                }))
                 .enter()
                 .append("circle")
-                    .attr("class", "d3-dot")
-                    .attr("cx", line.x())
-                    .attr("cy", line.y())
-                    .attr("r", 3)
-                    .style("fill", "#fff")
-                    .style("stroke", "#43A047")
-                    .style("stroke-width", 1.5)
-                    .on('mouseover', tip.show)
-                    .on('mouseout', tip.hide);
-
+                .attr("class", "d3-dot")
+                .attr("cx", line.x())
+                .attr("cy", line.y())
+                .attr("r", 3)
+                .style("fill", "#fff")
+                .style("stroke", "#43A047")
+                .style("stroke-width", 1.5)
+                .on('mouseover', tip.show)
+                .on('mouseout', tip.hide);
 
 
             // Resize chart
@@ -181,9 +184,9 @@ var D3AreaMissingData = function() {
             $('.sidebar-control').on('click', resize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resize() {
 
@@ -232,7 +235,7 @@ var D3AreaMissingData = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _areaMissingData();
         }
     }
@@ -242,6 +245,6 @@ var D3AreaMissingData = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3AreaMissingData.init();
 });

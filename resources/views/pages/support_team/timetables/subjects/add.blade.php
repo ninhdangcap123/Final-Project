@@ -7,9 +7,10 @@
                 {{--EXAM DATE--}}
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label font-weight-semibold">Exam Date <span
-                                class="text-danger">*</span></label>
+                            class="text-danger">*</span></label>
                     <div class="col-lg-9">
-                        <input autocomplete="off" name="exam_date" value="{{ old('exam_date') }}" required type="text" class="form-control date-pick" placeholder="Select Date...">
+                        <input autocomplete="off" name="exam_date" value="{{ old('exam_date') }}" required type="text"
+                               class="form-control date-pick" placeholder="Select Date...">
                     </div>
                 </div>
 
@@ -41,7 +42,8 @@
                             class="form-control select-search" name="subject_id" id="subject_id">
                         <option value=""></option>
                         @foreach($subjects as $sub)
-                            <option {{ old('subject_id') == $sub->id ? 'selected' : '' }} value="{{ $sub->id }}">{{ $sub->name }}</option>
+                            <option
+                                {{ old('subject_id') == $sub->id ? 'selected' : '' }} value="{{ $sub->id }}">{{ $sub->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -51,7 +53,7 @@
             <div class="form-group row">
 
                 <label for="ts_id" class="col-lg-3 col-form-label font-weight-semibold">Time Slot <span
-                            class="text-danger">*</span></label>
+                        class="text-danger">*</span></label>
 
                 <div class="col-lg-9">
                     <select data-placeholder="Select Time..." required class="select form-control" name="ts_id"
@@ -59,7 +61,8 @@
 
                         <option value=""></option>
                         @foreach($time_slots as $tms)
-                            <option {{ old('ts_id') == $tms->full ? 'selected' : '' }} value="{{ $tms->id }}">{{ $tms->full}}</option>
+                            <option
+                                {{ old('ts_id') == $tms->full ? 'selected' : '' }} value="{{ $tms->id }}">{{ $tms->full}}</option>
                         @endforeach
                     </select>
                 </div>

@@ -4,7 +4,6 @@ namespace App\Http\Requests\Student;
 
 use App\Helpers\DisplayMessageHelper;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Helpers\Qs;
 
 class StudentRecordUpdate extends FormRequest
 {
@@ -41,7 +40,7 @@ class StudentRecordUpdate extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
             'nal_id' => 'Nationality',
             'dorm_id' => 'Dormitory',
             'state_id' => 'State',

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var Buttons = function() {
+var Buttons = function () {
 
 
     //
@@ -18,7 +18,7 @@ var Buttons = function() {
     //
 
     // Progress buttons
-    var _componentLadda = function() {
+    var _componentLadda = function () {
         if (typeof Ladda == 'undefined') {
             console.warn('Warning - ladda.min.js is not loaded.');
             return;
@@ -32,13 +32,13 @@ var Buttons = function() {
 
         // Button with progress
         Ladda.bind('.btn-ladda-progress', {
-            callback: function(instance) {
+            callback: function (instance) {
                 var progress = 0;
-                var interval = setInterval(function() {
+                var interval = setInterval(function () {
                     progress = Math.min(progress + Math.random() * 0.1, 1);
                     instance.setProgress(progress);
 
-                    if( progress === 1 ) {
+                    if (progress === 1) {
                         instance.stop();
                         clearInterval(interval);
                     }
@@ -48,7 +48,7 @@ var Buttons = function() {
     };
 
     // Loading button
-    var _componentLoadingButton = function() {
+    var _componentLoadingButton = function () {
         $('.btn-loading').on('click', function () {
             var btn = $(this),
                 initialText = btn.data('initial-text'),
@@ -66,7 +66,7 @@ var Buttons = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentLadda();
             _componentLoadingButton();
         }
@@ -77,6 +77,6 @@ var Buttons = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     Buttons.init();
 });

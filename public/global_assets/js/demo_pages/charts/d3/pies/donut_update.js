@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3PieDonutUpdateAnimation = function() {
+var D3PieDonutUpdateAnimation = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3PieDonutUpdateAnimation = function() {
     //
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var D3PieDonutUpdateAnimation = function() {
     };
 
     // Chart
-    var _pieDonutUpdateAnimation = function() {
+    var _pieDonutUpdateAnimation = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -41,7 +41,7 @@ var D3PieDonutUpdateAnimation = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -61,7 +61,7 @@ var D3PieDonutUpdateAnimation = function() {
                 .attr("width", radius * 2)
                 .attr("height", radius * 2)
                 .append("g")
-                    .attr("transform", "translate(" + radius + "," + radius + ")");
+                .attr("transform", "translate(" + radius + "," + radius + ")");
 
 
             // Construct chart layout
@@ -75,17 +75,19 @@ var D3PieDonutUpdateAnimation = function() {
 
             // Pie
             var pie = d3.layout.pie()
-                .value(function(d) { return d.lemons; })
+                .value(function (d) {
+                    return d.lemons;
+                })
                 .sort(null);
 
 
             // Load data
             // ------------------------------
 
-            d3.tsv("../../../../global_assets/demo_data/d3/pies/donuts_update.tsv", function(error, data) {
+            d3.tsv("../../../../global_assets/demo_data/d3/pies/donuts_update.tsv", function (error, data) {
 
                 // Pull out values
-                data.forEach(function(d) {
+                data.forEach(function (d) {
                     d.lemons = +d.lemons || 0;
                     d.melons = +d.melons || 0;
                 });
@@ -100,16 +102,20 @@ var D3PieDonutUpdateAnimation = function() {
                     .data(pie)
                     .enter()
                     .append("path")
-                        .attr("fill", function(d, i) { return color(i); })
-                        .attr("d", arc)
-                        .style("stroke", "#fff")
-                        .each(function(d) { this._current = d; }); // store the initial angles
+                    .attr("fill", function (d, i) {
+                        return color(i);
+                    })
+                    .attr("d", arc)
+                    .style("stroke", "#fff")
+                    .each(function (d) {
+                        this._current = d;
+                    }); // store the initial angles
 
                 // Apply change event
                 d3.selectAll(".donut-radios input").on("change", change);
 
                 // Change values on page load
-                var timeout = setTimeout(function() {
+                var timeout = setTimeout(function () {
                     d3.select("input[value=\"melons\"]").property("checked", true).each(change);
                     $.uniform.update();
                 }, 2000);
@@ -118,7 +124,9 @@ var D3PieDonutUpdateAnimation = function() {
                 function change() {
                     var value = this.value;
                     clearTimeout(timeout);
-                    pie.value(function(d) { return d[value]; }); // change the value function
+                    pie.value(function (d) {
+                        return d[value];
+                    }); // change the value function
                     path = path.data(pie); // compute the new angles
                     path.transition().duration(750).attrTween("d", arcTween); // redraw the arcs
                 }
@@ -131,7 +139,7 @@ var D3PieDonutUpdateAnimation = function() {
             function arcTween(a) {
                 var i = d3.interpolate(this._current, a);
                 this._current = i(0);
-                return function(t) {
+                return function (t) {
                     return arc(i(t));
                 };
             }
@@ -144,7 +152,7 @@ var D3PieDonutUpdateAnimation = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentUniform();
             _pieDonutUpdateAnimation();
         }
@@ -155,6 +163,6 @@ var D3PieDonutUpdateAnimation = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3PieDonutUpdateAnimation.init();
 });

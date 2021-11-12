@@ -12,10 +12,11 @@ class LGARepository extends BaseRepository implements LGARepositoryInterface
         // TODO: Implement getModel() method.
         return Lga::class;
     }
-     public function getAllLGAs($state_id)
-     {
-         // TODO: Implement getAllLGAs() method.
-         return $this->model->where('state_id', $state_id)->orderBy('name', 'asc')->get();
-     }
+
+    public function getAllLGAs($state_id)
+    {
+        // TODO: Implement getAllLGAs() method.
+        return $this->model->where('state_id', $state_id)->orderBy('name', 'asc')->get();
+    }
 
 }

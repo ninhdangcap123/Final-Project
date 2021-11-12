@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var С3Grid = function() {
+var С3Grid = function () {
 
 
     //
@@ -18,7 +18,7 @@ var С3Grid = function() {
     //
 
     // Chart
-    var _gridExamples = function() {
+    var _gridExamples = function () {
         if (typeof c3 == 'undefined') {
             console.warn('Warning - c3.min.js is not loaded.');
             return;
@@ -33,12 +33,12 @@ var С3Grid = function() {
 
 
         // Grid lines
-        if(grid_lines_element) {
+        if (grid_lines_element) {
 
             // Generate chart
             var grid_lines = c3.generate({
                 bindto: grid_lines_element,
-                size: { height: 400 },
+                size: {height: 400},
                 color: {
                     pattern: ['#2196F3']
                 },
@@ -58,18 +58,18 @@ var С3Grid = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 grid_lines.resize();
             });
         }
 
         // Optional X grid lines
-        if(grid_lines_x_element) {
+        if (grid_lines_x_element) {
 
             // Generate chart
             var grid_lines_x = c3.generate({
                 bindto: grid_lines_x_element,
-                size: { height: 400 },
+                size: {height: 400},
                 color: {
                     pattern: ['#4CAF50']
                 },
@@ -86,18 +86,18 @@ var С3Grid = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 grid_lines_x.resize();
             });
         }
 
         // Optional Y grid lines
-        if(grid_lines_y_element) {
+        if (grid_lines_y_element) {
 
             // Generate chart
             var grid_lines_y = c3.generate({
                 bindto: grid_lines_y_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
                     columns: [
                         ['sample', 30, 200, 100, 400, 150, 250],
@@ -123,18 +123,18 @@ var С3Grid = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 grid_lines_y.resize();
             });
         }
 
         // Rects on chart
-        if(grid_region_element) {
+        if (grid_region_element) {
 
             // Generate chart
             var grid_region = c3.generate({
                 bindto: grid_region_element,
-                size: { height: 400 },
+                size: {height: 400},
                 data: {
                     columns: [
                         ['data1', 30, 200, 100, 400, 150, 250, 400],
@@ -166,18 +166,18 @@ var С3Grid = function() {
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 grid_region.resize();
             });
         }
 
         // Data regions
-        if(grid_region_chart_element) {
+        if (grid_region_chart_element) {
 
             // Generate chart
             var grid_region_chart = c3.generate({
                 bindto: grid_region_chart_element,
-                size: { height: 400 },
+                size: {height: 400},
                 color: {
                     pattern: ['#009688', '#9C27B0']
                 },
@@ -187,14 +187,14 @@ var С3Grid = function() {
                         ['data2', 50, 20, 10, 40, 15, 25]
                     ],
                     regions: {
-                        'data1': [{'start':1, 'end':2, 'style':'dashed'},{'start':3}], // currently 'dashed' style only
-                        'data2': [{'end':3}]
+                        'data1': [{'start': 1, 'end': 2, 'style': 'dashed'}, {'start': 3}], // currently 'dashed' style only
+                        'data2': [{'end': 3}]
                     }
                 }
             });
 
             // Resize chart on sidebar width change
-            $('.sidebar-control').on('click', function() {
+            $('.sidebar-control').on('click', function () {
                 grid_region_chart.resize();
             });
         }
@@ -206,7 +206,7 @@ var С3Grid = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _gridExamples();
         }
     }
@@ -216,6 +216,6 @@ var С3Grid = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     С3Grid.init();
 });

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3BarHierarchy = function() {
+var D3BarHierarchy = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3BarHierarchy = function() {
     //
 
     // Chart
-    var _barHierarchy = function() {
+    var _barHierarchy = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3BarHierarchy = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -45,7 +45,6 @@ var D3BarHierarchy = function() {
                 delay = 25;
 
 
-
             // Construct scales
             // ------------------------------
 
@@ -58,7 +57,6 @@ var D3BarHierarchy = function() {
                 .range(["#26A69A", "#ccc"]);
 
 
-
             // Create axes
             // ------------------------------
 
@@ -66,7 +64,6 @@ var D3BarHierarchy = function() {
             var xAxis = d3.svg.axis()
                 .scale(x)
                 .orient("top");
-
 
 
             // Create chart
@@ -80,7 +77,7 @@ var D3BarHierarchy = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             // Construct chart layout
@@ -88,14 +85,15 @@ var D3BarHierarchy = function() {
 
             // Partition
             var partition = d3.layout.partition()
-                .value(function(d) { return d.size; });
-
+                .value(function (d) {
+                    return d.size;
+                });
 
 
             // Load data
             // ------------------------------
 
-            d3.json("../../../../global_assets/demo_data/d3/bars/bars_hierarchical.json", function(error, root) {
+            d3.json("../../../../global_assets/demo_data/d3/bars/bars_hierarchical.json", function (error, root) {
                 partition.nodes(root);
                 x.domain([0, root.value]).nice();
                 down(root, 0);
@@ -136,7 +134,9 @@ var D3BarHierarchy = function() {
                     .attr("class", "exit");
 
                 // Entering nodes immediately obscure the clicked-on bar, so hide it.
-                exit.selectAll("rect").filter(function(p) { return p === d; })
+                exit.selectAll("rect").filter(function (p) {
+                    return p === d;
+                })
                     .style("fill-opacity", 1e-6);
 
                 // Enter the new bars for the clicked-on data.
@@ -151,7 +151,9 @@ var D3BarHierarchy = function() {
                 enter.select("rect").style("fill", color(true));
 
                 // Update the x-scale domain.
-                x.domain([0, d3.max(d.children, function(d) { return d.value; })]).nice();
+                x.domain([0, d3.max(d.children, function (d) {
+                    return d.value;
+                })]).nice();
 
                 // Update the x-axis.
                 svg.selectAll(".d3-axis-horizontal").transition()
@@ -161,8 +163,12 @@ var D3BarHierarchy = function() {
                 // Transition entering bars to their new position.
                 var enterTransition = enter.transition()
                     .duration(duration)
-                    .delay(function(d, i) { return i * delay; })
-                    .attr("transform", function(d, i) { return "translate(0," + barHeight * i * 1.2 + ")"; });
+                    .delay(function (d, i) {
+                        return i * delay;
+                    })
+                    .attr("transform", function (d, i) {
+                        return "translate(0," + barHeight * i * 1.2 + ")";
+                    });
 
                 // Transition entering text.
                 enterTransition.select("text")
@@ -170,8 +176,12 @@ var D3BarHierarchy = function() {
 
                 // Transition entering rects to the new x-scale.
                 enterTransition.select("rect")
-                    .attr("width", function(d) { return x(d.value); })
-                    .style("fill", function(d) { return color(!!d.children); });
+                    .attr("width", function (d) {
+                        return x(d.value);
+                    })
+                    .style("fill", function (d) {
+                        return color(!!d.children);
+                    });
 
                 // Transition exiting bars to fade out.
                 var exitTransition = exit.transition()
@@ -181,7 +191,9 @@ var D3BarHierarchy = function() {
 
                 // Transition exiting bars to the new x-scale.
                 exitTransition.selectAll("rect")
-                    .attr("width", function(d) { return x(d.value); });
+                    .attr("width", function (d) {
+                        return x(d.value);
+                    });
 
                 // Rebind the current node to the background.
                 svg.select(".d3-bars-background")
@@ -203,18 +215,26 @@ var D3BarHierarchy = function() {
 
                 // Enter the new bars for the clicked-on data's parent.
                 var enter = bar(d.parent)
-                    .attr("transform", function(d, i) { return "translate(0," + barHeight * i * 1.2 + ")"; })
+                    .attr("transform", function (d, i) {
+                        return "translate(0," + barHeight * i * 1.2 + ")";
+                    })
                     .style("opacity", 1e-6);
 
                 // Color the bars as appropriate.
                 // Exiting nodes will obscure the parent bar, so hide it.
                 enter.select("rect")
-                    .style("fill", function(d) { return color(!!d.children); })
-                    .filter(function(p) { return p === d; })
+                    .style("fill", function (d) {
+                        return color(!!d.children);
+                    })
+                    .filter(function (p) {
+                        return p === d;
+                    })
                     .style("fill-opacity", 1e-6);
 
                 // Update the x-scale domain.
-                x.domain([0, d3.max(d.parent.children, function(d) { return d.value; })]).nice();
+                x.domain([0, d3.max(d.parent.children, function (d) {
+                    return d.value;
+                })]).nice();
 
                 // Update the x-axis.
                 svg.selectAll(".d3-axis-horizontal").transition()
@@ -229,13 +249,19 @@ var D3BarHierarchy = function() {
                 // Transition entering rects to the new x-scale.
                 // When the entering parent rect is done, make it visible!
                 enterTransition.select("rect")
-                    .attr("width", function(d) { return x(d.value); })
-                    .each("end", function(p) { if (p === d) d3.select(this).style("fill-opacity", null); });
+                    .attr("width", function (d) {
+                        return x(d.value);
+                    })
+                    .each("end", function (p) {
+                        if (p === d) d3.select(this).style("fill-opacity", null);
+                    });
 
                 // Transition exiting bars to the parent's position.
                 var exitTransition = exit.selectAll("g").transition()
                     .duration(duration)
-                    .delay(function(d, i) { return i * delay; })
+                    .delay(function (d, i) {
+                        return i * delay;
+                    })
                     .attr("transform", stack(d.index));
 
                 // Transition exiting text to fade out.
@@ -244,7 +270,9 @@ var D3BarHierarchy = function() {
 
                 // Transition exiting rects to the new scale and fade to parent color.
                 exitTransition.select("rect")
-                    .attr("width", function(d) { return x(d.value); })
+                    .attr("width", function (d) {
+                        return x(d.value);
+                    })
                     .style("fill", color(true));
 
                 // Remove exiting nodes when the last child has finished transitioning.
@@ -268,18 +296,24 @@ var D3BarHierarchy = function() {
                     .data(d.children)
                     .enter()
                     .append("g")
-                        .style("cursor", function(d) { return !d.children ? null : "pointer"; })
-                        .on("click", down);
+                    .style("cursor", function (d) {
+                        return !d.children ? null : "pointer";
+                    })
+                    .on("click", down);
 
                 bar.append("text")
                     .attr("x", -6)
                     .attr("y", barHeight / 2)
                     .attr("dy", ".35em")
                     .style("text-anchor", "end")
-                    .text(function(d) { return d.name; });
+                    .text(function (d) {
+                        return d.name;
+                    });
 
                 bar.append("rect")
-                    .attr("width", function(d) { return x(d.value); })
+                    .attr("width", function (d) {
+                        return x(d.value);
+                    })
                     .attr("height", barHeight);
 
                 return bar;
@@ -288,13 +322,12 @@ var D3BarHierarchy = function() {
             // A stateful closure for stacking bars horizontally.
             function stack(i) {
                 var x0 = 0;
-                return function(d) {
+                return function (d) {
                     var tx = "translate(" + x0 + "," + barHeight * i * 1.2 + ")";
                     x0 += x(d.value);
                     return tx;
                 };
             }
-
 
 
             // Resize chart
@@ -307,9 +340,9 @@ var D3BarHierarchy = function() {
             $('.sidebar-control').on('click', resize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resize() {
 
@@ -341,7 +374,9 @@ var D3BarHierarchy = function() {
                 // -------------------------
 
                 // Bars
-                svg.selectAll('.enter rect').attr("width", function(d) { return x(d.value); });
+                svg.selectAll('.enter rect').attr("width", function (d) {
+                    return x(d.value);
+                });
             }
         }
     };
@@ -352,7 +387,7 @@ var D3BarHierarchy = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _barHierarchy();
         }
     }
@@ -362,6 +397,6 @@ var D3BarHierarchy = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3BarHierarchy.init();
 });

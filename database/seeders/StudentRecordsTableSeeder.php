@@ -21,30 +21,6 @@ class StudentRecordsTableSeeder extends Seeder
         $this->createManyStudentRecords(3);
     }
 
-    protected function createManyStudentRecords(int $count)
-    {
-        $classes = Classes::all();
-
-        foreach ($classes as $class){
-            User::factory()
-                ->has(
-                    StudentRecord::factory()
-                        ->state([
-                            'class_id' => $class->id,
-                            'my_course_id' => $class->my_course_id,
-                            'user_id' => function(User $user){
-                                return ['user_id' => $user->id];
-                            },
-                        ]), 'studentRecord')
-                ->count($count)
-                ->create([
-                    'user_type' => 'student',
-                    'password' => Hash::make('student'),
-                ]);
-        }
-
-    }
-
     protected function createStudentRecord()
     {
         $class = Classes::first();
@@ -63,5 +39,29 @@ class StudentRecordsTableSeeder extends Seeder
             'user_id' => $user->id,
             'class_id' => $class->id
         ]);
+    }
+
+    protected function createManyStudentRecords(int $count)
+    {
+        $classes = Classes::all();
+
+        foreach( $classes as $class ) {
+            User::factory()
+                ->has(
+                    StudentRecord::factory()
+                        ->state([
+                            'class_id' => $class->id,
+                            'my_course_id' => $class->my_course_id,
+                            'user_id' => function (User $user) {
+                                return [ 'user_id' => $user->id ];
+                            },
+                        ]), 'studentRecord')
+                ->count($count)
+                ->create([
+                    'user_type' => 'student',
+                    'password' => Hash::make('student'),
+                ]);
+        }
+
     }
 }

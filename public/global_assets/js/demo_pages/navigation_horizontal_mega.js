@@ -18,7 +18,7 @@ var HorizontalMegaMenu = function () {
     //
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var HorizontalMegaMenu = function () {
     };
 
     // Switchery
-    var _componentSwitchery = function() {
+    var _componentSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
@@ -37,13 +37,13 @@ var HorizontalMegaMenu = function () {
 
         // Initialize multiple switches
         var elems = Array.prototype.slice.call(document.querySelectorAll('.form-input-switchery'));
-        elems.forEach(function(html) {
+        elems.forEach(function (html) {
             var switchery = new Switchery(html);
         });
     };
 
     // Select2
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -56,15 +56,16 @@ var HorizontalMegaMenu = function () {
     };
 
     // Slinky
-    var _componentSlinky = function() {
+    var _componentSlinky = function () {
         if (!$().slinky) {
             console.warn('Warning - slinky.min.js is not loaded.');
             return;
-        };
+        }
+        ;
 
         // Attach drill down menu to menu list with child levels
         $('.nav-item-multi').one('shown.bs.dropdown', function () {
-            $('.dropdown-item-group').each(function() {
+            $('.dropdown-item-group').each(function () {
                 $(this).slinky({
                     title: true,
                     speed: 200
@@ -79,7 +80,7 @@ var HorizontalMegaMenu = function () {
     //
 
     return {
-        initComponents: function() {
+        initComponents: function () {
             _componentUniform();
             _componentSwitchery();
             _componentSelect2();
@@ -92,6 +93,6 @@ var HorizontalMegaMenu = function () {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     HorizontalMegaMenu.initComponents();
 });

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3PieTweenAnimation = function() {
+var D3PieTweenAnimation = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3PieTweenAnimation = function() {
     //
 
     // Chart
-    var _pieTweenAnimation = function() {
+    var _pieTweenAnimation = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3PieTweenAnimation = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -50,7 +50,7 @@ var D3PieTweenAnimation = function() {
                 .attr("width", radius * 2)
                 .attr("height", radius * 2)
                 .append("g")
-                    .attr("transform", "translate(" + radius + "," + radius + ")");
+                .attr("transform", "translate(" + radius + "," + radius + ")");
 
 
             // Construct chart layout
@@ -80,22 +80,22 @@ var D3PieTweenAnimation = function() {
                 .attr("d", arc);
 
             // Start a transition to a new random angle
-            setInterval(function() {
-              foreground.transition()
-                  .duration(750)
-                  .call(arcTween, Math.random() * τ);
+            setInterval(function () {
+                foreground.transition()
+                    .duration(750)
+                    .call(arcTween, Math.random() * τ);
             }, 1500);
 
             // Creates a tween on the specified transition's "d" attribute, transitioning
             // any selected arcs from their current angle to the specified new angle.
             function arcTween(transition, newAngle) {
-                transition.attrTween("d", function(d) {
+                transition.attrTween("d", function (d) {
 
                     // Interpolate between the two angles
                     var interpolate = d3.interpolate(d.endAngle, newAngle);
 
                     // Return value of the attrTween
-                    return function(t) {
+                    return function (t) {
 
                         // Calculate the current arc angle based on the transition time, t
                         d.endAngle = interpolate(t);
@@ -114,7 +114,7 @@ var D3PieTweenAnimation = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _pieTweenAnimation();
         }
     }
@@ -124,6 +124,6 @@ var D3PieTweenAnimation = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3PieTweenAnimation.init();
 });

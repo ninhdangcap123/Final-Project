@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleMapControlPosition = function() {
+var GoogleMapControlPosition = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleMapControlPosition = function() {
     //
 
     // Line chart
-    var _googleMapControlPosition = function() {
+    var _googleMapControlPosition = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Maps library is not loaded.');
             return;
@@ -69,7 +69,7 @@ var GoogleMapControlPosition = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleMapControlPosition();
         }
     }
@@ -79,6 +79,6 @@ var GoogleMapControlPosition = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     GoogleMapControlPosition.init();
 });

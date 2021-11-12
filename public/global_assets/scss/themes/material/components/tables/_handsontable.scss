@@ -29,7 +29,7 @@
 
         // If no scrolling, stretch holder vertically
         &:not(.hot-scrollable) > .handsontable > .ht_master > .wtHolder {
-            height: 100%!important;
+            height: 100% !important;
         }
 
         // Mobile view
@@ -45,7 +45,7 @@
 
             // If no scrolling, stretch holder vertically
             &:not(.hot-scrollable) .wtHolder {
-                height: 100%!important;
+                height: 100% !important;
             }
         }
     }
@@ -486,14 +486,17 @@
                 @include ll-font-smoothing();
                 @include transition(opacity ease-in-out $component-transition-timer);
             }
+
             &:before {
                 content: '\e9c1';
                 margin-top: ($font-size-sm / 3);
             }
+
             &:after {
                 content: '\e9c2';
                 margin-top: -($font-size-sm / 3);
             }
+
             &.ascending {
                 &:before {
                     content: none;
@@ -503,6 +506,7 @@
                     margin-top: 0;
                 }
             }
+
             &.descending {
                 &:before {
                     margin-top: 0;
@@ -535,7 +539,7 @@
 
         // Hidden border
         &.hidden {
-            display: none!important;
+            display: none !important;
         }
 
         // Corners
@@ -572,7 +576,7 @@
         font-size: inherit;
         resize: none;
         display: block;
-        width: auto!important;
+        width: auto !important;
         background-color: $hot-cell-bg;
         box-shadow: 0 0 0 ($table-border-width * 2) $hot-cell-highlight-border-color inset;
     }
@@ -603,7 +607,7 @@
         position: relative;
 
         // Arrow
-        > div:after{
+        > div:after {
             content: '\e9c7';
             font-family: $icon-font-family;
             position: absolute;
@@ -628,12 +632,15 @@
         .htLeft {
             text-align: left;
         }
+
         .htCenter {
             text-align: center;
         }
+
         .htRight {
             text-align: right;
         }
+
         .htJustify {
             text-align: justify;
         }
@@ -642,9 +649,11 @@
         .htTop {
             vertical-align: top;
         }
+
         .htMiddle {
             vertical-align: middle;
         }
+
         .htBottom {
             vertical-align: bottom;
         }
@@ -671,9 +680,9 @@
         margin-top: -($caret-width / 2);
         display: inline-block;
         margin-right: $caret-width;
-        border-top:   $caret-width dashed;
+        border-top: $caret-width dashed;
         border-right: $caret-width solid transparent;
-        border-left:  $caret-width solid transparent;
+        border-left: $caret-width solid transparent;
         opacity: 0.75;
     }
 
@@ -1077,7 +1086,7 @@
 
         // Hidden column
         col.hidden {
-            width: 0!important;
+            width: 0 !important;
         }
 
         // Lighten border
@@ -1105,7 +1114,7 @@
     .ht_clone_left,
     .ht_clone_top,
     .ht_clone_bottom {
-      overflow: hidden;
+        overflow: hidden;
     }
 
     // Holder
@@ -1192,7 +1201,7 @@
             &,
             .wtHolder {
                 -webkit-touch-callout: none;
-                -webkit-tap-highlight-color: rgba(0,0,0,0);
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
                 -webkit-overflow-scrolling: touch;
                 user-select: none;
             }
@@ -1646,7 +1655,6 @@
     }
 
 
-
     // Pikaday datepicker
     // ------------------------------
 
@@ -1854,10 +1862,12 @@
             color: $datepicker-item-today-color;
             background-color: $datepicker-item-today-bg;
         }
+
         .is-selected & {
             color: $datepicker-item-active-color;
             background-color: $datepicker-item-active-bg;
         }
+
         .is-today &:before,
         .is-selected &:before,
         .is-today.is-selected &:before {
@@ -1876,6 +1886,7 @@
             color: $datepicker-item-active-color;
             background-color: $datepicker-item-active-bg;
         }
+
         .is-inrange & {
             color: $datepicker-item-hover-color;
             background-color: $datepicker-item-hover-bg;

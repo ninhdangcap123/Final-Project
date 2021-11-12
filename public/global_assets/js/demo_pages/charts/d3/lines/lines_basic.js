@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3LineBasic = function() {
+var D3LineBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3LineBasic = function() {
     //
 
     // Chart
-    var _lineBasic = function() {
+    var _lineBasic = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3LineBasic = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -43,10 +43,13 @@ var D3LineBasic = function() {
 
             // Format data
             var parseDate = d3.time.format("%d-%b-%y").parse,
-                bisectDate = d3.bisector(function(d) { return d.date; }).left,
+                bisectDate = d3.bisector(function (d) {
+                    return d.date;
+                }).left,
                 formatValue = d3.format(",.2f"),
-                formatCurrency = function(d) { return "$" + formatValue(d); }
-
+                formatCurrency = function (d) {
+                    return "$" + formatValue(d);
+                }
 
 
             // Construct scales
@@ -59,7 +62,6 @@ var D3LineBasic = function() {
             // Vertical
             var y = d3.scale.linear()
                 .range([height, 0]);
-
 
 
             // Create axes
@@ -78,7 +80,6 @@ var D3LineBasic = function() {
                 .orient("left");
 
 
-
             // Create chart
             // ------------------------------
 
@@ -90,8 +91,7 @@ var D3LineBasic = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             // Construct chart layout
@@ -100,24 +100,27 @@ var D3LineBasic = function() {
             // Line
             var line = d3.svg.line()
                 .interpolate("basis")
-                .x(function(d) { return x(d.date); })
-                .y(function(d) { return y(d.close); });
-
+                .x(function (d) {
+                    return x(d.date);
+                })
+                .y(function (d) {
+                    return y(d.close);
+                });
 
 
             // Load data
             // ------------------------------
 
-            d3.tsv("../../../../global_assets/demo_data/d3/lines/lines_basic.tsv", function(error, data) {
+            d3.tsv("../../../../global_assets/demo_data/d3/lines/lines_basic.tsv", function (error, data) {
 
                 // Pull out values
-                data.forEach(function(d) {
+                data.forEach(function (d) {
                     d.date = parseDate(d.date);
                     d.close = +d.close;
                 });
 
                 // Sort data
-                data.sort(function(a, b) {
+                data.sort(function (a, b) {
                     return a.date - b.date;
                 });
 
@@ -126,10 +129,14 @@ var D3LineBasic = function() {
                 // ------------------------------
 
                 // Horizontal
-                x.domain(d3.extent(data, function(d) { return d.date; }));
+                x.domain(d3.extent(data, function (d) {
+                    return d.date;
+                }));
 
                 // Vertical
-                y.domain([0, d3.max(data, function(d) { return d.close; })]);
+                y.domain([0, d3.max(data, function (d) {
+                    return d.close;
+                })]);
 
 
                 //
@@ -139,12 +146,11 @@ var D3LineBasic = function() {
                 // Add line
                 svg.append("path")
                     .datum(data)
-                        .attr("class", "d3-line d3-line-medium")
-                        .attr("d", line)
-                        .style("fill", "none")
-                        .style("stroke-width", 2)
-                        .style("stroke", "#4CAF50");
-
+                    .attr("class", "d3-line d3-line-medium")
+                    .attr("d", line)
+                    .style("fill", "none")
+                    .style("stroke-width", 2)
+                    .style("stroke", "#4CAF50");
 
 
                 // Append axes
@@ -170,8 +176,6 @@ var D3LineBasic = function() {
                     .style("fill", "#999")
                     .style("font-size", 12)
                     .text("Price ($)");
-
-
 
 
                 // Append tooltip
@@ -200,17 +204,21 @@ var D3LineBasic = function() {
                     .attr("class", "d3-crosshair-overlay")
                     .attr("width", width)
                     .attr("height", height)
-                    .on("mouseover", function() { focus.style("display", null); })
-                    .on("mouseout", function() { focus.style("display", "none"); })
+                    .on("mouseover", function () {
+                        focus.style("display", null);
+                    })
+                    .on("mouseout", function () {
+                        focus.style("display", "none");
+                    })
                     .on("mousemove", mousemove);
 
                 // Display tooltip on mousemove
                 function mousemove() {
                     var x0 = x.invert(d3.mouse(this)[0]),
-                    i = bisectDate(data, x0, 1),
-                    d0 = data[i - 1],
-                    d1 = data[i],
-                    d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+                        i = bisectDate(data, x0, 1),
+                        d0 = data[i - 1],
+                        d1 = data[i],
+                        d = x0 - d0.date > d1.date - x0 ? d1 : d0;
                     focus.attr("transform", "translate(" + x(d.date) + "," + y(d.close) + ")");
                     focus.select("text").text(formatCurrency(d.close)).attr("dx", -26).attr("dy", 30);
                 }
@@ -227,9 +235,9 @@ var D3LineBasic = function() {
             $('.sidebar-control').on('click', resize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resize() {
 
@@ -275,7 +283,7 @@ var D3LineBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _lineBasic();
         }
     }
@@ -285,6 +293,6 @@ var D3LineBasic = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3LineBasic.init();
 });

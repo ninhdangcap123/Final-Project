@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var NavbarComponents = function() {
+var NavbarComponents = function () {
 
 
     //
@@ -18,7 +18,7 @@ var NavbarComponents = function() {
     //
 
     // Select2
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -31,7 +31,7 @@ var NavbarComponents = function() {
     };
 
     // Daterange pickers
-    var _componentDaterange = function() {
+    var _componentDaterange = function () {
         if (!$().daterangepicker) {
             console.warn('Warning - daterangepicker.js is not loaded.');
             return;
@@ -67,7 +67,7 @@ var NavbarComponents = function() {
                     direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
                 }
             },
-            function(start, end) {
+            function (start, end) {
                 $('.daterange-ranges-button span').html(start.format('MMM D, YY') + ' - ' + end.format('MMM D, YY'));
             }
         );
@@ -87,7 +87,7 @@ var NavbarComponents = function() {
                 endDate: moment(),
                 minDate: '01/01/2014',
                 maxDate: '12/31/2018',
-                dateLimit: { days: 60 },
+                dateLimit: {days: 60},
                 ranges: {
                     'Today': [moment(), moment()],
                     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -104,7 +104,7 @@ var NavbarComponents = function() {
                     direction: $('html').attr('dir') == 'rtl' ? 'rtl' : 'ltr'
                 }
             },
-            function(start, end) {
+            function (start, end) {
                 $('.daterange-ranges span').html(start.format('MMM D, YY') + ' - ' + end.format('MMM D, YY'));
             }
         );
@@ -114,7 +114,7 @@ var NavbarComponents = function() {
     };
 
     // Switchery
-    var _componentSwitchery = function() {
+    var _componentSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
@@ -122,13 +122,13 @@ var NavbarComponents = function() {
 
         // Initialize multiple switches
         var elems = Array.prototype.slice.call(document.querySelectorAll('.form-input-switchery'));
-        elems.forEach(function(html) {
+        elems.forEach(function (html) {
             var switchery = new Switchery(html, {color: '#006064', secondaryColor: '#fff'});
         });
     };
 
     // Multiselect
-    var _componentMultiselect = function() {
+    var _componentMultiselect = function () {
         if (!$().multiselect) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -144,7 +144,7 @@ var NavbarComponents = function() {
     };
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -170,7 +170,7 @@ var NavbarComponents = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentSelect2();
             _componentDaterange();
             _componentSwitchery();
@@ -184,6 +184,6 @@ var NavbarComponents = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     NavbarComponents.init();
 });

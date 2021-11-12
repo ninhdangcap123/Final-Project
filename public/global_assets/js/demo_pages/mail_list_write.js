@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var MailListWrite = function() {
+var MailListWrite = function () {
 
 
     //
@@ -18,7 +18,7 @@ var MailListWrite = function() {
     //
 
     // Summernote
-    var _componentSummernote = function() {
+    var _componentSummernote = function () {
         if (!$().summernote) {
             console.warn('Warning - summernote.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var MailListWrite = function() {
     };
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -47,7 +47,7 @@ var MailListWrite = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentSummernote();
             _componentUniform();
         }
@@ -58,6 +58,6 @@ var MailListWrite = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     MailListWrite.init();
 });

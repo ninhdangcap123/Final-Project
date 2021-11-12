@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Helpers\GetSystemInfoHelper;
-use App\Helpers\Qs;
 use DB;
 use Illuminate\Database\Seeder;
 

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleAreaVerticalStackedGrouped = function() {
+var DimpleAreaVerticalStackedGrouped = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleAreaVerticalStackedGrouped = function() {
     //
 
     // Chart
-    var _areaVerticalStackedGrouped = function() {
+    var _areaVerticalStackedGrouped = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleAreaVerticalStackedGrouped = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -65,7 +65,7 @@ var DimpleAreaVerticalStackedGrouped = function() {
 
                 // Vertical
                 var y = myChart.addCategoryAxis("y", ["Owner", "Month"]);
-                    y.addGroupOrderRule("Date");
+                y.addGroupOrderRule("Date");
 
 
                 // Construct layout
@@ -140,7 +140,7 @@ var DimpleAreaVerticalStackedGrouped = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _areaVerticalStackedGrouped();
         }
     }
@@ -150,6 +150,6 @@ var DimpleAreaVerticalStackedGrouped = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleAreaVerticalStackedGrouped.init();
 });

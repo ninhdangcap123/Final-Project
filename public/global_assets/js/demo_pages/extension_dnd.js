@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DragAndDrop = function() {
+var DragAndDrop = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DragAndDrop = function() {
     //
 
     // Dragula examples
-    var _componentDragula = function() {
+    var _componentDragula = function () {
         if (typeof dragula == 'undefined') {
             console.warn('Warning - dragula.min.js is not loaded.');
             return;
@@ -48,7 +48,7 @@ var DragAndDrop = function() {
 
         // Init dragula
         dragula(containers, {
-                mirrorContainer: document.querySelector('.dropdown-menu-sortable')
+            mirrorContainer: document.querySelector('.dropdown-menu-sortable')
         });
 
 
@@ -118,7 +118,7 @@ var DragAndDrop = function() {
     };
 
     // Select2
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -129,7 +129,7 @@ var DragAndDrop = function() {
     };
 
     // Uniform
-    var _comopnentUniform = function() {
+    var _comopnentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -147,7 +147,7 @@ var DragAndDrop = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentDragula();
             _componentSelect2();
             _comopnentUniform();
@@ -159,6 +159,6 @@ var DragAndDrop = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DragAndDrop.init();
 });

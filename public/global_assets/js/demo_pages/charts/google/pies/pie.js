@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GooglePieBasic = function() {
+var GooglePieBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GooglePieBasic = function() {
     //
 
     // Pie chart
-    var _googlePieBasic = function() {
+    var _googlePieBasic = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GooglePieBasic = function() {
 
                 // Resize on window resize
                 var resizePieBasic;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizePieBasic);
                     resizePieBasic = setTimeout(function () {
                         drawPie();
@@ -46,7 +46,7 @@ var GooglePieBasic = function() {
             packages: ['corechart']
         });
 
-        // Chart settings    
+        // Chart settings
         function drawPie() {
 
             // Define charts element
@@ -55,11 +55,11 @@ var GooglePieBasic = function() {
             // Data
             var data = google.visualization.arrayToDataTable([
                 ['Task', 'Hours per Day'],
-                ['Work',     11],
-                ['Eat',      2],
-                ['Commute',  2],
+                ['Work', 11],
+                ['Eat', 2],
+                ['Commute', 2],
                 ['Watch TV', 2],
-                ['Sleep',    7]
+                ['Sleep', 7]
             ]);
 
             // Options
@@ -86,7 +86,7 @@ var GooglePieBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googlePieBasic();
         }
     }

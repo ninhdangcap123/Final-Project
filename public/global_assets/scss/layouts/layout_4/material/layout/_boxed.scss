@@ -20,7 +20,7 @@
         padding-left: ($content-container-padding-x * 2);
         padding-right: ($content-container-padding-x * 2);
     }
-    
+
     // Boxed content section
     .content-boxed {
         @include media-breakpoint-up(lg) {

@@ -12,10 +12,11 @@ class NationalRepository extends BaseRepository implements NationalRepositoryInt
         // TODO: Implement getModel() method.
         return Nationality::class;
     }
+
     public function getAllNationals()
     {
         // TODO: Implement getAllNationals() method.
-        return $this->model->orderBy('name','asc')->get();
+        return $this->model->orderBy('name', 'asc')->get();
 
     }
 

@@ -56,6 +56,7 @@
             > .btn {
                 width: ($icon-font-size / 2) + ($input-btn-padding-x-lg * 2) - rem-calc($input-border-width * 2);
             }
+
             .bootstrap-touchspin-down {
                 @include border-right-radius($input-border-radius-lg);
             }
@@ -66,6 +67,7 @@
             > .btn {
                 width: ($icon-font-size / 2) + ($input-btn-padding-x-sm * 2) - rem-calc($input-border-width * 2);
             }
+
             .bootstrap-touchspin-down {
                 @include border-right-radius($input-border-radius-sm);
             }
@@ -77,11 +79,13 @@
         .input-group-prepend.d-none:first-child + .form-control {
             @include border-left-radius($input-border-radius);
         }
+
         &-lg {
             .input-group-prepend.d-none:first-child + .form-control {
                 @include border-left-radius($input-border-radius-lg);
             }
         }
+
         &-sm {
             .input-group-prepend.d-none:first-child + .form-control {
                 @include border-left-radius($input-border-radius-sm);

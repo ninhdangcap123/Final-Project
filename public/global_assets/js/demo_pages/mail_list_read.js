@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var MailListRead = function() {
+var MailListRead = function () {
 
 
     //
@@ -18,15 +18,15 @@ var MailListRead = function() {
     //
 
     // Grab first letter and insert to the icon
-    var _componentIconLetter = function() {
+    var _componentIconLetter = function () {
 
         // Title
-	    var $title = $('.letter-icon-title'),
-	        letter = $title.eq(0).text().charAt(0).toUpperCase();
+        var $title = $('.letter-icon-title'),
+            letter = $title.eq(0).text().charAt(0).toUpperCase();
 
-	    // Icon
-	    var $icon = $title.parent().parent().find('.letter-icon');
-	        $icon.eq(0).text(letter);
+        // Icon
+        var $icon = $title.parent().parent().find('.letter-icon');
+        $icon.eq(0).text(letter);
     };
 
 
@@ -35,7 +35,7 @@ var MailListRead = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentIconLetter();
         }
     }
@@ -45,6 +45,6 @@ var MailListRead = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     MailListRead.init();
 });

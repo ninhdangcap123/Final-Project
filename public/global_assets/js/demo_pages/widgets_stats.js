@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var StatisticWidgets = function() {
+var StatisticWidgets = function () {
 
 
     //
@@ -18,14 +18,14 @@ var StatisticWidgets = function() {
     //
 
     // Messages area chart
-    var _areaChartWidget = function(element, chartHeight, color) {
+    var _areaChartWidget = function (element, chartHeight, color) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
 
             // Basic setup
@@ -52,7 +52,7 @@ var StatisticWidgets = function() {
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             // Construct chart layout
@@ -60,9 +60,13 @@ var StatisticWidgets = function() {
 
             // Area
             var area = d3.svg.area()
-                .x(function(d) { return x(d.date); })
+                .x(function (d) {
+                    return x(d.date);
+                })
                 .y0(height)
-                .y1(function(d) { return y(d.value); })
+                .y1(function (d) {
+                    return y(d.value);
+                })
                 .interpolate('monotone');
 
 
@@ -70,7 +74,7 @@ var StatisticWidgets = function() {
             // ------------------------------
 
             // Horizontal
-            var x = d3.time.scale().range([0, width ]);
+            var x = d3.time.scale().range([0, width]);
 
             // Vertical
             var y = d3.scale.linear().range([height, 0]);
@@ -91,10 +95,12 @@ var StatisticWidgets = function() {
                 });
 
                 // Get the maximum value in the given array
-                var maxY = d3.max(data, function(d) { return d.value; });
+                var maxY = d3.max(data, function (d) {
+                    return d.value;
+                });
 
                 // Reset start data for animation
-                var startData = data.map(function(datum) {
+                var startData = data.map(function (datum) {
                     return {
                         date: datum.date,
                         value: 0
@@ -106,11 +112,14 @@ var StatisticWidgets = function() {
                 // ------------------------------
 
                 // Horizontal
-                x.domain(d3.extent(data, function(d, i) { return d.date; }));
+                x.domain(d3.extent(data, function (d, i) {
+                    return d.date;
+                }));
 
                 // Vertical
-                y.domain([0, d3.max( data, function(d) { return d.value; })]);
-
+                y.domain([0, d3.max(data, function (d) {
+                    return d.value;
+                })]);
 
 
                 //
@@ -124,13 +133,13 @@ var StatisticWidgets = function() {
                     .style('fill', color)
                     .attr("d", area)
                     .transition() // begin animation
-                        .duration(1000)
-                        .attrTween('d', function() {
-                            var interpolator = d3.interpolateArray(startData, data);
-                            return function (t) {
-                                return area(interpolator (t));
-                            };
-                        });
+                    .duration(1000)
+                    .attrTween('d', function () {
+                        var interpolator = d3.interpolateArray(startData, data);
+                        return function (t) {
+                            return area(interpolator(t));
+                        };
+                    });
 
 
                 // Resize chart
@@ -143,9 +152,9 @@ var StatisticWidgets = function() {
                 $(document).on('click', '.sidebar-control', messagesAreaResize);
 
                 // Resize function
-                // 
+                //
                 // Since D3 doesn't support SVG resize by default,
-                // we need to manually specify parts of the graph that need to 
+                // we need to manually specify parts of the graph that need to
                 // be updated on window resize
                 function messagesAreaResize() {
 
@@ -170,21 +179,21 @@ var StatisticWidgets = function() {
                     // -------------------------
 
                     // Area path
-                    svg.selectAll('.d3-area').datum( data ).attr("d", area);
+                    svg.selectAll('.d3-area').datum(data).attr("d", area);
                 }
             });
         }
     };
 
     // Simple bar charts
-    var _barChartWidget = function(element, barQty, height, animate, easing, duration, delay, color, tooltip) {
+    var _barChartWidget = function (element, barQty, height, animate, easing, duration, delay, color, tooltip) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
 
             // Basic setup
@@ -192,14 +201,13 @@ var StatisticWidgets = function() {
 
             // Add data set
             var bardata = [];
-            for (var i=0; i < barQty; i++) {
+            for (var i = 0; i < barQty; i++) {
                 bardata.push(Math.round(Math.random() * 10) + 10);
             }
 
             // Main variables
             var d3Container = d3.select(element),
                 width = d3Container.node().getBoundingClientRect().width;
-            
 
 
             // Construct scales
@@ -214,7 +222,6 @@ var StatisticWidgets = function() {
                 .range([0, height]);
 
 
-
             // Set input domains
             // ------------------------------
 
@@ -223,7 +230,6 @@ var StatisticWidgets = function() {
 
             // Vertical
             y.domain([0, d3.max(bardata)]);
-
 
 
             // Create chart
@@ -239,7 +245,6 @@ var StatisticWidgets = function() {
                 .append('g');
 
 
-
             //
             // Append chart elements
             //
@@ -249,13 +254,12 @@ var StatisticWidgets = function() {
                 .data(bardata)
                 .enter()
                 .append('rect')
-                    .attr('class', 'd3-random-bars')
-                    .attr('width', x.rangeBand())
-                    .attr('x', function(d,i) {
-                        return x(i);
-                    })
-                    .style('fill', color);
-
+                .attr('class', 'd3-random-bars')
+                .attr('width', x.rangeBand())
+                .attr('x', function (d, i) {
+                    return x(i);
+                })
+                .style('fill', color);
 
 
             // Tooltip
@@ -267,52 +271,51 @@ var StatisticWidgets = function() {
                 .offset([-10, 0]);
 
             // Show and hide
-            if(tooltip == "hours" || tooltip == "goal" || tooltip == "members") {
+            if (tooltip == "hours" || tooltip == "goal" || tooltip == "members") {
                 bars.call(tip)
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide);
             }
 
             // Daily meetings tooltip content
-            if(tooltip == "hours") {
+            if (tooltip == "hours") {
                 tip.html(function (d, i) {
                     return "<div class='text-center'>" +
-                            "<h6 class='mb-0'>" + d + "</h6>" +
-                            "<span class='font-size-sm'>meetings</span>" +
-                            "<div class='font-size-sm'>" + i + ":00" + "</div>" +
+                        "<h6 class='mb-0'>" + d + "</h6>" +
+                        "<span class='font-size-sm'>meetings</span>" +
+                        "<div class='font-size-sm'>" + i + ":00" + "</div>" +
                         "</div>";
                 });
             }
 
             // Statements tooltip content
-            if(tooltip == "goal") {
+            if (tooltip == "goal") {
                 tip.html(function (d, i) {
                     return "<div class='text-center'>" +
-                            "<h6 class='mb-0'>" + d + "</h6>" +
-                            "<span class='font-size-sm'>statements</span>" +
-                            "<div class='font-size-sm'>" + i + ":00" + "</div>" +
+                        "<h6 class='mb-0'>" + d + "</h6>" +
+                        "<span class='font-size-sm'>statements</span>" +
+                        "<div class='font-size-sm'>" + i + ":00" + "</div>" +
                         "</div>";
                 });
             }
 
             // Online members tooltip content
-            if(tooltip == "members") {
+            if (tooltip == "members") {
                 tip.html(function (d, i) {
                     return "<div class='text-center'>" +
-                            "<h6 class='mb-0'>" + d + "0" + "</h6>" +
-                            "<span class='font-size-sm'>members</span>" +
-                            "<div class='font-size-sm'>" + i + ":00" + "</div>" +
+                        "<h6 class='mb-0'>" + d + "0" + "</h6>" +
+                        "<span class='font-size-sm'>members</span>" +
+                        "<div class='font-size-sm'>" + i + ":00" + "</div>" +
                         "</div>";
                 });
             }
-
 
 
             // Bar loading animation
             // ------------------------------
 
             // Choose between animated or static
-            if(animate) {
+            if (animate) {
                 withAnimation();
             } else {
                 withoutAnimation();
@@ -324,30 +327,29 @@ var StatisticWidgets = function() {
                     .attr('height', 0)
                     .attr('y', height)
                     .transition()
-                        .attr('height', function(d) {
-                            return y(d);
-                        })
-                        .attr('y', function(d) {
-                            return height - y(d);
-                        })
-                        .delay(function(d, i) {
-                            return i * delay;
-                        })
-                        .duration(duration)
-                        .ease(easing);
+                    .attr('height', function (d) {
+                        return y(d);
+                    })
+                    .attr('y', function (d) {
+                        return height - y(d);
+                    })
+                    .delay(function (d, i) {
+                        return i * delay;
+                    })
+                    .duration(duration)
+                    .ease(easing);
             }
 
             // Load without animateion
             function withoutAnimation() {
                 bars
-                    .attr('height', function(d) {
+                    .attr('height', function (d) {
                         return y(d);
                     })
-                    .attr('y', function(d) {
+                    .attr('y', function (d) {
                         return height - y(d);
                     });
             }
-
 
 
             // Resize chart
@@ -360,9 +362,9 @@ var StatisticWidgets = function() {
             $(document).on('click', '.sidebar-control', barsResize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function barsResize() {
 
@@ -389,7 +391,7 @@ var StatisticWidgets = function() {
                 // Bars
                 svg.selectAll('.d3-random-bars')
                     .attr('width', x.rangeBand())
-                    .attr('x', function(d,i) {
+                    .attr('x', function (d, i) {
                         return x(i);
                     });
             }
@@ -397,14 +399,14 @@ var StatisticWidgets = function() {
     };
 
     // Simple line chart
-    var _lineChartWidget = function(element, chartHeight, lineColor, pathColor, pointerLineColor, pointerBgColor) {
+    var _lineChartWidget = function (element, chartHeight, lineColor, pathColor, pointerLineColor, pointerBgColor) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
 
             // Basic setup
@@ -457,8 +459,8 @@ var StatisticWidgets = function() {
                     return "<ul class='list-unstyled mb-1'>" +
                         "<li>" + "<div class='font-size-base my-1'><i class='icon-check2 mr-2'></i>" + formatDate(d.date) + "</div>" + "</li>" +
                         "<li>" + "Sales: &nbsp;" + "<span class='font-weight-semibold float-right'>" + d.alpha + "</span>" + "</li>" +
-                        "<li>" + "Revenue: &nbsp; " + "<span class='font-weight-semibold float-right'>" + "$" + (d.alpha * 25).toFixed(2) + "</span>" + "</li>" + 
-                    "</ul>";
+                        "<li>" + "Revenue: &nbsp; " + "<span class='font-weight-semibold float-right'>" + "$" + (d.alpha * 25).toFixed(2) + "</span>" + "</li>" +
+                        "</ul>";
                 });
 
 
@@ -470,11 +472,11 @@ var StatisticWidgets = function() {
 
             // Add SVG group
             var svg = container
-                    .attr('width', width + margin.left + margin.right)
-                    .attr('height', height + margin.top + margin.bottom)
-                    .append("g")
-                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                        .call(tooltip);
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .call(tooltip);
 
 
             // Load data
@@ -517,10 +519,10 @@ var StatisticWidgets = function() {
 
             // Line
             var line = d3.svg.line()
-                .x(function(d) {
+                .x(function (d) {
                     return x(d.date);
                 })
-                .y(function(d) {
+                .y(function (d) {
                     return y(d.alpha);
                 });
 
@@ -545,10 +547,10 @@ var StatisticWidgets = function() {
 
             // Animate mask
             clipRect
-                  .transition()
-                      .duration(1000)
-                      .ease('linear')
-                      .attr("width", width);
+                .transition()
+                .duration(1000)
+                .ease('linear')
+                .attr("width", width);
 
 
             // Line
@@ -566,8 +568,8 @@ var StatisticWidgets = function() {
             // Animate path
             svg.select('.line-tickets')
                 .transition()
-                    .duration(1000)
-                    .ease('linear');
+                .duration(1000)
+                .ease('linear');
 
 
             // Add vertical guide lines
@@ -582,31 +584,33 @@ var StatisticWidgets = function() {
             guide
                 .enter()
                 .append('line')
-                    .attr('class', 'd3-line-guides')
-                    .attr('x1', function (d, i) {
-                        return x(d.date);
-                    })
-                    .attr('y1', function (d, i) {
-                        return height;
-                    })
-                    .attr('x2', function (d, i) {
-                        return x(d.date);
-                    })
-                    .attr('y2', function (d, i) {
-                        return height;
-                    })
-                    .style('stroke', pathColor)
-                    .style('stroke-dasharray', '4,2')
-                    .style('shape-rendering', 'crispEdges');
+                .attr('class', 'd3-line-guides')
+                .attr('x1', function (d, i) {
+                    return x(d.date);
+                })
+                .attr('y1', function (d, i) {
+                    return height;
+                })
+                .attr('x2', function (d, i) {
+                    return x(d.date);
+                })
+                .attr('y2', function (d, i) {
+                    return height;
+                })
+                .style('stroke', pathColor)
+                .style('stroke-dasharray', '4,2')
+                .style('shape-rendering', 'crispEdges');
 
             // Animate guide lines
             guide
                 .transition()
-                    .duration(1000)
-                    .delay(function(d, i) { return i * 150; })
-                    .attr('y2', function (d, i) {
-                        return y(d.alpha);
-                    });
+                .duration(1000)
+                .delay(function (d, i) {
+                    return i * 150;
+                })
+                .attr('y2', function (d, i) {
+                    return y(d.alpha);
+                });
 
 
             // Alpha app points
@@ -618,23 +622,23 @@ var StatisticWidgets = function() {
                 .data(dataset)
                 .enter()
                 .append('circle')
-                    .attr('class', 'd3-line-circle d3-line-circle-medium')
-                    .attr("cx", line.x())
-                    .attr("cy", line.y())
-                    .attr("r", 3)
-                    .style({
-                        'stroke': pointerLineColor,
-                        'fill': pointerBgColor
-                    });
+                .attr('class', 'd3-line-circle d3-line-circle-medium')
+                .attr("cx", line.x())
+                .attr("cy", line.y())
+                .attr("r", 3)
+                .style({
+                    'stroke': pointerLineColor,
+                    'fill': pointerBgColor
+                });
 
             // Animate points on page load
             points
                 .style('opacity', 0)
                 .transition()
-                    .duration(250)
-                    .ease('linear')
-                    .delay(1000)
-                    .style('opacity', 1);
+                .duration(250)
+                .ease('linear')
+                .delay(1000)
+                .style('opacity', 1);
 
             // Add user interaction
             points
@@ -694,9 +698,9 @@ var StatisticWidgets = function() {
             $(document).on('click', '.sidebar-control', lineChartResize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function lineChartResize() {
 
@@ -742,14 +746,14 @@ var StatisticWidgets = function() {
     };
 
     // Simple sparklines
-    var _sparklinesWidget = function(element, chartType, qty, chartHeight, interpolation, duration, interval, color) {
+    var _sparklinesWidget = function (element, chartType, qty, chartHeight, interpolation, duration, interval, color) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
 
             // Basic setup
@@ -764,7 +768,7 @@ var StatisticWidgets = function() {
 
             // Generate random data (for demo only)
             var data = [];
-            for (var i=0; i < qty; i++) {
+            for (var i = 0; i < qty; i++) {
                 data.push(Math.floor(Math.random() * qty) + 5);
             }
 
@@ -787,7 +791,7 @@ var StatisticWidgets = function() {
 
             // Vertical
             y.domain([0, qty]);
-                
+
 
             // Construct chart layout
             // ------------------------------
@@ -795,18 +799,22 @@ var StatisticWidgets = function() {
             // Line
             var line = d3.svg.line()
                 .interpolate(interpolation)
-                .x(function(d, i) { return x(i); })
-                .y(function(d, i) { return y(d); });
+                .x(function (d, i) {
+                    return x(i);
+                })
+                .y(function (d, i) {
+                    return y(d);
+                });
 
             // Area
             var area = d3.svg.area()
                 .interpolate(interpolation)
-                .x(function(d,i) { 
-                    return x(i); 
+                .x(function (d, i) {
+                    return x(i);
                 })
                 .y0(height)
-                .y1(function(d) { 
-                    return y(d); 
+                .y1(function (d) {
+                    return y(d);
                 });
 
 
@@ -821,7 +829,7 @@ var StatisticWidgets = function() {
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             // Add mask for animation
@@ -830,7 +838,9 @@ var StatisticWidgets = function() {
             // Add clip path
             var clip = svg.append("defs")
                 .append("clipPath")
-                .attr('id', function(d, i) { return "load-clip-" + element.substring(1); });
+                .attr('id', function (d, i) {
+                    return "load-clip-" + element.substring(1);
+                });
 
             // Add clip shape
             var clips = clip.append("rect")
@@ -841,9 +851,9 @@ var StatisticWidgets = function() {
             // Animate mask
             clips
                 .transition()
-                    .duration(1000)
-                    .ease('linear')
-                    .attr("width", width);
+                .duration(1000)
+                .ease('linear')
+                .attr("width", width);
 
 
             //
@@ -852,16 +862,17 @@ var StatisticWidgets = function() {
 
             // Main path
             var path = svg.append("g")
-                .attr("clip-path", function(d, i) { return "url(#load-clip-" + element.substring(1) + ")"; })
+                .attr("clip-path", function (d, i) {
+                    return "url(#load-clip-" + element.substring(1) + ")";
+                })
                 .append("path")
-                    .datum(data)
-                    .attr("transform", "translate(" + x(0) + ",0)");
+                .datum(data)
+                .attr("transform", "translate(" + x(0) + ",0)");
 
             // Add path based on chart type
-            if(chartType == "area") {
+            if (chartType == "area") {
                 path.attr("d", area).attr('class', 'd3-area').style("fill", color); // area
-            }
-            else {
+            } else {
                 path.attr("d", line).attr("class", "d3-line d3-line-medium").style('stroke', color); // line
             }
 
@@ -869,15 +880,14 @@ var StatisticWidgets = function() {
             path
                 .style('opacity', 0)
                 .transition()
-                    .duration(500)
-                    .style('opacity', 1);
-
+                .duration(500)
+                .style('opacity', 1);
 
 
             // Set update interval. For demo only
             // ------------------------------
 
-            setInterval(function() {
+            setInterval(function () {
 
                 // push a new data point onto the back
                 data.push(Math.floor(Math.random() * qty) + 5);
@@ -890,7 +900,6 @@ var StatisticWidgets = function() {
             }, interval);
 
 
-
             // Update random data. For demo only
             // ------------------------------
 
@@ -900,19 +909,17 @@ var StatisticWidgets = function() {
                 path
                     .attr("transform", null)
                     .transition()
-                        .duration(duration)
-                        .ease("linear")
-                        .attr("transform", "translate(" + x(0) + ",0)");
+                    .duration(duration)
+                    .ease("linear")
+                    .attr("transform", "translate(" + x(0) + ",0)");
 
                 // Update path type
-                if(chartType == "area") {
+                if (chartType == "area") {
                     path.attr("d", area).attr('class', 'd3-area').style("fill", color);
-                }
-                else {
+                } else {
                     path.attr("d", line).attr("class", "d3-line d3-line-medium").style('stroke', color);
                 }
             }
-
 
 
             // Resize chart
@@ -925,9 +932,9 @@ var StatisticWidgets = function() {
             $(document).on('click', '.sidebar-control', resizeSparklines);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resizeSparklines() {
 
@@ -964,14 +971,14 @@ var StatisticWidgets = function() {
     };
 
     // Animated progress with icon
-    var _progressIcon = function(element, radius, border, backgroundColor, foregroundColor, end, iconClass) {
+    var _progressIcon = function (element, radius, border, backgroundColor, foregroundColor, end, iconClass) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
 
             // Basic setup
@@ -1004,7 +1011,7 @@ var StatisticWidgets = function() {
                 .attr('width', boxSize)
                 .attr('height', boxSize)
                 .append('g')
-                    .attr('transform', 'translate(' + (boxSize / 2) + ',' + (boxSize / 2) + ')');
+                .attr('transform', 'translate(' + (boxSize / 2) + ',' + (boxSize / 2) + ')');
 
 
             // Construct chart layout
@@ -1054,16 +1061,16 @@ var StatisticWidgets = function() {
 
             // Percentage text value
             var numberText = d3.select('.progress-percentage')
-                    .attr('class', 'pt-1 mt-2 mb-1');
+                .attr('class', 'pt-1 mt-2 mb-1');
 
             // Icon
             d3.select(element)
                 .append("i")
-                    .attr("class", iconClass + " counter-icon")
-                    .style({
-                        'color': foregroundColor,
-                        'top': ((boxSize - iconSize) / 2) + 'px'
-                    });
+                .attr("class", iconClass + " counter-icon")
+                .style({
+                    'color': foregroundColor,
+                    'top': ((boxSize - iconSize) / 2) + 'px'
+                });
 
 
             // Animation
@@ -1090,14 +1097,14 @@ var StatisticWidgets = function() {
     };
 
     // Animated progress with percentage count
-    var _progressPercentage = function(element, radius, border, backgroundColor, foregroundColor, end) {
+    var _progressPercentage = function (element, radius, border, backgroundColor, foregroundColor, end) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
 
             // Basic setup
@@ -1130,7 +1137,7 @@ var StatisticWidgets = function() {
                 .attr('width', boxSize)
                 .attr('height', boxSize)
                 .append('g')
-                    .attr('transform', 'translate(' + radius + ',' + radius + ')');
+                .attr('transform', 'translate(' + radius + ',' + radius + ')');
 
 
             // Construct chart layout
@@ -1181,14 +1188,14 @@ var StatisticWidgets = function() {
             // Percentage text value
             var numberText = svg
                 .append('text')
-                    .attr('dx', 0)
-                    .attr('dy', (fontSize / 2) - border)
-                    .style({
-                        'font-size': fontSize + 'px',
-                        'line-height': 1,
-                        'fill': foregroundColor,
-                        'text-anchor': 'middle'
-                    });
+                .attr('dx', 0)
+                .attr('dy', (fontSize / 2) - border)
+                .style({
+                    'font-size': fontSize + 'px',
+                    'line-height': 1,
+                    'fill': foregroundColor,
+                    'text-anchor': 'middle'
+                });
 
 
             // Animation
@@ -1215,14 +1222,14 @@ var StatisticWidgets = function() {
     };
 
     // Simple pie
-    var _animatedPie = function(element, size) {
+    var _animatedPie = function (element, size) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Add data set
             var data = [
@@ -1247,8 +1254,10 @@ var StatisticWidgets = function() {
             // Main variables
             var d3Container = d3.select(element),
                 distance = 2, // reserve 2px space for mouseover arc moving
-                radius = (size/2) - distance,
-                sum = d3.sum(data, function(d) { return d.value; });
+                radius = (size / 2) - distance,
+                sum = d3.sum(data, function (d) {
+                    return d.value;
+                });
 
 
             // Tooltip
@@ -1263,7 +1272,7 @@ var StatisticWidgets = function() {
                         "<li>" + "<div class='font-size-base my-1'>" + d.data.icon + d.data.status + "</div>" + "</li>" +
                         "<li>" + "Total: &nbsp;" + "<span class='font-weight-semibold float-right'>" + d.value + "</span>" + "</li>" +
                         "<li>" + "Share: &nbsp;" + "<span class='font-weight-semibold float-right'>" + (100 / (sum / d.value)).toFixed(2) + "%" + "</span>" + "</li>" +
-                    "</ul>";
+                        "</ul>";
                 });
 
 
@@ -1272,13 +1281,13 @@ var StatisticWidgets = function() {
 
             // Add svg element
             var container = d3Container.append("svg").call(tip);
-            
+
             // Add SVG group
             var svg = container
                 .attr("width", size)
                 .attr("height", size)
                 .append("g")
-                    .attr("transform", "translate(" + (size / 2) + "," + (size / 2) + ")");  
+                .attr("transform", "translate(" + (size / 2) + "," + (size / 2) + ")");
 
 
             // Construct chart layout
@@ -1289,9 +1298,9 @@ var StatisticWidgets = function() {
                 .sort(null)
                 .startAngle(Math.PI)
                 .endAngle(3 * Math.PI)
-                .value(function (d) { 
+                .value(function (d) {
                     return d.value;
-                }); 
+                });
 
             // Arc
             var arc = d3.svg.arc()
@@ -1306,14 +1315,14 @@ var StatisticWidgets = function() {
             var arcGroup = svg.selectAll(".d3-arc")
                 .data(pie(data))
                 .enter()
-                .append("g") 
-                    .attr("class", "d3-arc")
-                    .style({
-                        'stroke': '#fff',
-                        'stroke-width': 2,
-                        'cursor': 'pointer'
-                    });
-            
+                .append("g")
+                .attr("class", "d3-arc")
+                .style({
+                    'stroke': '#fff',
+                    'stroke-width': 2,
+                    'cursor': 'pointer'
+                });
+
             // Append path
             var arcPath = arcGroup
                 .append("path")
@@ -1327,7 +1336,7 @@ var StatisticWidgets = function() {
 
                     // Transition on mouseover
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('elastic')
                         .attr('transform', function (d) {
@@ -1338,7 +1347,7 @@ var StatisticWidgets = function() {
                         });
                 })
                 .on("mousemove", function (d) {
-                    
+
                     // Show tooltip on mousemove
                     tip.show(d)
                         .style("top", (d3.event.pageY - 40) + "px")
@@ -1348,7 +1357,7 @@ var StatisticWidgets = function() {
 
                     // Mouseout transition
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('bounce')
                         .attr('transform', 'translate(0,0)');
@@ -1360,15 +1369,17 @@ var StatisticWidgets = function() {
             // Animate chart on load
             arcPath
                 .transition()
-                    .delay(function(d, i) { return i * 500; })
-                    .duration(500)
-                    .attrTween("d", function(d) {
-                        var interpolate = d3.interpolate(d.startAngle,d.endAngle);
-                        return function(t) {
-                            d.endAngle = interpolate(t);
-                            return arc(d);  
-                        }; 
-                    });
+                .delay(function (d, i) {
+                    return i * 500;
+                })
+                .duration(500)
+                .attrTween("d", function (d) {
+                    var interpolate = d3.interpolate(d.startAngle, d.endAngle);
+                    return function (t) {
+                        d.endAngle = interpolate(t);
+                        return arc(d);
+                    };
+                });
 
 
             //
@@ -1384,10 +1395,10 @@ var StatisticWidgets = function() {
             d3Container.select('h2')
                 .transition()
                 .duration(1500)
-                .tween("text", function(d) {
+                .tween("text", function (d) {
                     var i = d3.interpolate(this.textContent, sum);
 
-                    return function(t) {
+                    return function (t) {
                         this.textContent = d3.format(",d")(Math.round(i(t)));
                     };
                 });
@@ -1395,14 +1406,14 @@ var StatisticWidgets = function() {
     };
 
     // Pie with legend
-    var _animatedPieWithLegend = function(element, size) {
+    var _animatedPieWithLegend = function (element, size) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Add data set
             var data = [
@@ -1424,8 +1435,10 @@ var StatisticWidgets = function() {
             // Main variables
             var d3Container = d3.select(element),
                 distance = 2, // reserve 2px space for mouseover arc moving
-                radius = (size/2) - distance,
-                sum = d3.sum(data, function(d) { return d.value; });
+                radius = (size / 2) - distance,
+                sum = d3.sum(data, function (d) {
+                    return d.value;
+                });
 
 
             // Create chart
@@ -1433,13 +1446,13 @@ var StatisticWidgets = function() {
 
             // Add svg element
             var container = d3Container.append("svg");
-            
+
             // Add SVG group
             var svg = container
                 .attr("width", size)
                 .attr("height", size)
                 .append("g")
-                    .attr("transform", "translate(" + (size / 2) + "," + (size / 2) + ")");  
+                .attr("transform", "translate(" + (size / 2) + "," + (size / 2) + ")");
 
 
             // Construct chart layout
@@ -1450,9 +1463,9 @@ var StatisticWidgets = function() {
                 .sort(null)
                 .startAngle(Math.PI)
                 .endAngle(3 * Math.PI)
-                .value(function (d) { 
+                .value(function (d) {
                     return d.value;
-                }); 
+                });
 
             // Arc
             var arc = d3.svg.arc()
@@ -1467,14 +1480,14 @@ var StatisticWidgets = function() {
             var arcGroup = svg.selectAll(".d3-arc")
                 .data(pie(data))
                 .enter()
-                .append("g") 
-                    .attr("class", "d3-arc")
-                    .style({
-                        'stroke': '#fff',
-                        'stroke-width': 2,
-                        'cursor': 'pointer'
-                    });
-            
+                .append("g")
+                .attr("class", "d3-arc")
+                .style({
+                    'stroke': '#fff',
+                    'stroke-width': 2,
+                    'cursor': 'pointer'
+                });
+
             // Append path
             var arcPath = arcGroup
                 .append("path")
@@ -1489,7 +1502,7 @@ var StatisticWidgets = function() {
 
                     // Transition on mouseover
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('elastic')
                         .attr('transform', function (d) {
@@ -1510,7 +1523,7 @@ var StatisticWidgets = function() {
 
                     // Mouseout transition
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('bounce')
                         .attr('transform', 'translate(0,0)');
@@ -1522,15 +1535,17 @@ var StatisticWidgets = function() {
             // Animate chart on load
             arcPath
                 .transition()
-                    .delay(function(d, i) { return i * 500; })
-                    .duration(500)
-                    .attrTween("d", function(d) {
-                        var interpolate = d3.interpolate(d.startAngle,d.endAngle);
-                        return function(t) {
-                            d.endAngle = interpolate(t);
-                            return arc(d);  
-                        }; 
-                    });
+                .delay(function (d, i) {
+                    return i * 500;
+                })
+                .duration(500)
+                .attrTween("d", function (d) {
+                    var interpolate = d3.interpolate(d.startAngle, d.endAngle);
+                    return function (t) {
+                        d.endAngle = interpolate(t);
+                        return arc(d);
+                    };
+                });
 
 
             //
@@ -1546,10 +1561,10 @@ var StatisticWidgets = function() {
             d3Container.select('h2')
                 .transition()
                 .duration(1500)
-                .tween("text", function(d) {
+                .tween("text", function (d) {
                     var i = d3.interpolate(this.textContent, sum);
 
-                    return function(t) {
+                    return function (t) {
                         this.textContent = d3.format(",d")(Math.round(i(t)));
                     };
                 });
@@ -1565,33 +1580,33 @@ var StatisticWidgets = function() {
                 .attr('class', 'chart-widget-legend')
                 .selectAll('li').data(pie(data))
                 .enter().append('li')
-                .attr('data-slice', function(d, i) {
+                .attr('data-slice', function (d, i) {
                     return i;
                 })
-                .attr('style', function(d, i) {
+                .attr('style', function (d, i) {
                     return 'border-bottom: 2px solid ' + d.data.color;
                 })
-                .text(function(d, i) {
+                .text(function (d, i) {
                     return d.data.status + ': ';
                 });
 
             // Add value
             legend.append('span')
-                .text(function(d, i) {
+                .text(function (d, i) {
                     return d.data.value;
                 });
         }
     };
 
     // Pie arc with legend
-    var _pieArcWithLegend = function(element, size) {
+    var _pieArcWithLegend = function (element, size) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
 
             // Basic setup
@@ -1620,9 +1635,10 @@ var StatisticWidgets = function() {
             // Main variables
             var d3Container = d3.select(element),
                 distance = 2, // reserve 2px space for mouseover arc moving
-                radius = (size/2) - distance,
-                sum = d3.sum(data, function(d) { return d.value; });
-
+                radius = (size / 2) - distance,
+                sum = d3.sum(data, function (d) {
+                    return d.value;
+                });
 
 
             // Tooltip
@@ -1637,9 +1653,8 @@ var StatisticWidgets = function() {
                         "<li>" + "<div class='font-size-base my-1'>" + d.data.icon + d.data.status + "</div>" + "</li>" +
                         "<li>" + "Total: &nbsp;" + "<span class='font-weight-semibold float-right'>" + d.value + "</span>" + "</li>" +
                         "<li>" + "Share: &nbsp;" + "<span class='font-weight-semibold float-right'>" + (100 / (sum / d.value)).toFixed(2) + "%" + "</span>" + "</li>" +
-                    "</ul>";
+                        "</ul>";
                 });
-
 
 
             // Create chart
@@ -1647,14 +1662,13 @@ var StatisticWidgets = function() {
 
             // Add svg element
             var container = d3Container.append("svg").call(tip);
-            
+
             // Add SVG group
             var svg = container
                 .attr("width", size)
                 .attr("height", size / 2)
                 .append("g")
-                    .attr("transform", "translate(" + (size / 2) + "," + (size / 2) + ")");  
-
+                .attr("transform", "translate(" + (size / 2) + "," + (size / 2) + ")");
 
 
             // Construct chart layout
@@ -1665,15 +1679,14 @@ var StatisticWidgets = function() {
                 .sort(null)
                 .startAngle(-Math.PI / 2)
                 .endAngle(Math.PI / 2)
-                .value(function (d) { 
+                .value(function (d) {
                     return d.value;
-                }); 
+                });
 
             // Arc
             var arc = d3.svg.arc()
                 .outerRadius(radius)
                 .innerRadius(radius / 1.3);
-
 
 
             //
@@ -1684,14 +1697,14 @@ var StatisticWidgets = function() {
             var arcGroup = svg.selectAll(".d3-arc")
                 .data(pie(data))
                 .enter()
-                .append("g") 
-                    .attr("class", "d3-arc")
-                    .style({
-                        'stroke': '#fff',
-                        'stroke-width': 2,
-                        'cursor': 'pointer'
-                    });
-            
+                .append("g")
+                .attr("class", "d3-arc")
+                .style({
+                    'stroke': '#fff',
+                    'stroke-width': 2,
+                    'cursor': 'pointer'
+                });
+
             // Append path
             var arcPath = arcGroup
                 .append("path")
@@ -1706,11 +1719,11 @@ var StatisticWidgets = function() {
 
             // Mouse
             arcPath
-                .on('mouseover', function(d, i) {
+                .on('mouseover', function (d, i) {
 
                     // Transition on mouseover
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('elastic')
                         .attr('transform', function (d) {
@@ -1726,11 +1739,11 @@ var StatisticWidgets = function() {
                     });
                     $(element + ' [data-slice=' + i + ']').css({'opacity': 1});
                 })
-                .on('mouseout', function(d, i) {
+                .on('mouseout', function (d, i) {
 
                     // Mouseout transition
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('bounce')
                         .attr('transform', 'translate(0,0)');
@@ -1741,17 +1754,17 @@ var StatisticWidgets = function() {
             // Animate chart on load
             arcPath
                 .transition()
-                    .delay(function(d, i) {
-                        return i * 500;
-                    })
-                    .duration(500)
-                    .attrTween("d", function(d) {
-                        var interpolate = d3.interpolate(d.startAngle,d.endAngle);
-                        return function(t) {
-                            d.endAngle = interpolate(t);
-                            return arc(d);  
-                        }; 
-                    });
+                .delay(function (d, i) {
+                    return i * 500;
+                })
+                .duration(500)
+                .attrTween("d", function (d) {
+                    var interpolate = d3.interpolate(d.startAngle, d.endAngle);
+                    return function (t) {
+                        d.endAngle = interpolate(t);
+                        return arc(d);
+                    };
+                });
 
 
             //
@@ -1792,10 +1805,10 @@ var StatisticWidgets = function() {
                 .transition()
                 .duration(1500)
                 .ease('linear')
-                .tween("text", function(d) {
+                .tween("text", function (d) {
                     var i = d3.interpolate(this.textContent, sum);
 
-                    return function(t) {
+                    return function (t) {
                         this.textContent = d3.format(",d")(Math.round(i(t)));
                     };
                 });
@@ -1813,33 +1826,33 @@ var StatisticWidgets = function() {
                 .data(pie(data))
                 .enter()
                 .append('li')
-                .attr('data-slice', function(d, i) {
+                .attr('data-slice', function (d, i) {
                     return i;
                 })
-                .attr('style', function(d, i) {
+                .attr('style', function (d, i) {
                     return 'border-bottom: solid 2px ' + d.data.color;
                 })
-                .text(function(d, i) {
+                .text(function (d, i) {
                     return d.data.status + ': ';
                 });
 
             // Legend text
             legend.append('span')
-                .text(function(d, i) {
+                .text(function (d, i) {
                     return d.data.value;
                 });
         }
     };
 
     // Simple donut
-    var _animatedDonut = function(element, size) {
+    var _animatedDonut = function (element, size) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Add data set
             var data = [
@@ -1864,8 +1877,10 @@ var StatisticWidgets = function() {
             // Main variables
             var d3Container = d3.select(element),
                 distance = 2, // reserve 2px space for mouseover arc moving
-                radius = (size/2) - distance,
-                sum = d3.sum(data, function(d) { return d.value; });
+                radius = (size / 2) - distance,
+                sum = d3.sum(data, function (d) {
+                    return d.value;
+                });
 
 
             // Tooltip
@@ -1880,7 +1895,7 @@ var StatisticWidgets = function() {
                         "<li>" + "<div class='font-size-base my-1'>" + d.data.icon + d.data.status + "</div>" + "</li>" +
                         "<li>" + "Total: &nbsp;" + "<span class='font-weight-semibold float-right'>" + d.value + "</span>" + "</li>" +
                         "<li>" + "Share: &nbsp;" + "<span class='font-weight-semibold float-right'>" + (100 / (sum / d.value)).toFixed(2) + "%" + "</span>" + "</li>" +
-                    "</ul>";
+                        "</ul>";
                 });
 
 
@@ -1889,13 +1904,13 @@ var StatisticWidgets = function() {
 
             // Add svg element
             var container = d3Container.append("svg").call(tip);
-            
+
             // Add SVG group
             var svg = container
                 .attr("width", size)
                 .attr("height", size)
                 .append("g")
-                    .attr("transform", "translate(" + (size / 2) + "," + (size / 2) + ")");  
+                .attr("transform", "translate(" + (size / 2) + "," + (size / 2) + ")");
 
 
             // Construct chart layout
@@ -1906,9 +1921,9 @@ var StatisticWidgets = function() {
                 .sort(null)
                 .startAngle(Math.PI)
                 .endAngle(3 * Math.PI)
-                .value(function (d) { 
+                .value(function (d) {
                     return d.value;
-                }); 
+                });
 
             // Arc
             var arc = d3.svg.arc()
@@ -1924,14 +1939,14 @@ var StatisticWidgets = function() {
             var arcGroup = svg.selectAll(".d3-arc")
                 .data(pie(data))
                 .enter()
-                .append("g") 
-                    .attr("class", "d3-arc")
-                    .style({
-                        'stroke': '#fff',
-                        'stroke-width': 2,
-                        'cursor': 'pointer'
-                    });
-            
+                .append("g")
+                .attr("class", "d3-arc")
+                .style({
+                    'stroke': '#fff',
+                    'stroke-width': 2,
+                    'cursor': 'pointer'
+                });
+
             // Append path
             var arcPath = arcGroup
                 .append("path")
@@ -1945,7 +1960,7 @@ var StatisticWidgets = function() {
 
                     // Transition on mouseover
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('elastic')
                         .attr('transform', function (d) {
@@ -1956,7 +1971,7 @@ var StatisticWidgets = function() {
                         });
                 })
                 .on("mousemove", function (d) {
-                    
+
                     // Show tooltip on mousemove
                     tip.show(d)
                         .style("top", (d3.event.pageY - 40) + "px")
@@ -1966,7 +1981,7 @@ var StatisticWidgets = function() {
 
                     // Mouseout transition
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('bounce')
                         .attr('transform', 'translate(0,0)');
@@ -1978,15 +1993,17 @@ var StatisticWidgets = function() {
             // Animate chart on load
             arcPath
                 .transition()
-                    .delay(function(d, i) { return i * 500; })
-                    .duration(500)
-                    .attrTween("d", function(d) {
-                        var interpolate = d3.interpolate(d.startAngle,d.endAngle);
-                        return function(t) {
-                            d.endAngle = interpolate(t);
-                            return arc(d);  
-                        }; 
-                    });
+                .delay(function (d, i) {
+                    return i * 500;
+                })
+                .duration(500)
+                .attrTween("d", function (d) {
+                    var interpolate = d3.interpolate(d.startAngle, d.endAngle);
+                    return function (t) {
+                        d.endAngle = interpolate(t);
+                        return arc(d);
+                    };
+                });
 
 
             //
@@ -2007,9 +2024,9 @@ var StatisticWidgets = function() {
             svg.select('text')
                 .transition()
                 .duration(1500)
-                .tween("text", function(d) {
+                .tween("text", function (d) {
                     var i = d3.interpolate(this.textContent, sum);
-                    return function(t) {
+                    return function (t) {
                         this.textContent = d3.format(",d")(Math.round(i(t)));
                     };
                 });
@@ -2017,14 +2034,14 @@ var StatisticWidgets = function() {
     };
 
     // Donut with legend
-    var _animatedDonutWithLegend = function(element, size) {
+    var _animatedDonutWithLegend = function (element, size) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Add data set
             var data = [
@@ -2046,8 +2063,10 @@ var StatisticWidgets = function() {
             // Main variables
             var d3Container = d3.select(element),
                 distance = 2, // reserve 2px space for mouseover arc moving
-                radius = (size/2) - distance,
-                sum = d3.sum(data, function(d) { return d.value; });
+                radius = (size / 2) - distance,
+                sum = d3.sum(data, function (d) {
+                    return d.value;
+                });
 
 
             // Create chart
@@ -2055,13 +2074,13 @@ var StatisticWidgets = function() {
 
             // Add svg element
             var container = d3Container.append("svg");
-            
+
             // Add SVG group
             var svg = container
                 .attr("width", size)
                 .attr("height", size)
                 .append("g")
-                    .attr("transform", "translate(" + (size / 2) + "," + (size / 2) + ")");  
+                .attr("transform", "translate(" + (size / 2) + "," + (size / 2) + ")");
 
 
             // Construct chart layout
@@ -2072,9 +2091,9 @@ var StatisticWidgets = function() {
                 .sort(null)
                 .startAngle(Math.PI)
                 .endAngle(3 * Math.PI)
-                .value(function (d) { 
+                .value(function (d) {
                     return d.value;
-                }); 
+                });
 
             // Arc
             var arc = d3.svg.arc()
@@ -2090,14 +2109,14 @@ var StatisticWidgets = function() {
             var arcGroup = svg.selectAll(".d3-arc")
                 .data(pie(data))
                 .enter()
-                .append("g") 
-                    .attr("class", "d3-arc")
-                    .style({
-                        'stroke': '#fff',
-                        'stroke-width': 2,
-                        'cursor': 'pointer'
-                    });
-            
+                .append("g")
+                .attr("class", "d3-arc")
+                .style({
+                    'stroke': '#fff',
+                    'stroke-width': 2,
+                    'cursor': 'pointer'
+                });
+
             // Append path
             var arcPath = arcGroup
                 .append("path")
@@ -2112,7 +2131,7 @@ var StatisticWidgets = function() {
 
                     // Transition on mouseover
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('elastic')
                         .attr('transform', function (d) {
@@ -2133,7 +2152,7 @@ var StatisticWidgets = function() {
 
                     // Mouseout transition
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('bounce')
                         .attr('transform', 'translate(0,0)');
@@ -2145,17 +2164,17 @@ var StatisticWidgets = function() {
             // Animate chart on load
             arcPath
                 .transition()
-                    .delay(function(d, i) {
-                        return i * 500;
-                    })
-                    .duration(500)
-                    .attrTween("d", function(d) {
-                        var interpolate = d3.interpolate(d.startAngle,d.endAngle);
-                        return function(t) {
-                            d.endAngle = interpolate(t);
-                            return arc(d);  
-                        }; 
-                    });
+                .delay(function (d, i) {
+                    return i * 500;
+                })
+                .duration(500)
+                .attrTween("d", function (d) {
+                    var interpolate = d3.interpolate(d.startAngle, d.endAngle);
+                    return function (t) {
+                        d.endAngle = interpolate(t);
+                        return arc(d);
+                    };
+                });
 
 
             //
@@ -2176,9 +2195,9 @@ var StatisticWidgets = function() {
             svg.select('text')
                 .transition()
                 .duration(1500)
-                .tween("text", function(d) {
+                .tween("text", function (d) {
                     var i = d3.interpolate(this.textContent, sum);
-                    return function(t) {
+                    return function (t) {
                         this.textContent = d3.format(",d")(Math.round(i(t)));
                     };
                 });
@@ -2194,33 +2213,33 @@ var StatisticWidgets = function() {
                 .attr('class', 'chart-widget-legend')
                 .selectAll('li').data(pie(data))
                 .enter().append('li')
-                .attr('data-slice', function(d, i) {
+                .attr('data-slice', function (d, i) {
                     return i;
                 })
-                .attr('style', function(d, i) {
+                .attr('style', function (d, i) {
                     return 'border-bottom: 2px solid ' + d.data.color;
                 })
-                .text(function(d, i) {
+                .text(function (d, i) {
                     return d.data.status + ': ';
                 });
 
             // Add value
             legend.append('span')
-                .text(function(d, i) {
+                .text(function (d, i) {
                     return d.data.value;
                 });
         }
     };
 
     // Donut with details
-    var _donutWithDetails = function(element, size) {
+    var _donutWithDetails = function (element, size) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
 
             // Basic setup
@@ -2249,8 +2268,10 @@ var StatisticWidgets = function() {
             // Main variables
             var d3Container = d3.select(element),
                 distance = 2, // reserve 2px space for mouseover arc moving
-                radius = (size/2) - distance,
-                sum = d3.sum(data, function(d) { return d.value; });
+                radius = (size / 2) - distance,
+                sum = d3.sum(data, function (d) {
+                    return d.value;
+                });
 
 
             // Tooltip
@@ -2265,7 +2286,7 @@ var StatisticWidgets = function() {
                         "<li>" + "<div class='font-size-base my-1'>" + d.data.icon + d.data.status + "</div>" + "</li>" +
                         "<li>" + "Total: &nbsp;" + "<span class='font-weight-semibold float-right'>" + d.value + "</span>" + "</li>" +
                         "<li>" + "Share: &nbsp;" + "<span class='font-weight-semibold float-right'>" + (100 / (sum / d.value)).toFixed(2) + "%" + "</span>" + "</li>" +
-                    "</ul>";
+                        "</ul>";
                 });
 
 
@@ -2274,13 +2295,13 @@ var StatisticWidgets = function() {
 
             // Add svg element
             var container = d3Container.append("svg").call(tip);
-            
+
             // Add SVG group
             var svg = container
                 .attr("width", size)
                 .attr("height", size)
                 .append("g")
-                    .attr("transform", "translate(" + (size / 2) + "," + (size / 2) + ")");  
+                .attr("transform", "translate(" + (size / 2) + "," + (size / 2) + ")");
 
 
             // Construct chart layout
@@ -2291,9 +2312,9 @@ var StatisticWidgets = function() {
                 .sort(null)
                 .startAngle(Math.PI)
                 .endAngle(3 * Math.PI)
-                .value(function (d) { 
+                .value(function (d) {
                     return d.value;
-                }); 
+                });
 
             // Arc
             var arc = d3.svg.arc()
@@ -2309,14 +2330,14 @@ var StatisticWidgets = function() {
             var arcGroup = svg.selectAll(".d3-arc")
                 .data(pie(data))
                 .enter()
-                .append("g") 
-                    .attr("class", "d3-arc")
-                    .style({
-                        'stroke': '#fff',
-                        'stroke-width': 2,
-                        'cursor': 'pointer'
-                    });
-            
+                .append("g")
+                .attr("class", "d3-arc")
+                .style({
+                    'stroke': '#fff',
+                    'stroke-width': 2,
+                    'cursor': 'pointer'
+                });
+
             // Append path
             var arcPath = arcGroup
                 .append("path")
@@ -2331,11 +2352,11 @@ var StatisticWidgets = function() {
 
             // Mouse
             arcPath
-                .on('mouseover', function(d, i) {
+                .on('mouseover', function (d, i) {
 
                     // Transition on mouseover
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('elastic')
                         .attr('transform', function (d) {
@@ -2351,11 +2372,11 @@ var StatisticWidgets = function() {
                     });
                     $(element + ' [data-slice=' + i + ']').css({'opacity': 1});
                 })
-                .on('mouseout', function(d, i) {
+                .on('mouseout', function (d, i) {
 
                     // Mouseout transition
                     d3.select(this)
-                    .transition()
+                        .transition()
                         .duration(500)
                         .ease('bounce')
                         .attr('transform', 'translate(0,0)');
@@ -2366,16 +2387,16 @@ var StatisticWidgets = function() {
             // Animate chart on load
             arcPath
                 .transition()
-                .delay(function(d, i) {
+                .delay(function (d, i) {
                     return i * 500;
                 })
                 .duration(500)
-                .attrTween("d", function(d) {
-                    var interpolate = d3.interpolate(d.startAngle,d.endAngle);
-                    return function(t) {
+                .attrTween("d", function (d) {
+                    var interpolate = d3.interpolate(d.startAngle, d.endAngle);
+                    return function (t) {
                         d.endAngle = interpolate(t);
-                        return arc(d);  
-                    }; 
+                        return arc(d);
+                    };
                 });
 
 
@@ -2413,10 +2434,10 @@ var StatisticWidgets = function() {
                 .transition()
                 .duration(1500)
                 .ease('linear')
-                .tween("text", function(d) {
+                .tween("text", function (d) {
                     var i = d3.interpolate(this.textContent, sum);
 
-                    return function(t) {
+                    return function (t) {
                         this.textContent = d3.format(",d")(Math.round(i(t)));
                     };
                 });
@@ -2434,33 +2455,33 @@ var StatisticWidgets = function() {
                 .data(pie(data))
                 .enter()
                 .append('li')
-                .attr('data-slice', function(d, i) {
+                .attr('data-slice', function (d, i) {
                     return i;
                 })
-                .attr('style', function(d, i) {
+                .attr('style', function (d, i) {
                     return 'border-bottom: solid 2px ' + d.data.color;
                 })
-                .text(function(d, i) {
+                .text(function (d, i) {
                     return d.data.status + ': ';
                 });
 
             // Append text
             legend.append('span')
-                .text(function(d, i) {
+                .text(function (d, i) {
                     return d.data.value;
                 });
         }
     };
 
     // Progress arc - single color
-    var _progressArcSingle = function(element, size) {
+    var _progressArcSingle = function (element, size) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Main variables
             var d3Container = d3.select(element),
@@ -2474,7 +2495,7 @@ var StatisticWidgets = function() {
 
             // Add svg element
             var container = d3Container.append("svg");
-            
+
             // Add SVG group
             var svg = container
                 .attr('width', radius * 2)
@@ -2570,7 +2591,7 @@ var StatisticWidgets = function() {
             //
 
             // Interval
-            setInterval(function() {
+            setInterval(function () {
                 update(Math.random() * 100);
             }, 1500);
 
@@ -2589,9 +2610,9 @@ var StatisticWidgets = function() {
             // Arc
             function arcTween(transition, v) {
                 var newAngle = v / 100 * Math.PI - Math.PI / 2;
-                transition.attrTween('d', function(d) {
+                transition.attrTween('d', function (d) {
                     var interpolate = d3.interpolate(d.endAngle, newAngle);
-                    return function(t) {
+                    return function (t) {
                         d.endAngle = interpolate(t);
                         return arc(d);
                     };
@@ -2600,11 +2621,11 @@ var StatisticWidgets = function() {
 
             // Text
             function textTween(transition, v) {
-                transition.tween('text', function() {
+                transition.tween('text', function () {
                     var interpolate = d3.interpolate(this.innerHTML, v),
                         split = (v + '').split('.'),
                         round = (split.length > 1) ? Math.pow(10, split[1].length) : 1;
-                    return function(t) {
+                    return function (t) {
                         this.innerHTML = d3.format('.0f')(Math.round(interpolate(t) * round) / round) + '<tspan>%</tspan>';
                     };
                 });
@@ -2613,14 +2634,14 @@ var StatisticWidgets = function() {
     };
 
     // Progress arc - multiple colors
-    var _progressArcMulti = function(element, size, goal) {
+    var _progressArcMulti = function (element, size, goal) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Main variables
             var d3Container = d3.select(element),
@@ -2641,7 +2662,7 @@ var StatisticWidgets = function() {
 
             // Add svg element
             var container = d3Container.append("svg");
-            
+
             // Add SVG group
             var svg = container
                 .attr('width', radius * 2)
@@ -2736,7 +2757,7 @@ var StatisticWidgets = function() {
             //
 
             // Interval
-            setInterval(function() {
+            setInterval(function () {
                 update(Math.random() * 100);
             }, 1500);
 
@@ -2745,7 +2766,7 @@ var StatisticWidgets = function() {
                 v = d3.format('.0f')(v);
                 foreground.transition()
                     .duration(750)
-                    .style('fill', function() {
+                    .style('fill', function () {
                         return color(v);
                     })
                     .call(arcTween, v);
@@ -2758,9 +2779,9 @@ var StatisticWidgets = function() {
             // Arc
             function arcTween(transition, v) {
                 var newAngle = v / 100 * Math.PI - Math.PI / 2;
-                transition.attrTween('d', function(d) {
+                transition.attrTween('d', function (d) {
                     var interpolate = d3.interpolate(d.endAngle, newAngle);
-                    return function(t) {
+                    return function (t) {
                         d.endAngle = interpolate(t);
                         return arc(d);
                     };
@@ -2769,11 +2790,11 @@ var StatisticWidgets = function() {
 
             // Text
             function textTween(transition, v) {
-                transition.tween('text', function() {
+                transition.tween('text', function () {
                     var interpolate = d3.interpolate(this.innerHTML, v),
                         split = (v + '').split('.'),
                         round = (split.length > 1) ? Math.pow(10, split[1].length) : 1;
-                    return function(t) {
+                    return function (t) {
                         this.innerHTML = d3.format('.0f')(Math.round(interpolate(t) * round) / round) + '<tspan>%</tspan>';
                     };
                 });
@@ -2782,14 +2803,14 @@ var StatisticWidgets = function() {
     };
 
     // Rounded progress - single arc
-    var _roundedProgressSingle = function(element, size, goal, color) {
+    var _roundedProgressSingle = function (element, size, goal, color) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Add random data
             var dataset = function () {
@@ -2812,13 +2833,13 @@ var StatisticWidgets = function() {
 
             // Add svg element
             var container = d3Container.append("svg");
-            
+
             // Add SVG group
             var svg = container
                 .attr("width", width)
                 .attr("height", height)
                 .append("g")
-                    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 
             // Construct chart layout
@@ -2925,22 +2946,22 @@ var StatisticWidgets = function() {
                     .duration(600)
                     .ease("easeInOut")
                     .attrTween("d", arcTween);
-                    
+
                 // Update count text
                 field
                     .select(".arc-goal-completed")
                     .text(function (d) {
-                        return Math.round(d.percentage /100 * goal);
+                        return Math.round(d.percentage / 100 * goal);
                     });
 
                 // Animate count text
                 svg.select('.arc-goal-completed')
                     .transition()
                     .duration(600)
-                    .tween("text", function(d) {
+                    .tween("text", function (d) {
                         var i = d3.interpolate(this.textContent, d.percentage);
-                        return function(t) {
-                            this.textContent = Math.floor(d.percentage/100 * goal);
+                        return function (t) {
+                            this.textContent = Math.floor(d.percentage / 100 * goal);
                         };
                     });
 
@@ -2960,21 +2981,21 @@ var StatisticWidgets = function() {
     };
 
     // Rounded progress - multiple arcs
-    var _roundedProgressMultiple = function(element, size) {
+    var _roundedProgressMultiple = function (element, size) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Add random data
             var data = [
-                    {index: 0, name: 'Memory', percentage: 0},
-                    {index: 1, name: 'CPU', percentage: 0},
-                    {index: 2, name: 'Sessions', percentage: 0}
-                ];
+                {index: 0, name: 'Memory', percentage: 0},
+                {index: 1, name: 'CPU', percentage: 0},
+                {index: 2, name: 'Sessions', percentage: 0}
+            ];
 
             // Main variables
             var d3Container = d3.select(element),
@@ -2993,13 +3014,13 @@ var StatisticWidgets = function() {
 
             // Add svg element
             var container = d3Container.append("svg");
-            
+
             // Add SVG group
             var svg = container
                 .attr("width", width)
                 .attr("height", height)
                 .append("g")
-                    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 
             // Construct chart layout
@@ -3073,13 +3094,13 @@ var StatisticWidgets = function() {
                 .data(data)
                 .enter()
                 .append('li')
-                .attr('data-slice', function(d, i) {
+                .attr('data-slice', function (d, i) {
                     return i;
                 })
-                .attr('style', function(d, i) {
+                .attr('style', function (d, i) {
                     return 'border-bottom: solid 2px ' + colors[i];
                 })
-                .text(function(d, i) {
+                .text(function (d, i) {
                     return d.name;
                 });
 
@@ -3110,7 +3131,7 @@ var StatisticWidgets = function() {
                     .duration(750)
                     .ease("easeInOut")
                     .attrTween("d", arcTween);
-                    
+
                 // Update every 4 seconds
                 setTimeout(update, 4000);
             }
@@ -3127,21 +3148,21 @@ var StatisticWidgets = function() {
     };
 
     // Pie with progress bar
-    var _pieWithProgress = function(element, size) {
+    var _pieWithProgress = function (element, size) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Demo dataset
             var dataset = [
-                    { name: 'New', count: 639 },
-                    { name: 'Pending', count: 255 },
-                    { name: 'Shipped', count: 215 }
-                ];
+                {name: 'New', count: 639},
+                {name: 'Pending', count: 255},
+                {name: 'Shipped', count: 215}
+            ];
 
             // Main variables
             var d3Container = d3.select(element),
@@ -3164,26 +3185,28 @@ var StatisticWidgets = function() {
 
             // Add svg element
             var container = d3Container.append("svg");
-            
+
             // Add SVG group
             var svg = container
                 .attr("width", width)
                 .attr("height", height)
                 .append("g")
-                    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 
             // Construct chart layout
             // ------------------------------
 
             // Add dataset
-            dataset.forEach(function(d){
-                total+= d.count;
+            dataset.forEach(function (d) {
+                total += d.count;
             });
 
             // Pie layout
             var pie = d3.layout.pie()
-                .value(function(d){ return d.count; })
+                .value(function (d) {
+                    return d.count;
+                })
                 .sort(null);
 
             // Inner arc
@@ -3204,7 +3227,7 @@ var StatisticWidgets = function() {
             //
             // Animations
             //
-            var arcTween = function(transition, newAngle) {
+            var arcTween = function (transition, newAngle) {
                 transition.attrTween("d", function (d) {
                     var interpolate = d3.interpolate(d.endAngle, newAngle);
                     var interpolateCount = d3.interpolate(0, dataset[0].count);
@@ -3227,7 +3250,7 @@ var StatisticWidgets = function() {
                 .enter()
                 .append('path')
                 .attr('d', arc)
-                .attr('fill', function(d, i) {
+                .attr('fill', function (d, i) {
                     return color(d.data.name);
                 })
                 .style({
@@ -3239,19 +3262,21 @@ var StatisticWidgets = function() {
             // Animate donut
             path
                 .transition()
-                .delay(function(d, i) { return i; })
+                .delay(function (d, i) {
+                    return i;
+                })
                 .duration(600)
-                .attrTween("d", function(d) {
+                .attrTween("d", function (d) {
                     var interpolate = d3.interpolate(d.startAngle, d.endAngle);
-                    return function(t) {
+                    return function (t) {
                         d.endAngle = interpolate(t);
-                        return arc(d);  
-                    }; 
+                        return arc(d);
+                    };
                 });
 
 
             //
-            // Line path 
+            // Line path
             //
 
             // Line
@@ -3281,9 +3306,9 @@ var StatisticWidgets = function() {
                     'font-weight': 500,
                     'text-anchor': 'middle'
                 })
-                .text(function(d){
+                .text(function (d) {
                     return d;
-                });            
+                });
 
 
             //
@@ -3292,14 +3317,14 @@ var StatisticWidgets = function() {
 
             // Mouse
             path
-                .on('mouseover', function(d, i) {
+                .on('mouseover', function (d, i) {
                     $(element + ' [data-slice]').css({
                         'opacity': 0.3,
                         'transition': 'all ease-in-out 0.15s'
                     });
                     $(element + ' [data-slice=' + i + ']').css({'opacity': 1});
                 })
-                .on('mouseout', function(d, i) {
+                .on('mouseout', function (d, i) {
                     $(element + ' [data-slice]').css('opacity', 1);
                 });
 
@@ -3316,33 +3341,33 @@ var StatisticWidgets = function() {
                 .data(pie(dataset))
                 .enter()
                 .append('li')
-                .attr('data-slice', function(d, i) {
+                .attr('data-slice', function (d, i) {
                     return i;
                 })
-                .attr('style', function(d, i) {
+                .attr('style', function (d, i) {
                     return 'border-bottom: solid 2px ' + color(d.data.name);
                 })
-                .text(function(d, i) {
+                .text(function (d, i) {
                     return d.data.name + ': ';
                 });
 
             // Append legend text
             legend.append('span')
-                .text(function(d, i) {
+                .text(function (d, i) {
                     return d.data.count;
                 });
         }
     };
 
     // Segmented gauge
-    var _segmentedGauge = function(element, size, min, max, sliceQty) {
+    var _segmentedGauge = function (element, size, min, max, sliceQty) {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
         }
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Main variables
             var d3Container = d3.select(element),
@@ -3355,13 +3380,13 @@ var StatisticWidgets = function() {
                 pointerWidth = 10,
                 pointerTailLength = 5,
                 pointerHeadLengthPercent = 0.75,
-                
+
                 minValue = min,
                 maxValue = max,
-                
+
                 minAngle = -90,
                 maxAngle = 90,
-                
+
                 slices = sliceQty,
                 range = maxAngle - minAngle,
                 pointerHeadLength = Math.round(radius * pointerHeadLengthPercent);
@@ -3387,16 +3412,16 @@ var StatisticWidgets = function() {
 
             // Construct chart layout
             // ------------------------------
-            
-            // Donut  
+
+            // Donut
             var arc = d3.svg.arc()
                 .innerRadius(radius - ringWidth - ringInset)
                 .outerRadius(radius - ringInset)
-                .startAngle(function(d, i) {
+                .startAngle(function (d, i) {
                     var ratio = d * i;
                     return deg2rad(minAngle + (ratio * range));
                 })
-                .endAngle(function(d, i) {
+                .endAngle(function (d, i) {
                     var ratio = d * (i + 1);
                     return deg2rad(minAngle + (ratio * range));
                 });
@@ -3405,11 +3430,11 @@ var StatisticWidgets = function() {
             var scale = d3.scale.linear()
                 .range([0, 1])
                 .domain([minValue, maxValue]);
-                
+
             // Ticks
             var ticks = scale.ticks(slices);
             var tickData = d3.range(slices)
-                .map(function() {
+                .map(function () {
                     return 1 / slices;
                 });
 
@@ -3417,7 +3442,7 @@ var StatisticWidgets = function() {
             function deg2rad(deg) {
                 return deg * Math.PI / 180;
             }
-                
+
             // Calculate rotation angle
             function newAngle(d) {
                 var ratio = scale(d);
@@ -3447,7 +3472,7 @@ var StatisticWidgets = function() {
                 .data(tickData)
                 .enter()
                 .append('path')
-                .attr('fill', function(d, i) {
+                .attr('fill', function (d, i) {
                     return colors(i);
                 })
                 .attr('d', arc);
@@ -3466,7 +3491,7 @@ var StatisticWidgets = function() {
                 .data(ticks)
                 .enter()
                 .append('text')
-                .attr('transform', function(d) {
+                .attr('transform', function (d) {
                     var ratio = scale(d);
                     var newAngle = minAngle + (ratio * range);
                     return 'rotate(' + newAngle + ') translate(0,' + (10 - radius) + ')';
@@ -3476,7 +3501,9 @@ var StatisticWidgets = function() {
                     'font-size': 11,
                     'fill': '#999'
                 })
-                .text(function(d) { return d + "%"; });
+                .text(function (d) {
+                    return d + "%";
+                });
 
 
             //
@@ -3485,7 +3512,7 @@ var StatisticWidgets = function() {
 
             // Line data
             var lineData = [
-                [pointerWidth / 2, 0], 
+                [pointerWidth / 2, 0],
                 [0, -pointerHeadLength],
                 [-(pointerWidth / 2), 0],
                 [0, pointerTailLength],
@@ -3521,10 +3548,11 @@ var StatisticWidgets = function() {
                     .ease('elastic')
                     .attr('transform', 'rotate(' + newAngle + ')');
             }
+
             update();
 
             // Update values every 5 seconds
-            setInterval(function() {
+            setInterval(function () {
                 update();
             }, 5000);
         }
@@ -3536,7 +3564,7 @@ var StatisticWidgets = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _areaChartWidget("#chart_area_basic", 50, '#5C6BC0');
             _areaChartWidget("#chart_area_color", 50, 'rgba(255,255,255,0.75)');
 
@@ -3580,6 +3608,6 @@ var StatisticWidgets = function() {
 // ------------------------------
 
 // When content loaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     StatisticWidgets.init();
 });

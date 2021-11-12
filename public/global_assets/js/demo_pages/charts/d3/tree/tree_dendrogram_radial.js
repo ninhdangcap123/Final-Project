@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3TreeDendrogramRadial = function() {
+var D3TreeDendrogramRadial = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3TreeDendrogramRadial = function() {
     //
 
     // Chart
-    var _treeDendrogramRadial = function() {
+    var _treeDendrogramRadial = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3TreeDendrogramRadial = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -50,8 +50,7 @@ var D3TreeDendrogramRadial = function() {
                 .attr("width", diameter)
                 .attr("height", diameter)
                 .append("g")
-                    .attr("transform", "translate(" + (diameter / 2) + "," + (diameter / 2) + ")");
-
+                .attr("transform", "translate(" + (diameter / 2) + "," + (diameter / 2) + ")");
 
 
             // Construct chart layout
@@ -63,13 +62,15 @@ var D3TreeDendrogramRadial = function() {
 
             // Diagonal projection
             var diagonal = d3.svg.diagonal.radial()
-                .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
+                .projection(function (d) {
+                    return [d.y, d.x / 180 * Math.PI];
+                });
 
 
             // Load data
             // ------------------------------
 
-            d3.json("../../../../global_assets/demo_data/d3/tree/tree_data_dendrogram_radial.json", function(error, root) {
+            d3.json("../../../../global_assets/demo_data/d3/tree/tree_data_dendrogram_radial.json", function (error, root) {
 
                 var nodes = cluster.nodes(root);
 
@@ -82,11 +83,11 @@ var D3TreeDendrogramRadial = function() {
                     .data(cluster.links(nodes))
                     .enter()
                     .append("path")
-                        .attr("class", "d3-tree-link")
-                        .attr("d", diagonal)
-                        .style("fill", "none")
-                        .style("stroke", "#ddd")
-                        .style("stroke-width", 1.5);
+                    .attr("class", "d3-tree-link")
+                    .attr("d", diagonal)
+                    .style("fill", "none")
+                    .style("stroke", "#ddd")
+                    .style("stroke-width", 1.5);
 
 
                 // Nodes
@@ -97,8 +98,10 @@ var D3TreeDendrogramRadial = function() {
                     .data(nodes)
                     .enter()
                     .append("g")
-                        .attr("class", "d3-tree-node")
-                        .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
+                    .attr("class", "d3-tree-node")
+                    .attr("transform", function (d) {
+                        return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")";
+                    })
 
                 // Append circles
                 node.append("circle")
@@ -110,10 +113,16 @@ var D3TreeDendrogramRadial = function() {
                 // Append text
                 node.append("text")
                     .attr("dy", ".31em")
-                    .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-                    .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
+                    .attr("text-anchor", function (d) {
+                        return d.x < 180 ? "start" : "end";
+                    })
+                    .attr("transform", function (d) {
+                        return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)";
+                    })
                     .style("font-size", 12)
-                    .text(function(d) { return d.name; });
+                    .text(function (d) {
+                        return d.name;
+                    });
             });
         }
     };
@@ -124,7 +133,7 @@ var D3TreeDendrogramRadial = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _treeDendrogramRadial();
         }
     }
@@ -134,6 +143,6 @@ var D3TreeDendrogramRadial = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3TreeDendrogramRadial.init();
 });

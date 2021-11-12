@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleBarVerticalGrouped = function() {
+var DimpleBarVerticalGrouped = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleBarVerticalGrouped = function() {
     //
 
     // Chart
-    var _barVerticalGrouped = function() {
+    var _barVerticalGrouped = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleBarVerticalGrouped = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -130,7 +130,7 @@ var DimpleBarVerticalGrouped = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _barVerticalGrouped();
         }
     }
@@ -140,6 +140,6 @@ var DimpleBarVerticalGrouped = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleBarVerticalGrouped.init();
 });

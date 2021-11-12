@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleDiffChart = function() {
+var GoogleDiffChart = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleDiffChart = function() {
     //
 
     // Diff chart
-    var _googleDiffChart = function() {
+    var _googleDiffChart = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleDiffChart = function() {
 
                 // Resize on window resize
                 var resizeDiffChart;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeDiffChart);
                     resizeDiffChart = setTimeout(function () {
                         drawDiff();
@@ -101,7 +101,7 @@ var GoogleDiffChart = function() {
                         fontSize: 13,
                         italic: false
                     },
-                    gridlines:{
+                    gridlines: {
                         color: '#e5e5e5',
                         count: 10
                     },
@@ -133,7 +133,7 @@ var GoogleDiffChart = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleDiffChart();
         }
     }

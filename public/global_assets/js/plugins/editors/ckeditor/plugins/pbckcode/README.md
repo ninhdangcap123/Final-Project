@@ -1,13 +1,17 @@
 # pbckcode
 
-A CKEditor plugin to easily add code into your articles.
-The plugin will create a dialog where you will be able to format your code as your will. When you press the **OK** button, the plugin will create a *pre* tag with your code inside.
+A CKEditor plugin to easily add code into your articles. The plugin will create a dialog where you will be able to
+format your code as your will. When you press the **OK** button, the plugin will create a *pre* tag with your code
+inside.
 
 # Demo
+
 See it in action ! http://prbaron.github.com/pbckcode/
 
 # Installation
-1. Download the plugin from the Github repository : [https://github.com/prbaron/pbckcode/tags](https://github.com/prbaron/pbckcode/tags)
+
+1. Download the plugin from the Github
+   repository : [https://github.com/prbaron/pbckcode/tags](https://github.com/prbaron/pbckcode/tags)
 2. Rename it to **pbckcode** (it will be easier to call it into CKEditor)
 3. Place the folder into the plugins folder of CKEditor ( *{Path to CKEDitor}/plugins/* )
 4. Open the config.js file and add the following lines :
@@ -52,13 +56,15 @@ See it in action ! http://prbaron.github.com/pbckcode/
      };
  };
 ```
+
 And you are good to go! You will have the same configuration than the demo.
 
 # Options
 
 ## highlighter
 
-Choose your synta highlighter output. Remove the option if you want to output a basic &lt;pre&gt; tag, otherwise, choose one of them.
+Choose your synta highlighter output. Remove the option if you want to output a basic &lt;pre&gt; tag, otherwise, choose
+one of them.
 
 ```
 'HIGHLIGHT' // http://highlightjs.org/
@@ -68,6 +74,7 @@ Choose your synta highlighter output. Remove the option if you want to output a 
 ```
 
 ## modes
+
 ```
 // Available modes
 ['C/C++'        , 'c_pp']
@@ -160,15 +167,17 @@ Choose your synta highlighter output. Remove the option if you want to output a 
 
 # Special Thanks
 
-  * CKEditor : [http://ckeditor.com/](http://ckeditor.com/)
-  * ACE : [http://ace.ajax.org/](http://ace.ajax.org/)
-  * Lea Verou : [http://prismjs.com/](http://prismjs.com/)
-  * Google : [https://code.google.com/p/google-code-prettify/](https://code.google.com/p/google-code-prettify/)
-  * Ivan Sagalaev : [http://highlightjs.org/](http://highlightjs.org/)
-  * Alex Gorbatchev : [http://alexgorbatchev.com/SyntaxHighlighter/](http://alexgorbatchev.com/SyntaxHighlighter/)
+* CKEditor : [http://ckeditor.com/](http://ckeditor.com/)
+* ACE : [http://ace.ajax.org/](http://ace.ajax.org/)
+* Lea Verou : [http://prismjs.com/](http://prismjs.com/)
+* Google : [https://code.google.com/p/google-code-prettify/](https://code.google.com/p/google-code-prettify/)
+* Ivan Sagalaev : [http://highlightjs.org/](http://highlightjs.org/)
+* Alex Gorbatchev : [http://alexgorbatchev.com/SyntaxHighlighter/](http://alexgorbatchev.com/SyntaxHighlighter/)
 
 # Credits
+
 #### Pierre Baron
+
 Website : [http://www.pierrebaron.fr](http://www.pierrebaron.fr)
 Twitter : [@prbaron](https://twitter.com/prbaron)
 Contact : <prbaron22@gmail.com>

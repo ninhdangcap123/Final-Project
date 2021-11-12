@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var AnimationsVelocityBasic = function() {
+var AnimationsVelocityBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var AnimationsVelocityBasic = function() {
     //
 
     // Velocity basic
-    var _componentAnimationVelocityBasic = function() {
+    var _componentAnimationVelocityBasic = function () {
         if (!$().velocity) {
             console.warn('Warning - velocity.min.js is not loaded.');
             return;
@@ -27,7 +27,7 @@ var AnimationsVelocityBasic = function() {
         // Run basic animations
         $('.velocity-property').on('click', function (e) {
             e.preventDefault();
-            
+
             // Get animation class and panel
             var property = $(this).data('property');
             var value = $(this).data('value');
@@ -40,10 +40,10 @@ var AnimationsVelocityBasic = function() {
 
             // Add options
             var animateMap = {},
-            animateOptions = {
-                easing: 'easeInOut',
-                duration: 250
-            };
+                animateOptions = {
+                    easing: 'easeInOut',
+                    duration: 250
+                };
             animateMap[property] = value;
             animateMap[property2] = value2;
             animateMap[property3] = value3;
@@ -51,13 +51,13 @@ var AnimationsVelocityBasic = function() {
 
             // Add animation class to panel element
             $(this).parents('.demo-velocity-box')
-            .velocity(animateMap, animateOptions)
-            .velocity("reverse", {
-                delay: 1000,
-                complete: function() {
-                    $(this).removeAttr('style');
-                }
-            });
+                .velocity(animateMap, animateOptions)
+                .velocity("reverse", {
+                    delay: 1000,
+                    complete: function () {
+                        $(this).removeAttr('style');
+                    }
+                });
         });
     };
 
@@ -67,7 +67,7 @@ var AnimationsVelocityBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentAnimationVelocityBasic();
         }
     }
@@ -77,6 +77,6 @@ var AnimationsVelocityBasic = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     AnimationsVelocityBasic.init();
 });

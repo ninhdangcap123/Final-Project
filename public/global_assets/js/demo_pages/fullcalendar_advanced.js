@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var FullCalendarAdvanced = function() {
+var FullCalendarAdvanced = function () {
 
 
     //
@@ -18,7 +18,7 @@ var FullCalendarAdvanced = function() {
     //
 
     // External events
-    var _componentFullCalendarEvents = function() {
+    var _componentFullCalendarEvents = function () {
         if (!$().fullCalendar || typeof Switchery == 'undefined' || !$().draggable) {
             console.warn('Warning - fullcalendar.min.js, switchery.min.js or jQuery UI is not loaded.');
             return;
@@ -117,7 +117,7 @@ var FullCalendarAdvanced = function() {
             events: eventColors,
             locale: 'en',
             droppable: true, // this allows things to be dropped onto the calendar
-                drop: function() {
+            drop: function () {
                 if ($('#drop-remove').is(':checked')) { // is the "remove after drop" checkbox checked?
                     $(this).remove(); // if so, remove the element from the "Draggable Events" list
                 }
@@ -126,7 +126,7 @@ var FullCalendarAdvanced = function() {
         });
 
         // Initialize the external events
-        $('#external-events .fc-event').each(function() {
+        $('#external-events .fc-event').each(function () {
 
             // Different colors for events
             $(this).css({'backgroundColor': $(this).data('color'), 'borderColor': $(this).data('color')});
@@ -148,7 +148,7 @@ var FullCalendarAdvanced = function() {
     };
 
     // FullCalendar RTL direction
-    var _componentFullCalendarRTL = function() {
+    var _componentFullCalendarRTL = function () {
         if (!$().fullCalendar) {
             console.warn('Warning - fullcalendar.min.js is not loaded.');
             return;
@@ -310,7 +310,7 @@ var FullCalendarAdvanced = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentFullCalendarEvents();
             _componentFullCalendarRTL();
         }
@@ -321,6 +321,6 @@ var FullCalendarAdvanced = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     FullCalendarAdvanced.init();
 });

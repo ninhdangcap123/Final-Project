@@ -44,14 +44,15 @@
             }
         }
     });
+
     function buildDropdown(trumbowyg) {
         var dropdown = [];
 
-        $.each(fonts, function(index, font) {
+        $.each(fonts, function (index, font) {
             trumbowyg.addBtnDef('fontfamily_' + index, {
                 title: '<span style="font-family: ' + font.family + ';">' + font.name + '</span>',
                 hasIcon: false,
-                fn: function(){
+                fn: function () {
                     trumbowyg.execCmd('fontName', font.family, true);
                 }
             });

@@ -27,7 +27,7 @@ class CourseCreate extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
             'major_id' => 'Major',
         ];
     }

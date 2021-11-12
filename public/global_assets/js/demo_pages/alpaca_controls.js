@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var AlpacaControls = function() {
+var AlpacaControls = function () {
 
 
     //
@@ -18,7 +18,7 @@ var AlpacaControls = function() {
     //
 
     // Alpaca examples
-    var _componentAlpacaControls = function() {
+    var _componentAlpacaControls = function () {
         if (!$().alpaca) {
             console.warn('Warning - alpaca.min.js is not loaded.');
             return;
@@ -36,7 +36,7 @@ var AlpacaControls = function() {
                 label: 'Question:',
                 rightLabel: 'Do you like Alpaca?'
             },
-            postRender: function(control) {
+            postRender: function (control) {
                 $alpacaCheckboxLabel.find('.checkbox').addClass('form-check');
                 $alpacaCheckboxLabel.find('label:not(.alpaca-control-label)').addClass('form-check-label');
                 $alpacaCheckboxLabel.find('input[type=checkbox]').addClass('form-check-input');
@@ -65,7 +65,7 @@ var AlpacaControls = function() {
                 label: 'What would you like with your order?',
                 optionLabels: ['A Sandwich', 'Potato Chips', 'A Cookie', 'Soft Drink']
             },
-            postRender: function(control) {
+            postRender: function (control) {
                 $alpacaCheckboxList.find('.checkbox').addClass('form-check');
                 $alpacaCheckboxList.find('label:not(.alpaca-control-label)').addClass('form-check-label');
                 $alpacaCheckboxList.find('input[type=checkbox]').addClass('form-check-input');
@@ -96,7 +96,7 @@ var AlpacaControls = function() {
                 required: true,
                 enum: ['red', 'green', 'blue', 'white', 'black']
             },
-            postRender: function(control) {
+            postRender: function (control) {
                 $alpacaRadioBasic.find('.radio').addClass('form-check');
                 $alpacaRadioBasic.find('label:not(.alpaca-control-label)').addClass('form-check-label');
                 $alpacaRadioBasic.find('input[type=radio]').addClass('form-check-input');
@@ -116,7 +116,7 @@ var AlpacaControls = function() {
                 vertical: true,
                 disabled: true
             },
-            postRender: function(control) {
+            postRender: function (control) {
                 $alpacaRadioBasicDisabled.find('.radio').addClass('form-check');
                 $alpacaRadioBasicDisabled.find('label:not(.alpaca-control-label)').addClass('form-check-label');
                 $alpacaRadioBasicDisabled.find('input[type=radio]').addClass('form-check-input');
@@ -136,7 +136,7 @@ var AlpacaControls = function() {
                 required: true,
                 enum: ['Vanilla', 'Chocolate', 'Coffee']
             },
-            postRender: function(control) {
+            postRender: function (control) {
                 $alpacaRadioRequired.find('.radio').addClass('form-check');
                 $alpacaRadioRequired.find('label:not(.alpaca-control-label)').addClass('form-check-label');
                 $alpacaRadioRequired.find('input[type=radio]').addClass('form-check-input');
@@ -156,7 +156,7 @@ var AlpacaControls = function() {
                 removeDefaultNone: true,
                 vertical: true
             },
-            postRender: function(control) {
+            postRender: function (control) {
                 $alpacaRadioOptions.find('.radio').addClass('form-check');
                 $alpacaRadioOptions.find('label:not(.alpaca-control-label)').addClass('form-check-label');
                 $alpacaRadioOptions.find('input[type=radio]').addClass('form-check-input');
@@ -165,7 +165,7 @@ var AlpacaControls = function() {
     };
 
     // Alpaca with Uniform
-    var _componentAlpacaControlsUniform = function() {
+    var _componentAlpacaControlsUniform = function () {
         if (!$().alpaca || !$().uniform) {
             console.warn('Warning - alpaca.min.js and/or uniform.min.js is not loaded.');
             return;
@@ -179,7 +179,7 @@ var AlpacaControls = function() {
                 label: 'Question:',
                 rightLabel: 'Do you like Alpaca?'
             },
-            postRender: function(control) {
+            postRender: function (control) {
                 $alpacaCheckboxStyled.find('.checkbox').addClass('form-check');
                 $alpacaCheckboxStyled.find('label:not(.alpaca-control-label)').addClass('form-check-label');
                 $alpacaCheckboxStyled.find('input[type=checkbox]').addClass('form-check-input').uniform();
@@ -195,7 +195,7 @@ var AlpacaControls = function() {
                 rightLabel: 'Do you like Alpaca?',
                 disabled: true
             },
-            postRender: function(control) {
+            postRender: function (control) {
                 $alpacaCheckboxStyledDisabled.find('.checkbox').addClass('form-check');
                 $alpacaCheckboxStyledDisabled.find('label:not(.alpaca-control-label)').addClass('form-check-label');
                 $alpacaCheckboxStyledDisabled.find('input[type=checkbox]').addClass('form-check-input').uniform();
@@ -215,7 +215,7 @@ var AlpacaControls = function() {
                 label: 'What would you like with your order?',
                 optionLabels: ['A Sandwich', 'Potato Chips', 'A Cookie', 'Soft Drink']
             },
-            postRender: function(control) {
+            postRender: function (control) {
                 $alpacaCheckboxListStyled.find('.checkbox').addClass('form-check');
                 $alpacaCheckboxListStyled.find('label:not(.alpaca-control-label)').addClass('form-check-label');
                 $alpacaCheckboxListStyled.find('input[type=checkbox]').addClass('form-check-input').uniform();
@@ -234,7 +234,7 @@ var AlpacaControls = function() {
                 label: 'Who is your favorite guitarist?',
                 vertical: true
             },
-            postRender: function(control) {
+            postRender: function (control) {
                 $alpacaRadioStyled.find('.radio').addClass('form-check');
                 $alpacaRadioStyled.find('label:not(.alpaca-control-label)').addClass('form-check-label');
                 $alpacaRadioStyled.find('input[type=radio]').addClass('form-check-input').uniform();
@@ -254,7 +254,7 @@ var AlpacaControls = function() {
                 vertical: true,
                 disabled: true
             },
-            postRender: function(control) {
+            postRender: function (control) {
                 $alpacaRadioStyledDisabled.find('.radio').addClass('form-check');
                 $alpacaRadioStyledDisabled.find('label:not(.alpaca-control-label)').addClass('form-check-label');
                 $alpacaRadioStyledDisabled.find('input[type=radio]').addClass('form-check-input').uniform();
@@ -263,7 +263,7 @@ var AlpacaControls = function() {
     };
 
     // Alpaca with Switchery
-    var _componentAlpacaControlsSwitchery = function() {
+    var _componentAlpacaControlsSwitchery = function () {
         if (!$().alpaca || typeof Switchery == 'undefined') {
             console.warn('Warning - alpaca.min.js and/or switchery.min.js is not loaded.');
             return;
@@ -278,12 +278,12 @@ var AlpacaControls = function() {
                 rightLabel: 'Do you like Alpaca?',
                 fieldClass: 'switchery-demo'
             },
-            postRender: function() {
+            postRender: function () {
 
                 // Init Switchery
                 var elems = Array.prototype.slice.call(document.querySelectorAll('.switchery-demo input[type=checkbox]'));
-                elems.forEach(function(html) {
-                  var switchery = new Switchery(html);
+                elems.forEach(function (html) {
+                    var switchery = new Switchery(html);
                 });
 
                 $alpacaSwitchery.find('.checkbox').addClass('form-check form-check-switchery');
@@ -301,12 +301,12 @@ var AlpacaControls = function() {
                 fieldClass: 'switchery-disabled-demo',
                 disabled: true
             },
-            postRender: function(control) {
+            postRender: function (control) {
 
                 // Init Switchery
                 var elems = Array.prototype.slice.call(document.querySelectorAll('.switchery-disabled-demo input[type=checkbox]'));
-                elems.forEach(function(html) {
-                  var switchery = new Switchery(html);
+                elems.forEach(function (html) {
+                    var switchery = new Switchery(html);
                 });
 
                 $alpacaSwitcheryDisabled.find('.checkbox').addClass('form-check form-check-switchery');
@@ -316,7 +316,7 @@ var AlpacaControls = function() {
     };
 
     // Alpaca with Tokenfield
-    var _componentAlpacaControlsTokenfield = function() {
+    var _componentAlpacaControlsTokenfield = function () {
         if (!$().alpaca || !$().tokenfield) {
             console.warn('Warning - alpaca.min.js and/or tokenfield.min.js is not loaded.');
             return;
@@ -370,7 +370,7 @@ var AlpacaControls = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentAlpacaControls();
             _componentAlpacaControlsUniform();
             _componentAlpacaControlsSwitchery();
@@ -383,6 +383,6 @@ var AlpacaControls = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     AlpacaControls.init();
 });

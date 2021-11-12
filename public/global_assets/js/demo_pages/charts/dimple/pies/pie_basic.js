@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimplePieBasic = function() {
+var DimplePieBasic = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimplePieBasic = function() {
     //
 
     // Chart
-    var _pieBasic = function() {
+    var _pieBasic = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimplePieBasic = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, 420, 300);
@@ -93,7 +93,7 @@ var DimplePieBasic = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _pieBasic();
         }
     }
@@ -103,6 +103,6 @@ var DimplePieBasic = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimplePieBasic.init();
 });

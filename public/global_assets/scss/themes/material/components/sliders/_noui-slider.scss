@@ -163,7 +163,7 @@
         outline: 0;
         @include size($slider-height * 3);
         @include border-radius($border-radius-circle);
-        
+
         // Animate handle
         &,
         &:after {

@@ -18,47 +18,47 @@ var Modals = function () {
     //
 
     // Load remote content
-    var _componentModalRemote = function() {
-        $('#modal_remote').on('show.bs.modal', function() {
-            $(this).find('.modal-body').load('../../../../global_assets/demo_data/wizard/education.html', function() {
+    var _componentModalRemote = function () {
+        $('#modal_remote').on('show.bs.modal', function () {
+            $(this).find('.modal-body').load('../../../../global_assets/demo_data/wizard/education.html', function () {
                 _componentSelect2();
             });
         });
     };
 
     // Modal callbacks
-    var _componentModalCallbacks = function() {
+    var _componentModalCallbacks = function () {
 
         // onShow callback
-        $('#modal_onshow').on('show.bs.modal', function() {
+        $('#modal_onshow').on('show.bs.modal', function () {
             alert('onShow callback fired.')
         });
 
         // onShown callback
-        $('#modal_onshown').on('shown.bs.modal', function() {
+        $('#modal_onshown').on('shown.bs.modal', function () {
             alert('onShown callback fired.')
         });
 
         // onHide callback
-        $('#modal_onhide').on('hide.bs.modal', function() {
+        $('#modal_onhide').on('hide.bs.modal', function () {
             alert('onHide callback fired.')
         });
 
         // onHidden callback
-        $('#modal_onhidden').on('hidden.bs.modal', function() {
+        $('#modal_onhidden').on('hidden.bs.modal', function () {
             alert('onHidden callback fired.')
         });
     };
 
     // Bootbox extension
-    var _componentModalBootbox = function() {
+    var _componentModalBootbox = function () {
         if (typeof bootbox == 'undefined') {
             console.warn('Warning - bootbox.min.js is not loaded.');
             return;
         }
 
         // Alert dialog
-        $('#alert').on('click', function() {
+        $('#alert').on('click', function () {
             bootbox.alert({
                 title: 'Check this out!',
                 message: 'Native alert dialog has been replaced with Bootbox alert box.'
@@ -66,7 +66,7 @@ var Modals = function () {
         });
 
         // Confirmation dialog
-        $('#confirm').on('click', function() {
+        $('#confirm').on('click', function () {
             bootbox.confirm({
                 title: 'Confirm dialog',
                 message: 'Native confirm dialog has been replaced with Bootbox confirm box.',
@@ -90,7 +90,7 @@ var Modals = function () {
         });
 
         // Prompt dialog
-        $('#prompt').on('click', function() {
+        $('#prompt').on('click', function () {
             bootbox.prompt({
                 title: 'Please enter your name',
                 buttons: {
@@ -104,23 +104,23 @@ var Modals = function () {
                     }
                 },
                 callback: function (result) {
-                    if (result === null) {                                             
+                    if (result === null) {
                         bootbox.alert({
                             title: 'Prompt dismissed',
                             message: 'You have cancelled this damn thing'
-                        });                              
+                        });
                     } else {
                         bootbox.alert({
                             title: 'Hi <strong>' + result + '</strong>',
                             message: 'How are you doing today?'
-                        });                              
+                        });
                     }
                 }
             });
         });
 
         // Prompt dialog with default value
-        $('#prompt_value').on('click', function() {
+        $('#prompt_value').on('click', function () {
             bootbox.prompt({
                 title: 'What is your real name?',
                 value: 'Eugene Kopyov',
@@ -134,24 +134,24 @@ var Modals = function () {
                         className: 'btn-link'
                     }
                 },
-                callback: function(result) {
-                    if (result === null) {                                             
+                callback: function (result) {
+                    if (result === null) {
                         bootbox.alert({
                             title: 'Prompt dismissed',
                             message: 'You have cancelled this damn thing'
-                        });                              
+                        });
                     } else {
                         bootbox.alert({
                             title: 'Hi <strong>' + result + '</strong>',
                             message: 'How are you doing today?'
-                        });                              
+                        });
                     }
                 }
             });
         });
 
         // Custom bootbox dialog
-        $('#bootbox_custom').on('click', function() {
+        $('#bootbox_custom').on('click', function () {
             bootbox.dialog({
                 message: 'I am a custom dialog',
                 title: 'Custom title',
@@ -159,7 +159,7 @@ var Modals = function () {
                     success: {
                         label: 'Success!',
                         className: 'btn-success',
-                        callback: function() {
+                        callback: function () {
                             bootbox.alert({
                                 title: 'Success!',
                                 message: 'This is a great success!'
@@ -169,7 +169,7 @@ var Modals = function () {
                     danger: {
                         label: 'Danger!',
                         className: 'btn-danger',
-                        callback: function() {
+                        callback: function () {
                             bootbox.alert({
                                 title: 'Ohh noooo!',
                                 message: 'Uh oh, look out!'
@@ -179,7 +179,7 @@ var Modals = function () {
                     main: {
                         label: 'Click ME!',
                         className: 'btn-primary',
-                        callback: function() {
+                        callback: function () {
                             bootbox.alert({
                                 title: 'Hooray!',
                                 message: 'Something awesome just happened!'
@@ -191,39 +191,39 @@ var Modals = function () {
         });
 
         // Custom bootbox dialog with form
-        $('#bootbox_form').on('click', function() {
+        $('#bootbox_form').on('click', function () {
             bootbox.dialog({
                     title: 'This is a form in a modal.',
                     message: '<div class="row">  ' +
                         '<div class="col-md-12">' +
-                            '<form action="">' +
-                                '<div class="form-group row">' +
-                                    '<label class="col-md-4 col-form-label">Name</label>' +
-                                    '<div class="col-md-8">' +
-                                        '<input id="name" name="name" type="text" placeholder="Your name" class="form-control">' +
-                                        '<span class="form-text text-muted">Here goes your name</span>' +
-                                    '</div>' +
-                                '</div>' +
-                                '<div class="form-group row">' +
-                                    '<label class="col-md-4 col-form-label">How awesome is this?</label>' +
-                                    '<div class="col-md-8">' +
-                                        '<div class="form-check">' +
-                                            '<label class="form-check-label">' +
-                                                '<input type="radio" class="form-check-input" name="awesomeness" id="awesomeness-0" value="Really awesome" checked>' +
-                                                'Really awesomeness' +
-                                            '</label>' +
-                                        '</div>' +
-                                        '<div class="form-check">' +
-                                            '<label class="form-check-label">' +
-                                                '<input type="radio" class="form-check-input" name="awesomeness" id="awesomeness-1" value="Super awesome">' +
-                                                'Super awesome' +
-                                            '</label>' +
-                                        '</div>' +
-                                    '</div>' +
-                                '</div>' +
-                            '</form>' +
+                        '<form action="">' +
+                        '<div class="form-group row">' +
+                        '<label class="col-md-4 col-form-label">Name</label>' +
+                        '<div class="col-md-8">' +
+                        '<input id="name" name="name" type="text" placeholder="Your name" class="form-control">' +
+                        '<span class="form-text text-muted">Here goes your name</span>' +
                         '</div>' +
-                    '</div>',
+                        '</div>' +
+                        '<div class="form-group row">' +
+                        '<label class="col-md-4 col-form-label">How awesome is this?</label>' +
+                        '<div class="col-md-8">' +
+                        '<div class="form-check">' +
+                        '<label class="form-check-label">' +
+                        '<input type="radio" class="form-check-input" name="awesomeness" id="awesomeness-0" value="Really awesome" checked>' +
+                        'Really awesomeness' +
+                        '</label>' +
+                        '</div>' +
+                        '<div class="form-check">' +
+                        '<label class="form-check-label">' +
+                        '<input type="radio" class="form-check-input" name="awesomeness" id="awesomeness-1" value="Super awesome">' +
+                        'Super awesome' +
+                        '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</form>' +
+                        '</div>' +
+                        '</div>',
                     buttons: {
                         success: {
                             label: 'Save',
@@ -244,7 +244,7 @@ var Modals = function () {
     };
 
     // Select2
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -262,7 +262,7 @@ var Modals = function () {
     //
 
     return {
-        initComponents: function() {
+        initComponents: function () {
             _componentModalRemote();
             _componentModalCallbacks();
             _componentModalBootbox();
@@ -274,6 +274,6 @@ var Modals = function () {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     Modals.initComponents();
 });

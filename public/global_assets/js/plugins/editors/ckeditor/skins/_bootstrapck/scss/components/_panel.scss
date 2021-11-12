@@ -137,6 +137,7 @@ is its visual representation:
     overflow: hidden;
     text-overflow: ellipsis;
     border-radius: 2px;
+
     &:hover, &:focus, &:active {
         background-color: $primary-lighter;
     }
@@ -144,14 +145,14 @@ is its visual representation:
 
 /* IE6 */
 * html .cke_panel_listItem a {
-    width : 100%;
+    width: 100%;
 
     /* IE is not able to inherit the color, so we must force it to black */
     color: #000;
 }
 
 /* IE7 */
-*:first-child+html .cke_panel_listItem a {
+*:first-child + html .cke_panel_listItem a {
     /* IE is not able to inherit the color, so we must force it to black */
     color: #000;
 }
@@ -184,6 +185,7 @@ is its visual representation:
     border-bottom: 1px solid $gray;
 
     background: $gray-lighter;
+
     &:first-child {
         border-radius: $border-radius $border-radius 0 0;
     }

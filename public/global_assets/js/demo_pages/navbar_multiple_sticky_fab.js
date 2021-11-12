@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var NavbarMultipleStickyFab = function() {
+var NavbarMultipleStickyFab = function () {
 
 
     //
@@ -18,7 +18,7 @@ var NavbarMultipleStickyFab = function() {
     //
 
     // Sticky.js
-    var _componentSticky = function() {
+    var _componentSticky = function () {
         if (!$().stick_in_parent) {
             console.warn('Warning - sticky.min.js is not loaded.');
             return;
@@ -31,7 +31,7 @@ var NavbarMultipleStickyFab = function() {
     };
 
     // FAB
-    var _componentFab = function() {
+    var _componentFab = function () {
         if (!$().stick_in_parent) {
             console.warn('Warning - sticky.min.js is not loaded.');
             return;
@@ -40,12 +40,11 @@ var NavbarMultipleStickyFab = function() {
         // Add bottom spacing if reached bottom,
         // to avoid footer overlapping
         // -------------------------
-        
-        $(window).on('scroll', function() {
-            if($(window).scrollTop() + $(window).height() > $(document).height() - 40) {
+
+        $(window).on('scroll', function () {
+            if ($(window).scrollTop() + $(window).height() > $(document).height() - 40) {
                 $('.fab-menu-bottom-right').addClass('reached-bottom');
-            }
-            else {
+            } else {
                 $('.fab-menu-bottom-right').removeClass('reached-bottom');
             }
         });
@@ -63,7 +62,7 @@ var NavbarMultipleStickyFab = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentSticky();
             _componentFab();
         }
@@ -74,6 +73,6 @@ var NavbarMultipleStickyFab = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     NavbarMultipleStickyFab.init();
 });

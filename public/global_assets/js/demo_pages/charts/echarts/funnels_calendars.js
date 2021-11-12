@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var EchartsFunnelsCalendar = function() {
+var EchartsFunnelsCalendar = function () {
 
 
     //
@@ -18,7 +18,7 @@ var EchartsFunnelsCalendar = function() {
     //
 
     // Funnela nd calendar charts
-    var _funnelsCalendarsExamples = function() {
+    var _funnelsCalendarsExamples = function () {
         if (typeof echarts == 'undefined') {
             console.warn('Warning - echarts.min.js is not loaded.');
             return;
@@ -56,10 +56,10 @@ var EchartsFunnelsCalendar = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -99,7 +99,7 @@ var EchartsFunnelsCalendar = function() {
                     orient: 'vertical',
                     top: 'center',
                     left: 0,
-                    data: ['IE','Opera','Safari','Firefox','Chrome'],
+                    data: ['IE', 'Opera', 'Safari', 'Firefox', 'Chrome'],
                     itemHeight: 8,
                     itemWidth: 8
                 },
@@ -150,10 +150,10 @@ var EchartsFunnelsCalendar = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -193,7 +193,7 @@ var EchartsFunnelsCalendar = function() {
                     orient: 'vertical',
                     top: 'center',
                     left: 0,
-                    data: ['IE','Opera','Safari','Firefox','Chrome'],
+                    data: ['IE', 'Opera', 'Safari', 'Firefox', 'Chrome'],
                     itemHeight: 8,
                     itemWidth: 8
                 },
@@ -245,10 +245,10 @@ var EchartsFunnelsCalendar = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -288,7 +288,7 @@ var EchartsFunnelsCalendar = function() {
                     orient: 'vertical',
                     top: 'center',
                     right: 0,
-                    data: ['IE','Opera','Safari','Firefox','Chrome'],
+                    data: ['IE', 'Opera', 'Safari', 'Firefox', 'Chrome'],
                     itemHeight: 8,
                     itemWidth: 8
                 },
@@ -340,10 +340,10 @@ var EchartsFunnelsCalendar = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -383,7 +383,7 @@ var EchartsFunnelsCalendar = function() {
                     orient: 'vertical',
                     top: 'center',
                     left: 0,
-                    data: ['IE','Opera','Safari','Firefox','Chrome'],
+                    data: ['IE', 'Opera', 'Safari', 'Firefox', 'Chrome'],
                     itemHeight: 8,
                     itemWidth: 8
                 },
@@ -479,7 +479,7 @@ var EchartsFunnelsCalendar = function() {
                     orient: 'vertical',
                     top: 'center',
                     left: 0,
-                    data: ['Chrome','Opera','Safari','Firefox','IE'],
+                    data: ['Chrome', 'Opera', 'Safari', 'Firefox', 'IE'],
                     itemHeight: 8,
                     itemWidth: 8
                 },
@@ -576,10 +576,10 @@ var EchartsFunnelsCalendar = function() {
 
                 // Colors
                 color: [
-                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
-                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
-                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
-                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                    '#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80',
+                    '#8d98b3', '#e5cf0d', '#97b552', '#95706d', '#dc69aa',
+                    '#07a2a4', '#9a7fd1', '#588dd5', '#f5994e', '#c05050',
+                    '#59678c', '#c9ab00', '#7eb00a', '#6f5553', '#c14089'
                 ],
 
                 // Global text styles
@@ -605,7 +605,7 @@ var EchartsFunnelsCalendar = function() {
                     orient: 'vertical',
                     top: 'center',
                     left: 0,
-                    data: ['Chrome','Opera','Safari','Firefox','IE','','Android','Windows','OS X','BlackBerry','Others'],
+                    data: ['Chrome', 'Opera', 'Safari', 'Firefox', 'IE', '', 'Android', 'Windows', 'OS X', 'BlackBerry', 'Others'],
                     itemHeight: 8,
                     itemWidth: 8
                 },
@@ -956,7 +956,7 @@ var EchartsFunnelsCalendar = function() {
         //
 
         // Resize function
-        var triggerChartResize = function() {
+        var triggerChartResize = function () {
             funnel_basic_element && funnel_basic.resize();
             funnel_sorting_element && funnel_sorting.resize();
             funnel_right_element && funnel_right.resize();
@@ -968,7 +968,7 @@ var EchartsFunnelsCalendar = function() {
         };
 
         // On sidebar width change
-        $(document).on('click', '.sidebar-control', function() {
+        $(document).on('click', '.sidebar-control', function () {
             setTimeout(function () {
                 triggerChartResize();
             }, 0);
@@ -990,7 +990,7 @@ var EchartsFunnelsCalendar = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _funnelsCalendarsExamples();
         }
     }
@@ -1000,6 +1000,6 @@ var EchartsFunnelsCalendar = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     EchartsFunnelsCalendar.init();
 });

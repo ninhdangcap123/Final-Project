@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleDonut3dExploded = function() {
+var GoogleDonut3dExploded = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleDonut3dExploded = function() {
     //
 
     // 3D donut chart
-    var _googleDonut3dExploded = function() {
+    var _googleDonut3dExploded = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleDonut3dExploded = function() {
 
                 // Resize on window resize
                 var resizeDonut3dExploded;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeDonut3dExploded);
                     resizeDonut3dExploded = setTimeout(function () {
                         drawDonut3dExploded();
@@ -82,7 +82,7 @@ var GoogleDonut3dExploded = function() {
                 },
                 is3D: true,
                 pieSliceText: 'label',
-                slices: {  
+                slices: {
                     2: {offset: 0.15},
                     8: {offset: 0.1},
                     10: {offset: 0.15},
@@ -102,7 +102,7 @@ var GoogleDonut3dExploded = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleDonut3dExploded();
         }
     }

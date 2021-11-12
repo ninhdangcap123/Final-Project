@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleRingBubble = function() {
+var DimpleRingBubble = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleRingBubble = function() {
     //
 
     // Chart
-    var _ringBubble = function() {
+    var _ringBubble = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleRingBubble = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -64,7 +64,7 @@ var DimpleRingBubble = function() {
                 var x = myChart.addMeasureAxis("x", "Unit Sales Monthly Change");
 
                 // Vertical
-                var y =  myChart.addMeasureAxis("y", "Price Monthly Change");
+                var y = myChart.addMeasureAxis("y", "Price Monthly Change");
 
                 // Other axes
                 myChart.addMeasureAxis("p", "Operating Profit");
@@ -140,7 +140,7 @@ var DimpleRingBubble = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _ringBubble();
         }
     }
@@ -150,6 +150,6 @@ var DimpleRingBubble = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleRingBubble.init();
 });

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleMapMarkerSymbolsCustom = function() {
+var GoogleMapMarkerSymbolsCustom = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleMapMarkerSymbolsCustom = function() {
     //
 
     // Line chart
-    var _googleMapMarkerSymbolsCustom = function() {
+    var _googleMapMarkerSymbolsCustom = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Maps library is not loaded.');
             return;
@@ -50,10 +50,10 @@ var GoogleMapMarkerSymbolsCustom = function() {
 
 
         /**
-        * Data for the markers consisting of a name, a LatLng and a zIndex for
-        * the order in which these markers should display on top of each
-        * other.
-        */
+         * Data for the markers consisting of a name, a LatLng and a zIndex for
+         * the order in which these markers should display on top of each
+         * other.
+         */
         var beaches = [
             ['Bondi Beach', -33.890542, 151.274856, 4],
             ['Coogee Beach', -33.923036, 151.259052, 5],
@@ -82,7 +82,7 @@ var GoogleMapMarkerSymbolsCustom = function() {
                 size: new google.maps.Size(20, 32),
 
                 // The origin for this image is 0,0.
-                origin: new google.maps.Point(0,0),
+                origin: new google.maps.Point(0, 0),
 
                 // The anchor for this image is the base of the flagpole at 0,32.
                 anchor: new google.maps.Point(0, 32)
@@ -95,7 +95,7 @@ var GoogleMapMarkerSymbolsCustom = function() {
             // coordinate closes the poly by connecting to the first
             // coordinate.
             var shape = {
-                coords: [1, 1, 1, 20, 18, 20, 18 , 1],
+                coords: [1, 1, 1, 20, 18, 20, 18, 1],
                 type: 'poly'
             };
             for (var i = 0; i < locations.length; i++) {
@@ -122,7 +122,7 @@ var GoogleMapMarkerSymbolsCustom = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleMapMarkerSymbolsCustom();
         }
     }
@@ -132,6 +132,6 @@ var GoogleMapMarkerSymbolsCustom = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     GoogleMapMarkerSymbolsCustom.init();
 });

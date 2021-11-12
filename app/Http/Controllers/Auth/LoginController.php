@@ -44,7 +44,7 @@ class LoginController extends Controller
     {
         $identity = request()->identity;
         $field = filter_var($identity, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        request()->merge([$field => $identity]);
+        request()->merge([ $field => $identity ]);
         return $field;
     }
 }

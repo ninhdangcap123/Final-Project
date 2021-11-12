@@ -48,6 +48,7 @@
             }
         }
     });
+
     // jshint camelcase:true
 
 
@@ -69,7 +70,7 @@
     function colorTagHandler(element, trumbowyg) {
         var tags = [];
 
-        if(!element.style){
+        if (!element.style) {
             return tags;
         }
 

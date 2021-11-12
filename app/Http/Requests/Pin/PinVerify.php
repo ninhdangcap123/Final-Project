@@ -26,7 +26,7 @@ class PinVerify extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
             'pin_code' => 'Pin Code',
         ];
     }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 
 use App\Helpers\GetPathHelper;
-use App\Helpers\Qs;
 use App\Http\Requests\UserChangePass;
 use App\Http\Requests\UserUpdate;
 use App\Repositories\User\UserRepositoryInterface;
@@ -14,11 +13,11 @@ use Illuminate\Support\Facades\Hash;
 
 class MyAccountController extends Controller
 {
-    protected $user;
+    protected $userRepo;
 
-    public function __construct(UserRepositoryInterface $user)
+    public function __construct(UserRepositoryInterface $userRepo)
     {
-        $this->user = $user;
+        $this->userRepo = $userRepo;
     }
 
     public function editProfile()
@@ -27,41 +26,41 @@ class MyAccountController extends Controller
         return view('pages.support_team.my_account', $data);
     }
 
-    public function updateProfile(UserUpdate $req)
+    public function updateProfile(UserUpdate $request)
     {
         $user = Auth::user();
 
-        $d = $user->username ? $req->only(['email', 'phone', 'address']) : $req->only(['email', 'phone', 'address', 'username']);
+        $data = $user->username ? $request->only([ 'email', 'phone', 'address' ]) : $request->only([ 'email', 'phone', 'address', 'username' ]);
 
-        if(!$user->username && !$req->username && !$req->email){
+        if( !$user->username && !$request->username && !$request->email ) {
             return back()->with('pop_error', __('msg.user_invalid'));
         }
 
-        $user_type = $user->user_type;
+        $userType = $user->user_type;
         $code = $user->code;
 
-        if($req->hasFile('photo')) {
-            $photo = $req->file('photo');
-            $f = GetPathHelper::getFileMetaData($photo);
-            $f['name'] = 'photo.' . $f['ext'];
-            $f['path'] = $photo->storeAs(GetPathHelper::getUploadPath($user_type).$code, $f['name']);
-            $d['photo'] = asset('storage/' . $f['path']);
+        if( $request->hasFile('photo') ) {
+            $photo = $request->file('photo');
+            $file = GetPathHelper::getFileMetaData($photo);
+            $file['name'] = 'photo.'.$file['ext'];
+            $file['path'] = $photo->storeAs(GetPathHelper::getUploadPath($userType).$code, $file['name']);
+            $data['photo'] = asset('storage/'.$file['path']);
         }
 
-        $this->user->update($user->id, $d);
+        $this->userRepo->update($user->id, $data);
         return back()->with('flash_success', __('msg.update_ok'));
     }
 
-    public function changePass(UserChangePass $req)
+    public function changePass(UserChangePass $request)
     {
-        $user_id = Auth::user()->id;
-        $my_pass = Auth::user()->password;
-        $old_pass = $req->current_password;
-        $new_pass = $req->password;
+        $userId = Auth::user()->id;
+        $myPassword = Auth::user()->password;
+        $oldPassword = $request->current_password;
+        $newPassword = $request->password;
 
-        if(password_verify($old_pass, $my_pass)){
-            $data['password'] = Hash::make($new_pass);
-            $this->user->update($user_id, $data);
+        if( password_verify($oldPassword, $myPassword) ) {
+            $data['password'] = Hash::make($newPassword);
+            $this->userRepo->update($userId, $data);
             return back()->with('flash_success', __('msg.p_reset'));
         }
 

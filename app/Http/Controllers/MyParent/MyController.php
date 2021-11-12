@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\MyParent;
+
 use App\Http\Controllers\Controller;
 use App\Repositories\Student\StudentRepositoryInterface;
 use App\Repositories\StudentRepo;
@@ -8,15 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class MyController extends Controller
 {
-    protected $student;
-    public function __construct(StudentRepositoryInterface $student)
+    protected $studentRepo;
+
+    public function __construct(StudentRepositoryInterface $studentRepo)
     {
-        $this->student = $student;
+        $this->studentRepo = $studentRepo;
     }
 
     public function children()
     {
-        $data['students'] = $this->student->getRecord(['my_parent_id' => Auth::user()->id])->with(['myCourse', 'classes'])->get();
+        $data['students'] = $this->studentRepo->getRecord([ 'my_parent_id' => Auth::user()->id ])->with([ 'myCourse', 'classes' ])->get();
 
         return view('pages.parent.children', $data);
     }

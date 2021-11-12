@@ -13,18 +13,18 @@ class SkillRepository extends BaseRepository implements SkillRepositoryInterface
         return Skill::class;
     }
 
+    public function getSkillByMajor($major = NULL, $skill_type = NULL)
+    {
+        // TODO: Implement getSkillByMajor() method.
+        return ( $skill_type )
+            ? $this->getSkill([ 'major' => $major, 'skill_type' => $skill_type ])
+            : $this->getSkill([ 'major' => $major ]);
+    }
+
     public function getSkill($where)
     {
         // TODO: Implement getSkill() method.
         return $this->model->where($where)->orderBy('name')->get();
 
-    }
-
-    public function getSkillByMajor($major = NULL, $skill_type = NULL)
-    {
-        // TODO: Implement getSkillByMajor() method.
-        return ($skill_type)
-            ? $this->getSkill(['major' => $major, 'skill_type' => $skill_type])
-            : $this->getSkill(['major' => $major]);
     }
 }

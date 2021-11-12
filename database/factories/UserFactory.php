@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Helpers\GetUsersHelper;
-use App\Helpers\Qs;
 use App\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -11,22 +10,22 @@ use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
-/**
-* The name of the factory's corresponding model.
-*
-* @var string
-*/
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
     protected $model = User::class;
 
-/**
-* Define the model's default state.
-*
-* @return array
-*/
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
     public function definition()
     {
         // Create random User Type
-        $user_type = GetUsersHelper::getStaff(['super_admin', 'librarian'])[rand(0,2)];
+        $user_type = GetUsersHelper::getStaff([ 'super_admin', 'librarian' ])[rand(0, 2)];
 
         return [
             'name' => $this->faker->name,

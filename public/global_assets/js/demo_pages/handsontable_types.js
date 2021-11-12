@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var HotCellTypes = function() {
+var HotCellTypes = function () {
 
 
     //
@@ -18,7 +18,7 @@ var HotCellTypes = function() {
     //
 
     // HOT cell types examples
-    var _componentHotCellTypes = function() {
+    var _componentHotCellTypes = function () {
         if (typeof Handsontable == 'undefined') {
             console.warn('Warning - handsontable.min.js is not loaded.');
             return;
@@ -52,7 +52,7 @@ var HotCellTypes = function() {
             data: car_data,
             stretchH: 'all',
             colHeaders: ['Car', 'Year', 'Price ($)', 'Price (€)', 'Market share'],
-            columnSorting : true,
+            columnSorting: true,
             sortIndicator: true,
             columns: [
                 {
@@ -91,7 +91,6 @@ var HotCellTypes = function() {
                 }
             ]
         });
-
 
 
         // Date type
@@ -155,7 +154,6 @@ var HotCellTypes = function() {
         });
 
 
-
         // Select type
         // ------------------------------
 
@@ -198,7 +196,6 @@ var HotCellTypes = function() {
         });
 
 
-
         // Dropdown type
         // ------------------------------
 
@@ -238,7 +235,6 @@ var HotCellTypes = function() {
                 }
             ]
         });
-
 
 
         // Handsontable type
@@ -318,7 +314,7 @@ var HotCellTypes = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentHotCellTypes();
         }
     }
@@ -328,6 +324,6 @@ var HotCellTypes = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     HotCellTypes.init();
 });

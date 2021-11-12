@@ -161,6 +161,7 @@
             background-color: $nav-tabs-top-link-border-color;
         }
     }
+
     .nav-link.active,
     .nav-item.show .nav-link {
         background-color: transparent;
@@ -206,6 +207,7 @@
             background-color: $nav-tabs-bottom-link-border-color;
         }
     }
+
     .nav-link.active,
     .nav-item.show .nav-link {
         background-color: transparent;
@@ -339,13 +341,13 @@
             background-color: $nav-tabs-highlight-link-border-color;
         }
     }
+
     .nav-link.active,
     .nav-item.show .nav-link {
         background-color: transparent;
         border-color: $nav-tabs-border-color transparent;
     }
 }
-
 
 
 // Pills
@@ -367,7 +369,7 @@
         }
 
         // Active state
-        // - change badge color according to active link bg 
+        // - change badge color according to active link bg
         &.active {
             @if (lightness($nav-pills-link-active-bg) < 75) {
                 .badge:not(.bg-transparent):not(.bg-light):not(.bg-white) {
@@ -471,6 +473,7 @@
                 @include border-left-radius($border-radius);
             }
         }
+
         &:last-child {
             .nav-link {
                 @include border-right-radius($border-radius);
@@ -487,12 +490,14 @@
                     @include border-top-radius($border-radius);
                 }
             }
+
             &:last-child {
                 .nav-link {
                     @include border-right-radius(0);
                     @include border-bottom-radius($border-radius);
                 }
             }
+
             + .nav-item {
                 margin-left: 0;
                 margin-top: -($nav-pills-bordered-border-width);

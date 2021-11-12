@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleMapLocation = function() {
+var GoogleMapLocation = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleMapLocation = function() {
     //
 
     // Line chart
-    var _googleMapLocation = function() {
+    var _googleMapLocation = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Maps library is not loaded.');
             return;
@@ -45,8 +45,8 @@ var GoogleMapLocation = function() {
             var map = new google.maps.Map(map_location_element, mapOptions);
 
             // Try HTML5 geolocation
-            if(navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
                     var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
                     // Info window
@@ -57,11 +57,10 @@ var GoogleMapLocation = function() {
                     });
 
                     map.setCenter(pos);
-                }, function() {
+                }, function () {
                     handleNoGeolocation(true);
                 });
-            }
-            else {
+            } else {
 
                 // Browser doesn't support Geolocation
                 handleNoGeolocation(false);
@@ -72,8 +71,7 @@ var GoogleMapLocation = function() {
         function handleNoGeolocation(errorFlag) {
             if (errorFlag) {
                 var content = 'Error: The Geolocation service failed.';
-            }
-            else {
+            } else {
                 var content = 'Error: Your browser doesn\'t support geolocation.';
             }
 
@@ -99,7 +97,7 @@ var GoogleMapLocation = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleMapLocation();
         }
     }
@@ -109,6 +107,6 @@ var GoogleMapLocation = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     GoogleMapLocation.init();
 });

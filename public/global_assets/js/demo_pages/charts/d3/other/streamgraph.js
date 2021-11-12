@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3Streamgraph = function() {
+var D3Streamgraph = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3Streamgraph = function() {
     //
 
     // Chart
-    var _streamgraph = function() {
+    var _streamgraph = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3Streamgraph = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -56,7 +56,6 @@ var D3Streamgraph = function() {
             var colorrange = ['#03A9F4', '#29B6F6', '#4FC3F7', '#81D4FA', '#B3E5FC', '#E1F5FE'];
 
 
-
             // Construct scales
             // ------------------------------
 
@@ -68,7 +67,6 @@ var D3Streamgraph = function() {
 
             // Colors
             var z = d3.scale.ordinal().range(colorrange);
-
 
 
             // Create axes
@@ -90,7 +88,9 @@ var D3Streamgraph = function() {
                 .innerTickSize(4)
                 .outerTickSize(0)
                 .tickPadding(8)
-                .tickFormat(function (d) { return (d/1000) + "k"; });
+                .tickFormat(function (d) {
+                    return (d / 1000) + "k";
+                });
 
             // Right vertical
             var yAxis2 = yAxis;
@@ -105,7 +105,6 @@ var D3Streamgraph = function() {
                 .tickSize(-width, 0, 0);
 
 
-
             // Create chart
             // ------------------------------
 
@@ -116,9 +115,8 @@ var D3Streamgraph = function() {
             var svg = container
                 .attr('width', width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
-                    .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             // Construct chart layout
@@ -127,21 +125,34 @@ var D3Streamgraph = function() {
             // Stack
             var stack = d3.layout.stack()
                 .offset("silhouette")
-                .values(function(d) { return d.values; })
-                .x(function(d) { return d.date; })
-                .y(function(d) { return d.value; });
+                .values(function (d) {
+                    return d.values;
+                })
+                .x(function (d) {
+                    return d.date;
+                })
+                .y(function (d) {
+                    return d.value;
+                });
 
             // Nest
             var nest = d3.nest()
-                .key(function(d) { return d.key; });
+                .key(function (d) {
+                    return d.key;
+                });
 
             // Area
             var area = d3.svg.area()
                 .interpolate("cardinal")
-                .x(function(d) { return x(d.date); })
-                .y0(function(d) { return y(d.y0); })
-                .y1(function(d) { return y(d.y0 + d.y); });
-
+                .x(function (d) {
+                    return x(d.date);
+                })
+                .y0(function (d) {
+                    return y(d.y0);
+                })
+                .y1(function (d) {
+                    return y(d.y0 + d.y);
+                });
 
 
             // Load data
@@ -159,16 +170,18 @@ var D3Streamgraph = function() {
                 var layers = stack(nest.entries(data));
 
 
-
                 // Set input domains
                 // ------------------------------
 
                 // Horizontal
-                x.domain(d3.extent(data, function(d, i) { return d.date; }));
+                x.domain(d3.extent(data, function (d, i) {
+                    return d.date;
+                }));
 
                 // Vertical
-                y.domain([0, d3.max(data, function(d) { return d.y0 + d.y; })]);
-
+                y.domain([0, d3.max(data, function (d) {
+                    return d.y0 + d.y;
+                })]);
 
 
                 // Add grid
@@ -178,7 +191,6 @@ var D3Streamgraph = function() {
                 svg.append("g")
                     .attr("class", "d3-grid-dashed")
                     .call(gridAxis);
-
 
 
                 //
@@ -196,21 +208,26 @@ var D3Streamgraph = function() {
                 var layer = group.selectAll(".streamgraph-layer")
                     .data(layers)
                     .enter()
-                        .append("path")
-                        .attr("class", "streamgraph-layer")
-                        .attr("d", function(d) { return area(d.values); })                    
-                        .style('stroke', '#fff')
-                        .style('stroke-width', 0.5)
-                        .style("fill", function(d, i) { return z(i); });
+                    .append("path")
+                    .attr("class", "streamgraph-layer")
+                    .attr("d", function (d) {
+                        return area(d.values);
+                    })
+                    .style('stroke', '#fff')
+                    .style('stroke-width', 0.5)
+                    .style("fill", function (d, i) {
+                        return z(i);
+                    });
 
                 // Add transition
                 var layerTransition = layer
                     .style('opacity', 0)
                     .transition()
-                        .duration(750)
-                        .delay(function(d, i) { return i * 50; })
-                        .style('opacity', 1)
-
+                    .duration(750)
+                    .delay(function (d, i) {
+                        return i * 50;
+                    })
+                    .style('opacity', 1)
 
 
                 // Append axes
@@ -254,7 +271,9 @@ var D3Streamgraph = function() {
 
                 // Add extra subticks for hidden hours
                 xaxisg.selectAll(".d3-axis-subticks")
-                    .data(x.ticks(d3.time.hours), function(d) { return d; })
+                    .data(x.ticks(d3.time.hours), function (d) {
+                        return d;
+                    })
                     .enter()
                     .append("line")
                     .attr("class", "d3-axis-subticks")
@@ -262,7 +281,6 @@ var D3Streamgraph = function() {
                     .attr("y2", 4)
                     .attr("x1", x)
                     .attr("x2", x);
-
 
 
                 // Add hover line and pointer
@@ -299,11 +317,10 @@ var D3Streamgraph = function() {
                     .style("opacity", 0);
 
 
-
                 // Append events to the layers group
                 // ------------------------------
 
-                layerTransition.each("end", function() {
+                layerTransition.each("end", function () {
                     layer
                         .on("mouseover", function (d, i) {
                             svg.selectAll(".streamgraph-layer")
@@ -348,12 +365,12 @@ var D3Streamgraph = function() {
                             // Tooltip data
                             tooltip.html(
                                 '<ul class="list-unstyled mb-1">' +
-                                    '<li>' + '<div class="font-size-base my-1"><i class="icon-circle-left2 mr-2"></i>' + d.key + '</div>' + '</li>' +
-                                    '<li>' + 'Visits: &nbsp;' + "<span class='font-weight-semibold float-right'>" + pro + '</span>' + '</li>' +
-                                    '<li>' + 'Time: &nbsp; ' + '<span class="font-weight-semibold float-right">' + formatDate(d.values[mousedate].date) + '</span>' + '</li>' + 
+                                '<li>' + '<div class="font-size-base my-1"><i class="icon-circle-left2 mr-2"></i>' + d.key + '</div>' + '</li>' +
+                                '<li>' + 'Visits: &nbsp;' + "<span class='font-weight-semibold float-right'>" + pro + '</span>' + '</li>' +
+                                '<li>' + 'Time: &nbsp; ' + '<span class="font-weight-semibold float-right">' + formatDate(d.values[mousedate].date) + '</span>' + '</li>' +
                                 '</ul>'
                             )
-                            .style("display", "block");
+                                .style("display", "block");
 
                             // Tooltip arrow
                             tooltip.append('div').attr('class', 'd3-tip-arrow');
@@ -375,8 +392,7 @@ var D3Streamgraph = function() {
 
                             hoverLine.style("opacity", 0);
                         });
-                    });
-
+                });
 
 
                 // Append events to the chart container
@@ -389,26 +405,24 @@ var D3Streamgraph = function() {
                         mousey = mouse[1];
 
                         // Display hover line
-                            //.style("opacity", 1);
+                        //.style("opacity", 1);
 
 
                         // Move tooltip vertically
                         tooltip.style("top", (mousey - ($('.d3-tip').outerHeight() / 2)) - 2 + "px") // Half tooltip height - half arrow width
 
                         // Move tooltip horizontally
-                        if(mousex >= ($(element).outerWidth() - $('.d3-tip').outerWidth() - margin.right - (tooltipOffset * 2))) {
+                        if (mousex >= ($(element).outerWidth() - $('.d3-tip').outerWidth() - margin.right - (tooltipOffset * 2))) {
                             tooltip
                                 .style("left", (mousex - $('.d3-tip').outerWidth() - tooltipOffset) + "px") // Change tooltip direction from right to left to keep it inside graph area
                                 .attr("class", "d3-tip w");
-                        }
-                        else {
+                        } else {
                             tooltip
-                                .style("left", (mousex + tooltipOffset) + "px" )
+                                .style("left", (mousex + tooltipOffset) + "px")
                                 .attr("class", "d3-tip e");
                         }
                     });
             });
-
 
 
             // Resize chart
@@ -421,9 +435,9 @@ var D3Streamgraph = function() {
             $('.sidebar-control').on('click', resizeStream);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resizeStream() {
 
@@ -459,7 +473,9 @@ var D3Streamgraph = function() {
                 svg.selectAll(".d3-axis-right").attr("transform", "translate(" + width + ", 0)");
 
                 // Area paths
-                svg.selectAll('.streamgraph-layer').attr("d", function(d) { return area(d.values); });
+                svg.selectAll('.streamgraph-layer').attr("d", function (d) {
+                    return area(d.values);
+                });
             }
         }
     };
@@ -470,7 +486,7 @@ var D3Streamgraph = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _streamgraph();
         }
     }
@@ -480,6 +496,6 @@ var D3Streamgraph = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3Streamgraph.init();
 });

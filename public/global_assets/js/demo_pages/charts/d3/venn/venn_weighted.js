@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3VennWeighted = function() {
+var D3VennWeighted = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3VennWeighted = function() {
     //
 
     // Chart
-    var _vennWeighted = function() {
+    var _vennWeighted = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -29,39 +29,39 @@ var D3VennWeighted = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Data set
             // ------------------------------
 
             // Circles
             var sets = [{label: "0", size: 7000},
-                       {label: "1", size: 7000},
-                       {label: "2", size: 2000},
-                       {label: "3", size: 11000},
-                       {label: "4", size: 11000}];
+                {label: "1", size: 7000},
+                {label: "2", size: 2000},
+                {label: "3", size: 11000},
+                {label: "4", size: 11000}];
 
             // Overlaps
-            var overlaps = [{id: 1, sets: [2,0], size: 300},
-                           {id: 2, sets: [2,1], size: 300},
-                           {id: 4, sets: [2,3], size: 100},
-                           {id: 5, sets: [2,4], size: 100},
-                           {sets: [0,0], size: 0, weight: 1e-10},
-                           {sets: [0,1], size: 0, weight: 1e-10},
-                           {sets: [0,3], size: 0, weight: 1e-10},
-                           {sets: [0,4], size: 0, weight: 1e-10},
-                           {sets: [1,0], size: 0, weight: 1e-10},
-                           {sets: [1,1], size: 0, weight: 1e-10},
-                           {sets: [1,3], size: 0, weight: 1e-10},
-                           {sets: [1,4], size: 0, weight: 1e-10},
-                           {sets: [3,0], size: 0, weight: 1e-10},
-                           {sets: [3,1], size: 0, weight: 1e-10},
-                           {sets: [3,3], size: 0, weight: 1e-10},
-                           {sets: [3,4], size: 0, weight: 1e-10},
-                           {sets: [4,0], size: 0, weight: 1e-10},
-                           {sets: [4,1], size: 0, weight: 1e-10},
-                           {sets: [4,3], size: 0, weight: 1e-10},
-                           {sets: [4,4], size: 0, weight: 1e-10}];
+            var overlaps = [{id: 1, sets: [2, 0], size: 300},
+                {id: 2, sets: [2, 1], size: 300},
+                {id: 4, sets: [2, 3], size: 100},
+                {id: 5, sets: [2, 4], size: 100},
+                {sets: [0, 0], size: 0, weight: 1e-10},
+                {sets: [0, 1], size: 0, weight: 1e-10},
+                {sets: [0, 3], size: 0, weight: 1e-10},
+                {sets: [0, 4], size: 0, weight: 1e-10},
+                {sets: [1, 0], size: 0, weight: 1e-10},
+                {sets: [1, 1], size: 0, weight: 1e-10},
+                {sets: [1, 3], size: 0, weight: 1e-10},
+                {sets: [1, 4], size: 0, weight: 1e-10},
+                {sets: [3, 0], size: 0, weight: 1e-10},
+                {sets: [3, 1], size: 0, weight: 1e-10},
+                {sets: [3, 3], size: 0, weight: 1e-10},
+                {sets: [3, 4], size: 0, weight: 1e-10},
+                {sets: [4, 0], size: 0, weight: 1e-10},
+                {sets: [4, 1], size: 0, weight: 1e-10},
+                {sets: [4, 3], size: 0, weight: 1e-10},
+                {sets: [4, 4], size: 0, weight: 1e-10}];
 
 
             // Initialize chart
@@ -83,8 +83,12 @@ var D3VennWeighted = function() {
             diagram.circles
                 .style("fill-opacity", .7)
                 .style("stroke-opacity", 0)
-                .style("fill", function(d,i) { return colours(i); })
-                .style("stroke", function(d,i) { return colours(i); });
+                .style("fill", function (d, i) {
+                    return colours(i);
+                })
+                .style("stroke", function (d, i) {
+                    return colours(i);
+                });
 
 
             // Text styles
@@ -100,7 +104,7 @@ var D3VennWeighted = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _vennWeighted();
         }
     }
@@ -110,6 +114,6 @@ var D3VennWeighted = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3VennWeighted.init();
 });

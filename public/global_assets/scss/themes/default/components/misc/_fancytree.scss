@@ -100,7 +100,6 @@
     }
 
 
-
     //
     // Expander icon
     //
@@ -117,17 +116,21 @@
         .fancytree-exp-c &:after {
             content: '\e9c7';
         }
+
         .fancytree-exp-cl &:after {
             content: '\e9c7';
         }
+
         .fancytree-exp-cd &:after,
         .fancytree-exp-cdl &:after {
             content: '\e9c7';
         }
+
         .fancytree-exp-e &:after,
         .fancytree-exp-ed &:after {
             content: '\e9c5';
         }
+
         .fancytree-exp-el &:after,
         .fancytree-exp-edl &:after {
             content: '\e9c5';
@@ -153,7 +156,6 @@
             @include transition(all ease-in-out $component-transition-timer);
         }
     }
-
 
 
     //
@@ -259,7 +261,6 @@
             @include border-radius($border-radius-circle);
         }
     }
-
 
 
     // Other styles

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleRingLollipop = function() {
+var DimpleRingLollipop = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleRingLollipop = function() {
     //
 
     // Chart
-    var _ringLollipop = function() {
+    var _ringLollipop = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleRingLollipop = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -65,7 +65,7 @@ var DimpleRingLollipop = function() {
 
                 // Horizontal
                 var x = myChart.addCategoryAxis("x", "Month");
-                    x.addOrderRule("Date");
+                x.addOrderRule("Date");
 
                 // Vertical
                 var y = myChart.addMeasureAxis("y", "Unit Sales");
@@ -140,7 +140,7 @@ var DimpleRingLollipop = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _ringLollipop();
         }
     }
@@ -150,6 +150,6 @@ var DimpleRingLollipop = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleRingLollipop.init();
 });

@@ -26,7 +26,7 @@ class PinCreate extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
             'pin_count' => 'Pin Amount',
         ];
     }

@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Subject;
 
 use App\Helpers\DisplayMessageHelper;
-use App\Helpers\Qs;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SubjectUpdate extends FormRequest
@@ -31,7 +30,7 @@ class SubjectUpdate extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
             'my_course_id' => 'Course',
             'teacher_id' => 'Teacher',
             'slug' => 'Short Name',

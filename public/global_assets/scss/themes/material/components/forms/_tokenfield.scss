@@ -46,7 +46,7 @@
             // Tag text
             .token-label {
                 display: block;
-                max-width: none!important;
+                max-width: none !important;
                 padding: $input-padding-y $input-btn-padding-x;
                 padding-right: ($input-btn-padding-x + ($icon-font-size * 1.5));
             }
@@ -93,7 +93,7 @@
         .token-input {
             direction: ltr;
             background: none;
-            width: 5.625rem!important;
+            width: 5.625rem !important;
             max-width: 50%;
             min-width: 4rem;
             padding: $input-padding-y $input-padding-x;
@@ -123,7 +123,7 @@
         // Disabled
         &.disabled {
             cursor: $cursor-disabled;
-            
+
             // Token style
             .token {
 

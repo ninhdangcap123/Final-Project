@@ -22,7 +22,7 @@ class SkillsTableSeeder extends Seeder
     protected function createSkills()
     {
 
-        $types = ['AF', 'PS']; // Affective & Psychomotor Traits/Skills
+        $types = [ 'AF', 'PS' ]; // Affective & Psychomotor Traits/Skills
         $d = [
 
             [ 'name' => 'PUNCTUALITY', 'skill_type' => $types[0] ],

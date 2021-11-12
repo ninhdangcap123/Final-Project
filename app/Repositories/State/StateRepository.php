@@ -12,12 +12,12 @@ class StateRepository extends BaseRepository implements StateRepositoryInterface
         // TODO: Implement getModel() method.
         return State::class;
     }
+
     public function getStates()
     {
         // TODO: Implement getAllStates() method.
         return $this->model->all();
     }
-
 
 
 }

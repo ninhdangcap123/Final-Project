@@ -1,21 +1,22 @@
 <html>
 <head>
     <title>Tabulation Sheet - {{ $my_course->name.' '.$class->name.' - '.$ex->name.' ('.$year.')' }}</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/print_tabulation.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/print_tabulation.css') }}"/>
 </head>
 <body>
 <div class="container">
-    <div id="print" xmlns:margin-top="http://www.w3.org/1999/xhtml">
+    <div id="print">
         {{--    Logo N School Details--}}
         <table width="100%">
             <tr>
                 {{--<td><img src="{{ $s['logo'] }}" style="max-height : 100px;"></td>--}}
 
-                <td >
-                    <strong><span style="color: #1b0c80; font-size: 25px;">{{ strtoupper(\App\Helpers\GetSystemInfoHelper::getSetting('system_name')) }}</span></strong><br/>
+                <td>
+                    <strong><span
+                            style="color: #1b0c80; font-size: 25px;">{{ strtoupper(\App\Helpers\GetSystemInfoHelper::getSetting('system_name')) }}</span></strong><br/>
                     {{-- <strong><span style="color: #1b0c80; font-size: 20px;">MINNA, NIGER STATE</span></strong><br/>--}}
                     <strong><span
-                                style="color: #000; font-size: 15px;"><i>{{ ucwords($s['address']) }}</i></span></strong><br/>
+                            style="color: #000; font-size: 15px;"><i>{{ ucwords($s['address']) }}</i></span></strong><br/>
                     <strong><span style="color: #000; font-size: 15px;"> TABULATION SHEET FOR {{ strtoupper($my_course->name.' '.$class->name.' - '.$ex->name.' ('.$year.')' ) }}
                     </span></strong>
                 </td>
@@ -26,7 +27,7 @@
         {{--Background Logo--}}
         <div style="position: relative;  text-align: center; ">
             <img src="{{ $s['logo'] }}"
-                 style="max-width: 500px; max-height:600px; margin-top: 60px; position:absolute ; opacity: 0.2; margin-left: auto;margin-right: auto; left: 0; right: 0;" />
+                 style="max-width: 500px; max-height:600px; margin-top: 60px; position:absolute ; opacity: 0.2; margin-left: auto;margin-right: auto; left: 0; right: 0;"/>
         </div>
 
         {{-- Tabulation Begins --}}
@@ -38,13 +39,13 @@
                 @foreach($subjects as $sub)
                     <th rowspan="2">{{ strtoupper($sub->slug ?: $sub->name) }}</th>
                 @endforeach
-             {{--   @if($ex->term == 3)
-                    <th>1ST TERM TOTAL</th>
-                    <th>2ND TERM TOTAL</th>
-                    <th>3RD TERM TOTAL</th>
-                    <th style="color: darkred">CUM Total</th>
-                    <th style="color: darkblue">CUM Average</th>
-                @endif--}}
+                {{--   @if($ex->term == 3)
+                       <th>1ST TERM TOTAL</th>
+                       <th>2ND TERM TOTAL</th>
+                       <th>3RD TERM TOTAL</th>
+                       <th style="color: darkred">CUM Total</th>
+                       <th style="color: darkblue">CUM Average</th>
+                   @endif--}}
                 <th style="color: darkred">Total</th>
                 <th style="color: darkblue">Average</th>
                 <th style="color: darkgreen">Position</th>

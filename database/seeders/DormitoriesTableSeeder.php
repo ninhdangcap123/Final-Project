@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -15,11 +16,11 @@ class DormitoriesTableSeeder extends Seeder
     {
         DB::table('dormitories')->delete();
         $data = [
-            ['name' => 'KTX Co May'],
-            ['name' => 'KTX RMIT'],
-            ['name' => 'KTX Quoc gia'],
-            ['name' => 'KTX Lam Nghiep'],
-            ['name' => 'KTX FPT'],
+            [ 'name' => 'KTX Co May' ],
+            [ 'name' => 'KTX RMIT' ],
+            [ 'name' => 'KTX Quoc gia' ],
+            [ 'name' => 'KTX Lam Nghiep' ],
+            [ 'name' => 'KTX FPT' ],
         ];
         DB::table('dormitories')->insert($data);
     }

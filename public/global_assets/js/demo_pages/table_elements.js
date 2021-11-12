@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var TableElements = function() {
+var TableElements = function () {
 
 
     //
@@ -18,7 +18,7 @@ var TableElements = function() {
     //
 
     // Default file input style
-    var _componentMultiselect = function() {
+    var _componentMultiselect = function () {
         if (!$().multiselect) {
             console.warn('Warning - bootstrap-multiselect.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var TableElements = function() {
     };
 
     // Default file input style
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
@@ -48,7 +48,9 @@ var TableElements = function() {
         // Format icon
         function iconFormat(icon) {
             var originalOption = icon.element;
-            if (!icon.id) { return icon.text; }
+            if (!icon.id) {
+                return icon.text;
+            }
             var $icon = "<i class='icon-" + $(icon.element).data('icon') + "'></i>" + icon.text;
 
             return $icon;
@@ -59,12 +61,14 @@ var TableElements = function() {
             templateResult: iconFormat,
             minimumResultsForSearch: Infinity,
             templateSelection: iconFormat,
-            escapeMarkup: function(m) { return m; }
+            escapeMarkup: function (m) {
+                return m;
+            }
         });
     };
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -77,7 +81,7 @@ var TableElements = function() {
     };
 
     // Switchery
-    var _componentSwitchery = function() {
+    var _componentSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
@@ -85,7 +89,7 @@ var TableElements = function() {
 
         // Initialize
         var elems = Array.prototype.slice.call(document.querySelectorAll('.form-input-switchery'));
-        elems.forEach(function(html) {
+        elems.forEach(function (html) {
             var switchery = new Switchery(html);
         });
 
@@ -99,18 +103,17 @@ var TableElements = function() {
         var controlsInit = new Switchery(controls);
 
         // Change select state on toggle
-        controls.onchange = function() {
-            if(controls.checked) {
+        controls.onchange = function () {
+            if (controls.checked) {
                 $('#available_controls').prop('disabled', false);
-            }
-            else {
+            } else {
                 $('#available_controls').prop('disabled', true);
             }
         };
     };
 
     // Bootstrap file upload
-    var _componentFileUpload = function() {
+    var _componentFileUpload = function () {
         if (!$().fileinput) {
             console.warn('Warning - fileinput.min.js is not loaded.');
             return;
@@ -130,7 +133,7 @@ var TableElements = function() {
     };
 
     // Touchspin spinners
-    var _componentTouchspin = function() {
+    var _componentTouchspin = function () {
         if (!$().TouchSpin) {
             console.warn('Warning - touchspin.min.js is not loaded.');
             return;
@@ -152,7 +155,7 @@ var TableElements = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentMultiselect();
             _componentSelect2();
             _componentUniform();
@@ -167,6 +170,6 @@ var TableElements = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     TableElements.init();
 });

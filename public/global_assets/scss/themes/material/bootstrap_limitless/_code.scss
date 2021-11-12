@@ -15,7 +15,7 @@ code {
 // Blocks of code
 pre {
     white-space: pre-wrap;
-	/*rtl:ignore*/
-	text-align: left;
+    /*rtl:ignore*/
+    text-align: left;
     @include border-radius($border-radius);
 }

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var Gallery = function() {
+var Gallery = function () {
 
 
     //
@@ -18,7 +18,7 @@ var Gallery = function() {
     //
 
     // Lightbox
-    var _componentFancybox = function() {
+    var _componentFancybox = function () {
         if (!$().fancybox) {
             console.warn('Warning - fancybox.min.js is not loaded.');
             return;
@@ -36,7 +36,7 @@ var Gallery = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentFancybox();
         }
     }
@@ -46,6 +46,6 @@ var Gallery = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     Gallery.init();
 });

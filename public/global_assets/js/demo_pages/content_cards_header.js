@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var CardHeader = function() {
+var CardHeader = function () {
 
 
     //
@@ -18,7 +18,7 @@ var CardHeader = function() {
     //
 
     // Switchery
-    var _componentSwitchery = function() {
+    var _componentSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
@@ -26,13 +26,13 @@ var CardHeader = function() {
 
         // Initialize multiple switches
         var elems = Array.prototype.slice.call(document.querySelectorAll('.form-input-switchery'));
-        elems.forEach(function(html) {
+        elems.forEach(function (html) {
             var switchery = new Switchery(html);
         });
     };
 
     // Bootstrap switch
-    var _componentBootstrapSwitch = function() {
+    var _componentBootstrapSwitch = function () {
         if (!$().bootstrapSwitch) {
             console.warn('Warning - switch.min.js is not loaded.');
             return;
@@ -43,11 +43,12 @@ var CardHeader = function() {
     };
 
     // Select2
-    var _componentSelect2 = function() {
+    var _componentSelect2 = function () {
         if (!$().select2) {
             console.warn('Warning - select2.min.js is not loaded.');
             return;
-        };
+        }
+        ;
 
         // Initialize
         $('.form-control-select2').select2({
@@ -56,7 +57,7 @@ var CardHeader = function() {
     };
 
     // Touchspin
-    var _componentTouchSpin = function() {
+    var _componentTouchSpin = function () {
         if (!$().TouchSpin) {
             console.warn('Warning - touchspin.min.js is not loaded.');
             return;
@@ -73,7 +74,7 @@ var CardHeader = function() {
     };
 
     // Multiselect
-    var _componentMulti = function() {
+    var _componentMulti = function () {
         if (!$().multiselect) {
             console.warn('Warning - bootstrap-multiselect.js is not loaded.');
             return;
@@ -84,7 +85,7 @@ var CardHeader = function() {
     };
 
     // NoUI slider
-    var _componentNouiSlider = function() {
+    var _componentNouiSlider = function () {
         if (typeof noUiSlider == 'undefined') {
             console.warn('Warning - nouislider.min.js is not loaded.');
             return;
@@ -95,19 +96,19 @@ var CardHeader = function() {
 
         // Create slider
         noUiSlider.create(noui_slider_demo, {
-            start: [ 20, 80 ],
+            start: [20, 80],
             behaviour: 'drag',
             connect: true,
             tooltips: true,
             range: {
-                'min':  0,
-                'max':  100
+                'min': 0,
+                'max': 100
             }
         });
     };
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - switch.min.js is not loaded.');
             return;
@@ -121,7 +122,7 @@ var CardHeader = function() {
     };
 
     // jQuery UI Sortable
-    var _componentSortable = function() {
+    var _componentSortable = function () {
         if (!$().sortable) {
             console.warn('Warning - jQuery UI components are not loaded.');
             return;
@@ -140,14 +141,14 @@ var CardHeader = function() {
             placeholder: 'sortable-placeholder',
             forcePlaceholderSize: true,
             tolerance: 'pointer',
-            start: function(e, ui){
+            start: function (e, ui) {
                 ui.placeholder.height(ui.item.outerHeight());
             }
         });
     };
 
     // jQuery UI slider
-    var _componentJuiSlider = function() {
+    var _componentJuiSlider = function () {
         if (!$().slider) {
             console.warn('Warning - jQuery UI components are not loaded.');
             return;
@@ -168,7 +169,7 @@ var CardHeader = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentSwitchery();
             _componentBootstrapSwitch();
             _componentSelect2();
@@ -186,6 +187,6 @@ var CardHeader = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     CardHeader.init();
 });

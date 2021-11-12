@@ -8,7 +8,7 @@ class DisplayMessageHelper
 {
     public static function displayError($errors)
     {
-        foreach ($errors as $err) {
+        foreach( $errors as $err ) {
             $data[] = $err;
         }
         return '
@@ -19,6 +19,7 @@ class DisplayMessageHelper
 							    </div>
                 ';
     }
+
     public static function displaySuccess($msg)
     {
         return '
@@ -27,12 +28,14 @@ class DisplayMessageHelper
             $msg.'  </div>
                 ';
     }
+
     public static function hash($id)
     {
         $date = date('dMY').'TGMA';
         $hash = new Hashids($date, 14);
         return $hash->encode($id);
     }
+
     public static function decodeHash($str, $toString = true)
     {
         $date = date('dMY').'TGMA';

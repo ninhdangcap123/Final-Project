@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleMapMarkerSymbolPredefined = function() {
+var GoogleMapMarkerSymbolPredefined = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleMapMarkerSymbolPredefined = function() {
     //
 
     // Line chart
-    var _googleMapMarkerSymbolPredefined = function() {
+    var _googleMapMarkerSymbolPredefined = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Maps library is not loaded.');
             return;
@@ -65,7 +65,7 @@ var GoogleMapMarkerSymbolPredefined = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleMapMarkerSymbolPredefined();
         }
     }
@@ -75,6 +75,6 @@ var GoogleMapMarkerSymbolPredefined = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     GoogleMapMarkerSymbolPredefined.init();
 });

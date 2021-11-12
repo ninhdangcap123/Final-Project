@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\SupportTeam;
 
 use App\Helpers\JsonHelper;
-use App\Helpers\Qs;
 use App\Helpers\RouteHelper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Subject\SubjectCreate;
 use App\Http\Requests\Subject\SubjectUpdate;
 use App\Repositories\MyCourse\MyCourseRepositoryInterface;
@@ -12,59 +12,60 @@ use App\Repositories\MyCourseRepo;
 use App\Repositories\Subject\SubjectRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
-use App\Http\Controllers\Controller;
 
 class SubjectController extends Controller
 {
-    protected $my_course, $user, $subject;
+    protected $myCourseRepo;
+    protected $userRepo;
+    protected $subjectRepo;
 
-    public function __construct(MyCourseRepositoryInterface $my_course, UserRepositoryInterface $user, SubjectRepositoryInterface $subject)
+    public function __construct(MyCourseRepositoryInterface $myCourseRepo,
+                                UserRepositoryInterface     $userRepo,
+                                SubjectRepositoryInterface  $subjectRepo)
     {
-        $this->middleware('teamSA', ['except' => ['destroy',] ]);
-        $this->middleware('super_admin', ['only' => ['destroy',] ]);
-
-        $this->my_course = $my_course;
-        $this->user = $user;
-        $this->subject = $subject;
+        $this->middleware('teamSA', [ 'except' => [ 'destroy', ] ]);
+        $this->middleware('super_admin', [ 'only' => [ 'destroy', ] ]);
+        $this->myCourseRepo = $myCourseRepo;
+        $this->userRepo = $userRepo;
+        $this->subjectRepo = $subjectRepo;
     }
 
     public function index()
     {
-        $data['my_courses'] = $this->my_course->getAll();
-        $data['teachers'] = $this->user->getUserByType('teacher');
-        $data['subjects'] = $this->subject->getAll();
+        $data['my_courses'] = $this->myCourseRepo->getAll();
+        $data['teachers'] = $this->userRepo->getUserByType('teacher');
+        $data['subjects'] = $this->subjectRepo->getAll();
 
         return view('pages.support_team.subjects.index', $data);
     }
 
-    public function store(SubjectCreate $req)
+    public function store(SubjectCreate $request)
     {
-        $data = $req->all();
-        $this->subject->create($data);
-
-        return JsonHelper::jsonStoreOk();
+        $data = $request->validated();
+        $this->subjectRepo->create($data);
+        return JsonHelper::jsonStoreSuccess();
     }
 
     public function edit($id)
     {
-        $data['s'] = $sub = $this->subject->find($id);
-        $data['my_courses'] = $this->my_course->getAll();
-        $data['teachers'] = $this->user->getUserByType('teacher');
+        $data['s'] = $subject = $this->subjectRepo->find($id);
+        $data['my_courses'] = $this->myCourseRepo->getAll();
+        $data['teachers'] = $this->userRepo->getUserByType('teacher');
 
-        return is_null($sub) ? RouteHelper::goWithDanger('subjects.index') : view('pages.support_team.subjects.edit', $data);
+        return is_null($subject) ? RouteHelper::goWithDanger('subjects.index') : view('pages.support_team.subjects.edit', $data);
     }
 
-    public function update(SubjectUpdate $req, $id)
+    public function update(SubjectUpdate $request, $id)
     {
-        $data = $req->all();
-        $this->subject->update($id, $data);
+        $data = $request->validated();
+        $this->subjectRepo->update($id, $data);
 
-        return JsonHelper::jsonUpdateOk();
+        return JsonHelper::jsonUpdateSuccess();
     }
 
     public function destroy($id)
     {
-        $this->subject->delete($id);
+        $this->subjectRepo->delete($id);
         return back()->with('flash_success', __('msg.del_ok'));
     }
 }

@@ -145,10 +145,10 @@
 
     // Error
     .fancybox-error {
-        color: theme-color("danger");  
-        font-weight: $font-weight-semibold;  
-        margin: 0;  
-        padding: $modal-inner-padding;  
+        color: theme-color("danger");
+        font-weight: $font-weight-semibold;
+        margin: 0;
+        padding: $modal-inner-padding;
         white-space: nowrap;
     }
 
@@ -246,7 +246,7 @@
                 font-size: $icon-font-size;
                 line-height: 1;
                 @include ll-font-smoothing();
-            } 
+            }
 
             // Hover state
             @include hover-focus {
@@ -274,11 +274,10 @@
             &:after {
                 @if $direction == 'LTR' {
                     content: '\e9c8';
-                }
-                @else {
+                } @else {
                     content: '\e9cb';
                 }
-            } 
+            }
         }
     }
 
@@ -294,11 +293,10 @@
             &:after {
                 @if $direction == 'LTR' {
                     content: '\e9cb';
-                }
-                @else {
+                } @else {
                     content: '\e9c8';
                 }
-            } 
+            }
         }
     }
 

@@ -18,7 +18,7 @@ var TaskManagerGrid = function () {
     //
 
     // Switchery
-    var _componentSwitchery = function() {
+    var _componentSwitchery = function () {
         if (typeof Switchery == 'undefined') {
             console.warn('Warning - switchery.min.js is not loaded.');
             return;
@@ -26,8 +26,8 @@ var TaskManagerGrid = function () {
 
         // Initialize multiple switches
         var elems = Array.prototype.slice.call(document.querySelectorAll('.form-input-switchery'));
-        elems.forEach(function(html) {
-          var switchery = new Switchery(html);
+        elems.forEach(function (html) {
+            var switchery = new Switchery(html);
         });
     };
 
@@ -37,7 +37,7 @@ var TaskManagerGrid = function () {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentSwitchery();
         }
     }
@@ -47,6 +47,6 @@ var TaskManagerGrid = function () {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     TaskManagerGrid.init();
 });

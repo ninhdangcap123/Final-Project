@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var GoogleGeoRegion = function() {
+var GoogleGeoRegion = function () {
 
 
     //
@@ -18,7 +18,7 @@ var GoogleGeoRegion = function() {
     //
 
     // Geo chart
-    var _googleGeoRegion = function() {
+    var _googleGeoRegion = function () {
         if (typeof google == 'undefined') {
             console.warn('Warning - Google Charts library is not loaded.');
             return;
@@ -36,7 +36,7 @@ var GoogleGeoRegion = function() {
 
                 // Resize on window resize
                 var resizeGeoRegion;
-                $(window).on('resize', function() {
+                $(window).on('resize', function () {
                     clearTimeout(resizeGeoRegion);
                     resizeGeoRegion = setTimeout(function () {
                         drawRegionsMap();
@@ -89,7 +89,7 @@ var GoogleGeoRegion = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _googleGeoRegion();
         }
     }

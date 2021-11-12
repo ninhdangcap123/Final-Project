@@ -120,6 +120,7 @@
         .navbar-light &.active:before {
             background-color: $navbar-light-link-highlight-color;
         }
+
         .navbar-dark &.active:before {
             background-color: $navbar-dark-link-highlight-color;
         }
@@ -448,7 +449,6 @@
 }
 
 
-
 // Extra navbar components
 // ------------------------------
 
@@ -502,19 +502,19 @@
 
                     // All badges except badge mark
                     .badge:not(.badge-mark) {
-                        background-color: $white!important;
-                        color: $body-color!important;
+                        background-color: $white !important;
+                        color: $body-color !important;
                     }
 
                     // Badge mark with custom bg
                     .badge-mark[class*=bg-] {
-                        background-color: $white!important;
-                        border-color: $white!important;
+                        background-color: $white !important;
+                        border-color: $white !important;
                     }
 
                     // Badge mark with custom border
                     .badge-mark[class*=border-] {
-                        border-color: $white!important;
+                        border-color: $white !important;
                     }
                 }
             }
@@ -538,10 +538,10 @@
 // Button dropdown
 .navbar {
     .btn-group {
-      .dropdown-menu-right {
-        right: 0;
-        left: auto; // Reset the default from `.dropdown-menu`
-      }
+        .dropdown-menu-right {
+            right: 0;
+            left: auto; // Reset the default from `.dropdown-menu`
+        }
     }
 }
 
@@ -672,7 +672,6 @@
 }
 
 
-
 // Fixed navbar setup
 // -------------------------
 
@@ -681,21 +680,27 @@
     &-top {
         padding-top: $nav-link-height;
     }
+
     &-lg-top {
         padding-top: $nav-link-height-lg;
     }
+
     &-sm-top {
         padding-top: $nav-link-height-sm;
     }
+
     &-lg-md-top {
         padding-top: ($nav-link-height-lg + $nav-link-height);
     }
+
     &-md-md-top {
         padding-top: ($nav-link-height * 2);
     }
+
     &-sm-md-top {
         padding-top: ($nav-link-height-sm + $nav-link-height);
     }
+
     &-lg-sm-top {
         padding-top: ($nav-link-height-lg + $nav-link-height-sm);
     }
@@ -706,20 +711,23 @@
     &-bottom {
         padding-bottom: $nav-link-height;
     }
+
     &-lg-md-bottom {
         padding-bottom: ($nav-link-height-lg + $nav-link-height);
     }
+
     &-md-md-bottom {
         padding-bottom: ($nav-link-height * 2);
     }
+
     &-sm-md-bottom {
         padding-bottom: ($nav-link-height-sm + $nav-link-height);
     }
+
     &-lg-sm-bottom {
         padding-bottom: ($nav-link-height-lg + $nav-link-height-sm);
     }
 }
-
 
 
 // Optional sizing
@@ -816,7 +824,6 @@
 }
 
 
-
 // Misc
 // ------------------------------
 
@@ -859,7 +866,6 @@
 .navbar-static {
     z-index: ($sidebar-zindex-main + 1);
 }
-
 
 
 // Layout specific additions

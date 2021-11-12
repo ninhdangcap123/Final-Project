@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var DimpleScatterLollipopVertical = function() {
+var DimpleScatterLollipopVertical = function () {
 
 
     //
@@ -18,7 +18,7 @@ var DimpleScatterLollipopVertical = function() {
     //
 
     // Chart
-    var _scatterLollipopVertical = function() {
+    var _scatterLollipopVertical = function () {
         if (typeof dimple == 'undefined') {
             console.warn('Warning - dimple.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var DimpleScatterLollipopVertical = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Construct chart
             var svg = dimple.newSvg(element, "100%", 500);
@@ -59,7 +59,7 @@ var DimpleScatterLollipopVertical = function() {
 
                 // Horizontal
                 var x = myChart.addCategoryAxis("x", "Month");
-                    x.addOrderRule("Date");
+                x.addOrderRule("Date");
 
                 // Vertical
                 var y = myChart.addMeasureAxis("y", "Unit Sales");
@@ -137,7 +137,7 @@ var DimpleScatterLollipopVertical = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _scatterLollipopVertical();
         }
     }
@@ -147,6 +147,6 @@ var DimpleScatterLollipopVertical = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     DimpleScatterLollipopVertical.init();
 });

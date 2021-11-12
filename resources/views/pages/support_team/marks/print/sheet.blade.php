@@ -8,9 +8,13 @@
         <td><strong>CLASS:</strong> {{ strtoupper($my_course->name) }}</td>
     </tr>
     <tr>
-        <td><strong>REPORT SHEET FOR</strong> {!! strtoupper(\App\Helpers\PrintMarkSheetHelper::getSuffix($ex->term)) !!} TERM </td>
+        <td><strong>REPORT SHEET
+                    FOR</strong> {!! strtoupper(\App\Helpers\PrintMarkSheetHelper::getSuffix($ex->term)) !!} TERM
+        </td>
         <td><strong>ACADEMIC YEAR:</strong> {{ $ex->year }}</td>
-        <td><strong>AGE:</strong> {{ $sr->age ?: ($sr->user->dob ? date_diff(date_create($sr->user->dob), date_create('now'))->y : '-') }}</td>
+        <td>
+            <strong>AGE:</strong> {{ $sr->age ?: ($sr->user->dob ? date_diff(date_create($sr->user->dob), date_create('now'))->y : '-') }}
+        </td>
     </tr>
 
     </tbody>
@@ -29,14 +33,14 @@
         <th rowspan="2">SUBJECT <br> POSITION</th>
 
 
-      {{--  @if($ex->term == 3) --}}{{-- 3rd Term --}}{{--
-        <th rowspan="2">FINAL MARKS <br>(100%) 3<sup>RD</sup> TERM</th>
-        <th rowspan="2">1<sup>ST</sup> <br> TERM</th>
-        <th rowspan="2">2<sup>ND</sup> <br> TERM</th>
-        <th rowspan="2">CUM (300%) <br> 1<sup>ST</sup> + 2<sup>ND</sup> + 3<sup>RD</sup></th>
-        <th rowspan="2">CUM AVE</th>
-        <th rowspan="2">GRADE</th>
-        @endif--}}
+        {{--  @if($ex->term == 3) --}}{{-- 3rd Term --}}{{--
+          <th rowspan="2">FINAL MARKS <br>(100%) 3<sup>RD</sup> TERM</th>
+          <th rowspan="2">1<sup>ST</sup> <br> TERM</th>
+          <th rowspan="2">2<sup>ND</sup> <br> TERM</th>
+          <th rowspan="2">CUM (300%) <br> 1<sup>ST</sup> + 2<sup>ND</sup> + 3<sup>RD</sup></th>
+          <th rowspan="2">CUM AVE</th>
+          <th rowspan="2">GRADE</th>
+          @endif--}}
 
         <th rowspan="2">REMARKS</th>
     </tr>

@@ -18,7 +18,7 @@ class TTRecordRequest extends FormRequest
      */
     public function rules()
     {
-        if($this->method() === 'POST'){
+        if( $this->method() === 'POST' ) {
             return [
                 'name' => 'required|string|min:3',
                 'my_course_id' => 'required',
@@ -33,7 +33,7 @@ class TTRecordRequest extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
             'my_course_id' => 'Course',
         ];
     }

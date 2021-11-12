@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3TreeBracket = function() {
+var D3TreeBracket = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3TreeBracket = function() {
     //
 
     // Chart
-    var _treeBracket = function() {
+    var _treeBracket = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -30,7 +30,7 @@ var D3TreeBracket = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -46,7 +46,6 @@ var D3TreeBracket = function() {
                 root;
 
 
-
             // Create chart
             // ------------------------------
 
@@ -58,25 +57,24 @@ var D3TreeBracket = function() {
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
-                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
             // Get children
-            var getChildren = function(d) {
+            var getChildren = function (d) {
                 var a = [];
-                if(d.winners) for(var i = 0; i < d.winners.length; i++){
+                if (d.winners) for (var i = 0; i < d.winners.length; i++) {
                     d.winners[i].isRight = false;
                     d.winners[i].parent = d;
                     a.push(d.winners[i]);
                 }
-                if(d.challengers) for(var i = 0; i < d.challengers.length; i++){
+                if (d.challengers) for (var i = 0; i < d.challengers.length; i++) {
                     d.challengers[i].isRight = true;
                     d.challengers[i].parent = d;
                     a.push(d.challengers[i]);
                 }
-                return a.length?a:null;
+                return a.length ? a : null;
             };
-
 
 
             // Add zoom behavior
@@ -84,14 +82,13 @@ var D3TreeBracket = function() {
 
             // Add zoom with scale
             var zoom = d3.behavior.zoom()
-                .scaleExtent([1,2])
-                .on('zoom', function(){
+                .scaleExtent([1, 2])
+                .on('zoom', function () {
                     svg.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
                 });
 
             // Initialize zoom
             container.call(zoom);
-
 
 
             // Construct chart layout
@@ -103,72 +100,75 @@ var D3TreeBracket = function() {
 
             // Diagonal projection
             var diagonal = d3.svg.diagonal()
-                .projection(function(d) { return [d.y, d.x]; });
-
+                .projection(function (d) {
+                    return [d.y, d.x];
+                });
 
 
             // Helper functions
             // ------------------------------
 
             // Connector
-            var elbow = function (d, i){
+            var elbow = function (d, i) {
                 var source = calcLeft(d.source),
                     target = calcLeft(d.target),
-                    hy = (target.y-source.y) / 2;
+                    hy = (target.y - source.y) / 2;
 
-                    if(d.isRight) hy = -hy;
-                    return "M" + source.y + "," + source.x + "H" + (source.y + hy) + "V" + target.x + "H" + target.y;
+                if (d.isRight) hy = -hy;
+                return "M" + source.y + "," + source.x + "H" + (source.y + hy) + "V" + target.x + "H" + target.y;
             };
             var connector = elbow;
 
             // Calculate horizontal position
-            var calcLeft = function(d) {
+            var calcLeft = function (d) {
                 var l = d.y;
-                if(!d.isRight) {
-                    l = d.y-halfWidth;
+                if (!d.isRight) {
+                    l = d.y - halfWidth;
                     l = halfWidth - l;
                 }
-                return {x : d.x, y : l};
+                return {x: d.x, y: l};
             };
 
-            var toArray = function(item, arr){
+            var toArray = function (item, arr) {
                 arr = arr || [];
                 var i = 0,
-                l = item.children?item.children.length : 0;
-                
+                    l = item.children ? item.children.length : 0;
+
                 arr.push(item);
-                for(; i < l; i++) {
+                for (; i < l; i++) {
                     toArray(item.children[i], arr);
                 }
                 return arr;
             };
 
 
-
             // Load data
             // ------------------------------
 
-            d3.json("../../../../global_assets/demo_data/d3/tree/tree_bracket.json", function(json) {
+            d3.json("../../../../global_assets/demo_data/d3/tree/tree_bracket.json", function (json) {
                 root = json;
                 root.x0 = height / 2;
                 root.y0 = width / 2;
-                
+
                 // Add tree layout
-                var t1 = d3.layout.tree().size([height, halfWidth]).children(function(d){return d.winners;}),
-                    t2 = d3.layout.tree().size([height, halfWidth]).children(function(d){return d.challengers;});
-                    t1.nodes(root);
-                    t2.nodes(root);
-      
+                var t1 = d3.layout.tree().size([height, halfWidth]).children(function (d) {
+                        return d.winners;
+                    }),
+                    t2 = d3.layout.tree().size([height, halfWidth]).children(function (d) {
+                        return d.challengers;
+                    });
+                t1.nodes(root);
+                t2.nodes(root);
+
                 // Rebuild children nodes
-                var rebuildChildren = function(node){
+                var rebuildChildren = function (node) {
                     node.children = getChildren(node);
-                    if(node.children) node.children.forEach(rebuildChildren);
+                    if (node.children) node.children.forEach(rebuildChildren);
                 }
                 rebuildChildren(root);
                 root.isRight = false;
                 update(root);
             });
-
 
 
             // Layout setup
@@ -181,14 +181,18 @@ var D3TreeBracket = function() {
                 var nodes = toArray(source);
 
                 // Normalize for fixed-depth.
-                nodes.forEach(function(d) { d.y = d.depth * 180 + halfWidth; });
+                nodes.forEach(function (d) {
+                    d.y = d.depth * 180 + halfWidth;
+                });
 
                 // Update the nodes…
                 var node = svg.selectAll("g.node")
-                    .data(nodes, function(d) { return d.id || (d.id = ++i); });
+                    .data(nodes, function (d) {
+                        return d.id || (d.id = ++i);
+                    });
 
                 // Stash the old positions for transition.
-                nodes.forEach(function(d) {
+                nodes.forEach(function (d) {
                     var p = calcLeft(d);
                     d.x0 = p.x;
                     d.y0 = p.y;
@@ -201,8 +205,10 @@ var D3TreeBracket = function() {
                 // Enter any new nodes at the parent's previous position.
                 var nodeEnter = node.enter().append("g")
                     .attr("class", "node")
-                    .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-                    .on("click", click);    
+                    .attr("transform", function (d) {
+                        return "translate(" + source.y0 + "," + source.x0 + ")";
+                    })
+                    .on("click", click);
 
                 // Add node circles
                 nodeEnter.append("circle")
@@ -210,15 +216,21 @@ var D3TreeBracket = function() {
                     .style("stroke", "#546E7A")
                     .style("stroke-width", 1.5)
                     .style("cursor", "pointer")
-                    .style("fill", function(d) { return d._children ? "#546E7A" : "#fff"; });
+                    .style("fill", function (d) {
+                        return d._children ? "#546E7A" : "#fff";
+                    });
 
                 // Add node text
                 nodeEnter.append("text")
-                .attr("dy", function(d) { return d.isRight?18:-12;})
-                .attr("text-anchor", "middle")
-                .text(function(d) { return d.name; })
-                .style("font-size", 12)
-                .style("fill-opacity", 1e-6);
+                    .attr("dy", function (d) {
+                        return d.isRight ? 18 : -12;
+                    })
+                    .attr("text-anchor", "middle")
+                    .text(function (d) {
+                        return d.name;
+                    })
+                    .style("font-size", 12)
+                    .style("fill-opacity", 1e-6);
 
 
                 // Update nodes
@@ -227,12 +239,17 @@ var D3TreeBracket = function() {
                 // Transition nodes to their new position.
                 var nodeUpdate = node.transition()
                     .duration(duration)
-                    .attr("transform", function(d) { p = calcLeft(d); return "translate(" + p.y + "," + p.x + ")"; });
+                    .attr("transform", function (d) {
+                        p = calcLeft(d);
+                        return "translate(" + p.y + "," + p.x + ")";
+                    });
 
                 // Update circle
                 nodeUpdate.select("circle")
                     .attr("r", 4.5)
-                    .style("fill", function(d) { return d._children ? "#546E7A" : "#fff"; });
+                    .style("fill", function (d) {
+                        return d._children ? "#546E7A" : "#fff";
+                    });
 
                 // Update text
                 nodeUpdate.select("text")
@@ -245,7 +262,10 @@ var D3TreeBracket = function() {
                 // Transition exiting nodes to the parent's new position.
                 var nodeExit = node.exit().transition()
                     .duration(duration)
-                    .attr("transform", function(d) { p = calcLeft(d.parent||source); return "translate(" + p.y + "," + p.x + ")"; })
+                    .attr("transform", function (d) {
+                        p = calcLeft(d.parent || source);
+                        return "translate(" + p.y + "," + p.x + ")";
+                    })
                     .remove();
 
                 // Update circles
@@ -257,13 +277,14 @@ var D3TreeBracket = function() {
                     .style("fill-opacity", 1e-6);
 
 
-
                 // Links
                 // ------------------------------
 
                 // Update the links
                 var link = svg.selectAll("path.link")
-                    .data(tree.links(nodes), function(d) { return d.target.id; });
+                    .data(tree.links(nodes), function (d) {
+                        return d.target.id;
+                    });
 
                 // Enter any new links at the parent's previous position
                 link.enter().insert("path", "g")
@@ -271,7 +292,7 @@ var D3TreeBracket = function() {
                     .style("stroke", "#546E7A")
                     .style("fill", "none")
                     .style("stroke-width", 1.5)
-                    .attr("d", function(d) {
+                    .attr("d", function (d) {
                         var o = {x: source.x0, y: source.y0};
                         return connector({source: o, target: o});
                     });
@@ -284,14 +305,13 @@ var D3TreeBracket = function() {
                 // Transition exiting nodes to the parent's new position
                 link.exit().transition()
                     .duration(duration)
-                    .attr("d", function(d) {
-                        var o = calcLeft(d.source||source);
-                        if(d.source.isRight) o.y -= halfWidth - (d.target.y - d.source.y);
+                    .attr("d", function (d) {
+                        var o = calcLeft(d.source || source);
+                        if (d.source.isRight) o.y -= halfWidth - (d.target.y - d.source.y);
                         else o.y += halfWidth - (d.target.y - d.source.y);
                         return connector({source: o, target: o});
                     })
                     .remove();
-
 
 
                 // Toggle children on click.
@@ -318,20 +338,20 @@ var D3TreeBracket = function() {
 
 
                 // Resize function
-                // 
+                //
                 // Since D3 doesn't support SVG resize by default,
-                // we need to manually specify parts of the graph that need to 
+                // we need to manually specify parts of the graph that need to
                 // be updated on window resize
                 function resize() {
 
                     // Layout variables
                     width = d3Container.node().getBoundingClientRect().width - margin.left - margin.right,
 
-                    // Layout
-                    // -------------------------
+                        // Layout
+                        // -------------------------
 
-                    // Main svg width
-                    container.attr("width", width + margin.left + margin.right);
+                        // Main svg width
+                        container.attr("width", width + margin.left + margin.right);
 
                     // Width of appended group
                     svg.attr("width", width + margin.left + margin.right);
@@ -346,7 +366,7 @@ var D3TreeBracket = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _treeBracket();
         }
     }
@@ -356,6 +376,6 @@ var D3TreeBracket = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3TreeBracket.init();
 });

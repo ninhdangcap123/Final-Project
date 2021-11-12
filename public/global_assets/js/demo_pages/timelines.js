@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var Timelines = function() {
+var Timelines = function () {
 
 
     //
@@ -18,7 +18,7 @@ var Timelines = function() {
     //
 
     // Charts
-    var _chartsStatistics = function() {
+    var _chartsStatistics = function () {
         if (typeof echarts == 'undefined') {
             console.warn('Warning - echarts.min.js is not loaded.');
             return;
@@ -44,7 +44,7 @@ var Timelines = function() {
             daily_statistics.setOption({
 
                 // Define colors
-                color: ['#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80'],
+                color: ['#2ec7c9', '#b6a2de', '#5ab1ef', '#ffb980', '#d87a80'],
 
                 // Global text styles
                 textStyle: {
@@ -66,7 +66,7 @@ var Timelines = function() {
 
                 // Add legend
                 legend: {
-                    data: ['Clicks','Visits','Sales'],
+                    data: ['Clicks', 'Visits', 'Sales'],
                     itemHeight: 8,
                     itemGap: 20,
                     textStyle: {
@@ -94,7 +94,7 @@ var Timelines = function() {
                 // Horizontal axis
                 xAxis: [{
                     type: 'category',
-                    data: ['00:00','02:00','04:00','06:00','08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00'],
+                    data: ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
                     axisLabel: {
                         color: '#333'
                     },
@@ -139,29 +139,29 @@ var Timelines = function() {
                         }
                     }
                 },
-                {
-                    type: 'value',
-                    name: 'Clicks',
-                    axisLabel: {
-                        color: '#333'
-                    },
-                    axisLine: {
-                        lineStyle: {
-                            color: '#999'
+                    {
+                        type: 'value',
+                        name: 'Clicks',
+                        axisLabel: {
+                            color: '#333'
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#999'
+                            }
+                        },
+                        splitLine: {
+                            lineStyle: {
+                                color: ['#eee']
+                            }
+                        },
+                        splitArea: {
+                            show: true,
+                            areaStyle: {
+                                color: ['rgba(250,250,250,0.1)', 'rgba(0,0,0,0.01)']
+                            }
                         }
-                    },
-                    splitLine: {
-                        lineStyle: {
-                            color: ['#eee']
-                        }
-                    },
-                    splitArea: {
-                        show: true,
-                        areaStyle: {
-                            color: ['rgba(250,250,250,0.1)', 'rgba(0,0,0,0.01)']
-                        }
-                    }
-                }],
+                    }],
 
                 // Add series
                 series: [
@@ -207,7 +207,7 @@ var Timelines = function() {
             weekly_statistics.setOption({
 
                 // Define colors
-                color: ['#2ec7c9','#5ab1ef','#b6a2de',],
+                color: ['#2ec7c9', '#5ab1ef', '#b6a2de',],
 
                 // Global text styles
                 textStyle: {
@@ -277,7 +277,7 @@ var Timelines = function() {
                 // Vertical axis
                 yAxis: [{
                     type: 'category',
-                    data: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+                    data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
                     axisTick: {
                         show: false
                     },
@@ -367,7 +367,7 @@ var Timelines = function() {
         //
 
         // On sidebar width change
-        $('.sidebar-control').on('click', function() {
+        $('.sidebar-control').on('click', function () {
             daily_statistics.resize();
             weekly_statistics.resize();
         })
@@ -384,7 +384,7 @@ var Timelines = function() {
     };
 
     // Schedule
-    var _componentFullCalendar = function() {
+    var _componentFullCalendar = function () {
         if (!$().fullCalendar) {
             console.warn('Warning - fullcalendar.min.js is not loaded.');
             return;
@@ -478,7 +478,7 @@ var Timelines = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _chartsStatistics();
             _componentFullCalendar();
         }
@@ -489,6 +489,6 @@ var Timelines = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     Timelines.init();
 });

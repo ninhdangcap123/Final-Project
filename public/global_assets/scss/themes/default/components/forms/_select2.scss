@@ -497,6 +497,7 @@
                 border-bottom: $dropdown-border-width solid rgba($white, 0.2);
             }
         }
+
         &.select2-container--above {
             .select2-selection--single,
             .select2-selection--multiple {
@@ -514,6 +515,7 @@
                 border-top: $dropdown-border-width solid rgba($white, 0.2);
             }
         }
+
         &.select2-container--below {
             .select2-selection--single,
             .select2-selection--multiple {
@@ -662,7 +664,7 @@
 
     // Dropdown menu
     .select2-dropdown[class*=bg-] {
-        
+
         // Search field
         .select2-search--dropdown .select2-search__field {
             background-color: $dropdown-dark-active-bg;
@@ -682,7 +684,6 @@
             color: $white;
         }
     }
-
 
 
     // Misc
@@ -717,7 +718,6 @@
         position: fixed !important;
         width: 1px !important;
     }
-
 
 
     // Loading remote data example demo

@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var D3Treemap = function() {
+var D3Treemap = function () {
 
 
     //
@@ -18,7 +18,7 @@ var D3Treemap = function() {
     //
 
     // Uniform
-    var _componentUniform = function() {
+    var _componentUniform = function () {
         if (!$().uniform) {
             console.warn('Warning - uniform.min.js is not loaded.');
             return;
@@ -29,7 +29,7 @@ var D3Treemap = function() {
     };
 
     // Chart
-    var _treemap = function() {
+    var _treemap = function () {
         if (typeof d3 == 'undefined') {
             console.warn('Warning - d3.min.js is not loaded.');
             return;
@@ -41,7 +41,7 @@ var D3Treemap = function() {
 
 
         // Initialize chart only if element exsists in the DOM
-        if(element) {
+        if (element) {
 
             // Basic setup
             // ------------------------------
@@ -51,7 +51,6 @@ var D3Treemap = function() {
                 width = d3Container.node().getBoundingClientRect().width,
                 root,
                 node;
-
 
 
             // Construct scales
@@ -68,7 +67,6 @@ var D3Treemap = function() {
             var color = d3.scale.category20();
 
 
-        
             // Create chart
             // ------------------------------
 
@@ -80,11 +78,10 @@ var D3Treemap = function() {
                 .attr("width", width)
                 .attr("height", height)
                 .append("g")
-                    .attr("transform", "translate(.5,.5)")
-                    .style("font-size", 12)
-                    .style("overflow", "hidden")
-                    .style("text-indent", 2);
-
+                .attr("transform", "translate(.5,.5)")
+                .style("font-size", 12)
+                .style("overflow", "hidden")
+                .style("text-indent", 2);
 
 
             // Construct chart layout
@@ -95,17 +92,20 @@ var D3Treemap = function() {
                 .round(false)
                 .size([width, height])
                 .sticky(true)
-                .value(function(d) { return d.size; });
-
+                .value(function (d) {
+                    return d.size;
+                });
 
 
             // Load data
             // ------------------------------
 
-            d3.json("../../../../global_assets/demo_data/d3/other/treemap.json", function(data) {
+            d3.json("../../../../global_assets/demo_data/d3/other/treemap.json", function (data) {
                 node = root = data;
                 var nodes = treemap.nodes(root)
-                    .filter(function(d) { return !d.children; });
+                    .filter(function (d) {
+                        return !d.children;
+                    });
 
 
                 // Add cells
@@ -116,27 +116,46 @@ var D3Treemap = function() {
                     .data(nodes)
                     .enter()
                     .append("g")
-                        .attr("class", "d3-treemap-cell")
-                        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-                        .style("cursor", "pointer")
-                        .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); });
+                    .attr("class", "d3-treemap-cell")
+                    .attr("transform", function (d) {
+                        return "translate(" + d.x + "," + d.y + ")";
+                    })
+                    .style("cursor", "pointer")
+                    .on("click", function (d) {
+                        return zoom(node == d.parent ? root : d.parent);
+                    });
 
                 // Append cell rects
                 cell.append("rect")
-                    .attr("width", function(d) { return d.dx - 1; })
-                    .attr("height", function(d) { return d.dy - 1; })
-                    .style("fill", function(d, i) { return color(i); });
+                    .attr("width", function (d) {
+                        return d.dx - 1;
+                    })
+                    .attr("height", function (d) {
+                        return d.dy - 1;
+                    })
+                    .style("fill", function (d, i) {
+                        return color(i);
+                    });
 
                 // Append text
                 cell.append("text")
-                    .attr("x", function(d) { return d.dx / 2; })
-                    .attr("y", function(d) { return d.dy / 2; })
+                    .attr("x", function (d) {
+                        return d.dx / 2;
+                    })
+                    .attr("y", function (d) {
+                        return d.dy / 2;
+                    })
                     .attr("dy", ".35em")
                     .attr("text-anchor", "middle")
-                    .text(function(d) { return d.name; })
+                    .text(function (d) {
+                        return d.name;
+                    })
                     .style("fill", "#fff")
-                    .style("opacity", function(d) { d.width = this.getComputedTextLength(); return d.dx > d.width ? 1 : 0; });
-            }); 
+                    .style("opacity", function (d) {
+                        d.width = this.getComputedTextLength();
+                        return d.dx > d.width ? 1 : 0;
+                    });
+            });
 
 
             // Change data
@@ -166,29 +185,42 @@ var D3Treemap = function() {
                 x.domain([d.x, d.x + d.dx]);
                 y.domain([d.y, d.y + d.dy]);
 
-            // Cell transition
-            var t = svg.selectAll(".d3-treemap-cell").transition()
-                .duration(500)
-                .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+                // Cell transition
+                var t = svg.selectAll(".d3-treemap-cell").transition()
+                    .duration(500)
+                    .attr("transform", function (d) {
+                        return "translate(" + x(d.x) + "," + y(d.y) + ")";
+                    });
 
                 // Cell rect transition
                 t.select("rect")
-                    .attr("width", function(d) { return kx * d.dx - 1; })
-                    .attr("height", function(d) { return ky * d.dy - 1; })
+                    .attr("width", function (d) {
+                        return kx * d.dx - 1;
+                    })
+                    .attr("height", function (d) {
+                        return ky * d.dy - 1;
+                    })
 
                 // Text transition
                 t.select("text")
-                    .attr("x", function(d) { return kx * d.dx / 2; })
-                    .attr("y", function(d) { return ky * d.dy / 2; })
-                    .style("opacity", function(d) { return kx * d.dx > d.width ? 1 : 0; });
+                    .attr("x", function (d) {
+                        return kx * d.dx / 2;
+                    })
+                    .attr("y", function (d) {
+                        return ky * d.dy / 2;
+                    })
+                    .style("opacity", function (d) {
+                        return kx * d.dx > d.width ? 1 : 0;
+                    });
 
                 node = d;
                 d3.event.stopPropagation();
             }
 
             // Add click event
-            d3.select(window).on("click", function() { zoom(root); });
-
+            d3.select(window).on("click", function () {
+                zoom(root);
+            });
 
 
             // Resize chart
@@ -201,9 +233,9 @@ var D3Treemap = function() {
             d3.select('.sidebar-control').on('click', resize);
 
             // Resize function
-            // 
+            //
             // Since D3 doesn't support SVG resize by default,
-            // we need to manually specify parts of the graph that need to 
+            // we need to manually specify parts of the graph that need to
             // be updated on window resize
             function resize() {
 
@@ -236,7 +268,7 @@ var D3Treemap = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentUniform();
             _treemap();
         }
@@ -247,6 +279,6 @@ var D3Treemap = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     D3Treemap.init();
 });

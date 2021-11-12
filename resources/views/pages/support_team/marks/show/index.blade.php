@@ -4,7 +4,8 @@
 
     <div class="card">
         <div class="card-header text-center">
-            <h4 class="card-title font-weight-bold">Student Marksheet for =>  {{ $sr->user->name.' ('.$my_course->name.' '.$my_course->classes->first()->name.')' }} </h4>
+            <h4 class="card-title font-weight-bold">Student Marksheet for
+                                                    => {{ $sr->user->name.' ('.$my_course->name.' '.$my_course->classes->first()->name.')' }} </h4>
         </div>
     </div>
 
@@ -25,7 +26,9 @@
 
                         {{--Print Button--}}
                         <div class="text-center mt-3">
-                            <a target="_blank" href="{{ route('marks.print', [\App\Helpers\DisplayMessageHelper::hash($student_id), $ex->id, $year]) }}" class="btn btn-secondary btn-lg">Print Marksheet <i class="icon-printer ml-2"></i></a>
+                            <a target="_blank"
+                               href="{{ route('marks.print', [\App\Helpers\DisplayMessageHelper::hash($student_id), $ex->id, $year]) }}"
+                               class="btn btn-secondary btn-lg">Print Marksheet <i class="icon-printer ml-2"></i></a>
                         </div>
 
                     </div>

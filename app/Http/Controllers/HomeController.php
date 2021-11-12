@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Helpers\CheckUsersHelper;
 use App\Helpers\GetSystemInfoHelper;
-use App\Helpers\Qs;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\UserRepo;
 
 class HomeController extends Controller
 {
-    protected $user;
-    public function __construct(UserRepositoryInterface $user)
-    {
-        $this->user = $user;
-    }
+    protected $userRepo;
 
+    public function __construct(UserRepositoryInterface $userRepo)
+    {
+        $this->userRepo = $userRepo;
+    }
 
     public function index()
     {
@@ -40,11 +39,11 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        $d=[];
-        if(CheckUsersHelper::userIsTeamSAT()){
-            $d['users'] = $this->user->getAll();
+        $data = [];
+        if( CheckUsersHelper::userIsTeamSAT() ) {
+            $data['users'] = $this->userRepo->getAll();
         }
 
-        return view('pages.support_team.dashboard', $d);
+        return view('pages.support_team.dashboard', $data);
     }
 }

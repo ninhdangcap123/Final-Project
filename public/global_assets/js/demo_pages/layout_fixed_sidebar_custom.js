@@ -10,7 +10,7 @@
 // Setup module
 // ------------------------------
 
-var FixedSidebarCustomScroll = function() {
+var FixedSidebarCustomScroll = function () {
 
 
     //
@@ -18,7 +18,7 @@ var FixedSidebarCustomScroll = function() {
     //
 
     // Perfect scrollbar
-    var _componentPerfectScrollbar = function() {
+    var _componentPerfectScrollbar = function () {
         if (typeof PerfectScrollbar == 'undefined') {
             console.warn('Warning - perfect_scrollbar.min.js is not loaded.');
             return;
@@ -37,7 +37,7 @@ var FixedSidebarCustomScroll = function() {
     //
 
     return {
-        init: function() {
+        init: function () {
             _componentPerfectScrollbar();
         }
     }
@@ -47,6 +47,6 @@ var FixedSidebarCustomScroll = function() {
 // Initialize module
 // ------------------------------
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     FixedSidebarCustomScroll.init();
 });

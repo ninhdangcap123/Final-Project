@@ -24,7 +24,7 @@ class MarkUpdate extends FormRequest
 
     public function attributes()
     {
-        return  [
+        return [
 
         ];
     }
