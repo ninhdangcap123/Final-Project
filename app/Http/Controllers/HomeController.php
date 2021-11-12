@@ -10,12 +10,11 @@ use App\Repositories\UserRepo;
 
 class HomeController extends Controller
 {
-    protected $user;
-    public function __construct(UserRepositoryInterface $user)
+    protected $userRepo;
+    public function __construct(UserRepositoryInterface $userRepo)
     {
-        $this->user = $user;
+        $this->userRepo = $userRepo;
     }
-
 
     public function index()
     {
@@ -40,11 +39,11 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        $d=[];
+        $data=[];
         if(CheckUsersHelper::userIsTeamSAT()){
-            $d['users'] = $this->user->getAll();
+            $data['users'] = $this->userRepo->getAll();
         }
 
-        return view('pages.support_team.dashboard', $d);
+        return view('pages.support_team.dashboard', $data);
     }
 }

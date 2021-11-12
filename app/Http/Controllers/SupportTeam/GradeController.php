@@ -14,53 +14,55 @@ use App\Repositories\MyCourseRepo;
 
 class GradeController extends Controller
 {
-    protected $exam, $grade, $my_course, $major;
+    protected $examRepo;
+    protected $gradeRepo;
+    protected $myCourseRepo;
+    protected $majorRepo;
 
-    public function __construct(GradeRepositoryInterface $grade, ExamRepositoryInterface $exam,
-                                MajorRepositoryInterface $major, MyCourseRepositoryInterface $my_course)
+    public function __construct(GradeRepositoryInterface    $gradeRepo,
+                                ExamRepositoryInterface     $examRepo,
+                                MajorRepositoryInterface    $majorRepo,
+                                MyCourseRepositoryInterface $myCourseRepo)
     {
-        $this->exam = $exam;
-        $this->my_course = $my_course;
-        $this->major = $major;
-        $this->grade = $grade;
-
+        $this->examRepo = $examRepo;
+        $this->myCourseRepo = $myCourseRepo;
+        $this->majorRepo = $majorRepo;
+        $this->gradeRepo = $gradeRepo;
         $this->middleware('teamSA', ['except' => ['destroy',] ]);
         $this->middleware('super_admin', ['only' => ['destroy',] ]);
     }
 
     public function index()
     {
-         $d['grades'] = $this->grade->getAll();
-         $d['majors'] = $this->major->getAll();
-        return view('pages.support_team.grades.index', $d);
+         $data['grades'] = $this->gradeRepo->getAll();
+         $data['majors'] = $this->majorRepo->getAll();
+        return view('pages.support_team.grades.index', $data);
     }
 
-    public function store(GradeCreate $req)
+    public function store(GradeCreate $request)
     {
-        $data = $req->all();
-
-        $this->grade->create($data);
+        $data = $request->validated();
+        $this->gradeRepo->create($data);
         return back()->with('flash_success', __('msg.store_ok'));
     }
 
     public function edit($id)
     {
-        $data['majors'] = $this->major->getAll();
-        $data['gr'] = $this->grade->find($id);
+        $data['majors'] = $this->majorRepo->getAll();
+        $data['gr'] = $this->gradeRepo->find($id);
         return view('pages.support_team.grades.edit', $data);
     }
 
-    public function update(GradeUpdate $req, $id)
+    public function update(GradeUpdate $request, $id)
     {
-        $data = $req->all();
-
-        $this->grade->update($id, $data);
+        $data = $request->validated();
+        $this->gradeRepo->update($id, $data);
         return back()->with('flash_success', __('msg.update_ok'));
     }
 
     public function destroy($id)
     {
-        $this->grade->delete($id);
+        $this->gradeRepo->delete($id);
         return back()->with('flash_success', __('msg.del_ok'));
     }
 }

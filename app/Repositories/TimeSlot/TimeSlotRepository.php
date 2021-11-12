@@ -38,31 +38,14 @@ class TimeSlotRepository extends BaseRepository implements TimeSlotRepositoryInt
     {
         return TimeTableRecord::orderBy('name')->whereIn('id', $ids)->get();
     }
-    public function create($attributes = [])
-    {
-        // TODO: Implement create() method.
-        return $this->model->create($attributes);
-    }
-    public function delete($id) : bool
-    {
-        // TODO: Implement delete() method.
-        return $this->model->destroy($id);
-    }
+
+
     public function deleteTimeSlotByIDs($where)
     {
         // TODO: Implement deleteTimeSlotByIDs() method.
         return $this->model->where($where)->delete();
     }
-    public function update($id, $attribute)
-    {
-        // TODO: Implement update() method.
-        return $this->model->find($id)->update($attribute);
-    }
-    public function find($id)
-    {
-        // TODO: Implement find() method.
-        return $this->model->findOrFail($id);
-    }
+
 
 
 }

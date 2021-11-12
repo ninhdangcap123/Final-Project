@@ -14,10 +14,7 @@ class SettingRepository extends BaseRepository implements SettingRepositoryInter
         // TODO: Implement getModel() method.
         return Setting::class;
     }
-    public function getAll()
-    {
-        return $this->model->all();
-    }
+
     public function update($id, $attribute)
     {
         return $this->model->where('type',$id)->update(['description'=>$attribute]);

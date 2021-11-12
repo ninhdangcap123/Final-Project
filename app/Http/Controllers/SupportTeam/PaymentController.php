@@ -27,69 +27,76 @@ use PDF;
 
 class PaymentController extends Controller
 {
-    protected $my_course, $payment_record, $receipt, $pay, $student, $year;
+    protected $myCourseRepo;
+    protected $paymentRecordRepo;
+    protected $receiptRepo;
+    protected $paymentRepo;
+    protected $studentRepo;
+    protected $year;
 
-    public function __construct(PaymentRecordRepositoryInterface $payment_record, ReceiptRepositoryInterface $receipt, MyCourseRepositoryInterface $my_course,
-                                PaymentRepositoryInterface $pay, StudentRepositoryInterface $student)
+    public function __construct(PaymentRecordRepositoryInterface $paymentRecordRepo,
+                                ReceiptRepositoryInterface       $receiptRepo,
+                                MyCourseRepositoryInterface      $myCourseRepo,
+                                PaymentRepositoryInterface       $paymentRepo,
+                                StudentRepositoryInterface       $studentRepo)
     {
-        $this->my_course = $my_course;
-        $this->pay = $pay;
-        $this->receipt = $receipt;
-        $this->payment_record = $payment_record;
+        $this->myCourseRepo = $myCourseRepo;
+        $this->paymentRepo = $paymentRepo;
+        $this->receiptRepo = $receiptRepo;
+        $this->paymentRecordRepo = $paymentRecordRepo;
         $this->year = GetSystemInfoHelper::getCurrentSession();
-        $this->student = $student;
-
+        $this->studentRepo = $studentRepo;
         $this->middleware('teamAccount');
     }
 
     public function index()
     {
-        $d['selected'] = false;
-        $d['years'] = $this->pay->getPaymentYears();
+        $data['selected'] = false;
+        $data['years'] = $this->paymentRepo->getPaymentYears();
 
-        return view('pages.support_team.payments.index', $d);
+        return view('pages.support_team.payments.index', $data);
     }
 
     public function show($year)
     {
-        $data['payments'] = $p = $this->pay->getPayment(['year' => $year])->get();
+        $data['payments'] = $payment = $this->paymentRepo->getPayment(['year' => $year])->get();
 
-        if(($p->count() < 1)){
+        if(($payment->count() < 1)){
             return RouteHelper::goWithDanger('payments.index');
         }
 
         $data['selected'] = true;
-        $data['my_courses'] = $this->my_course->getAll();
-        $data['years'] = $this->pay->getPaymentYears();
+        $data['my_courses'] = $this->myCourseRepo->getAll();
+        $data['years'] = $this->paymentRepo->getPaymentYears();
         $data['year'] = $year;
 
         return view('pages.support_team.payments.index', $data);
 
     }
 
-    public function selectYear(Request $req)
+    public function selectYear(Request $request)
     {
-        return RouteHelper::goToRoute(['payments.show', $req->year]);
+        return RouteHelper::goToRoute(['payments.show', $request->year]);
     }
 
     public function create()
     {
-        $d['my_courses'] = $this->my_course->getAll();
-        return view('pages.support_team.payments.create', $d);
+        $data['my_courses'] = $this->myCourseRepo->getAll();
+        return view('pages.support_team.payments.create', $data);
     }
 
-    public function invoice($st_id, $year = NULL)
+    public function invoice($student_id, $year = NULL)
     {
-        if(!$st_id) {return RouteHelper::goWithDanger();}
+        if(!$student_id) {return RouteHelper::goWithDanger();}
 
-        $inv = $year ? $this->payment_record->getAllMyPR($st_id, $year) : $this->payment_record->getAllMyPR($st_id);
+        $invoice = $year ? $this->paymentRecordRepo->getAllMyPR($student_id, $year) : $this->paymentRecordRepo->getAllMyPR($student_id);
 
-        $d['sr'] = $this->student->findByUserId($st_id)->first();
-        $pr = $inv->get();
-        $d['uncleared'] = $pr->where('paid', 0);
-        $d['cleared'] = $pr->where('paid', 1);
+        $data['sr'] = $this->studentRepo->findByUserId($student_id)->first();
+        $paymentRecord = $invoice->get();
+        $data['uncleared'] = $paymentRecord->where('paid', 0);
+        $data['cleared'] = $paymentRecord->where('paid', 1);
 
-        return view('pages.support_team.payments.invoice', $d);
+        return view('pages.support_team.payments.invoice', $data);
     }
 
     public function receipts($pr_id)
@@ -97,18 +104,18 @@ class PaymentController extends Controller
         if(!$pr_id) {return RouteHelper::goWithDanger();}
 
         try {
-             $d['pr'] = $pr = $this->payment_record->getRecord(['id' => $pr_id])->with('receipt')->first();
+             $data['pr'] = $paymentRecord = $this->paymentRecordRepo->getRecord(['id' => $pr_id])->with('receipt')->first();
         } catch (ModelNotFoundException $ex) {
             return back()->with('flash_danger', __('msg.rnf'));
         }
-        $d['receipts'] = $pr->receipt;
-        $d['payment'] = $pr->payment;
-        $d['sr'] = $this->student->findByUserId($pr->student_id)->first();
-        $d['s'] = Setting::all()->flatMap(function($s){
+        $data['receipts'] = $paymentRecord->receipt;
+        $data['payment'] = $paymentRecord->payment;
+        $data['sr'] = $this->studentRepo->findByUserId($paymentRecord->student_id)->first();
+        $data['s'] = Setting::all()->flatMap(function($s){
             return [$s->type => $s->description];
         });
 
-        return view('pages.support_team.payments.receipt', $d);
+        return view('pages.support_team.payments.receipt', $data);
     }
 
     public function pdfReceipts($pr_id)
@@ -116,20 +123,20 @@ class PaymentController extends Controller
         if(!$pr_id) {return RouteHelper::goWithDanger();}
 
         try {
-            $d['pr'] = $pr = $this->payment_record->getRecord(['id' => $pr_id])->with('receipt')->first();
+            $data['pr'] = $paymentRecord = $this->paymentRecordRepo->getRecord(['id' => $pr_id])->with('receipt')->first();
         } catch (ModelNotFoundException $ex) {
             return back()->with('flash_danger', __('msg.rnf'));
         }
-        $d['receipts'] = $pr->receipt;
-        $d['payment'] = $pr->payment;
-        $d['sr'] = $sr =$this->student->findByUserId($pr->student_id)->first();
-        $d['s'] = Setting::all()->flatMap(function($s){
+        $data['receipts'] = $paymentRecord->receipt;
+        $data['payment'] = $paymentRecord->payment;
+        $data['sr'] = $sr =$this->studentRepo->findByUserId($paymentRecord->student_id)->first();
+        $data['s'] = Setting::all()->flatMap(function($s){
             return [$s->type => $s->description];
         });
 
-        $pdf_name = 'Receipt_'.$pr->ref_no;
+        $pdfName = 'Receipt_'.$paymentRecord->ref_no;
 
-        return PDF::loadView('pages.support_team.payments.receipt', $d)->download($pdf_name);
+        return PDF::loadView('pages.support_team.payments.receipt', $data)->download($pdfName);
 
         //return $this->downloadReceipt('pages.support_team.payments.receipt', $d, $pdf_name);
     }
@@ -142,113 +149,107 @@ class PaymentController extends Controller
         return PDF::loadHTML($html)->download($name);
     }
 
-    public function payNow(Request $req, $pr_id)
+    public function payNow(Request $request, $pr_id)
     {
-        $this->validate($req, [
+        $this->validate($request, [
             'amt_paid' => 'required|numeric'
         ], [], ['amt_paid' => 'Amount Paid']);
 
-        $pr = $this->payment_record->find($pr_id);
-        $payment = $this->pay->find($pr->payment_id);
-        $d['amt_paid'] = $amt_p = $pr->amt_paid + $req->amt_paid;
-        $d['balance'] = $bal = $payment->amount - $amt_p;
-        $d['paid'] = $bal < 1 ? 1 : 0;
+        $paymentRecord = $this->paymentRecordRepo->find($pr_id);
+        $payment = $this->paymentRepo->find($paymentRecord->payment_id);
+        $data['amt_paid'] = $amount = $paymentRecord->amt_paid + $request->amt_paid;
+        $data['balance'] = $balance = $payment->amount - $amount;
+        $data['paid'] = $balance < 1 ? 1 : 0;
 
-        $this->payment_record->update($pr_id, $d);
+        $this->paymentRecordRepo->update($pr_id, $data);
+        $data2['amt_paid'] = $request->amt_paid;
+        $data2['balance'] = $balance;
+        $data2['pr_id'] = $pr_id;
+        $data2['year'] = $this->year;
 
-        $d2['amt_paid'] = $req->amt_paid;
-        $d2['balance'] = $bal;
-        $d2['pr_id'] = $pr_id;
-        $d2['year'] = $this->year;
-
-        $this->receipt->create($d2);
-        return JsonHelper::jsonUpdateOk();
+        $this->receiptRepo->create($data2);
+        return JsonHelper::jsonUpdateSuccess();
     }
 
     public function manage($course_id = NULL)
     {
-        $d['my_courses'] = $this->my_course->getAll();
-        $d['selected'] = false;
+        $data['my_courses'] = $this->myCourseRepo->getAll();
+        $data['selected'] = false;
 
         if($course_id){
-            $d['students'] = $st = $this->student->getRecord(['my_course_id' => $course_id])->get()->sortBy('user.name');
-            if($st->count() < 1){
+            $data['students'] = $students = $this->studentRepo->getRecord(['my_course_id' => $course_id])->get()->sortBy('user.name');
+            if($students->count() < 1){
                 return RouteHelper::goWithDanger('payments.manage');
             }
-            $d['selected'] = true;
-            $d['my_course_id'] = $course_id;
+            $data['selected'] = true;
+            $data['my_course_id'] = $course_id;
         }
 
-        return view('pages.support_team.payments.manage', $d);
+        return view('pages.support_team.payments.manage', $data);
     }
 
-    public function selectClass(Request $req)
+    public function selectClass(Request $request)
     {
-        $this->validate($req, [
+        $this->validate($request, [
             'my_course_id' => 'required'
         ], [], ['my_course_id' => 'Course']);
 
-        $wh['my_course_id'] = $course_id = $req->my_course_id;
+        $wh['my_course_id'] = $course_id = $request->my_course_id;
 
-        $pay1 = $this->pay->getPayment(['my_course_id' => $course_id, 'year' => $this->year])->get();
-        $pay2 = $this->pay->getGeneralPayment(['year' => $this->year])->get();
-        $payments = $pay2->count() ? $pay1->merge($pay2) : $pay1;
-        $students = $this->student->getRecord($wh)->get();
+        $payment1 = $this->paymentRepo->getPayment(['my_course_id' => $course_id, 'year' => $this->year])->get();
+        $payment2 = $this->paymentRepo->getGeneralPayment(['year' => $this->year])->get();
+        $payments = $payment2->count() ? $payment1->merge($payment2) : $payment1;
+        $students = $this->studentRepo->getRecord($wh)->get();
 
         if($payments->count() && $students->count()){
-            foreach($payments as $p){
-                foreach($students as $st){
-                    $pr['student_id'] = $st->user_id;
-                    $pr['payment_id'] = $p->id;
-                    $pr['year'] = $this->year;
-                    $rec = $this->payment_record->create($pr);
-                    $rec->ref_no ?: $rec->update(['ref_no' => mt_rand(100000, 99999999)]);
+            foreach($payments as $payment){
+                foreach($students as $student){
+                    $paymentRecord['student_id'] = $student->user_id;
+                    $paymentRecord['payment_id'] = $payment->id;
+                    $paymentRecord['year'] = $this->year;
+                    $receipt = $this->paymentRecordRepo->create($paymentRecord);
+                    $receipt->ref_no ?: $receipt->update(['ref_no' => mt_rand(100000, 99999999)]);
 
                 }
             }
         }
-
         return RouteHelper::goToRoute(['payments.manage', $course_id]);
     }
 
-    public function store(PaymentCreate $req)
+    public function store(PaymentCreate $request)
     {
-        $data = $req->all();
+        $data = $request->validated();
         $data['year'] = $this->year;
         $data['ref_no'] = GetPaymentHelper::genRefCode();
-        $this->pay->create($data);
+        $this->paymentRepo->create($data);
 
-        return JsonHelper::jsonStoreOk();
+        return JsonHelper::jsonStoreSuccess();
     }
 
     public function edit($id)
     {
-        $d['payment'] = $pay = $this->pay->find($id);
-
-        return is_null($pay) ? RouteHelper::goWithDanger('payments.index') : view('pages.support_team.payments.edit', $d);
+        $data['payment'] = $pay = $this->paymentRepo->find($id);
+        return is_null($pay) ? RouteHelper::goWithDanger('payments.index') : view('pages.support_team.payments.edit', $data);
     }
 
-    public function update(PaymentUpdate $req, $id)
+    public function update(PaymentUpdate $request, $id)
     {
-        $data = $req->all();
-        $this->pay->update($id, $data);
-
-        return JsonHelper::jsonUpdateOk();
+        $data = $request->validated();
+        $this->paymentRepo->update($id, $data);
+        return JsonHelper::jsonUpdateSuccess();
     }
 
     public function destroy($id)
     {
-        $this->pay->find($id)->delete();
-
+        $this->paymentRepo->find($id)->delete();
         return RouteHelper::deleteOk('payments.index');
     }
 
     public function reset_record($id)
     {
-        $pr['amt_paid'] = $pr['paid'] = $pr['balance'] = 0;
-        $this->payment_record->update($id, $pr);
-        $this->receipt->delete(['pr_id' => $id]);
-
+        $paymentRecord['amt_paid'] = $paymentRecord['paid'] = $paymentRecord['balance'] = 0;
+        $this->paymentRecordRepo->update($id, $paymentRecord);
+        $this->receiptRepo->delete(['pr_id' => $id]);
         return back()->with('flash_success', __('msg.update_ok'));
     }
 }

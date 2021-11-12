@@ -6,9 +6,8 @@ use App\Repositories\RepositoryInterface;
 
 interface PinRepositoryInterface extends RepositoryInterface
 {
-    public function find($id);
-    public function create($attributes = []);
-    public function update($id, $attribute);
+
+
     public function countValid();
     public function deleteUsed();
     public function getUserPin($code, $user_id, $st_id);

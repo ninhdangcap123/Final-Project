@@ -12,47 +12,44 @@ use App\Http\Controllers\Controller;
 
 class ExamController extends Controller
 {
-    protected $exam;
-    public function __construct(ExamRepositoryInterface $exam)
+    protected $examRepo;
+    public function __construct(ExamRepositoryInterface $examRepo)
     {
         $this->middleware('teamSA', ['except' => ['destroy',] ]);
         $this->middleware('super_admin', ['only' => ['destroy',] ]);
-
-        $this->exam = $exam;
+        $this->examRepo = $examRepo;
     }
 
     public function index()
     {
-        $d['exams'] = $this->exam->getAll();
-        return view('pages.support_team.exams.index', $d);
+        $data['exams'] = $this->examRepo->getAll();
+        return view('pages.support_team.exams.index', $data);
     }
 
-    public function store(ExamCreate $req)
+    public function store(ExamCreate $request)
     {
-        $data = $req->only(['name', 'term']);
+        $data = $request->only(['name', 'term']);
         $data['year'] = GetSystemInfoHelper::getSetting('current_session');
-
-        $this->exam->create($data);
+        $this->examRepo->create($data);
         return back()->with('flash_success', __('msg.store_ok'));
     }
 
     public function edit($id)
     {
-        $d['ex'] = $this->exam->find($id);
-        return view('pages.support_team.exams.edit', $d);
+        $data['ex'] = $this->examRepo->find($id);
+        return view('pages.support_team.exams.edit', $data);
     }
 
-    public function update(ExamUpdate $req, $id)
+    public function update(ExamUpdate $request, $id)
     {
-        $data = $req->only(['name', 'term']);
-
-        $this->exam->update($id, $data);
+        $data = $request->only(['name', 'term']);
+        $this->examRepo->update($id, $data);
         return back()->with('flash_success', __('msg.update_ok'));
     }
 
     public function destroy($id)
     {
-        $this->exam->delete($id);
+        $this->examRepo->delete($id);
         return back()->with('flash_success', __('msg.del_ok'));
     }
 }

@@ -14,23 +14,24 @@ use Illuminate\Support\Facades\Auth;
 
 class AjaxController extends Controller
 {
-    protected $loc, $my_course, $class, $lga, $subject;
+    protected $myCourseRepo;
+    protected $classRepo;
+    protected $lga;
+    protected $subjectRepo;
 
-    public function __construct(ClassesRepositoryInterface $class, SubjectRepositoryInterface $subject, MyCourseRepositoryInterface $my_course,
-                                LGARepositoryInterface $lga)
+    public function __construct(ClassesRepositoryInterface  $classRepo,
+                                SubjectRepositoryInterface  $subjectRepo,
+                                MyCourseRepositoryInterface $myCourseRepo,
+                                LGARepositoryInterface      $lga)
     {
-
-        $this->my_course = $my_course;
+        $this->myCourseRepo = $myCourseRepo;
         $this->lga = $lga;
-        $this->subject = $subject;
-        $this->class = $class;
+        $this->subjectRepo = $subjectRepo;
+        $this->classRepo = $classRepo;
     }
 
     public function getLga($state_id)
     {
-//        $state_id = Qs::decodeHash($state_id);
-//        return ['id' => Qs::hash($q->id), 'name' => $q->name];
-
         $lgas = $this->lga->getAllLGAs($state_id);
         return $data = $lgas->map(function($q){
             return ['id' => $q->id, 'name' => $q->name];
@@ -39,7 +40,7 @@ class AjaxController extends Controller
 
     public function getClassSections($class_id)
     {
-        $classes = $this->class->getCourseClasses($class_id);
+        $classes = $this->classRepo->getCourseClasses($class_id);
         return $sections = $classes->map(function($q){
             return ['id' => $q->id, 'name' => $q->name];
         })->all();
@@ -47,21 +48,21 @@ class AjaxController extends Controller
 
     public function getClassSubjects($class_id)
     {
-        $classes = $this->class->getCourseClasses($class_id);
-        $subjects = $this->subject->findSubjectByCourse($class_id);
+        $classes = $this->classRepo->getCourseClasses($class_id);
+        $subjects = $this->subjectRepo->findSubjectByCourse($class_id);
 
         if(GetUserTypeHelper::userIsTeacher()){
-            $subjects = $this->subject->findSubjectByTeacher(Auth::user()->id)->where('my_class_id', $class_id);
+            $subjects = $this->subjectRepo->findSubjectByTeacher(Auth::user()->id)->where('my_class_id', $class_id);
         }
 
-        $d['classes'] = $classes->map(function($q){
+        $data['classes'] = $classes->map(function($q){
             return ['id' => $q->id, 'name' => $q->name];
         })->all();
-        $d['subjects'] = $subjects->map(function($q){
+        $data['subjects'] = $subjects->map(function($q){
             return ['id' => $q->id, 'name' => $q->name];
         })->all();
 
-        return $d;
+        return $data;
     }
 
 }

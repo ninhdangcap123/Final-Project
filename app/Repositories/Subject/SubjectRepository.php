@@ -12,16 +12,7 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
         // TODO: Implement getModel() method.
         return Subject::class;
     }
-    public function create($attributes = [])
-    {
-        // TODO: Implement create() method.
-        return $this->model->create($attributes);
-    }
-    public function find($id)
-    {
-        // TODO: Implement find() method.
-        return $this->model->find($id);
-    }
+
     public function getSubject($data)
     {
         // TODO: Implement getSubject() method.
@@ -46,15 +37,6 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
     {
         return $this->model->orderBy('name', 'asc')->with(['myCourse', 'teacher'])->get();
     }
-    public function update($id, $attribute)
-    {
-        // TODO: Implement update() method.
-        return $this->model->find($id)->update($attribute);
-    }
-    public function delete($id) : bool
-    {
-        // TODO: Implement delete() method.
-        return $this->model->destroy($id);
-    }
+
 
 }

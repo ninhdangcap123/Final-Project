@@ -17,26 +17,7 @@ class GradeRepository extends BaseRepository implements GradeRepositoryInterface
         // TODO: Implement getAll() method.
         return $this->model->orderBy('name')->get();
     }
-    public function find($id)
-    {
-        // TODO: Implement find() method.
-        return $this->model->find($id);
-    }
-    public function create($attributes = [])
-    {
-        // TODO: Implement create() method.
-        return $this->model->create($attributes);
-    }
-    public function update($id, $attribute)
-    {
-        // TODO: Implement update() method.
-        return $this->model->find($id)->update($attribute);
-    }
-    public function delete($id) : bool
-    {
-        // TODO: Implement delete() method.
-        return $this->model->destroy($id);
-    }
+
 
     public function getGrade($total, $major_id)
     {

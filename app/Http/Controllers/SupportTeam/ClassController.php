@@ -16,58 +16,58 @@ use App\Repositories\UserRepo;
 
 class ClassController extends Controller
 {
-    protected $my_course, $user, $class;
+    protected $myCourseRepo;
+    protected $userRepo;
+    protected $classRepo;
 
-    public function __construct(MyCourseRepositoryInterface $my_course, ClassesRepositoryInterface $class, UserRepositoryInterface $user)
+    public function __construct(MyCourseRepositoryInterface $myCourseRepo,
+                                ClassesRepositoryInterface  $classRepo,
+                                UserRepositoryInterface     $userRepo)
     {
         $this->middleware('teamSA', ['except' => ['destroy',] ]);
         $this->middleware('super_admin', ['only' => ['destroy',] ]);
-
-        $this->my_course = $my_course;
-        $this->user = $user;
-        $this->class = $class;
+        $this->myCourseRepo = $myCourseRepo;
+        $this->userRepo = $userRepo;
+        $this->classRepo = $classRepo;
     }
 
     public function index()
     {
-        $d['my_courses'] = $this->my_course->getAll();
-        $d['classes'] = $this->class->getAll();
-        $d['teachers'] = $this->user->getUserByType('teacher');
-
-        return view('pages.support_team.classes.index', $d);
+        $data['my_courses'] = $this->myCourseRepo->getAll();
+        $data['classes'] = $this->classRepo->getAll();
+        $data['teachers'] = $this->userRepo->getUserByType('teacher');
+        return view('pages.support_team.classes.index', $data);
     }
 
-    public function store(ClassCreate $req)
+    public function store(ClassCreate $request)
     {
-        $data = $req->all();
-        $this->class->create($data);
-
-        return JsonHelper::jsonStoreOk();
+        $data = $request->validated();
+        $this->classRepo->create($data);
+        return JsonHelper::jsonStoreSuccess();
     }
 
     public function edit($id)
     {
-        $d['s'] = $s = $this->class->find($id);
-        $d['teachers'] = $this->user->getUserByType('teacher');
+        $data['s'] = $class = $this->classRepo->find($id);
+        $data['teachers'] = $this->userRepo->getUserByType('teacher');
 
-        return is_null($s) ? RouteHelper::goWithDanger('classes.index') :view('pages.support_team.classes.edit', $d);
+        return is_null($class) ? RouteHelper::goWithDanger('classes.index') :view('pages.support_team.classes.edit', $data);
     }
 
-    public function update(ClassUpdate $req, $id)
+    public function update(ClassUpdate $request, $id)
     {
-        $data = $req->only(['name', 'teacher_id']);
-        $this->class->update($id, $data);
+        $data = $request->only(['name', 'teacher_id']);
+        $this->classRepo->update($id, $data);
 
-        return JsonHelper::jsonUpdateOk();
+        return JsonHelper::jsonUpdateSuccess();
     }
 
     public function destroy($id)
     {
-        if($this->class->isActiveClass($id)){
+        if($this->classRepo->isActiveClass($id)){
             return back()->with('pop_warning', 'Every class must have a default section, You Cannot Delete It');
         }
-
-        $this->class->delete($id);
+        $this->classRepo->delete($id);
         return back()->with('flash_success', __('msg.del_ok'));
     }
 

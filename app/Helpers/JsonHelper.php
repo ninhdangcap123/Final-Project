@@ -9,12 +9,12 @@ class JsonHelper
         return $arr ? response()->json($arr) : response()->json(['ok' => $ok, 'msg' => $msg]);
     }
 
-    public static function jsonStoreOk()
+    public static function jsonStoreSuccess()
     {
         return self::json(__('msg.store_ok'));
     }
 
-    public static function jsonUpdateOk()
+    public static function jsonUpdateSuccess()
     {
         return self::json(__('msg.update_ok'));
     }

@@ -13,15 +13,6 @@ class StaffRecordRepository extends BaseRepository implements StaffRecordReposit
         // TODO: Implement getModel() method.
         return StaffRecord::class;
     }
-    public function create($attributes = [])
-    {
-        // TODO: Implement create() method.
-        return $this->model->create($attributes);
-    }
-    public function update($id, $attribute)
-    {
-        // TODO: Implement update() method.
-        return $this->model->where($id)->update($attribute);
-    }
+
 
 }

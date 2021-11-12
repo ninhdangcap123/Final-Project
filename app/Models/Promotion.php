@@ -15,22 +15,22 @@ class Promotion extends Eloquent
         return $this->belongsTo(User::class, 'student_id');
     }
 
-    public function fc()
+    public function fromCourse()
     {
         return $this->belongsTo(MyCourse::class, 'from_course');
     }
 
-    public function fs()
+    public function fromSection()
     {
         return $this->belongsTo(Classes::class, 'from_section');
     }
 
-    public function ts()
+    public function toSection()
     {
         return $this->belongsTo(Classes::class, 'to_section');
     }
 
-    public function tc()
+    public function toCourse()
     {
         return $this->belongsTo(MyCourse::class, 'to_course');
     }

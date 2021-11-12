@@ -12,21 +12,7 @@ class PaymentRecordRepository extends BaseRepository implements PaymentRecordRep
         // TODO: Implement getModel() method.
         return PaymentRecord::class;
     }
-    public function create($attributes = [])
-    {
-        // TODO: Implement create() method.
-        return $this->model->firstOrCreate($attributes);
-    }
-    public function find($id)
-    {
-        // TODO: Implement find() method.
-        return $this->model->findOrFail($id);
-    }
-    public function update($id, $attribute)
-    {
-        // TODO: Implement update() method.
-        return $this->model->find($id)->update($attribute);
-    }
+
     public function getRecord($data)
     {
         // TODO: Implement getRecord() method.

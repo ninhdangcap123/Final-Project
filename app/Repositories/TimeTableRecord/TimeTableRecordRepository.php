@@ -27,24 +27,6 @@ class TimeTableRecordRepository extends BaseRepository implements TimeTableRecor
         // TODO: Implement getRecord() method.
         return $this->model->where($where)->get();
     }
-    public function create($attributes = [])
-    {
-        // TODO: Implement create() method.
-        return $this->model->create($attributes);
-    }
-    public function update($id, $attribute)
-    {
-        return $this->model->find($id)->update($attribute);
-    }
-    public function delete($id) : bool
-    {
-        // TODO: Implement delete() method.
-        return $this->model->destroy($id);
-    }
-    public function find($id)
-    {
-        // TODO: Implement find() method.
-        return $this->model->findOrFail($id);
-    }
+
 
 }

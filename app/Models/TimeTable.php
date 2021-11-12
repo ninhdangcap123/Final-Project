@@ -13,7 +13,7 @@ class TimeTable extends Eloquent
         return $this->belongsTo(TimeSlot::class, 'ts_id');
     }
 
-    public function ttRecord()
+    public function timeTableRecord()
     {
         return $this->belongsTo(TimeTableRecord::class, 'ttr_id');
     }

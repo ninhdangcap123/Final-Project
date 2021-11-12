@@ -18,14 +18,5 @@ class DormRepository extends BaseRepository implements DormRepositoryInterface
         // TODO: Implement getAll() method.
         return $this->model->orderBy('name', 'asc')->get();
     }
-    public function find($id)
-    {
-        // TODO: Implement find() method.
-        return $this->model->find($id);
-    }
-    public function update($id, $attribute)
-    {
-        // TODO: Implement update() method.
-        return $this->model->find($id)->update($attribute);
-    }
+
 }
