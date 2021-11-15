@@ -31,12 +31,14 @@ class TimeTableController extends Controller
     protected $year;
     protected $subjectRepo;
 
-    public function __construct(TimeSlotRepositoryInterface        $timeSlotRepo,
-                                TimeTableRecordRepositoryInterface $timeTableRecordRepo,
-                                TimeTableRepositoryInterface       $timeTableRepo,
-                                SubjectRepositoryInterface         $subjectRepo,
-                                MyCourseRepositoryInterface        $myCourseRepo,
-                                ExamRepositoryInterface            $examRepo)
+    public function __construct(
+        TimeSlotRepositoryInterface        $timeSlotRepo,
+        TimeTableRecordRepositoryInterface $timeTableRecordRepo,
+        TimeTableRepositoryInterface       $timeTableRepo,
+        SubjectRepositoryInterface         $subjectRepo,
+        MyCourseRepositoryInterface        $myCourseRepo,
+        ExamRepositoryInterface            $examRepo
+    )
     {
         $this->timeTableRepo = $timeTableRepo;
         $this->timeSlotRepo = $timeSlotRepo;

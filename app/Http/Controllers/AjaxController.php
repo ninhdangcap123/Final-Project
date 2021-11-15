@@ -18,10 +18,11 @@ class AjaxController extends Controller
     protected $lga;
     protected $subjectRepo;
 
-    public function __construct(ClassesRepositoryInterface  $classRepo,
-                                SubjectRepositoryInterface  $subjectRepo,
-                                MyCourseRepositoryInterface $myCourseRepo,
-                                LGARepositoryInterface      $lga)
+    public function __construct(
+        ClassesRepositoryInterface  $classRepo,
+        SubjectRepositoryInterface  $subjectRepo,
+        MyCourseRepositoryInterface $myCourseRepo,
+        LGARepositoryInterface      $lga)
     {
         $this->myCourseRepo = $myCourseRepo;
         $this->lga = $lga;

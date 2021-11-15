@@ -15,8 +15,8 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Manage Subjects</a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        @foreach($my_courses as $c)
-                            <a href="#c{{ $c->id }}" class="dropdown-item" data-toggle="tab">{{ $c->name }}</a>
+                        @foreach($my_courses as $course)
+                            <a href="#{{ $course->id }}" class="dropdown-item" data-toggle="tab">{{ $course->name }}</a>
                         @endforeach
                     </div>
                 </li>
@@ -54,9 +54,9 @@
                                         <select required data-placeholder="Select Class" class="form-control select"
                                                 name="my_course_id" id="my_course_id">
                                             <option value=""></option>
-                                            @foreach($my_courses as $c)
+                                            @foreach($my_courses as $course)
                                                 <option
-                                                    {{ old('my_course_id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
+                                                    {{ old('my_course_id') == $course->id ? 'selected' : '' }} value="{{ $course->id }}">{{ $course->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -69,9 +69,9 @@
                                         <select required data-placeholder="Select Teacher"
                                                 class="form-control select-search" name="teacher_id" id="teacher_id">
                                             <option value=""></option>
-                                            @foreach($teachers as $t)
+                                            @foreach($teachers as $teacher)
                                                 <option
-                                                    {{ old('teacher_id') == \App\Helpers\DisplayMessageHelper::hash($t->id) ? 'selected' : '' }} value="{{ \App\Helpers\DisplayMessageHelper::hash($t->id) }}">{{ $t->name }}</option>
+                                                    {{ old('teacher_id') == \App\Helpers\DisplayMessageHelper::hash($teacher->id) ? 'selected' : '' }} value="{{ \App\Helpers\DisplayMessageHelper::hash($teacher->id) }}">{{ $teacher->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -86,8 +86,8 @@
                     </div>
                 </div>
 
-                @foreach($my_courses as $c)
-                    <div class="tab-pane fade" id="c{{ $c->id }}">
+                @foreach($my_courses as $course)
+                    <div class="tab-pane fade" id="{{ $course->id }}">
                         <table class="table datatable-button-html5-columns">
                             <thead>
                             <tr>
@@ -100,7 +100,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($subjects->where('my_course.id', $c->id) as $s)
+                            @foreach($subjects->where('my_course.id', $course->id) as $s)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $s->name }} </td>

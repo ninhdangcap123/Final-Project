@@ -10,6 +10,8 @@ interface StudentRepositoryInterface extends RepositoryInterface
 
     public function gradStudents();
 
+    public function where($id);
+
     public function createRecord($attributes = []);
 
     public function updateRecord($id, array $attribute);
@@ -21,6 +23,8 @@ interface StudentRepositoryInterface extends RepositoryInterface
     public function findByUserId($st_id);
 
     public function getAll();
+
+    public function updateStudent($id, $attribute);
 
     public function getGradRecord($data = []);
 

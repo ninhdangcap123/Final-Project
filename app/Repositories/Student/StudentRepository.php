@@ -27,6 +27,19 @@ class StudentRepository extends BaseRepository implements StudentRepositoryInter
 
     }
 
+    public function updateStudent($promotion, $attribute)
+    {
+        // TODO: Implement update() method.
+
+        return $this->model->where($promotion)->update($attribute);
+
+    }
+
+    public function where($id)
+    {
+        return $this->model->where([ 'user_id'=> $id])->get();
+    }
+
     public function getAllDorms()
     {
         // TODO: Implement getAllDorms() method.

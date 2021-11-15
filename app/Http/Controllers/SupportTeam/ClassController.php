@@ -19,9 +19,11 @@ class ClassController extends Controller
     protected $userRepo;
     protected $classRepo;
 
-    public function __construct(MyCourseRepositoryInterface $myCourseRepo,
-                                ClassesRepositoryInterface  $classRepo,
-                                UserRepositoryInterface     $userRepo)
+    public function __construct(
+        MyCourseRepositoryInterface $myCourseRepo,
+        ClassesRepositoryInterface  $classRepo,
+        UserRepositoryInterface     $userRepo
+    )
     {
         $this->middleware('teamSA', [ 'except' => [ 'destroy', ] ]);
         $this->middleware('super_admin', [ 'only' => [ 'destroy', ] ]);

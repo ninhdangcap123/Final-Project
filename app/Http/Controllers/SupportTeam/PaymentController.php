@@ -9,17 +9,18 @@ use App\Helpers\RouteHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\PaymentCreate;
 use App\Http\Requests\Payment\PaymentUpdate;
-use App\Http\Requests\PaymentNow;
-use App\Http\Requests\PaymentSelectClass;
+use App\Http\Requests\Payment\PaymentNow;
+
+use App\Http\Requests\Payment\PaymentSelectClass;
 use App\Models\Setting;
 use App\Repositories\MyCourse\MyCourseRepositoryInterface;
-use App\Repositories\MyCourseRepo;
+
 use App\Repositories\Payment\PaymentRepositoryInterface;
 use App\Repositories\PaymentRecord\PaymentRecordRepositoryInterface;
-use App\Repositories\PaymentRepo;
+
 use App\Repositories\Receipt\ReceiptRepositoryInterface;
 use App\Repositories\Student\StudentRepositoryInterface;
-use App\Repositories\StudentRepo;
+
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -34,11 +35,13 @@ class PaymentController extends Controller
     protected $studentRepo;
     protected $year;
 
-    public function __construct(PaymentRecordRepositoryInterface $paymentRecordRepo,
-                                ReceiptRepositoryInterface       $receiptRepo,
-                                MyCourseRepositoryInterface      $myCourseRepo,
-                                PaymentRepositoryInterface       $paymentRepo,
-                                StudentRepositoryInterface       $studentRepo)
+    public function __construct(
+        PaymentRecordRepositoryInterface $paymentRecordRepo,
+        ReceiptRepositoryInterface       $receiptRepo,
+        MyCourseRepositoryInterface      $myCourseRepo,
+        PaymentRepositoryInterface       $paymentRepo,
+        StudentRepositoryInterface       $studentRepo
+    )
     {
         $this->myCourseRepo = $myCourseRepo;
         $this->paymentRepo = $paymentRepo;

@@ -77,6 +77,12 @@ class MarkRepository extends BaseRepository implements MarkRepositoryInterface
 //
 //    }
 
+    public function insert($data)
+    {
+        // TODO: Implement insert() method.
+        return $this->model->insert($data);
+    }
+
     public function getSubjectPosition($student_id, $exam, $course_id, $subject_id, $year)
     {
         // TODO: Implement getSubPos() method.

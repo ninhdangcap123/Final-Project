@@ -21,8 +21,10 @@ class PinController extends Controller
     protected $examIsLocked;
     protected $userRepo;
 
-    public function __construct(PinRepositoryInterface  $pinRepo,
-                                UserRepositoryInterface $userRepo)
+    public function __construct(
+        PinRepositoryInterface  $pinRepo,
+        UserRepositoryInterface $userRepo
+    )
     {
         $this->pinRepo = $pinRepo;
         $this->userRepo = $userRepo;
@@ -35,6 +37,7 @@ class PinController extends Controller
         $data['pin_count'] = $this->pinRepo->countValid();
         $data['valid_pins'] = $this->pinRepo->getValid();
         $data['used_pins'] = $this->pinRepo->getInValid();
+
         return view('pages.support_team.pins.index', $data);
     }
 
