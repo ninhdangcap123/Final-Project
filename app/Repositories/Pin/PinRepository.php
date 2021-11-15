@@ -22,19 +22,21 @@ class PinRepository extends BaseRepository implements PinRepositoryInterface
 
     public function countValid()
     {
-        return $this->find([ 'used' => 0 ])->count();
+
+
+        return $this->model->where([ 'used' => 0 ])->count();
     }
 
     public function deleteUsed()
     {
         // TODO: Implement deleteUsed() method.
-        return $this->find([ 'used' => 1 ])->delete();
+        return $this->model->where([ 'used' => 1 ])->delete();
     }
 
     public function getUserPin($code, $user_id, $st_id)
     {
         // TODO: Implement getUserPin() method.
-        return $this->find([
+        return $this->model->find([
             'code' => $code,
             'user_id' => $user_id,
             'student_id' => $st_id
@@ -44,19 +46,19 @@ class PinRepository extends BaseRepository implements PinRepositoryInterface
     public function findValidCode($code)
     {
         // TODO: Implement findValidCode() method.
-        return $this->find([ 'code' => $code, 'used' => 0 ])->get();
+        return $this->model->where([ 'code' => $code, 'used' => 0 ])->get();
     }
 
     public function getValid()
     {
         // TODO: Implement getValid() method.
-        return $this->find([ 'used' => 0 ])->get();
+        return $this->model->where([ 'used' => 0 ])->get();
     }
 
     public function getInvalid()
     {
         // TODO: Implement getInvalid() method.
-        return $this->find([ 'used' => 1 ])->with([ 'user', 'student' ])->get();
+        return $this->model->where([ 'used' => 1 ])->with([ 'user', 'student' ])->get();
     }
 
 

@@ -19,9 +19,11 @@ class SubjectController extends Controller
     protected $userRepo;
     protected $subjectRepo;
 
-    public function __construct(MyCourseRepositoryInterface $myCourseRepo,
-                                UserRepositoryInterface     $userRepo,
-                                SubjectRepositoryInterface  $subjectRepo)
+    public function __construct(
+        MyCourseRepositoryInterface $myCourseRepo,
+        UserRepositoryInterface     $userRepo,
+        SubjectRepositoryInterface  $subjectRepo
+    )
     {
         $this->middleware('teamSA', [ 'except' => [ 'destroy', ] ]);
         $this->middleware('super_admin', [ 'only' => [ 'destroy', ] ]);

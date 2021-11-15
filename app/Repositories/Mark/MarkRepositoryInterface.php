@@ -11,6 +11,8 @@ interface MarkRepositoryInterface extends RepositoryInterface
 
     public function getMark($data);
 
+    public function insert($data);
+
 //    public function getSubjectTotalTerm($student_id, $subject_id, $term, $course_id, $year);
 
     public function getExamTotalTerm($exam, $student_id, $course_id, $year);

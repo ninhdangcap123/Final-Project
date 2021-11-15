@@ -6,12 +6,12 @@ use App\Helpers\GetSystemInfoHelper;
 use App\Helpers\JsonHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Mark;
+use App\Models\StudentRecord;
 use App\Repositories\Classes\ClassesRepositoryInterface;
 use App\Repositories\MyCourse\MyCourseRepositoryInterface;
 use App\Repositories\MyCourseRepo;
 use App\Repositories\Promotion\PromotionRepositoryInterface;
 use App\Repositories\Student\StudentRepositoryInterface;
-use App\Repositories\StudentRepo;
 use Illuminate\Http\Request;
 
 class PromotionController extends Controller
@@ -21,10 +21,12 @@ class PromotionController extends Controller
     protected $classRepo;
     protected $promotionRepo;
 
-    public function __construct(MyCourseRepositoryInterface  $myCourseRepo,
-                                PromotionRepositoryInterface $promotionRepo,
-                                ClassesRepositoryInterface   $classRepo,
-                                StudentRepositoryInterface   $studentRepo)
+    public function __construct(
+        MyCourseRepositoryInterface  $myCourseRepo,
+        PromotionRepositoryInterface $promotionRepo,
+        ClassesRepositoryInterface   $classRepo,
+        StudentRepositoryInterface   $studentRepo
+    )
     {
         $this->middleware('teamSA');
         $this->myCourseRepo = $myCourseRepo;
@@ -111,17 +113,17 @@ class PromotionController extends Controller
             $this->studentRepo->updateRecord($student->id, $data);
 
 //            Insert New Promotion Data
-            $promote['fromCourse'] = $fromCourse;
-            $promote['fromSection'] = $fromSection;
-            $promote['grad'] = ( $promote === 'G' ) ? 1 : 0;
-            $promote['toCourse'] = in_array($promote, [ 'D', 'G' ]) ? $fromCourse : $toCourse;
-            $promote['toSection'] = in_array($promote, [ 'D', 'G' ]) ? $fromSection : $toSection;
-            $promote['student_id'] = $student->user_id;
-            $promote['from_session'] = $oldSession;
-            $promote['to_session'] = $newYear;
-            $promote['status'] = $promote;
+            $promotes['from_course'] = $fromCourse;
+            $promotes['from_section'] = $fromSection;
+            $promotes['grad'] = ( $promote === 'G' ) ? 1 : 0;
+            $promotes['to_course'] = in_array($promote, [ 'D', 'G' ]) ? $fromCourse : $toCourse;
+            $promotes['to_section'] = in_array($promote, [ 'D', 'G' ]) ? $fromSection : $toSection;
+            $promotes['student_id'] = $student->user_id;
+            $promotes['from_session'] = $oldSession;
+            $promotes['to_session'] = $newYear;
+            $promotes['status'] = $promote;
 
-            $this->promotionRepo->create($promote);
+            $this->promotionRepo->create($promotes);
         }
         return redirect()->route('students.promotion')->with('flash_success', __('msg.update_ok'));
     }
@@ -137,7 +139,9 @@ class PromotionController extends Controller
 
     public function reset($promotion_id)
     {
+
         $this->resetSingle($promotion_id);
+
         return redirect()->route('students.promotion_manage')->with('flash_success', __('msg.update_ok'));
     }
 
@@ -151,7 +155,10 @@ class PromotionController extends Controller
         $data['grad'] = 0;
         $data['grad_date'] = null;
 
-        $this->studentRepo->update([ 'user_id' => $promotion->student_id ], $data);
+
+        $this->studentRepo->updateStudent(['user_id'=> $promotion->student_id] , $data);
+//        $new = $this->studentRepo->where($promotion->student_id)->toArray();
+//        $this->studentRepo->update($new[0]['id'], $data);
 
         return $this->promotionRepo->delete($promotion_id);
     }
@@ -168,7 +175,6 @@ class PromotionController extends Controller
                 $this->deleteOldMarks($promotion->student_id, $nextSession);
             }
         }
-
         return JsonHelper::jsonUpdateSuccess();
     }
 

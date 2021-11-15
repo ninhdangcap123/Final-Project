@@ -46,16 +46,18 @@ class MarkController extends Controller
     protected $majorRepo;
     protected $gradeRepo;
 
-    public function __construct(ExamRecordRepositoryInterface $examRecordRepo,
-                                SkillRepositoryInterface      $skillRepo,
-                                MyCourseRepositoryInterface   $myCourseRepo,
-                                ClassesRepositoryInterface    $classRepo,
-                                SubjectRepositoryInterface    $subjectRepo,
-                                ExamRepositoryInterface       $examRepo,
-                                StudentRepositoryInterface    $studentRepo,
-                                MarkRepositoryInterface       $markRepo,
-                                MajorRepositoryInterface      $majorRepo,
-                                GradeRepositoryInterface      $gradeRepo)
+    public function __construct(
+        ExamRecordRepositoryInterface $examRecordRepo,
+        SkillRepositoryInterface      $skillRepo,
+        MyCourseRepositoryInterface   $myCourseRepo,
+        ClassesRepositoryInterface    $classRepo,
+        SubjectRepositoryInterface    $subjectRepo,
+        ExamRepositoryInterface       $examRepo,
+        StudentRepositoryInterface    $studentRepo,
+        MarkRepositoryInterface       $markRepo,
+        MajorRepositoryInterface      $majorRepo,
+        GradeRepositoryInterface      $gradeRepo
+    )
     {
         $this->examRepo = $examRepo;
         $this->markRepo = $markRepo;
@@ -255,8 +257,10 @@ class MarkController extends Controller
         return view('pages.support_team.marks.manage', $data);
     }
 
+
     public function update(MarkUpdate $request, $exam_id, $my_course_id, $class_id, $subject_id)
     {
+
         $input = [
             'exam_id' => $exam_id,
             'my_course_id' => $my_course_id,
@@ -272,28 +276,37 @@ class MarkController extends Controller
         $allMarks = $request->validated();
 
         /** Test, Exam, Grade **/
-        foreach( $marks->sortBy('user.name') as $mark ) {
+        $data = [];
+        $i = 0;
+        foreach( $marks->sortBy('studentRecord.user_id') as $mark )
+        {
             $all_student_ids[] = $mark->student_id;
-            $data['t1'] = $t1 = $allMarks['t1_'.$mark->id];
-            $data['t2'] = $t2 = $allMarks['t2_'.$mark->id];
-            $data['tca'] = $tca = $t1 + $t2;
-            $data['exm'] = $exam = $allMarks['exm_'.$mark->id];
+            $data[$i]['t1'] = $t1 = $allMarks['t1_'.$mark->id];
+            $data[$i]['t2'] = $t2 = $allMarks['t2_'.$mark->id];
+            $data[$i]['tca'] = $tca = $t1 + $t2;
+            $data[$i]['exm'] = $exam = $allMarks['exm_'.$mark->id];
+            $i++;
 
             /** SubTotal Grade, Remark, Cum, CumAvg**/
 
-            $data['tex'.$findExam->term] = $total = $tca + $exam;
+//            $data['tex'.$findExam->term] = $total = $tca + $exam;
 
-            if( $total > 100 ) {
-                $data['tex'.$findExam->term] = $data['t1'] = $data['t2'] = $data['t3'] = $data['t4'] = $data['tca'] = $data['exm'] = NULL;
-            }
-            $grade = $this->gradeRepo->getGrade($total, $major->id);
-            $data['grade_id'] = $grade ? $grade->id : NULL;
-            $this->markRepo->update($mark->id, $data);
+//            if( $total > 100 ) {
+//                $data['tex'.$findExam->term] = $data['t1'] = $data['t2'] = $data['t3'] = $data['t4'] = $data['tca'] = $data['exm'] = NULL;
+//            }
+
+//            $grade = $this->gradeRepo->getGrade($total, $major->id);
+//            $data['grade_id'] = $grade ? $grade->id : NULL;
+
+
         }
+
+        $this->markRepo->insert($data);
+
 
         /** Sub Position Begin  **/
 
-        foreach( $marks->sortBy('user.name') as $mark ) {
+        foreach( $marks->sortBy('studentRecord.user_id') as $mark ) {
             $data2['sub_pos'] = $this->markRepo->getSubjectPosition($mark->student_id, $findExam, $my_course_id, $subject_id, $this->year);
             $this->markRepo->update($mark->id, $data2);
         }

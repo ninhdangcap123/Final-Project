@@ -26,9 +26,9 @@ class Mark extends Eloquent
         return $this->belongsTo(MyCourse::class, 'my_course_id');
     }
 
-    public function user()
+    public function studentRecord()
     {
-        return $this->belongsTo(User::class, 'student_id');
+        return $this->belongsTo(StudentRecord::class, 'student_id');
     }
 
     public function subject()

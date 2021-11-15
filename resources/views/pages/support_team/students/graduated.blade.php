@@ -44,7 +44,7 @@
                                          src="{{ $s->user->photo }}" alt="photo"></td>
                                 <td>{{ $s->user->name }}</td>
                                 <td>{{ $s->adm_no }}</td>
-                                <td>{{ $s->myCourse->name.' '.$s->section->name }}</td>
+                                <td>{{ $s->myCourse->name.' '.$s->classes->name }}</td>
                                 <td>{{ $s->grad_date }}</td>
                                 <td class="text-center">
                                     <div class="list-icons">
@@ -120,7 +120,7 @@
                                              src="{{ $s->user->photo }}" alt="photo"></td>
                                     <td>{{ $s->user->name }}</td>
                                     <td>{{ $s->adm_no }}</td>
-                                    <td>{{ $s->myCourse->name.' '.$s->section->name }}</td>
+                                    <td>{{ $s->myCourse->name.' '.$s->classes->name }}</td>
                                     <td>{{ $s->grad_date }}</td>
                                     <td class="text-center">
                                         <div class="list-icons">

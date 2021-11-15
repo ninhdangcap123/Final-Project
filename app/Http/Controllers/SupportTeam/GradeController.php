@@ -19,10 +19,12 @@ class GradeController extends Controller
     protected $myCourseRepo;
     protected $majorRepo;
 
-    public function __construct(GradeRepositoryInterface    $gradeRepo,
-                                ExamRepositoryInterface     $examRepo,
-                                MajorRepositoryInterface    $majorRepo,
-                                MyCourseRepositoryInterface $myCourseRepo)
+    public function __construct(
+        GradeRepositoryInterface    $gradeRepo,
+        ExamRepositoryInterface     $examRepo,
+        MajorRepositoryInterface    $majorRepo,
+        MyCourseRepositoryInterface $myCourseRepo
+    )
     {
         $this->examRepo = $examRepo;
         $this->myCourseRepo = $myCourseRepo;

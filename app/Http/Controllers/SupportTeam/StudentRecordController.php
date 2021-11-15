@@ -41,14 +41,16 @@ class StudentRecordController extends Controller
     protected $state;
     protected $nationalityRepo;
 
-    public function __construct(PromotionRepositoryInterface $promotionRepo,
-                                ClassesRepositoryInterface   $classRepo,
-                                MyCourseRepositoryInterface  $myCourseRepo,
-                                UserRepositoryInterface      $userRepo,
-                                StudentRepositoryInterface   $studentRepo,
-                                StateRepositoryInterface     $stateRepo,
-                                NationalRepositoryInterface  $nationalityRepo,
-                                MajorRepositoryInterface     $majorRepo)
+    public function __construct(
+        PromotionRepositoryInterface $promotionRepo,
+        ClassesRepositoryInterface   $classRepo,
+        MyCourseRepositoryInterface  $myCourseRepo,
+        UserRepositoryInterface      $userRepo,
+        StudentRepositoryInterface   $studentRepo,
+        StateRepositoryInterface     $stateRepo,
+        NationalRepositoryInterface  $nationalityRepo,
+        MajorRepositoryInterface     $majorRepo
+    )
     {
         $this->middleware('teamSA', [ 'only' => [ 'edit', 'update', 'reset_pass', 'create', 'store', 'graduated' ] ]);
         $this->middleware('super_admin', [ 'only' => [ 'destroy', ] ]);

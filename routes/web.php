@@ -119,7 +119,7 @@ Route::group([ 'middleware' => 'auth' ], function () {
             Route::group([ 'middleware' => 'teamSAT' ], function () {
                 Route::get('/', 'MarkController@index')->name('marks.index');
                 Route::get('manage/{exam}/{courses}/{classes}/{subject}', 'MarkController@manage')->name('marks.manage');
-                Route::put('update/{exam}/{my_courses}/{classes}/{subject}', 'MarkController@update')->name('marks.update');
+                Route::put('update/{exam}/{courses}/{classes}/{subject}', 'MarkController@update')->name('marks.update');
                 Route::put('comment_update/{exr_id}', 'MarkController@commentUpdate')->name('marks.comment_update');
                 Route::put('skills_update/{skill}/{exr_id}', 'MarkController@skillsUpdate')->name('marks.skills_update');
                 Route::post('selector', 'MarkController@selector')->name('marks.selector');

@@ -39,14 +39,16 @@ class UserController extends Controller
     protected $subjectRepo;
     protected $bloodGroup;
 
-    public function __construct(UserRepositoryInterface        $userRepo,
-                                UserTypeRepositoryInterface    $userTypeRepo,
-                                StaffRecordRepositoryInterface $staffRepo,
-                                BloodGroupRepositoryInterface  $bloodGroup,
-                                SubjectRepositoryInterface     $subjectRepo,
-                                MyCourseRepositoryInterface    $myCourseRepo,
-                                StateRepositoryInterface       $stateRepo,
-                                NationalRepositoryInterface    $nationalityRepo)
+    public function __construct(
+        UserRepositoryInterface        $userRepo,
+        UserTypeRepositoryInterface    $userTypeRepo,
+        StaffRecordRepositoryInterface $staffRepo,
+        BloodGroupRepositoryInterface  $bloodGroup,
+        SubjectRepositoryInterface     $subjectRepo,
+        MyCourseRepositoryInterface    $myCourseRepo,
+        StateRepositoryInterface       $stateRepo,
+        NationalRepositoryInterface    $nationalityRepo
+    )
     {
         $this->middleware('teamSA', [ 'only' => [ 'index', 'store', 'edit', 'update' ] ]);
         $this->middleware('super_admin', [ 'only' => [ 'reset_pass', 'destroy' ] ]);
