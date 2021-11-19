@@ -19,4 +19,9 @@ class ExamRecordRepository extends BaseRepository implements ExamRecordRepositor
         return $this->model->where($data)->get();
     }
 
+    public function updateRecord($where,$data)
+    {
+        return $this->model->where($where)->update($data);
+    }
+
 }

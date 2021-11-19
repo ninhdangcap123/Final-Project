@@ -20,6 +20,8 @@ interface StudentRepositoryInterface extends RepositoryInterface
 
     public function getRecordByUserIDs($ids);
 
+    public function getRecordSortBy($data);
+
     public function findByUserId($st_id);
 
     public function getAll();

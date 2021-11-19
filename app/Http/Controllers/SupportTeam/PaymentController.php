@@ -26,7 +26,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 
-class PaymentController extends Controller
+class   PaymentController extends Controller
 {
     protected $myCourseRepo;
     protected $paymentRecordRepo;
@@ -147,7 +147,6 @@ class PaymentController extends Controller
 
         return PDF::loadView('pages.support_team.payments.receipt', $data)->download($pdfName);
 
-        //return $this->downloadReceipt('pages.support_team.payments.receipt', $d, $pdf_name);
     }
 
     public function payNow(PaymentNow $request, $pr_id)
@@ -175,7 +174,7 @@ class PaymentController extends Controller
         $data['selected'] = false;
 
         if( $course_id ) {
-            $data['students'] = $students = $this->studentRepo->getRecord([ 'my_course_id' => $course_id ])->get()->sortBy('user.name');
+            $data['students'] = $students = $this->studentRepo->getRecordSortBy([ 'my_course_id' => $course_id ]);
             if( $students->count() < 1 ) {
                 return RouteHelper::goWithDanger('payments.manage');
             }

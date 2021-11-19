@@ -23,9 +23,9 @@ interface MarkRepositoryInterface extends RepositoryInterface
 //
 //    public function getSubCumAvg($tex3, $student_id, $subject_id, $course_id, $year);
 
-    public function getSubjectMark($exam, $course_id, $subject_id, $student_id, $year);
-
-    public function getSubjectPosition($student_id, $exam, $course_id, $subject_id, $year);
+//    public function getSubjectMark($exam, $course_id, $subject_id, $student_id, $year);
+//
+//    public function getSubjectPosition($student_id, $exam, $course_id, $subject_id, $year);
 
 //    public function countExamSubjects($exam, $student_id, $course_id, $year);
 

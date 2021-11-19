@@ -80,11 +80,11 @@ class PromotionController extends Controller
         $data = [];
         $oldYear = explode('-', $oldSession);
         $newYear = ++$oldYear[0].'-'.++$oldYear[1];
-        $students = $this->studentRepo->getRecord([
+        $students = $this->studentRepo->getRecordSortBy([
             'my_course_id' => $fromCourse,
             'class_id' => $fromSection,
             'session' => $oldSession
-        ])->get()->sortBy('user.name');
+        ]);
 
         if( $students->count() < 1 ) {
             return redirect()->route('students.promotion')->with('flash_danger', __('msg.srnf'));

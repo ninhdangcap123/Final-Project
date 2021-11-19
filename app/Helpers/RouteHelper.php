@@ -23,11 +23,6 @@ class RouteHelper
         return app('redirect')->to(route($to, $data), $status, $headers, $secure);
     }
 
-    public static function storeOk($routeName)
-    {
-        return self::goWithSuccess($routeName, __('msg.store_ok'));
-    }
-
     public static function goWithSuccess($to, $msg)
     {
         return self::goToRoute($to)->with('flash_success', $msg);
@@ -38,19 +33,9 @@ class RouteHelper
         return self::goWithSuccess($routeName, __('msg.del_ok'));
     }
 
-    public static function updateOk($routeName)
-    {
-        return self::goWithSuccess($routeName, __('msg.update_ok'));
-    }
-
     public static function getDaysOfTheWeek()
     {
         return [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ];
-    }
-
-    public function selectYear(Request $req)
-    {
-        return self::goToRoute([ 'payments.show', $req->year ]);
     }
 
 }
