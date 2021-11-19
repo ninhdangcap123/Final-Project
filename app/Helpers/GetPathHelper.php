@@ -9,11 +9,6 @@ class GetPathHelper
         return 'uploads/';
     }
 
-    public static function getUserUploadPath()
-    {
-        return 'uploads/'.date('Y').'/'.date('m').'/'.date('d').'/';
-    }
-
     public static function getUploadPath($user_type)
     {
         return 'uploads/'.$user_type.'/';

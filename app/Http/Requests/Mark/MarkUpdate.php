@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Mark;
 
+use App\Models\Mark;
 use Illuminate\Foundation\Http\FormRequest;
 
 class MarkUpdate extends FormRequest
@@ -19,15 +20,13 @@ class MarkUpdate extends FormRequest
      */
     public function rules()
     {
+
+
         return [
 
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
 
         ];
+
     }
+
 }

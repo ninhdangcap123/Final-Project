@@ -31,6 +31,7 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
         return $this->getSubject([ 'teacher_id' => $teacher_id ])->orderBy('name')->get();
     }
 
+
     public function getSubjectsByIDs($ids)
     {
         // TODO: Implement getSubjectsByIDs() method.

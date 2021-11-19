@@ -83,7 +83,7 @@ class StudentRepository extends BaseRepository implements StudentRepositoryInter
     public function getRecordByUserIDs($ids)
     {
         // TODO: Implement getRecordByUserIDs() method.
-        return $this->activeStudents()->whereIn('user_id', $ids)->with('user');
+        return $this->activeStudents()->whereIn('user_id', $ids)->with('user')->get()->sortBy('user.name');
     }
 
     public function findByUserId($st_id)
@@ -96,6 +96,10 @@ class StudentRepository extends BaseRepository implements StudentRepositoryInter
     {
         // TODO: Implement getRecord() method.
         return $this->activeStudents()->where($data)->with('user');
+    }
+
+    public function getRecordSortBy($data){
+        return $this->activeStudents()->where($data)->with('user')->get()->sortBy('user.name');
     }
 
     public function getAll()

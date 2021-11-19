@@ -215,12 +215,14 @@ class MarkController extends Controller
         $data3['session'] = $data['year'] = $data2['year'] = $this->year;
 
         $students = $this->studentRepo->getRecord($data3)->get();
+
         if( $students->count() < 1 ) {
             return back()->with('pop_error', __('msg.rnf'));
         }
 
         foreach( $students as $student ) {
             $data['student_id'] = $data2['student_id'] = $student->user_id;
+            
             $this->markRepo->create($data);
             $this->examRecordRepo->create($data2);
         }
@@ -248,9 +250,6 @@ class MarkController extends Controller
         $data['my_courses'] = $this->myCourseRepo->getAll();
         $data['classes'] = $this->classRepo->getAll();
         $data['subjects'] = $this->subjectRepo->getAll();
-        if( GetUserTypeHelper::userIsTeacher() ) {
-            $data['subjects'] = $this->subjectRepo->findSubjectByTeacher(Auth::user()->id)->where('my_courses_id', $my_course_id);
-        }
         $data['selected'] = true;
         $data['major'] = $this->majorRepo->findMajorByCourse($my_course_id);
 
@@ -276,56 +275,34 @@ class MarkController extends Controller
         $allMarks = $request->validated();
 
         /** Test, Exam, Grade **/
-        $data = [];
-        $i = 0;
+
         foreach( $marks->sortBy('studentRecord.user_id') as $mark )
         {
             $all_student_ids[] = $mark->student_id;
-            $data[$i]['t1'] = $t1 = $allMarks['t1_'.$mark->id];
-            $data[$i]['t2'] = $t2 = $allMarks['t2_'.$mark->id];
-            $data[$i]['tca'] = $tca = $t1 + $t2;
-            $data[$i]['exm'] = $exam = $allMarks['exm_'.$mark->id];
-            $i++;
-
+            $data['t1'] = $t1 = $allMarks['t1_'.$mark->id];
+            $data['t2'] = $t2 = $allMarks['t2_'.$mark->id];
+            $data['exm'] = $exam = $allMarks['exm_'.$mark->id];
             /** SubTotal Grade, Remark, Cum, CumAvg**/
+            $data['tex'.$findExam->term] = $total = $t1 + $t2 + $exam;
 
-//            $data['tex'.$findExam->term] = $total = $tca + $exam;
+            $grade = $this->gradeRepo->getGrade($total, $major->id);
+            $data['grade_id'] = $grade ? $grade->id : NULL;
+            $this->markRepo->update($mark->id, $data);
 
-//            if( $total > 100 ) {
-//                $data['tex'.$findExam->term] = $data['t1'] = $data['t2'] = $data['t3'] = $data['t4'] = $data['tca'] = $data['exm'] = NULL;
-//            }
+            unset($input['subject_id']);
+            foreach( $all_student_ids as $student_id ) {
 
-//            $grade = $this->gradeRepo->getGrade($total, $major->id);
-//            $data['grade_id'] = $grade ? $grade->id : NULL;
+                $input['student_id'] = $student_id;
+                $data3['total'] = $this->markRepo->getExamTotalTerm($findExam, $student_id, $my_course_id, $this->year);
+                $data3['ave'] = $this->markRepo->getExamAverageTerm($findExam, $student_id, $my_course_id, $class_id, $this->year);
+                $data3['class_ave'] = $this->markRepo->getClassAverage($findExam, $my_course_id, $this->year);
+                $data3['pos'] = $this->markRepo->getPosition($student_id, $findExam, $my_course_id, $class_id, $this->year);
 
+                $this->examRecordRepo->updateRecord($input, $data3);
+            }
 
         }
 
-        $this->markRepo->insert($data);
-
-
-        /** Sub Position Begin  **/
-
-        foreach( $marks->sortBy('studentRecord.user_id') as $mark ) {
-            $data2['sub_pos'] = $this->markRepo->getSubjectPosition($mark->student_id, $findExam, $my_course_id, $subject_id, $this->year);
-            $this->markRepo->update($mark->id, $data2);
-        }
-
-        /*Sub Position End*/
-
-        /* Exam Record Update */
-
-        unset($input['subject_id']);
-        foreach( $all_student_ids as $student_id ) {
-
-            $input['student_id'] = $student_id;
-            $data3['total'] = $this->markRepo->getExamTotalTerm($findExam, $student_id, $my_course_id, $this->year);
-            $data3['ave'] = $this->markRepo->getExamAverageTerm($findExam, $student_id, $my_course_id, $class_id, $this->year);
-            $data3['class_ave'] = $this->markRepo->getClassAverage($findExam, $my_course_id, $this->year);
-            $data3['pos'] = $this->markRepo->getPosition($student_id, $findExam, $my_course_id, $class_id, $this->year);
-
-            $this->examRecordRepo->update($input, $data3);
-        }
         /*Exam Record End*/
 
         return JsonHelper::jsonUpdateSuccess();
@@ -334,7 +311,7 @@ class MarkController extends Controller
     public function commentUpdate(Request $request, $exr_id): \Illuminate\Http\JsonResponse
     {
         $data = CheckUsersHelper::userIsTeamSA() ? $request->only([ 't_comment', 'p_comment' ]) : $request->only([ 't_comment' ]);
-        $this->examRecordRepo->update([ 'id' => $exr_id ], $data);
+        $this->examRecordRepo->updateRecord([ 'id' => $exr_id ], $data);
         return JsonHelper::jsonUpdateSuccess();
     }
 
@@ -345,7 +322,7 @@ class MarkController extends Controller
             $skills = strtolower($skill);
             $data[$skill] = implode(',', $request->$skills);
         }
-        $this->examRecordRepo->update([ 'id' => $exr_id ], $data);
+        $this->examRecordRepo->updateRecord([ 'id' => $exr_id ], $data);
         return JsonHelper::jsonUpdateSuccess();
     }
 
@@ -354,7 +331,7 @@ class MarkController extends Controller
         $data['my_courses'] = $this->myCourseRepo->getAll();
         $data['selected'] = false;
         if( $my_course_id && $class_id ) {
-            $data['classes'] = $this->classRepo->getAll()->where('my_course_id', $my_course_id);
+            $data['classes'] = $this->classRepo->where($my_course_id);
             $data['students'] = $student = $this->studentRepo->getRecord([
                 'my_course_id' => $my_course_id,
                 'class_id' => $class_id
@@ -397,7 +374,7 @@ class MarkController extends Controller
             }
 
             $data['subjects'] = $this->subjectRepo->getSubjectsByIDs($subjectIDs);
-            $data['students'] = $this->studentRepo->getRecordByUserIDs($studentIDs)->get()->sortBy('user.name');
+            $data['students'] = $this->studentRepo->getRecordByUserIDs($studentIDs);
             $data['classes'] = $this->classRepo->getAll();
 
             $data['selected'] = TRUE;
@@ -405,8 +382,8 @@ class MarkController extends Controller
             $data['class_id'] = $class_id;
             $data['exam_id'] = $exam_id;
             $data['year'] = $this->year;
-            $data['marks'] = $mks = $this->markRepo->getMark($where);
-            $data['exr'] = $exr = $this->examRecordRepo->getRecord($where);
+            $data['marks'] = $this->markRepo->getMark($where);
+            $data['exr'] = $this->examRecordRepo->getRecord($where);
 
             $data['my_course'] = $mc = $this->myCourseRepo->find($my_course_id);
             $data['class'] = $this->classRepo->find($class_id);
@@ -433,16 +410,16 @@ class MarkController extends Controller
         }
 
         $data['subjects'] = $this->subjectRepo->getSubjectsByIDs($subjectIDs);
-        $data['students'] = $this->studentRepo->getRecordByUserIDs($studentIDs)->get()->sortBy('user.name');
+        $data['students'] = $this->studentRepo->getRecordByUserIDs($studentIDs);
 
         $data['my_course_id'] = $my_course_id;
         $data['exam_id'] = $exam_id;
         $data['year'] = $this->year;
         $where = [ 'exam_id' => $exam_id, 'my_course_id' => $my_course_id ];
-        $data['marks'] = $marks = $this->markRepo->getMark($where);
-        $data['exr'] = $examRecord = $this->examRecordRepo->getRecord($where);
+        $data['marks'] = $this->markRepo->getMark($where);
+        $data['exr'] = $this->examRecordRepo->getRecord($where);
 
-        $data['my_course'] = $myCourse = $this->myCourseRepo->find($my_course_id);
+        $data['my_course'] = $this->myCourseRepo->find($my_course_id);
         $data['class'] = $this->classRepo->find($class_id);
         $data['ex'] = $exam = $this->examRepo->find($exam_id);
         $data['tex'] = 'tex'.$exam->term;

@@ -32,4 +32,9 @@ class ClassesRepository extends BaseRepository implements ClassesRepositoryInter
         return $this->model->where([ 'my_course_id' => $course_id ])->orderBy('name', 'asc')->get();
     }
 
+    public function where($course_id)
+    {
+        return $this->getAll()->where(['my_course_id', $course_id]);
+    }
+
 }

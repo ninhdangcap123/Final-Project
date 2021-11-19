@@ -6,17 +6,19 @@ use App\Helpers\GetPathHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingUpdate;
 use App\Repositories\Major\MajorRepositoryInterface;
-use App\Repositories\MyCourseRepo;
+
 use App\Repositories\Setting\SettingRepositoryInterface;
-use App\Repositories\SettingRepo;
+use Illuminate\Http\RedirectResponse;
+
 
 class SettingController extends Controller
 {
     protected $settingRepo;
     protected $majorRepo;
 
-    public function __construct(SettingRepositoryInterface $settingRepo,
-                                MajorRepositoryInterface   $majorRepo)
+    public function __construct(
+        SettingRepositoryInterface $settingRepo,
+        MajorRepositoryInterface   $majorRepo)
     {
         $this->settingRepo = $settingRepo;
         $this->majorRepo = $majorRepo;
@@ -32,7 +34,7 @@ class SettingController extends Controller
         return view('pages.super_admin.settings', $data);
     }
 
-    public function update(SettingUpdate $request)
+    public function update(SettingUpdate $request): RedirectResponse
     {
         $settings = $request->except('_token', '_method', 'logo');
         $settings['lock_exam'] = $settings['lock_exam'] == 1 ? 1 : 0;
