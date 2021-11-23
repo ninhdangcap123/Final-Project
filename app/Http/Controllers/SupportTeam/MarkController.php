@@ -300,7 +300,7 @@ class MarkController extends Controller
             $data3['total'] = $this->markRepo->getExamTotalTerm($findExam, $student_id, $my_course_id, $this->year);
             $data3['ave'] = $this->markRepo->getExamAverageTerm($findExam, $student_id, $my_course_id, $class_id, $this->year);
             $data3['class_ave'] = $this->markRepo->getClassAverage($findExam, $my_course_id, $this->year);
-            $data3['pos'] = $this->markRepo->getPosition($student_id, $findExam, $my_course_id, $class_id, $this->year);
+            
 
             $this->examRecordRepo->updateRecord($input, $data3);
         }
