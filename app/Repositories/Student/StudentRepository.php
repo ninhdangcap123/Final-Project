@@ -83,7 +83,7 @@ class StudentRepository extends BaseRepository implements StudentRepositoryInter
     public function getRecordByUserIDs($ids)
     {
         // TODO: Implement getRecordByUserIDs() method.
-        return $this->activeStudents()->whereIn('user_id', $ids)->with('user')->get()->sortBy('user.name');
+        return $this->activeStudents()->whereIn('user_id', $ids)->with('user')->sortBy('user.name')->get();
     }
 
     public function findByUserId($st_id)
