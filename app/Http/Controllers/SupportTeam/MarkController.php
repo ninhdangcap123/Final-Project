@@ -222,7 +222,7 @@ class MarkController extends Controller
 
         foreach( $students as $student ) {
             $data['student_id'] = $data2['student_id'] = $student->user_id;
-            
+
             $this->markRepo->create($data);
             $this->examRecordRepo->create($data2);
         }
@@ -272,7 +272,7 @@ class MarkController extends Controller
         $findExam = $this->examRepo->find($exam_id);
         $marks = $this->markRepo->getMark($input);
         $major = $this->majorRepo->findMajorByCourse($my_course_id);
-        $allMarks = $request->validated();
+        $allMarks = $request->all();
 
         /** Test, Exam, Grade **/
 
