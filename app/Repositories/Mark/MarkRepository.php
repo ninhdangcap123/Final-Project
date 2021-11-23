@@ -60,42 +60,7 @@ class MarkRepository extends BaseRepository implements MarkRepositoryInterface
         return round($average, 1);
     }
 
-    public function getPosition($student_id, $exam, $course_id, $class_id, $year)
-    {
-        // TODO: Implement getPos() method.
-        $data = [
-            'student_id' => $student_id,
-            'exam_id' => $exam->id,
-            'my_course_id' => $course_id,
-            'class_id' => $class_id,
-            'year' => $year ];
-
-        $allMarks = [];
-        $tex = 'tex'.$exam->term;
-        $myMark = $this->model->where($data)->select($tex)->sum($tex);
-        unset($data['student_id']);
-        $mark = $this->model->where($data);
-        $students = $mark->select('student_id')->distinct()->get();
-        foreach( $students as $student ) {
-            $allMarks[] = $this->getExamTotalTerm($exam, $student->student_id, $course_id, $year);
-        }
-        rsort($allMarks);
-        return array_search($myMark, $allMarks) + 1;
-    }
-
-    public function getExamTotalTerm($exam, $student_id, $course_id, $year)
-    {
-        // TODO: Implement getExamTotalTerm() method.
-        $data = [
-            'student_id' => $student_id,
-            'exam_id' => $exam->id,
-            'my_course_id' => $course_id,
-            'year' => $year ];
-
-        $tex = 'tex'.$exam->term;
-        $mark = $this->model->where($data);
-        return $mark->select($tex)->sum($tex);
-    }
+ 
 
     public function getSubjectIDs($data)
     {
