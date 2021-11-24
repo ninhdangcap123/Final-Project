@@ -23,8 +23,10 @@
     }
 
     function getClassSections(class_id, destination) {
+
         var url = '{{ route('get_class_sections', [':id']) }}';
         url = url.replace(':id', class_id);
+
         var section = destination ? $(destination) : $('#section_id');
 
         $.ajax({

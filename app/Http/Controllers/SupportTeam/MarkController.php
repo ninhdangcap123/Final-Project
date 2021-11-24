@@ -209,7 +209,7 @@ class MarkController extends Controller
 
     public function selector(MarkSelector $request): \Illuminate\Http\RedirectResponse
     {
-        $data = $request->validated();
+        $data = $request->all();
         $data2 = $request->only([ 'exam_id', 'my_course_id', 'class_id' ]);
         $data3 = $request->only([ 'my_course_id', 'class_id' ]);
         $data3['session'] = $data['year'] = $data2['year'] = $this->year;
@@ -257,7 +257,7 @@ class MarkController extends Controller
     }
 
 
-    public function update(MarkUpdate $request, $exam_id, $my_course_id, $class_id, $subject_id)
+    public function update(Request $request, $exam_id, $my_course_id, $class_id, $subject_id)
     {
 
         $input = [
@@ -272,22 +272,23 @@ class MarkController extends Controller
         $findExam = $this->examRepo->find($exam_id);
         $marks = $this->markRepo->getMark($input);
         $major = $this->majorRepo->findMajorByCourse($my_course_id);
-        $allMarks = $request->all();
+        $allMarks = $request->except(['_token','_method',]);
+        $findStudent = $this->markRepo->findStudent($input);
 
         /** Test, Exam, Grade **/
 
         foreach( $marks->sortBy('studentRecord.user_id') as $mark )
         {
             $all_student_ids[] = $mark->student_id;
-            $data['t1'] = $t1 = $allMarks['t1_'.$mark->id];
-            $data['t2'] = $t2 = $allMarks['t2_'.$mark->id];
-            $data['exm'] = $exam = $allMarks['exm_'.$mark->id];
-            /** SubTotal Grade, Remark, Cum, CumAvg**/
+            $data['t1'] = $t1 = $allMarks[$mark->id]['t1'];
+            $data['t2'] = $t2 = $allMarks[$mark->id]['t2'];
+            $data['exm'] = $exam = $allMarks[$mark->id]['exm'];
+            /** SubTotal Grade, Remark**/
             $data['tex'.$findExam->term] = $total = $t1 + $t2 + $exam;
             $grade = $this->gradeRepo->getGrade($total, $major->id);
             $data['grade_id'] = $grade ? $grade->id : NULL;
-            $this->markRepo->update($mark->id, $data);
 
+            $this->markRepo->update($mark->id, $data);
         }
 
         unset($input['subject_id']);

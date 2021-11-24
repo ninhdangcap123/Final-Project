@@ -13,16 +13,30 @@ class MarkRepository extends BaseRepository implements MarkRepositoryInterface
         return Mark::class;
     }
 
+
+
     public function getExamYears($student_id)
     {
         // TODO: Implement getExamYears() method.
         return $this->model->where('student_id', $student_id)->select('year')->distinct()->get();
     }
 
+    public function findStudent($data)
+    {
+        // TODO: Implement findStudent() method.
+        return $this->model->where($data)->select('student_id')->pluck('student_id')->toArray();
+    }
+
     public function getMark($data)
     {
         // TODO: Implement getMark() method.
         return $this->model->where($data)->with('grade')->get();
+    }
+
+    public function upsert($where, array $value, array $column)
+    {
+        // TODO: Implement upsert() method.
+        return $this->model->where('student_id', $where)->upsert($value,$column);
     }
 
     public function getExamAverageTerm($exam, $student_id, $course_id, $sec_id, $year)

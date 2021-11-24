@@ -16,16 +16,16 @@
         @foreach($marks->sortBy('studentRecord.user_id') as $mk)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $mk->studentRecord->user->id }} </td>
+                <td>{{ $mk->studentRecord->user->name }} </td>
                 <td>{{ $mk->studentRecord->adm_no }}</td>
 
 
                 {{-- CA AND EXAMS --}}
-                <td><input title="1ST CA" min="1" max="20" class="text-center" name="t1_{{ $mk->id }}"
+                <td><input title="1ST CA" min="1" max="20" class="text-center" name="{{$mk->id}}[t1]"
                            value="{{ $mk->t1 }}" type="number"></td>
-                <td><input title="2ND CA" min="1" max="20" class="text-center" name="t2_{{ $mk->id }}"
+                <td><input title="2ND CA" min="1" max="20" class="text-center" name="{{$mk->id}}[t2]"
                            value="{{ $mk->t2 }}" type="number"></td>
-                <td><input title="EXAM" min="1" max="60" class="text-center" name="exm_{{ $mk->id }}"
+                <td><input title="EXAM" min="1" max="60" class="text-center" name="{{$mk->id}}[exm]"
                            value="{{ $mk->exm }}" type="number"></td>
 
             </tr>
