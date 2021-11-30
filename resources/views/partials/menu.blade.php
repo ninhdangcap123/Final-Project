@@ -110,9 +110,17 @@
                             <li class="nav-item nav-item-submenu {{ in_array(Route::currentRouteName(), ['students.list', 'students.edit', 'students.show']) ? 'nav-item-expanded' : '' }}">
                                 <a href="#" class="nav-link {{ in_array(Route::currentRouteName(), ['students.list', 'students.edit', 'students.show']) ? 'active' : '' }}">Student Information</a>
                                 <ul class="nav nav-group-sub">
+                                    @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
                                     @foreach(App\Models\MyClass::orderBy('name')->get() as $c)
                                         <li class="nav-item"><a href="{{ route('students.list', $c->id) }}" class="nav-link ">{{ $c->name }}</a></li>
                                     @endforeach
+                                    @endif
+                                    @if(\App\Helpers\getUserTypeHelper::userIsTeacher())
+                                      @foreach(\App\Models\Section::where('teacher_id',auth()->user()->id)->get() as $s)
+                                        <li class="nav-item"><a href="{{ route('students.list', $s->my_class->id) }}" class="nav-link ">{{ $s->my_class->name }}</a></li>
+                                      @endforeach
+
+                                    @endif
                                 </ul>
                             </li>
 

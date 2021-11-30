@@ -20,17 +20,24 @@
                                         <div class="form-group">
                                             <label for="my_class_id" class="col-form-label font-weight-bold">Class:</label>
                                             <select required onchange="getClassSections(this.value)" id="my_class_id" name="my_class_id" class="form-control select">
-                                                <option value="">Select Class</option>
+                                                <option value="">Select Course</option>
+                                                @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
                                                 @foreach($my_classes as $c)
                                                     <option {{ ($selected && $my_class_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                                 @endforeach
+                                                @endif
+                                                @if(\App\Helpers\getUserTypeHelper::userIsTeacher())
+                                                    @foreach(\App\Models\Section::where('teacher_id',auth()->user()->id)->get() as $s)
+                                                        <option {{ ($selected && $my_class_id == $s->my_class->id) ? 'selected' : '' }} value="{{ $s->my_class->id }}">{{ $s->my_class->name }}</option>
+                                                    @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="section_id" class="col-form-label font-weight-bold">Section:</label>
+                                            <label for="section_id" class="col-form-label font-weight-bold">Class:</label>
                                             <select required id="section_id" name="section_id" data-placeholder="Select Class First" class="form-control select">
                                         @if($selected)
                                             @foreach($sections as $s)
