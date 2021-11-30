@@ -63,6 +63,62 @@
                    </div>
                </div>
            </div>
+           <div class="col-sm-6 col-xl-3">
+               <div class="card card-body bg-indigo-400 has-bg-image">
+                   <div class="media">
+                       <div class="mr-3 align-self-center">
+                           <i class="icon-user icon-3x opacity-75"></i>
+                       </div>
+
+                       <div class="media-body text-right">
+                           <h3 class="mb-0">{{ \App\Models\Major::all()->count() }}</h3>
+                           <span class="text-uppercase font-size-xs">Total Majors</span>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <div class="col-sm-6 col-xl-3">
+               <div class="card card-body bg-indigo-400 has-bg-image">
+                   <div class="media">
+                       <div class="mr-3 align-self-center">
+                           <i class="icon-user icon-3x opacity-75"></i>
+                       </div>
+
+                       <div class="media-body text-right">
+                           <h3 class="mb-0">{{ \App\Models\MyClass::all()->count() }}</h3>
+                           <span class="text-uppercase font-size-xs">Total Courses</span>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <div class="col-sm-6 col-xl-3">
+               <div class="card card-body bg-indigo-400 has-bg-image">
+                   <div class="media">
+                       <div class="mr-3 align-self-center">
+                           <i class="icon-user icon-3x opacity-75"></i>
+                       </div>
+
+                       <div class="media-body text-right">
+                           <h3 class="mb-0">{{ \App\Models\Section::all()->count() }}</h3>
+                           <span class="text-uppercase font-size-xs">Total Classes</span>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <div class="col-sm-6 col-xl-3">
+               <div class="card card-body bg-indigo-400 has-bg-image">
+                   <div class="media">
+                       <div class="mr-3 align-self-center">
+                           <i class="icon-user icon-3x opacity-75"></i>
+                       </div>
+
+                       <div class="media-body text-right">
+                           <h3 class="mb-0">{{ \App\Models\Subject::all()->count() }}</h3>
+                           <span class="text-uppercase font-size-xs">Total Subjects</span>
+                       </div>
+                   </div>
+               </div>
+           </div>
        </div>
        @endif
 

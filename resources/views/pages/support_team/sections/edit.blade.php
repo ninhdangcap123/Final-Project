@@ -4,7 +4,7 @@
 
     <div class="card">
         <div class="card-header header-elements-inline">
-            <h6 class="card-title">Edit Section of {{ $s->my_class->name }}</h6>
+            <h6 class="card-title">Edit Class of {{ $s->my_class->name }}</h6>
             {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
         </div>
 
@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class </label>
+                            <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Course </label>
                             <div class="col-lg-9">
                                 <input class="form-control" id="my_class_id" disabled="disabled" type="text" value="{{ $s->my_class->name }}">
                             </div>
