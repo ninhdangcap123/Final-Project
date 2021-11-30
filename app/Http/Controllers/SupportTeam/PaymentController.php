@@ -30,8 +30,6 @@ class PaymentController extends Controller
         $this->pay = $pay;
         $this->year = getSystemInfoHelper::getCurrentSession();
         $this->student = $student;
-
-        $this->middleware('teamAccount');
     }
 
     public function index()
