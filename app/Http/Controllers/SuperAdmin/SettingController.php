@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingUpdate;
 use App\Repositories\MyClassRepo;
 use App\Repositories\SettingRepo;
+use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -43,8 +44,9 @@ class SettingController extends Controller
             $logo = $req->file('logo');
             $f = getPathHelper::getFileMetaData($logo);
             $f['name'] = 'logo.' . $f['ext'];
-            $f['path'] = $logo->storeAs(getPathHelper::getPublicUploadPath(), $f['name']);
-            $logo_path = asset('storage/' . $f['path']);
+            $f['path'] = $logo->storeAs(getPathHelper::getPublicUploadPath(), $f['name'],'s3');
+            Storage::disk('s3')->setVisibility($f['path'],'public');
+            $logo_path = Storage::disk('s3')->url($f['path']);
             $this->setting->update('logo', $logo_path);
         }
 

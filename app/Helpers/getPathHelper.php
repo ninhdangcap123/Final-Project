@@ -6,7 +6,7 @@ class getPathHelper
 {
     public static function getPublicUploadPath()
     {
-        return 'uploads/';
+        return 'uploads';
     }
 
     public static function getUserUploadPath()
