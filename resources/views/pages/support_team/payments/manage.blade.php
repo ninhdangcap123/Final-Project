@@ -15,12 +15,19 @@
                       <div class="row">
                           <div class="col-md-10">
                               <div class="form-group">
-                                  <label for="my_class_id" class="col-form-label font-weight-bold">Class:</label>
+                                  <label for="my_class_id" class="col-form-label font-weight-bold">Course:</label>
                                   <select required id="my_class_id" name="my_class_id" class="form-control select">
-                                      <option value="">Select Class</option>
+                                      <option value="">Select Course</option>
+                                      @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
                                       @foreach($my_classes as $c)
                                           <option {{ ($selected && $my_class_id == $c->id) ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                       @endforeach
+                                      @endif
+                                      @if(\App\Helpers\getUserTypeHelper::userIsStudent())
+                                          @foreach(\App\Models\StudentRecord::where('user_id',auth()->user()->id)->get() as $s))
+                                              <option {{ ($selected && $my_class_id == $s->my_class->id) ? 'selected' : '' }} value="{{ $s->my_class->id }}">{{ $s->my_class->name }}</option>
+                                          @endforeach
+                                      @endif
                                   </select>
                               </div>
                           </div>

@@ -6,15 +6,18 @@
     "type": "project",
     "require": {
         "php": "^7.2||^8.0",
+        "aws/aws-sdk-php": "^3.207",
         "barryvdh/laravel-dompdf": "^0.8.3",
         "fakerphp/faker": "^1.14",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
+        "graham-campbell/flysystem": "7.1",
         "guzzlehttp/guzzle": "^7.0.1",
         "hashids/hashids": "^4.1.0",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.0"
+        "laravel/ui": "^3.0",
+        "league/flysystem-aws-s3-v3": "~1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

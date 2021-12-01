@@ -10,6 +10,7 @@ use App\Http\Requests\UserUpdate;
 use App\Repositories\UserRepo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class MyAccountController extends Controller
 {
@@ -43,8 +44,9 @@ class MyAccountController extends Controller
             $photo = $req->file('photo');
             $f = getPathHelper::getFileMetaData($photo);
             $f['name'] = 'photo.' . $f['ext'];
-            $f['path'] = $photo->storeAs(getPathHelper::getUploadPath($user_type).$code, $f['name']);
-            $d['photo'] = asset('storage/' . $f['path']);
+            $f['path'] = $photo->storeAs(getPathHelper::getUploadPath($user_type).$code, $f['name'],'s3');
+            Storage::disk('s3')->setVisibility($f['path'], 'public');
+            $d['photo'] = Storage::disk('s3')->url($f['path']);
         }
 
         $this->user->update($user->id, $d);
