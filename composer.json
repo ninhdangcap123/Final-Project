@@ -17,15 +17,16 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
-        "league/flysystem-aws-s3-v3": "~1.0"
-    },
-    "require-dev": {
+        "league/flysystem-aws-s3-v3": "~1.0",
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.10",
         "facade/ignition": "^2.5",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
+    },
+    "require-dev": {
+
     },
     "autoload": {
         "psr-4": {
