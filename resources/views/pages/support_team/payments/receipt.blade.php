@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>Receipt_{{ $pr->ref_no.'_'.$sr->user->name }}</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/receipt.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ secure_asset('assets/css/receipt.css') }}"/>
 </head>
 <body>
 <div class="container">

@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>Tabulation Sheet - {{ $my_class->name.' '.$section->name.' - '.$ex->name.' ('.$year.')' }}</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/print_tabulation.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ secure_asset('assets/css/print_tabulation.css') }}" />
 </head>
 <body>
 <div class="container">

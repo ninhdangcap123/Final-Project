@@ -2,7 +2,7 @@
 <head>
     <title>Student Marksheet - {{ $sr->user->name}}</title>
 {{--    {{dd($major->name)}}--}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/my_print.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ secure_asset('assets/css/my_print.css') }}" />
 </head>
 <body>
 <div class="container">
