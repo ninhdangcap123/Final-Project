@@ -8,6 +8,15 @@ Route::get('/terms-of-use', 'HomeController@terms_of_use')->name('terms_of_use')
 
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::resource('students', 'StudentRecordController');
+    Route::resource('users', 'UserController');
+    Route::resource('classes', 'MyClassController');
+    Route::resource('sections', 'SectionController');
+    Route::resource('subjects', 'SubjectController');
+    Route::resource('grades', 'GradeController');
+    Route::resource('exams', 'ExamController');
+    Route::resource('dorms', 'DormController');
+    Route::resource('payments', 'PaymentController');
 
     Route::get('/', 'HomeController@dashboard')->name('home');
     Route::get('/home', 'HomeController@dashboard')->name('home');
@@ -135,15 +144,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         });
 
-        Route::resource('students', 'StudentRecordController');
-        Route::resource('users', 'UserController');
-        Route::resource('classes', 'MyClassController');
-        Route::resource('sections', 'SectionController');
-        Route::resource('subjects', 'SubjectController');
-        Route::resource('grades', 'GradeController');
-        Route::resource('exams', 'ExamController');
-        Route::resource('dorms', 'DormController');
-        Route::resource('payments', 'PaymentController');
+
 
     });
 
