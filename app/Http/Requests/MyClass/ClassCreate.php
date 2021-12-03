@@ -21,7 +21,7 @@ class ClassCreate extends FormRequest
     {
         return [
             'name' => 'required|string|min:3',
-            'major_id' => 'required|exists:class_types,id',
+            'major_id' => 'required',
         ];
     }
 

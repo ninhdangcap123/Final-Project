@@ -14,8 +14,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 
     Route::group(['prefix' => 'my_account'], function() {
-        Route::get('/', 'MyAccountController@edit_profile')->name('my_account');
-        Route::put('/', 'MyAccountController@update_profile')->name('my_account.update');
+        Route::get('/edit', 'MyAccountController@edit_profile')->name('my_account');
+        Route::put('/update', 'MyAccountController@update_profile')->name('my_account.update');
         Route::put('/change_password', 'MyAccountController@change_pass')->name('my_account.change_pass');
     });
 
