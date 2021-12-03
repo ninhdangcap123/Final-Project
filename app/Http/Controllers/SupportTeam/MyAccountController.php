@@ -5,6 +5,7 @@ namespace App\Http\Controllers\SupportTeam;
 
 use App\Helpers\getPathHelper;
 use App\Helpers\Qs;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UserChangePass;
 use App\Http\Requests\UserUpdate;
 use App\Repositories\UserRepo;
