@@ -49,7 +49,7 @@ class MyAccountController extends Controller
             $d['photo'] = Storage::disk('s3')->url($f['path']);
         }
 
-        $this->user->update($req->id, $d);
+        $this->user->update(\auth()->user()->id, $d);
         return back()->with('flash_success', __('msg.update_ok'));
     }
 
