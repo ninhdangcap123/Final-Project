@@ -6,7 +6,6 @@ use App\Models\BloodGroup;
 use App\Models\StaffRecord;
 use App\Models\UserType;
 use App\User;
-use Illuminate\Support\Facades\DB;
 
 
 class UserRepo {
@@ -14,7 +13,7 @@ class UserRepo {
 
     public function update($id, $data)
     {
-        return User::query()->find($id)->update((array)DB::raw($data));
+        return User::find($id)->update($data);
     }
 
     public function delete($id)
