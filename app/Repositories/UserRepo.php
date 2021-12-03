@@ -13,7 +13,7 @@ class UserRepo {
 
     public function update($id, $data)
     {
-        return User::where('id', $id)->update(array($data));
+        return User::query()->whereColumn('id', '=', $id)->update($data);
     }
 
     public function delete($id)
