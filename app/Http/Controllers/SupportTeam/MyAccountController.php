@@ -50,7 +50,7 @@ class MyAccountController extends Controller
             $d['photo'] = Storage::disk('s3')->url($f['path']);
         }
 
-        $this->user->update($code, $d);
+        $this->user->update($user->id, $d);
         return back()->with('flash_success', __('msg.update_ok'));
     }
 
