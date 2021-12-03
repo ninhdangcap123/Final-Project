@@ -15,7 +15,7 @@ class MyClass extends Eloquent
 
     public function major(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Major::class);
+        return $this->belongsTo(Major::class,'major_id');
     }
 
     public function student_record(): \Illuminate\Database\Eloquent\Relations\HasMany

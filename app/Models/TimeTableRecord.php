@@ -10,11 +10,11 @@ class TimeTableRecord extends Eloquent
 
     public function my_class()
     {
-        return $this->belongsTo(MyClass::class);
+        return $this->belongsTo(MyClass::class,'my_class_id');
     }
 
     public function exam()
     {
-        return $this->belongsTo(Exam::class);
+        return $this->belongsTo(Exam::class,'exam_id');
     }
 }

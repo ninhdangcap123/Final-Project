@@ -11,7 +11,7 @@ class PaymentRecord extends Eloquent
 
     public function payment()
     {
-        return $this->belongsTo(Payment::class);
+        return $this->belongsTo(Payment::class,'payment_id');
     }
 
     public function student()

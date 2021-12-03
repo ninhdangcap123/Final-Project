@@ -11,17 +11,17 @@ class Mark extends Eloquent
 
     public function exam()
     {
-        return $this->belongsTo(Exam::class);
+        return $this->belongsTo(Exam::class,'exam_id');
     }
 
     public function section()
     {
-        return $this->belongsTo(Section::class);
+        return $this->belongsTo(Section::class,'section_id');
     }
 
     public function my_class()
     {
-        return $this->belongsTo(MyClass::class);
+        return $this->belongsTo(MyClass::class,'my_class_id');
     }
 
     public function user()
@@ -31,11 +31,11 @@ class Mark extends Eloquent
 
     public function subject()
     {
-        return $this->belongsTo(Subject::class);
+        return $this->belongsTo(Subject::class,'subject_id');
     }
 
     public function grade()
     {
-        return $this->belongsTo(Grade::class);
+        return $this->belongsTo(Grade::class,'grade_id');
     }
 }

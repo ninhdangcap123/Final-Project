@@ -16,26 +16,26 @@ class StudentRecord extends Eloquent
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function my_parent()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'my_parent_id');
     }
 
     public function my_class()
     {
-        return $this->belongsTo(MyClass::class);
+        return $this->belongsTo(MyClass::class,'my_class_id');
     }
 
     public function section()
     {
-        return $this->belongsTo(Section::class);
+        return $this->belongsTo(Section::class,'section_id');
     }
 
     public function dorm()
     {
-        return $this->belongsTo(Dorm::class);
+        return $this->belongsTo(Dorm::class,'dorm_id');
     }
 }
