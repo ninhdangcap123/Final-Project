@@ -8,25 +8,12 @@ Route::get('/terms-of-use', 'HomeController@terms_of_use')->name('terms_of_use')
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('students', 'StudentRecordController');
-    Route::resource('users', 'UserController');
-    Route::resource('classes', 'MyClassController');
-    Route::resource('sections', 'SectionController');
-    Route::resource('subjects', 'SubjectController');
-    Route::resource('grades', 'GradeController');
-    Route::resource('exams', 'ExamController');
-    Route::resource('dorms', 'DormController');
-    Route::resource('payments', 'PaymentController');
 
     Route::get('/', 'HomeController@dashboard')->name('home');
     Route::get('/home', 'HomeController@dashboard')->name('home');
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 
-    Route::group(['prefix' => 'my_account'], function() {
-        Route::put('/update', 'MyAccountController@update_profile')->name('my_account.update');
-        Route::get('/edit', 'MyAccountController@edit_profile')->name('my_account');
-        Route::put('/change_password', 'MyAccountController@change_pass')->name('my_account.change_pass');
-    });
+
 
     /*************** Support Team *****************/
     Route::group(['namespace' => 'SupportTeam',], function(){
@@ -144,7 +131,21 @@ Route::group(['middleware' => 'auth'], function () {
 
         });
 
+        Route::resource('students', 'StudentRecordController');
+        Route::resource('users', 'UserController');
+        Route::resource('classes', 'MyClassController');
+        Route::resource('sections', 'SectionController');
+        Route::resource('subjects', 'SubjectController');
+        Route::resource('grades', 'GradeController');
+        Route::resource('exams', 'ExamController');
+        Route::resource('dorms', 'DormController');
+        Route::resource('payments', 'PaymentController');
 
+        Route::group(['prefix' => 'my_account'], function() {
+            Route::put('/update', 'MyAccountController@update_profile')->name('my_account.update');
+            Route::get('/edit', 'MyAccountController@edit_profile')->name('my_account');
+            Route::put('/change_password', 'MyAccountController@change_pass')->name('my_account.change_pass');
+        });
 
     });
 
