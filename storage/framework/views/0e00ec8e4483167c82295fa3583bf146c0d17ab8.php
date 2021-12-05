@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('page_title', 'Manage Payments'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -50,9 +49,9 @@
 
         <div class="card-body">
             <ul class="nav nav-tabs nav-tabs-highlight">
-                <li class="nav-item"><a href="#all-payments" class="nav-link active" data-toggle="tab">All Classes</a></li>
+                <li class="nav-item"><a href="#all-payments" class="nav-link active" data-toggle="tab">All Courses</a></li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Class Payments</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Course Payments</a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <?php $__currentLoopData = $my_classes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <a href="#pc-<?php echo e($mc->id); ?>" class="dropdown-item" data-toggle="tab"><?php echo e($mc->name); ?></a>
@@ -70,7 +69,7 @@
                                 <th>Title</th>
                                 <th>Amount</th>
                                 <th>Ref_No</th>
-                                <th>Class</th>
+                                <th>Course</th>
                                 <th>Method</th>
                                 <th>Info</th>
                                 <th>Action</th>
@@ -83,7 +82,7 @@
                                     <td><?php echo e($p->title); ?></td>
                                     <td><?php echo e($p->amount); ?></td>
                                     <td><?php echo e($p->ref_no); ?></td>
-                                    <td><?php echo e($p->my_class_id ? $p->my_class->name : ''); ?></td>
+                                    <td><?php echo e($p->my_class_id ? $p->my_class->name : 'All Courses'); ?></td>
                                     <td><?php echo e(ucwords($p->method)); ?></td>
                                     <td><?php echo e($p->description); ?></td>
                                     <td class="text-center">
@@ -119,7 +118,7 @@
                                 <th>Title</th>
                                 <th>Amount</th>
                                 <th>Ref_No</th>
-                                <th>Class</th>
+                                <th>Course</th>
                                 <th>Method</th>
                                 <th>Info</th>
                                 <th>Action</th>

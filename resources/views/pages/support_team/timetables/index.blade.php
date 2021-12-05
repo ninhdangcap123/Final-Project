@@ -39,9 +39,9 @@
                            </div>
 
                            <div class="form-group row">
-                               <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class <span class="text-danger">*</span></label>
+                               <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Course <span class="text-danger">*</span></label>
                                <div class="col-lg-9">
-                                   <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
+                                   <select required data-placeholder="Select Course" class="form-control select" name="my_class_id" id="my_class_id">
                                        @foreach($my_classes as $mc)
                                            <option {{ old('my_class_id') == $mc->id ? 'selected' : '' }} value="{{ $mc->id }}">{{ $mc->name }}</option>
                                        @endforeach
@@ -50,10 +50,10 @@
                            </div>
 
                            <div class="form-group row">
-                               <label for="exam_id" class="col-lg-3 col-form-label font-weight-semibold">Type (Class or Exam)</label>
+                               <label for="exam_id" class="col-lg-3 col-form-label font-weight-semibold">Type (Course or Exam)</label>
                                <div class="col-lg-9">
                                    <select class="select form-control" name="exam_id" id="exam_id">
-                                       <option value="">Class Timetable</option>
+                                       <option value="">Course Timetable</option>
                                        @foreach($exams as $ex)
                                            <option {{ old('exam_id') == $ex->id ? 'selected' : '' }} value="{{ $ex->id }}">{{ $ex->name }}</option>
                                        @endforeach
@@ -77,7 +77,7 @@
                             <tr>
                                 <th>S/N</th>
                                 <th>Name</th>
-                                <th>Class</th>
+                                <th>Course</th>
                                 <th>Type</th>
                                 <th>Year</th>
                                 <th>Action</th>
@@ -89,7 +89,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $ttr->name }}</td>
                                     <td>{{ $ttr->my_class->name }}</td>
-                                    <td>{{ ($ttr->exam_id) ? $ttr->exam->name : 'Class TimeTable' }}
+                                    <td>{{ ($ttr->exam_id) ? $ttr->exam->name : 'Course TimeTable' }}
                                     <td>{{ $ttr->year }}</td>
                                     <td class="text-center">
                                         <div class="list-icons">

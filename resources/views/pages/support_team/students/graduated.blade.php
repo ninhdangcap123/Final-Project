@@ -12,7 +12,7 @@
         <ul class="nav nav-tabs nav-tabs-highlight">
             <li class="nav-item"><a href="#all-students" class="nav-link active" data-toggle="tab">All Graduated Students</a></li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Select Class</a>
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Select Course</a>
                 <div class="dropdown-menu dropdown-menu-right">
                     @foreach($my_classes as $c)
                     <a href="#c{{ $c->id }}" class="dropdown-item" data-toggle="tab">{{ $c->name }}</a>
@@ -30,7 +30,7 @@
                         <th>Photo</th>
                         <th>Name</th>
                         <th>ADM_No</th>
-                        <th>Section</th>
+                        <th>Class</th>
                         <th>Grad Year</th>
                         <th>Action</th>
                     </tr>
@@ -52,9 +52,9 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-left">
-                                        <a href="{{ route('students.show', \App\Helpers\displayMessageHelper::hash($s->id)) }}" class="dropdown-item"><i class="icon-eye"></i> View Profile</a>
+
                                         @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
-                                        <a href="{{ route('students.edit', \App\Helpers\displayMessageHelper::hash($s->id)) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
+
                                         <a href="{{ route('st.reset_pass', \App\Helpers\displayMessageHelper::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-lock"></i> Reset password</a>
 
                                         {{--Not Graduated--}}

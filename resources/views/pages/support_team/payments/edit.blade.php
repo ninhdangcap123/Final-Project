@@ -21,9 +21,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class </label>
+                            <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Course </label>
                             <div class="col-lg-9">
-                                <input class="form-control" title="Class" disabled value="{{ $payment->my_class_id ? $payment->my_class->name : 'All Classes' }}" type="text">
+                                <input class="form-control" title="Class" disabled value="{{ $payment->my_class_id ? $payment->my_class->name : 'All Courses' }}" type="text">
                             </div>
                         </div>
 

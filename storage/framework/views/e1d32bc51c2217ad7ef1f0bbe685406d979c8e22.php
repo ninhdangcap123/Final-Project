@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('page_title', 'Manage TimeTables'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -40,9 +39,9 @@
                            </div>
 
                            <div class="form-group row">
-                               <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class <span class="text-danger">*</span></label>
+                               <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Course <span class="text-danger">*</span></label>
                                <div class="col-lg-9">
-                                   <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
+                                   <select required data-placeholder="Select Course" class="form-control select" name="my_class_id" id="my_class_id">
                                        <?php $__currentLoopData = $my_classes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                            <option <?php echo e(old('my_class_id') == $mc->id ? 'selected' : ''); ?> value="<?php echo e($mc->id); ?>"><?php echo e($mc->name); ?></option>
                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -51,10 +50,10 @@
                            </div>
 
                            <div class="form-group row">
-                               <label for="exam_id" class="col-lg-3 col-form-label font-weight-semibold">Type (Class or Exam)</label>
+                               <label for="exam_id" class="col-lg-3 col-form-label font-weight-semibold">Type (Course or Exam)</label>
                                <div class="col-lg-9">
                                    <select class="select form-control" name="exam_id" id="exam_id">
-                                       <option value="">Class Timetable</option>
+                                       <option value="">Course Timetable</option>
                                        <?php $__currentLoopData = $exams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ex): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                            <option <?php echo e(old('exam_id') == $ex->id ? 'selected' : ''); ?> value="<?php echo e($ex->id); ?>"><?php echo e($ex->name); ?></option>
                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -78,7 +77,7 @@
                             <tr>
                                 <th>S/N</th>
                                 <th>Name</th>
-                                <th>Class</th>
+                                <th>Course</th>
                                 <th>Type</th>
                                 <th>Year</th>
                                 <th>Action</th>
@@ -90,7 +89,7 @@
                                     <td><?php echo e($loop->iteration); ?></td>
                                     <td><?php echo e($ttr->name); ?></td>
                                     <td><?php echo e($ttr->my_class->name); ?></td>
-                                    <td><?php echo e(($ttr->exam_id) ? $ttr->exam->name : 'Class TimeTable'); ?>
+                                    <td><?php echo e(($ttr->exam_id) ? $ttr->exam->name : 'Course TimeTable'); ?>
 
                                     <td><?php echo e($ttr->year); ?></td>
                                     <td class="text-center">

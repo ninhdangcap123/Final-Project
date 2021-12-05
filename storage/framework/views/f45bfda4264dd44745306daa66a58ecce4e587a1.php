@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('page_title', 'Create Payment'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -22,10 +21,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class </label>
+                            <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Course </label>
                             <div class="col-lg-9">
                                 <select class="form-control select-search" name="my_class_id" id="my_class_id">
-                                    <option value="">All Classes</option>
+                                    <option value="">All Courses</option>
                                     <?php $__currentLoopData = $my_classes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option <?php echo e(old('my_class_id') == $c->id ? 'selected' : ''); ?> value="<?php echo e($c->id); ?>"><?php echo e($c->name); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

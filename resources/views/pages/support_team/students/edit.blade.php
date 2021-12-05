@@ -134,8 +134,8 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="my_class_id">Class: </label>
-                                <select onchange="getClassSections(this.value)" name="my_class_id" required id="my_class_id" class="form-control select-search" data-placeholder="Select Class">
+                                <label for="my_class_id">Course: </label>
+                                <select onchange="getClassSections(this.value)" name="my_class_id" required id="my_class_id" class="form-control select-search" data-placeholder="Select Course">
                                     <option value=""></option>
                                     @foreach($my_classes as $c)
                                         <option {{ $sr->my_class_id == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
@@ -146,8 +146,8 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="section_id">Section: </label>
-                                <select name="section_id" required id="section_id" class="form-control select" data-placeholder="Select Section">
+                                <label for="section_id">Class: </label>
+                                <select name="section_id" required id="section_id" class="form-control select" data-placeholder="Select Class">
                                     <option value="{{ $sr->section_id }}">{{ $sr->section->name }}</option>
                                 </select>
                             </div>

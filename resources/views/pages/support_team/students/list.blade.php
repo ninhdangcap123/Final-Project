@@ -12,7 +12,7 @@
             <ul class="nav nav-tabs nav-tabs-highlight">
                 <li class="nav-item"><a href="#all-students" class="nav-link active" data-toggle="tab">All {{ $my_class->name }} Students</a></li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Sections</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Classes</a>
                     <div class="dropdown-menu dropdown-menu-right">
                         @foreach($sections as $s)
                             <a href="#s{{ $s->id }}" class="dropdown-item" data-toggle="tab">{{ $my_class->name.' '.$s->name }}</a>
@@ -30,7 +30,7 @@
                             <th>Photo</th>
                             <th>Name</th>
                             <th>ADM_No</th>
-                            <th>Section</th>
+                            <th>Class</th>
                             <th>Email</th>
                             <th>Action</th>
                         </tr>
@@ -42,7 +42,7 @@
                                 <td><img class="rounded-circle" style="height: 40px; width: 40px;" src="{{ $s->user->photo }}" alt="photo"></td>
                                 <td>{{ $s->user->name }}</td>
                                 <td>{{ $s->adm_no }}</td>
-                                <td>{{ $my_class->name.' '.$s->section->name }}</td>
+                                <td>{{ $s->section->name }}</td>
                                 <td>{{ $s->user->email }}</td>
                                 <td class="text-center">
                                     <div class="list-icons">

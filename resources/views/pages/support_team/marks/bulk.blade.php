@@ -18,7 +18,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="my_class_id" class="col-form-label font-weight-bold">Class:</label>
+                                            <label for="my_class_id" class="col-form-label font-weight-bold">Course:</label>
                                             <select required onchange="getClassSections(this.value)" id="my_class_id" name="my_class_id" class="form-control select">
                                                 <option value="">Select Course</option>
                                                 @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())

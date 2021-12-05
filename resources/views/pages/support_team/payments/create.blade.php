@@ -21,10 +21,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class </label>
+                            <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Course </label>
                             <div class="col-lg-9">
                                 <select class="form-control select-search" name="my_class_id" id="my_class_id">
-                                    <option value="">All Classes</option>
+                                    <option value="">All Courses</option>
                                     @foreach($my_classes as $c)
                                         <option {{ old('my_class_id') == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                     @endforeach

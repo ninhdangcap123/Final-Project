@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('page_title', 'Manage Users'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -87,13 +86,6 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Date of Employment:</label>
-                                        <input autocomplete="off" name="emp_date" value="<?php echo e(old('emp_date')); ?>" type="text" class="form-control date-pick" placeholder="Select Date...">
-
-                                    </div>
-                                </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
