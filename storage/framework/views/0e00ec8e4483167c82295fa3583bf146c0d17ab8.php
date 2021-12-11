@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('page_title', 'Manage Payments'); ?>
 <?php $__env->startSection('content'); ?>
 

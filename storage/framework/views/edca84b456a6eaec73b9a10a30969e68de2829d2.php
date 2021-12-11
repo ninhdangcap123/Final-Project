@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('page_title', 'My Dashboard'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -130,9 +129,6 @@
 
         </div>
 
-        <div class="card-body">
-            <div class="fullcalendar-basic"></div>
-        </div>
     </div>
     
     <?php $__env->stopSection(); ?>

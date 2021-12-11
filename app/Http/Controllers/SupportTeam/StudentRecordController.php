@@ -42,7 +42,7 @@ class StudentRecordController extends Controller
     public function reset_pass($st_id)
     {
         $st_id = displayMessageHelper::decodeHash($st_id);
-        $data['password'] = Hash::make('student');
+        $data['password'] = Hash::make('123');
         $this->user->update($st_id, $data);
         return back()->with('flash_success', __('msg.p_reset'));
     }

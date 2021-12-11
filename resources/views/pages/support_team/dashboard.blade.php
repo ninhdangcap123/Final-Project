@@ -121,14 +121,4 @@
            </div>
        </div>
        @endif
-
-    {{--Events Calendar Begins--}}
-    <div class="card">
-        <div class="card-header header-elements-inline">
-            <h5 class="card-title">School Events Calendar</h5>
-         {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
-        </div>
-
-    </div>
-    {{--Events Calendar Ends--}}
     @endsection
