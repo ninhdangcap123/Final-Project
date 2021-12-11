@@ -129,9 +129,6 @@
          {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
         </div>
 
-        <div class="card-body">
-            <div class="fullcalendar-basic"></div>
-        </div>
     </div>
     {{--Events Calendar Ends--}}
     @endsection
