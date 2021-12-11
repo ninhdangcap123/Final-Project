@@ -120,17 +120,6 @@
            </div>
        </div>
        <?php endif; ?>
-
-    
-    <div class="card">
-        <div class="card-header header-elements-inline">
-            <h5 class="card-title">School Events Calendar</h5>
-         <?php echo \App\Helpers\getSystemInfoHelper::getPanelOptions(); ?>
-
-        </div>
-
-    </div>
-    
     <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Final-Project\resources\views/pages/support_team/dashboard.blade.php ENDPATH**/ ?>

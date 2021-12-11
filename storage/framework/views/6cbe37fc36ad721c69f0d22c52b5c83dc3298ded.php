@@ -45,12 +45,14 @@
             <ul class="nav nav-sidebar" data-nav-type="accordion">
 
                 <!-- Main -->
+                <?php if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin()): ?>
                 <li class="nav-item">
                     <a href="<?php echo e(route('dashboard')); ?>" class="nav-link <?php echo e((Route::is('dashboard')) ? 'active' : ''); ?>">
                         <i class="icon-home4"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <?php endif; ?>
 
                 
                 <?php if(\App\Helpers\checkUsersHelper::userIsAcademic()): ?>

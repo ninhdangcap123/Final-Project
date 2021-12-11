@@ -44,12 +44,14 @@
             <ul class="nav nav-sidebar" data-nav-type="accordion">
 
                 <!-- Main -->
+                @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
                 <li class="nav-item">
                     <a href="{{ route('dashboard') }}" class="nav-link {{ (Route::is('dashboard')) ? 'active' : '' }}">
                         <i class="icon-home4"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
+                @endif
 
                 {{--Academics--}}
                 @if(\App\Helpers\checkUsersHelper::userIsAcademic())

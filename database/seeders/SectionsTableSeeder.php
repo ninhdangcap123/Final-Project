@@ -19,18 +19,17 @@ class SectionsTableSeeder extends Seeder
         $c = MyClass::pluck('id')->all();
 
         $data = [
-            ['name' => 'A', 'my_class_id' => $c[0], 'active' => 1],
-            ['name' => 'B', 'my_class_id' => $c[0], 'active' => 1],
-            ['name' => 'A', 'my_class_id' => $c[1], 'active' => 1],
-            ['name' => 'B', 'my_class_id' => $c[1], 'active' => 1],
-            ['name' => 'A', 'my_class_id' => $c[2], 'active' => 1],
-            ['name' => 'A', 'my_class_id' => $c[3], 'active' => 1],
-            ['name' => 'A', 'my_class_id' => $c[4], 'active' => 1],
-            ['name' => 'A', 'my_class_id' => $c[5], 'active' => 1],
-            ['name' => 'A', 'my_class_id' => $c[6], 'active' => 1],
-            ['name' => 'A', 'my_class_id' => $c[7], 'active' => 1],
-            ['name' => 'A', 'my_class_id' => $c[8], 'active' => 1],
-            ['name' => 'A', 'my_class_id' => $c[9], 'active' => 1],
+            ['name' => 'A', 'my_class_id' => $c[0], 'active' => 1, 'teacher_id' => 3],
+            ['name' => 'B', 'my_class_id' => $c[0], 'active' => 1, 'teacher_id' => 3],
+            ['name' => 'A', 'my_class_id' => $c[1], 'active' => 1, 'teacher_id' => 3],
+            ['name' => 'B', 'my_class_id' => $c[1], 'active' => 1, 'teacher_id' => 3],
+            ['name' => 'A', 'my_class_id' => $c[2], 'active' => 1, 'teacher_id' => 3],
+            ['name' => 'A', 'my_class_id' => $c[3], 'active' => 1, 'teacher_id' => 3],
+            ['name' => 'A', 'my_class_id' => $c[4], 'active' => 1, 'teacher_id' => 3],
+            ['name' => 'A', 'my_class_id' => $c[6], 'active' => 1, 'teacher_id' => 3],
+            ['name' => 'A', 'my_class_id' => $c[7], 'active' => 1, 'teacher_id' => 3],
+            ['name' => 'A', 'my_class_id' => $c[8], 'active' => 1, 'teacher_id' => 3],
+            ['name' => 'A', 'my_class_id' => $c[9], 'active' => 1, 'teacher_id' => 3],
         ];
 
         DB::table('sections')->insert($data);

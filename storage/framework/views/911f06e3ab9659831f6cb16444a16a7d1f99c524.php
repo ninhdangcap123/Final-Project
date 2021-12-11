@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('page_title', 'Student Information - '.$my_class->name); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -12,7 +13,7 @@
             <ul class="nav nav-tabs nav-tabs-highlight">
                 <li class="nav-item"><a href="#all-students" class="nav-link active" data-toggle="tab">All <?php echo e($my_class->name); ?> Students</a></li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Sections</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Classes</a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <?php $__currentLoopData = $sections; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <a href="#s<?php echo e($s->id); ?>" class="dropdown-item" data-toggle="tab"><?php echo e($my_class->name.' '.$s->name); ?></a>
