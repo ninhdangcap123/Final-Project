@@ -16,9 +16,18 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Show TimeTables</a>
                     <div class="dropdown-menu dropdown-menu-right">
+                        @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
                         @foreach($my_classes as $mc)
                             <a href="#ttr{{ $mc->id }}" class="dropdown-item" data-toggle="tab">{{ $mc->name }}</a>
                         @endforeach
+                        @endif
+                        @if(\App\Helpers\getUserTypeHelper::userIsTeacher())
+                                    @foreach(\App\Models\Section::where('teacher_id',auth()->user()->id)->get() as $s)
+                                        <a href="#ttr{{ $s->my_class->id }}" class="dropdown-item" data-toggle="tab">{{ $s->my_class->name }}</a>
+                                    @endforeach
+                        @endif
+
+
                     </div>
                 </li>
             </ul>
@@ -55,7 +64,7 @@
                                    <select class="select form-control" name="exam_id" id="exam_id">
                                        <option value="">Course Timetable</option>
                                        @foreach($exams as $ex)
-                                           <option {{ old('exam_id') == $ex->id ? 'selected' : '' }} value="{{ $ex->id }}">{{ $ex->name }}</option>
+                                           <option {{ old('exam_id') == $ex->id ? 'selected' : '' }} value="{{ $ex->id }}">{{ $ex->name }} term {{ $ex->term }}</option>
                                        @endforeach
                                    </select>
                                </div>
@@ -89,7 +98,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $ttr->name }}</td>
                                     <td>{{ $ttr->my_class->name }}</td>
-                                    <td>{{ ($ttr->exam_id) ? $ttr->exam->name : 'Course TimeTable' }}
+                                    <td>{{ ($ttr->exam_id) ? $ttr->exam->name . $ttr->exam->term : 'Course TimeTable' }}
                                     <td>{{ $ttr->year }}</td>
                                     <td class="text-center">
                                         <div class="list-icons">

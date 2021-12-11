@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('page_title', 'Manage TimeTables'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -17,9 +16,18 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Show TimeTables</a>
                     <div class="dropdown-menu dropdown-menu-right">
+                        <?php if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin()): ?>
                         <?php $__currentLoopData = $my_classes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mc): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <a href="#ttr<?php echo e($mc->id); ?>" class="dropdown-item" data-toggle="tab"><?php echo e($mc->name); ?></a>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
+                        <?php if(\App\Helpers\getUserTypeHelper::userIsTeacher()): ?>
+                                    <?php $__currentLoopData = \App\Models\Section::where('teacher_id',auth()->user()->id)->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <a href="#ttr<?php echo e($s->my_class->id); ?>" class="dropdown-item" data-toggle="tab"><?php echo e($s->my_class->name); ?></a>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
+
+
                     </div>
                 </li>
             </ul>
@@ -56,7 +64,7 @@
                                    <select class="select form-control" name="exam_id" id="exam_id">
                                        <option value="">Course Timetable</option>
                                        <?php $__currentLoopData = $exams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ex): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                           <option <?php echo e(old('exam_id') == $ex->id ? 'selected' : ''); ?> value="<?php echo e($ex->id); ?>"><?php echo e($ex->name); ?></option>
+                                           <option <?php echo e(old('exam_id') == $ex->id ? 'selected' : ''); ?> value="<?php echo e($ex->id); ?>"><?php echo e($ex->name); ?> term <?php echo e($ex->term); ?></option>
                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                    </select>
                                </div>
@@ -90,7 +98,7 @@
                                     <td><?php echo e($loop->iteration); ?></td>
                                     <td><?php echo e($ttr->name); ?></td>
                                     <td><?php echo e($ttr->my_class->name); ?></td>
-                                    <td><?php echo e(($ttr->exam_id) ? $ttr->exam->name : 'Course TimeTable'); ?>
+                                    <td><?php echo e(($ttr->exam_id) ? $ttr->exam->name . $ttr->exam->term : 'Course TimeTable'); ?>
 
                                     <td><?php echo e($ttr->year); ?></td>
                                     <td class="text-center">
