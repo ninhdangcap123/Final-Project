@@ -14,7 +14,7 @@
             @if(\App\Helpers\checkUsersHelper::userIsAcademic())
                 <div class="card">
                     <div class="card-header header-elements-inline">
-                        <h6 class="font-weight-bold">{{ $ex->name.' - '.$ex->year }}</h6>
+                        <h6 class="font-weight-bold">{{ $ex->name.' term '.$ex->term.' - '.$ex->year }}</h6>
                         {!! \App\Helpers\getSystemInfoHelper::getPanelOptions() !!}
                     </div>
 
@@ -33,11 +33,14 @@
                 </div>
             @endif
 
+            @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
+
             {{--    EXAM COMMENTS   --}}
             @include('pages.support_team.marks.show.comments')
 
             {{-- SKILL RATING --}}
             @include('pages.support_team.marks.show.skills')
+            @endif
 
         @endforeach
     @endforeach

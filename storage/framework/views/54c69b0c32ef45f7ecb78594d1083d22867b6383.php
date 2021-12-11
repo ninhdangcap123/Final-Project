@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('page_title', 'Student Marksheet'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -14,7 +13,7 @@
             <?php if(\App\Helpers\checkUsersHelper::userIsAcademic()): ?>
                 <div class="card">
                     <div class="card-header header-elements-inline">
-                        <h6 class="font-weight-bold"><?php echo e($ex->name.' - '.$ex->year); ?></h6>
+                        <h6 class="font-weight-bold"><?php echo e($ex->name.' term '.$ex->term.' - '.$ex->year); ?></h6>
                         <?php echo \App\Helpers\getSystemInfoHelper::getPanelOptions(); ?>
 
                     </div>
@@ -34,11 +33,14 @@
                 </div>
             <?php endif; ?>
 
+            <?php if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin()): ?>
+
             
             <?php echo $__env->make('pages.support_team.marks.show.comments', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
             
             <?php echo $__env->make('pages.support_team.marks.show.skills', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php endif; ?>
 
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
