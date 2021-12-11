@@ -10,7 +10,7 @@
                                 <label for="exam_id" class="col-form-label font-weight-bold">Exam:</label>
                                 <select required id="exam_id" name="exam_id" data-placeholder="Select Exam" class="form-control select">
                                     @foreach($exams as $ex)
-                                        <option {{ $selected && $exam_id == $ex->id ? 'selected' : '' }} value="{{ $ex->id }}">{{ $ex->name }}</option>
+                                        <option {{ $selected && $exam_id == $ex->id ? 'selected' : '' }} value="{{ $ex->id }}">{{ $ex->name }} term {{ $ex->term }}</option>
                                     @endforeach
                                 </select>
                             </div>

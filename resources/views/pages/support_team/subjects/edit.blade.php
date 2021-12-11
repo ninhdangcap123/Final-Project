@@ -28,9 +28,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Class <span class="text-danger">*</span></label>
+                            <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Course <span class="text-danger">*</span></label>
                             <div class="col-lg-9">
-                                <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
+                                <select required data-placeholder="Select Course" class="form-control select" name="my_class_id" id="my_class_id">
                                     @foreach($my_classes as $c)
                                         <option {{ $s->my_class_id == $c->id ? 'selected' : '' }} value="{{ $c->id }}">{{ $c->name }}</option>
                                     @endforeach

@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('page_title', 'Manage Subjects'); ?>
 <?php $__env->startSection('content'); ?>
 
@@ -43,9 +42,9 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Select Class <span class="text-danger">*</span></label>
+                                    <label for="my_class_id" class="col-lg-3 col-form-label font-weight-semibold">Select Course <span class="text-danger">*</span></label>
                                     <div class="col-lg-9">
-                                        <select required data-placeholder="Select Class" class="form-control select" name="my_class_id" id="my_class_id">
+                                        <select required data-placeholder="Select Course" class="form-control select" name="my_class_id" id="my_class_id">
                                             <option value=""></option>
                                             <?php $__currentLoopData = $my_classes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $c): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <option <?php echo e(old('my_class_id') == $c->id ? 'selected' : ''); ?> value="<?php echo e($c->id); ?>"><?php echo e($c->name); ?></option>
@@ -81,7 +80,7 @@
                                 <th>S/N</th>
                                 <th>Name</th>
                                 <th>Short Name</th>
-                                <th>Class</th>
+                                <th>Course</th>
                                 <th>Teacher</th>
                                 <th>Action</th>
                             </tr>

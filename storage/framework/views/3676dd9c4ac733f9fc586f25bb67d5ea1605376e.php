@@ -17,7 +17,7 @@
                                             <label for="exam_id" class="col-form-label font-weight-bold">Exam:</label>
                                             <select required id="exam_id" name="exam_id" class="form-control select" data-placeholder="Select Exam">
                                                 <?php $__currentLoopData = $exams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $exm): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <option <?php echo e(($selected && $exam_id == $exm->id) ? 'selected' : ''); ?> value="<?php echo e($exm->id); ?>"><?php echo e($exm->name); ?></option>
+                                                    <option <?php echo e(($selected && $exam_id == $exm->id) ? 'selected' : ''); ?> value="<?php echo e($exm->id); ?>"><?php echo e($exm->name); ?> term <?php echo e($exm->term); ?></option>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </select>
                                         </div>
