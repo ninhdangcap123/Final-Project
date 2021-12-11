@@ -170,7 +170,8 @@
                 </div>
 
                 @foreach($user_types as $ut)
-                    <div class="tab-pane fade" id="ut-{{\App\Helpers\displayMessageHelper::hash($ut->id)}}">                         <table class="table datatable-button-html5-columns">
+                    <div class="tab-pane fade" id="ut-{{\App\Helpers\displayMessageHelper::hash($ut->id)}}">
+                        <table class="table datatable-button-html5-columns">
                             <thead>
                             <tr>
                                 <th>S/N</th>
