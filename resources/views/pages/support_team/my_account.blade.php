@@ -111,13 +111,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label for="address" class="col-lg-3 col-form-label font-weight-semibold">Change Photo </label>
-                                        <div class="col-lg-9">
-                                            <input  accept="image/*" type="file" name="photo" class="form-input-styled" data-fouc>
-                                        </div>
-                                    </div>
-
                                     <div class="text-right">
                                         <button type="submit" class="btn btn-danger">Submit form <i class="icon-paperplane ml-2"></i></button>
                                     </div>

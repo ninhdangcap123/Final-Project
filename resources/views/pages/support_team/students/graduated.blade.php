@@ -52,17 +52,14 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-left">
-                                        <a href="{{ route('students.show', \App\Helpers\displayMessageHelper::hash($s->id)) }}" class="dropdown-item"><i class="icon-eye"></i> View Profile</a>
+
                                         @if(\App\Helpers\checkUsersHelper::userIsTeamSA())
-                                        <a href="{{ route('students.edit', \App\Helpers\displayMessageHelper::hash($s->id)) }}" class="dropdown-item"><i class="icon-pencil"></i> Edit</a>
                                         <a href="{{ route('st.reset_pass', \App\Helpers\displayMessageHelper::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-lock"></i> Reset password</a>
 
                                         {{--Not Graduated--}}
                                         <a id="{{ \App\Helpers\displayMessageHelper::hash($s->id) }}" href="#" onclick="$('form#ng-'+this.id).submit();" class="dropdown-item"><i class="icon-stairs-down"></i> Not Graduated</a>
                                             <form method="post" id="ng-{{ \App\Helpers\displayMessageHelper::hash($s->id) }}" action="{{ route('st.not_graduated', \App\Helpers\displayMessageHelper::hash($s->id)) }}" class="hidden">@csrf @method('put')</form>
                                         @endif
-
-                                        <a target="_blank" href="{{ route('marks.year_selector', \App\Helpers\displayMessageHelper::hash($s->user->id)) }}" class="dropdown-item"><i class="icon-check"></i> Marksheet</a>
 
                                         {{--Delete--}}
                                         @if(\App\Helpers\getUserTypeHelper::userIsSuperAdmin())
